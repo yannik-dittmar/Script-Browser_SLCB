@@ -1,0 +1,158 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using MetroFramework;
+using MaterialSkin;
+using MaterialSkin.Controls;
+using MaterialSkin.Animations;
+using System.Runtime.InteropServices;
+
+namespace Script_Browser
+{
+    public partial class Main : Form
+    {
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn
+        (
+            int nLeftRect,     // x-coordinate of upper-left corner
+            int nTopRect,      // y-coordinate of upper-left corner
+            int nRightRect,    // x-coordinate of lower-right corner
+            int nBottomRect,   // y-coordinate of lower-right corner
+            int nWidthEllipse, // height of ellipse
+            int nHeightEllipse // width of ellipse
+        );
+        [DllImportAttribute("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
+
+        const int WM_NCLBUTTONDOWN = 0xA1;
+        const int HT_CAPTION = 0x2;
+
+        List<TableLayoutPanel> navbarTransitionIn = new List<TableLayoutPanel>();
+        List<TableLayoutPanel> navbarTransitionOut = new List<TableLayoutPanel>();
+        TableLayoutPanel selectedTabPage = null;
+
+        public Main()
+        {
+            InitializeComponent();
+            Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
+
+            selectedTabPage = tableLayoutPanel3;
+            navbarTransitionIn.Add(tableLayoutPanel3);
+            NavTransitionIn.Enabled = true;
+        }
+
+        //
+        // Windows API, Window Settings
+        //
+        private void MoveForm_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+        //
+        // Animations
+        //
+        private void NavTransitionIn_Tick(object sender, EventArgs e)
+        {
+            for (int i=0; i < navbarTransitionIn.Count; i++)
+            {
+                TableLayoutPanel tlp = navbarTransitionIn[i];
+                Color c = tlp.BackColor;
+                int r = c.R + 2;
+                if (r > 25)
+                    r = 25;
+                int g = c.G + 2;
+                if (g > 72)
+                    g = 72;
+                int b = c.B + 2;
+                if (b > 70)
+                    b = 70;
+                tlp.BackColor = Color.FromArgb(r, g, b);
+                if (r == 25 && g == 72 && b == 70)
+                    navbarTransitionIn.Remove(tlp);
+            }
+
+            NavTransitionIn.Enabled = navbarTransitionIn.Count != 0;
+        }
+
+        private void NavTransitionOut_Tick(object sender, EventArgs e)
+        {
+            for (int i = 0; i < navbarTransitionOut.Count; i++)
+            {
+                TableLayoutPanel tlp = navbarTransitionOut[i];
+                Color c = tlp.BackColor;
+                int r = c.R - 2;
+                if (r < 18)
+                    r = 18;
+                int g = c.G - 2;
+                if (g < 25)
+                    g = 25;
+                int b = c.B - 2;
+                if (b < 31)
+                    b = 31;
+                tlp.BackColor = Color.FromArgb(r, g, b);
+                if (r == 18 && g == 25 && b == 31)
+                    navbarTransitionOut.Remove(tlp);
+            }
+
+            NavTransitionOut.Enabled = navbarTransitionOut.Count != 0;
+        }
+
+        private void tableLayoutPanel_MouseEnter(object sender, EventArgs e)
+        {
+            if (sender.GetType().ToString() != "System.Windows.Forms.TableLayoutPanel")
+            {
+                if (!navbarTransitionIn.Contains((TableLayoutPanel)((Control)sender).Parent))
+                    navbarTransitionIn.Add((TableLayoutPanel)((Control)sender).Parent);
+                navbarTransitionOut.Remove((TableLayoutPanel)((Control)sender).Parent);
+            }
+            else
+            {
+                if (!navbarTransitionIn.Contains(sender as TableLayoutPanel))
+                    navbarTransitionIn.Add(sender as TableLayoutPanel);
+                navbarTransitionOut.Remove(sender as TableLayoutPanel);
+            }
+            
+            NavTransitionIn.Enabled = true;
+        }
+
+        private void tableLayoutPanel_MouseLeave(object sender, EventArgs e)
+        {
+            if (selectedTabPage != sender)
+            {
+                if (sender.GetType().ToString() != "System.Windows.Forms.TableLayoutPanel")
+                {
+                    if (!navbarTransitionOut.Contains((TableLayoutPanel)((Control)sender).Parent))
+                        navbarTransitionOut.Add((TableLayoutPanel)((Control)sender).Parent);
+                    navbarTransitionIn.Remove((TableLayoutPanel)((Control)sender).Parent);
+                }
+                else
+                {
+                    if (!navbarTransitionOut.Contains(sender as TableLayoutPanel))
+                        navbarTransitionOut.Add(sender as TableLayoutPanel);
+                    navbarTransitionIn.Remove(sender as TableLayoutPanel);
+
+                }
+
+                NavTransitionOut.Enabled = true;
+            }
+        }
+    }
+}
