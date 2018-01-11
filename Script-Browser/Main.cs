@@ -39,6 +39,9 @@ namespace Script_Browser
         List<TableLayoutPanel> navbarTransitionOut = new List<TableLayoutPanel>();
         TableLayoutPanel selectedTabPage = null;
 
+        Size lastWinSize;
+        Point lastWinPos;
+
         public Main()
         {
             InitializeComponent();
@@ -46,24 +49,105 @@ namespace Script_Browser
 
             selectedTabPage = tableLayoutPanel3;
             navbarTransitionIn.Add(tableLayoutPanel3);
-            NavTransitionIn.Enabled = true;
+            lastWinSize = Size;
+            lastWinPos = Location;
         }
 
         //
         // Windows API, Window Settings
         //
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                const int WS_MINIMIZEBOX = 0x00020000;
+                var cp = base.CreateParams;
+                cp.Style |= WS_MINIMIZEBOX;
+                return cp;
+            }
+        }
+
+        protected override void OnActivated(EventArgs e)
+        {
+            base.OnActivated(e);
+            if (Opacity == 0 && WindowState == FormWindowState.Minimized)
+                maximize.Enabled = true;
+        }
+
         private void MoveForm_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
+                if (Size == Screen.GetWorkingArea(new Point(Cursor.Position.X, Cursor.Position.Y)).Size)
+                {
+                    Size = lastWinSize;
+                    Left = Cursor.Position.X - Width / 2;
+                }
+
                 ReleaseCapture();
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+
+                if (Cursor.Position.Y <= Screen.GetWorkingArea(new Point(Cursor.Position.X, Cursor.Position.Y)).Y + 20)
+                    label3_Click(null, null);
+                else
+                    lastWinPos = Location;
             }
         }
 
         private void label2_Click(object sender, EventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        private void minimized_Tick(object sender, EventArgs e)
+        {
+            Opacity = (Opacity - ((Double)7 / 100));
+            if (Opacity == 0)
+            {
+                WindowState = FormWindowState.Minimized;
+                minimized.Enabled = false;
+            }
+        }
+
+        private void maximize_Tick(object sender, EventArgs e)
+        {
+            Opacity = (Opacity + ((Double)7 / 100));
+            if (Opacity == 1)
+                maximize.Enabled = false;
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+            minimized.Enabled = true;
+            maximize.Enabled = false;
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+            Screen screen = Screen.FromControl(this);
+            if (Size == screen.WorkingArea.Size && Location == new Point(screen.Bounds.Left, screen.Bounds.Top))
+            {
+                Size = lastWinSize;
+                Location = lastWinPos;
+            }
+            else
+            {
+                lastWinSize = Size;
+                if (sender != null)
+                    lastWinPos = Location;
+                Size = Screen.GetWorkingArea(new Point(Cursor.Position.X, Cursor.Position.Y)).Size;
+                Location = new Point(screen.Bounds.Left, screen.Bounds.Top);
+                Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width + 1, Height + 1, 0, 0));
+            }
+        }
+
+        private void Main_Resize(object sender, EventArgs e)
+        {
+            Screen screen = Screen.FromControl(this);
+            if (Size == screen.WorkingArea.Size && Location == new Point(screen.Bounds.Left, screen.Bounds.Top))
+                Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width + 1, Height + 1, 0, 0));
+            else
+                Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
         }
 
         //

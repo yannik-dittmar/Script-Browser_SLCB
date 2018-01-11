@@ -44,12 +44,14 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.NavTransitionIn = new System.Windows.Forms.Timer(this.components);
-            this.NavTransitionOut = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.NavTransitionIn = new System.Windows.Forms.Timer(this.components);
+            this.NavTransitionOut = new System.Windows.Forms.Timer(this.components);
+            this.minimized = new System.Windows.Forms.Timer(this.components);
+            this.maximize = new System.Windows.Forms.Timer(this.components);
             this.metroPanel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -115,6 +117,7 @@
             this.label4.Size = new System.Drawing.Size(26, 22);
             this.label4.TabIndex = 2;
             this.label4.Text = "🗕";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label3
             // 
@@ -129,6 +132,7 @@
             this.label3.Size = new System.Drawing.Size(26, 22);
             this.label3.TabIndex = 1;
             this.label3.Text = "🗖";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label2
             // 
@@ -286,27 +290,6 @@
             this.label5.MouseEnter += new System.EventHandler(this.tableLayoutPanel_MouseEnter);
             this.label5.MouseLeave += new System.EventHandler(this.tableLayoutPanel_MouseLeave);
             // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.panel2.Location = new System.Drawing.Point(0, 35);
-            this.panel2.Margin = new System.Windows.Forms.Padding(0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(645, 355);
-            this.panel2.TabIndex = 2;
-            // 
-            // NavTransitionIn
-            // 
-            this.NavTransitionIn.Interval = 1;
-            this.NavTransitionIn.Tick += new System.EventHandler(this.NavTransitionIn_Tick);
-            // 
-            // NavTransitionOut
-            // 
-            this.NavTransitionOut.Interval = 1;
-            this.NavTransitionOut.Tick += new System.EventHandler(this.NavTransitionOut_Tick);
-            // 
             // tableLayoutPanel5
             // 
             this.tableLayoutPanel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
@@ -355,7 +338,40 @@
             this.label6.MouseEnter += new System.EventHandler(this.tableLayoutPanel_MouseEnter);
             this.label6.MouseLeave += new System.EventHandler(this.tableLayoutPanel_MouseLeave);
             // 
-            // Form1
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.panel2.Location = new System.Drawing.Point(0, 35);
+            this.panel2.Margin = new System.Windows.Forms.Padding(0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(645, 355);
+            this.panel2.TabIndex = 2;
+            // 
+            // NavTransitionIn
+            // 
+            this.NavTransitionIn.Enabled = true;
+            this.NavTransitionIn.Interval = 1;
+            this.NavTransitionIn.Tick += new System.EventHandler(this.NavTransitionIn_Tick);
+            // 
+            // NavTransitionOut
+            // 
+            this.NavTransitionOut.Interval = 1;
+            this.NavTransitionOut.Tick += new System.EventHandler(this.NavTransitionOut_Tick);
+            // 
+            // minimized
+            // 
+            this.minimized.Interval = 5;
+            this.minimized.Tick += new System.EventHandler(this.minimized_Tick);
+            // 
+            // maximize
+            // 
+            this.maximize.Enabled = true;
+            this.maximize.Interval = 5;
+            this.maximize.Tick += new System.EventHandler(this.maximize_Tick);
+            // 
+            // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -365,9 +381,11 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.metroPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Form1";
+            this.Name = "Main";
+            this.Opacity = 0D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.Resize += new System.EventHandler(this.Main_Resize);
             this.metroPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -408,6 +426,8 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Timer minimized;
+        private System.Windows.Forms.Timer maximize;
     }
 }
 
