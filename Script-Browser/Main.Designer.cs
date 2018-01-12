@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            AnimatorNS.Animation animation1 = new AnimatorNS.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -47,12 +48,20 @@
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panelTab0 = new System.Windows.Forms.Panel();
             this.NavTransitionIn = new System.Windows.Forms.Timer(this.components);
             this.NavTransitionOut = new System.Windows.Forms.Timer(this.components);
             this.minimized = new System.Windows.Forms.Timer(this.components);
             this.maximize = new System.Windows.Forms.Timer(this.components);
             this.panelMain = new System.Windows.Forms.Panel();
+            this.animatorTabPage = new AnimatorNS.Animator(this.components);
+            this.panelTab1 = new System.Windows.Forms.Panel();
+            this.panelTab2 = new System.Windows.Forms.Panel();
+            this.panelTab3 = new System.Windows.Forms.Panel();
             this.metroPanel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -63,6 +72,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.tableLayoutPanel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            this.panel2.SuspendLayout();
             this.panelMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,6 +82,7 @@
             // 
             this.metroPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
             this.metroPanel1.Controls.Add(this.tableLayoutPanel1);
+            this.animatorTabPage.SetDecoration(this.metroPanel1, AnimatorNS.DecorationType.None);
             this.metroPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
@@ -96,6 +109,7 @@
             this.tableLayoutPanel1.Controls.Add(this.label3, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 4, 0);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
+            this.animatorTabPage.SetDecoration(this.tableLayoutPanel1, AnimatorNS.DecorationType.None);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
@@ -111,6 +125,7 @@
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label4.AutoSize = true;
             this.label4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.animatorTabPage.SetDecoration(this.label4, AnimatorNS.DecorationType.None);
             this.label4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(555, 6);
@@ -126,6 +141,7 @@
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
             this.label3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.animatorTabPage.SetDecoration(this.label3, AnimatorNS.DecorationType.None);
             this.label3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(586, 6);
@@ -141,6 +157,7 @@
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
             this.label2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.animatorTabPage.SetDecoration(this.label2, AnimatorNS.DecorationType.None);
             this.label2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(617, 8);
@@ -155,6 +172,7 @@
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
+            this.animatorTabPage.SetDecoration(this.label1, AnimatorNS.DecorationType.None);
             this.label1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(10, 10);
@@ -169,6 +187,7 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
             this.panel1.Controls.Add(this.tableLayoutPanel2);
+            this.animatorTabPage.SetDecoration(this.panel1, AnimatorNS.DecorationType.None);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 390);
             this.panel1.Name = "panel1";
@@ -177,8 +196,9 @@
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 5;
+            this.tableLayoutPanel2.ColumnCount = 6;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
@@ -186,6 +206,8 @@
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel4, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel5, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel6, 4, 0);
+            this.animatorTabPage.SetDecoration(this.tableLayoutPanel2, AnimatorNS.DecorationType.None);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -202,8 +224,9 @@
             this.tableLayoutPanel4.Controls.Add(this.pictureBox3, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.label7, 0, 1);
             this.tableLayoutPanel4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.animatorTabPage.SetDecoration(this.tableLayoutPanel4, AnimatorNS.DecorationType.None);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(272, 0);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(222, 0);
             this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 2;
@@ -211,12 +234,15 @@
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(100, 74);
             this.tableLayoutPanel4.TabIndex = 5;
+            this.tableLayoutPanel4.Tag = "1";
+            this.tableLayoutPanel4.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel_MouseClick);
             this.tableLayoutPanel4.MouseEnter += new System.EventHandler(this.tableLayoutPanel_MouseEnter);
             this.tableLayoutPanel4.MouseLeave += new System.EventHandler(this.tableLayoutPanel_MouseLeave);
             // 
             // pictureBox3
             // 
             this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.animatorTabPage.SetDecoration(this.pictureBox3, AnimatorNS.DecorationType.None);
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
             this.pictureBox3.Location = new System.Drawing.Point(11, 3);
             this.pictureBox3.Name = "pictureBox3";
@@ -224,6 +250,8 @@
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 4;
             this.pictureBox3.TabStop = false;
+            this.pictureBox3.Tag = "1";
+            this.pictureBox3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel_MouseClick);
             this.pictureBox3.MouseEnter += new System.EventHandler(this.tableLayoutPanel_MouseEnter);
             this.pictureBox3.MouseLeave += new System.EventHandler(this.tableLayoutPanel_MouseLeave);
             // 
@@ -231,6 +259,7 @@
             // 
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label7.AutoSize = true;
+            this.animatorTabPage.SetDecoration(this.label7, AnimatorNS.DecorationType.None);
             this.label7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.White;
             this.label7.Location = new System.Drawing.Point(23, 56);
@@ -238,7 +267,9 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(54, 15);
             this.label7.TabIndex = 3;
+            this.label7.Tag = "1";
             this.label7.Text = "Search";
+            this.label7.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel_MouseClick);
             this.label7.MouseEnter += new System.EventHandler(this.tableLayoutPanel_MouseEnter);
             this.label7.MouseLeave += new System.EventHandler(this.tableLayoutPanel_MouseLeave);
             // 
@@ -249,8 +280,9 @@
             this.tableLayoutPanel3.Controls.Add(this.pictureBox1, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.label5, 0, 1);
             this.tableLayoutPanel3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.animatorTabPage.SetDecoration(this.tableLayoutPanel3, AnimatorNS.DecorationType.None);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(172, 0);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(122, 0);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 2;
@@ -259,6 +291,8 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(100, 74);
             this.tableLayoutPanel3.TabIndex = 0;
+            this.tableLayoutPanel3.Tag = "0";
+            this.tableLayoutPanel3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel_MouseClick);
             this.tableLayoutPanel3.MouseEnter += new System.EventHandler(this.tableLayoutPanel_MouseEnter);
             this.tableLayoutPanel3.MouseLeave += new System.EventHandler(this.tableLayoutPanel_MouseLeave);
             // 
@@ -266,6 +300,7 @@
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.animatorTabPage.SetDecoration(this.pictureBox1, AnimatorNS.DecorationType.None);
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(11, 3);
             this.pictureBox1.Name = "pictureBox1";
@@ -273,6 +308,8 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Tag = "0";
+            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel_MouseClick);
             this.pictureBox1.MouseEnter += new System.EventHandler(this.tableLayoutPanel_MouseEnter);
             this.pictureBox1.MouseLeave += new System.EventHandler(this.tableLayoutPanel_MouseLeave);
             // 
@@ -281,6 +318,7 @@
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.animatorTabPage.SetDecoration(this.label5, AnimatorNS.DecorationType.None);
             this.label5.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
             this.label5.Location = new System.Drawing.Point(9, 56);
@@ -288,7 +326,9 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(81, 15);
             this.label5.TabIndex = 3;
+            this.label5.Tag = "0";
             this.label5.Text = "Top Scripts";
+            this.label5.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel_MouseClick);
             this.label5.MouseEnter += new System.EventHandler(this.tableLayoutPanel_MouseEnter);
             this.label5.MouseLeave += new System.EventHandler(this.tableLayoutPanel_MouseLeave);
             // 
@@ -300,8 +340,9 @@
             this.tableLayoutPanel5.Controls.Add(this.pictureBox2, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.label6, 0, 1);
             this.tableLayoutPanel5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.animatorTabPage.SetDecoration(this.tableLayoutPanel5, AnimatorNS.DecorationType.None);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(372, 0);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(322, 0);
             this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 2;
@@ -309,12 +350,15 @@
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel5.Size = new System.Drawing.Size(100, 74);
             this.tableLayoutPanel5.TabIndex = 6;
+            this.tableLayoutPanel5.Tag = "2";
+            this.tableLayoutPanel5.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel_MouseClick);
             this.tableLayoutPanel5.MouseEnter += new System.EventHandler(this.tableLayoutPanel_MouseEnter);
             this.tableLayoutPanel5.MouseLeave += new System.EventHandler(this.tableLayoutPanel_MouseLeave);
             // 
             // pictureBox2
             // 
             this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.animatorTabPage.SetDecoration(this.pictureBox2, AnimatorNS.DecorationType.None);
             this.pictureBox2.Image = global::Script_Browser.Properties.Resources.python;
             this.pictureBox2.Location = new System.Drawing.Point(11, 3);
             this.pictureBox2.Name = "pictureBox2";
@@ -322,6 +366,8 @@
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 4;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.Tag = "2";
+            this.pictureBox2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel_MouseClick);
             this.pictureBox2.MouseEnter += new System.EventHandler(this.tableLayoutPanel_MouseEnter);
             this.pictureBox2.MouseLeave += new System.EventHandler(this.tableLayoutPanel_MouseLeave);
             // 
@@ -329,6 +375,7 @@
             // 
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label6.AutoSize = true;
+            this.animatorTabPage.SetDecoration(this.label6, AnimatorNS.DecorationType.None);
             this.label6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
             this.label6.Location = new System.Drawing.Point(12, 56);
@@ -336,20 +383,95 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(75, 15);
             this.label6.TabIndex = 3;
+            this.label6.Tag = "2";
             this.label6.Text = "My Scripts";
+            this.label6.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel_MouseClick);
             this.label6.MouseEnter += new System.EventHandler(this.tableLayoutPanel_MouseEnter);
             this.label6.MouseLeave += new System.EventHandler(this.tableLayoutPanel_MouseLeave);
+            // 
+            // tableLayoutPanel6
+            // 
+            this.tableLayoutPanel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
+            this.tableLayoutPanel6.ColumnCount = 1;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel6.Controls.Add(this.pictureBox4, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label8, 0, 1);
+            this.tableLayoutPanel6.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.animatorTabPage.SetDecoration(this.tableLayoutPanel6, AnimatorNS.DecorationType.None);
+            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(422, 0);
+            this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 2;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(100, 74);
+            this.tableLayoutPanel6.TabIndex = 7;
+            this.tableLayoutPanel6.Tag = "3";
+            this.tableLayoutPanel6.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel_MouseClick);
+            this.tableLayoutPanel6.MouseEnter += new System.EventHandler(this.tableLayoutPanel_MouseEnter);
+            this.tableLayoutPanel6.MouseLeave += new System.EventHandler(this.tableLayoutPanel_MouseLeave);
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.animatorTabPage.SetDecoration(this.pictureBox4, AnimatorNS.DecorationType.None);
+            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
+            this.pictureBox4.Location = new System.Drawing.Point(11, 3);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(78, 48);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox4.TabIndex = 4;
+            this.pictureBox4.TabStop = false;
+            this.pictureBox4.Tag = "3";
+            this.pictureBox4.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel_MouseClick);
+            this.pictureBox4.MouseEnter += new System.EventHandler(this.tableLayoutPanel_MouseEnter);
+            this.pictureBox4.MouseLeave += new System.EventHandler(this.tableLayoutPanel_MouseLeave);
+            // 
+            // label8
+            // 
+            this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label8.AutoSize = true;
+            this.animatorTabPage.SetDecoration(this.label8, AnimatorNS.DecorationType.None);
+            this.label8.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.Location = new System.Drawing.Point(19, 56);
+            this.label8.Margin = new System.Windows.Forms.Padding(0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(61, 15);
+            this.label8.TabIndex = 3;
+            this.label8.Tag = "3";
+            this.label8.Text = "Settings";
+            this.label8.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel_MouseClick);
+            this.label8.MouseEnter += new System.EventHandler(this.tableLayoutPanel_MouseEnter);
+            this.label8.MouseLeave += new System.EventHandler(this.tableLayoutPanel_MouseLeave);
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
+            this.panel2.Controls.Add(this.panelTab3);
+            this.panel2.Controls.Add(this.panelTab2);
+            this.panel2.Controls.Add(this.panelTab1);
+            this.panel2.Controls.Add(this.panelTab0);
+            this.animatorTabPage.SetDecoration(this.panel2, AnimatorNS.DecorationType.None);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Location = new System.Drawing.Point(0, 35);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(645, 464);
+            this.panel2.Size = new System.Drawing.Size(645, 355);
             this.panel2.TabIndex = 2;
+            // 
+            // panelTab0
+            // 
+            this.panelTab0.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.animatorTabPage.SetDecoration(this.panelTab0, AnimatorNS.DecorationType.None);
+            this.panelTab0.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelTab0.Location = new System.Drawing.Point(0, 0);
+            this.panelTab0.Name = "panelTab0";
+            this.panelTab0.Size = new System.Drawing.Size(645, 355);
+            this.panelTab0.TabIndex = 0;
+            this.panelTab0.Tag = "0";
             // 
             // NavTransitionIn
             // 
@@ -375,14 +497,69 @@
             // 
             // panelMain
             // 
+            this.panelMain.Controls.Add(this.panel2);
             this.panelMain.Controls.Add(this.panel1);
             this.panelMain.Controls.Add(this.metroPanel1);
-            this.panelMain.Controls.Add(this.panel2);
+            this.animatorTabPage.SetDecoration(this.panelMain, AnimatorNS.DecorationType.None);
             this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMain.Location = new System.Drawing.Point(0, 0);
             this.panelMain.Name = "panelMain";
             this.panelMain.Size = new System.Drawing.Size(645, 464);
             this.panelMain.TabIndex = 3;
+            // 
+            // animatorTabPage
+            // 
+            this.animatorTabPage.AnimationType = AnimatorNS.AnimationType.HorizSlide;
+            this.animatorTabPage.Cursor = null;
+            animation1.AnimateOnlyDifferences = true;
+            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
+            animation1.LeafCoeff = 0F;
+            animation1.MaxTime = 1F;
+            animation1.MinTime = 0F;
+            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
+            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
+            animation1.MosaicSize = 0;
+            animation1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            animation1.RotateCoeff = 0F;
+            animation1.RotateLimit = 0F;
+            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
+            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
+            animation1.TimeCoeff = 0F;
+            animation1.TransparencyCoeff = 0F;
+            this.animatorTabPage.DefaultAnimation = animation1;
+            // 
+            // panelTab1
+            // 
+            this.panelTab1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.animatorTabPage.SetDecoration(this.panelTab1, AnimatorNS.DecorationType.None);
+            this.panelTab1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelTab1.Location = new System.Drawing.Point(0, 0);
+            this.panelTab1.Name = "panelTab1";
+            this.panelTab1.Size = new System.Drawing.Size(645, 355);
+            this.panelTab1.TabIndex = 1;
+            this.panelTab1.Tag = "1";
+            // 
+            // panelTab2
+            // 
+            this.panelTab2.BackColor = System.Drawing.Color.Yellow;
+            this.animatorTabPage.SetDecoration(this.panelTab2, AnimatorNS.DecorationType.None);
+            this.panelTab2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelTab2.Location = new System.Drawing.Point(0, 0);
+            this.panelTab2.Name = "panelTab2";
+            this.panelTab2.Size = new System.Drawing.Size(645, 355);
+            this.panelTab2.TabIndex = 2;
+            this.panelTab2.Tag = "2";
+            // 
+            // panelTab3
+            // 
+            this.panelTab3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.animatorTabPage.SetDecoration(this.panelTab3, AnimatorNS.DecorationType.None);
+            this.panelTab3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelTab3.Location = new System.Drawing.Point(0, 0);
+            this.panelTab3.Name = "panelTab3";
+            this.panelTab3.Size = new System.Drawing.Size(645, 355);
+            this.panelTab3.TabIndex = 3;
+            this.panelTab3.Tag = "3";
             // 
             // Main
             // 
@@ -391,6 +568,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
             this.ClientSize = new System.Drawing.Size(645, 464);
             this.Controls.Add(this.panelMain);
+            this.animatorTabPage.SetDecoration(this, AnimatorNS.DecorationType.None);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Main";
             this.Opacity = 0D;
@@ -411,6 +589,10 @@
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            this.panel2.ResumeLayout(false);
             this.panelMain.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -441,6 +623,14 @@
         private System.Windows.Forms.Timer minimized;
         private System.Windows.Forms.Timer maximize;
         private System.Windows.Forms.Panel panelMain;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.Label label8;
+        private AnimatorNS.Animator animatorTabPage;
+        private System.Windows.Forms.Panel panelTab0;
+        private System.Windows.Forms.Panel panelTab2;
+        private System.Windows.Forms.Panel panelTab3;
+        private System.Windows.Forms.Panel panelTab1;
     }
 }
 

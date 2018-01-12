@@ -42,6 +42,7 @@ namespace Script_Browser
         List<TableLayoutPanel> navbarTransitionIn = new List<TableLayoutPanel>();
         List<TableLayoutPanel> navbarTransitionOut = new List<TableLayoutPanel>();
         TableLayoutPanel selectedTabPage = null;
+        int selectedTabPageIndex = 0;
 
         Size lastWinSize;
         Point lastWinPos;
@@ -271,11 +272,83 @@ namespace Script_Browser
                     if (!navbarTransitionOut.Contains(sender as TableLayoutPanel))
                         navbarTransitionOut.Add(sender as TableLayoutPanel);
                     navbarTransitionIn.Remove(sender as TableLayoutPanel);
-
                 }
 
                 NavTransitionOut.Enabled = true;
             }
+        }
+
+        private void tableLayoutPanel_MouseClick(object sender, MouseEventArgs e)
+        {
+            int index = Int32.Parse(((Control)sender).Tag.ToString());
+
+            if (index > selectedTabPageIndex)
+            {
+                Control newControl = ControlByTag(panel2, index + "");
+                animatorTabPage.ShowSync(newControl);
+
+                foreach (Control c in tableLayoutPanel2.Controls)
+                {
+                    if (c.Tag.ToString() == index + "")
+                    {
+                        if (!navbarTransitionOut.Contains(selectedTabPage))
+                            navbarTransitionOut.Add(selectedTabPage);
+                        navbarTransitionIn.Remove(selectedTabPage);
+                        NavTransitionOut.Enabled = true;
+
+                        selectedTabPage = c as TableLayoutPanel;
+                        break;
+                    }
+                }
+
+                selectedTabPageIndex = index;
+            }
+            else if (index < selectedTabPageIndex)
+            {
+                foreach (Control c in panel2.Controls)
+                {
+                    try
+                    {
+                        if (c.Tag.ToString() != index + "" && c.Tag.ToString() != selectedTabPageIndex + "")
+                            c.Visible = false;
+                    }
+                    catch { }
+                }
+                Control oldControl = ControlByTag(panel2, selectedTabPageIndex + "");
+                Control newControl = ControlByTag(panel2, index + "");
+                newControl.Visible = true;
+                animatorTabPage.Hide(oldControl);
+
+                foreach (Control c in tableLayoutPanel2.Controls)
+                {
+                    if (c.Tag.ToString() == index + "")
+                    {
+                        if (!navbarTransitionOut.Contains(selectedTabPage))
+                            navbarTransitionOut.Add(selectedTabPage);
+                        navbarTransitionIn.Remove(selectedTabPage);
+                        NavTransitionOut.Enabled = true;
+
+                        selectedTabPage = c as TableLayoutPanel;
+                        break;
+                    }
+                }
+
+                selectedTabPageIndex = index;
+            }
+        }
+
+        private Control ControlByTag(Control parent, string tag)
+        {
+            foreach (Control c in parent.Controls)
+            {
+                try
+                {
+                    if (c.Tag.ToString() == tag)
+                        return c;
+                }
+                catch { }
+            }
+            return null;
         }
     }
 }
