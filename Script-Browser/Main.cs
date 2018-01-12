@@ -58,6 +58,13 @@ namespace Script_Browser
             lastWinPos = Location;
         }
 
+        private void Main_Load(object sender, EventArgs e)
+        {
+            animatorTabPage.Hide(panelTab3);
+            animatorTabPage.Hide(panelTab2);
+            animatorTabPage.Hide(panelTab1);
+        }
+
         //
         // Windows API, Window Settings
         //
@@ -212,6 +219,10 @@ namespace Script_Browser
                 if (r == 25 && g == 72 && b == 70)
                     navbarTransitionIn.Remove(tlp);
             }
+            Color c2 = selectedTabPage.BackColor;
+            if ((c2.R != 25 || c2.G != 72 || c2.B != 70) && !navbarTransitionIn.Contains(selectedTabPage))
+
+                navbarTransitionIn.Add(selectedTabPage);
 
             NavTransitionIn.Enabled = navbarTransitionIn.Count != 0;
         }
