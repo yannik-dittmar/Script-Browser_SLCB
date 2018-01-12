@@ -34,6 +34,10 @@ namespace Script_Browser
 
         const int WM_NCLBUTTONDOWN = 0xA1;
         const int HT_CAPTION = 0x2;
+        int tolerance = 20;
+        const int WM_NCHITTEST = 132;
+        const int HTBOTTOMRIGHT = 17;
+        Rectangle sizeGripRectangle;
 
         List<TableLayoutPanel> navbarTransitionIn = new List<TableLayoutPanel>();
         List<TableLayoutPanel> navbarTransitionOut = new List<TableLayoutPanel>();
@@ -67,11 +71,44 @@ namespace Script_Browser
             }
         }
 
+        protected override void WndProc(ref Message m)
+        {
+            switch (m.Msg)
+            {
+                case WM_NCHITTEST:
+                    base.WndProc(ref m);
+                    var hitPoint = this.PointToClient(new Point(m.LParam.ToInt32() & 0xffff, m.LParam.ToInt32() >> 16));
+                    if (sizeGripRectangle.Contains(hitPoint) && Size != Screen.GetWorkingArea(new Point(Cursor.Position.X, Cursor.Position.Y)).Size)
+                        m.Result = new IntPtr(HTBOTTOMRIGHT);
+                    break;
+                default:
+                    base.WndProc(ref m);
+                    break;
+            }
+        }
+
         protected override void OnActivated(EventArgs e)
         {
             base.OnActivated(e);
             if (Opacity == 0 && WindowState == FormWindowState.Minimized)
                 maximize.Enabled = true;
+        }
+
+        protected override void OnSizeChanged(EventArgs e)
+        {
+            base.OnSizeChanged(e);
+            var region = new Region(new Rectangle(0, 0, ClientRectangle.Width, ClientRectangle.Height));
+            sizeGripRectangle = new Rectangle(ClientRectangle.Width - tolerance, ClientRectangle.Height - tolerance, tolerance, tolerance);
+            region.Exclude(sizeGripRectangle);
+            panelMain.Region = region;
+            Invalidate();
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            if (Size != Screen.GetWorkingArea(new Point(Cursor.Position.X, Cursor.Position.Y)).Size)
+                ControlPaint.DrawSizeGrip(e.Graphics, Color.Transparent, sizeGripRectangle);
         }
 
         private void MoveForm_MouseDown(object sender, MouseEventArgs e)
@@ -153,6 +190,8 @@ namespace Script_Browser
         //
         // Animations
         //
+
+        // Navbar
         private void NavTransitionIn_Tick(object sender, EventArgs e)
         {
             for (int i=0; i < navbarTransitionIn.Count; i++)
