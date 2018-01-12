@@ -223,8 +223,6 @@ namespace Script_Browser
             if ((c2.R != 25 || c2.G != 72 || c2.B != 70) && !navbarTransitionIn.Contains(selectedTabPage))
 
                 navbarTransitionIn.Add(selectedTabPage);
-
-            NavTransitionIn.Enabled = navbarTransitionIn.Count != 0;
         }
 
         private void NavTransitionOut_Tick(object sender, EventArgs e)
