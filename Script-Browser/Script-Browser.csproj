@@ -117,5 +117,8 @@
   <ItemGroup>
     <None Include="Resources\wrench.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo_white.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

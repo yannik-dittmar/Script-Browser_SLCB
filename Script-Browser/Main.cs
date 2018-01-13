@@ -221,7 +221,6 @@ namespace Script_Browser
             }
             Color c2 = selectedTabPage.BackColor;
             if ((c2.R != 25 || c2.G != 72 || c2.B != 70) && !navbarTransitionIn.Contains(selectedTabPage))
-
                 navbarTransitionIn.Add(selectedTabPage);
         }
 
