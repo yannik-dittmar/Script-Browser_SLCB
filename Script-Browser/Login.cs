@@ -67,20 +67,35 @@ namespace Script_Browser
         {
             Environment.Exit(0);
         }
-    }
 
-    class RoundedEdgesButton : Button
-    {
-        protected override void OnPaint(PaintEventArgs e)
+        private void label4_Click(object sender, EventArgs e)
         {
-            base.OnPaint(e);
-            Rectangle Rect = new Rectangle(0, 0, this.Width, this.Height);
-            GraphicsPath GraphPath = new GraphicsPath();
-            GraphPath.AddArc(Rect.X, Rect.Y, 40, 40, 180, 90);
-            GraphPath.AddArc(Rect.X + Rect.Width - 40, Rect.Y, 40, 40, 270, 90);
-            GraphPath.AddArc(Rect.X + Rect.Width - 40, Rect.Y + Rect.Height - 40, 40, 40, 0, 90);
-            GraphPath.AddArc(Rect.X, Rect.Y + Rect.Height - 40, 40, 40, 90, 90);
-            this.Region = new Region(GraphPath);
+            if (label4.Text == "Login")
+            {
+                tableLayoutPanel2.RowStyles[1] = new RowStyle(SizeType.AutoSize);
+                tableLayoutPanel2.RowStyles[2] = new RowStyle(SizeType.Absolute, 0);
+
+                label4.Text = "Sign up";
+                roundedEdgesButton1.Text = "Login";
+                label5.Visible = true;
+            }
+            else
+            {
+                tableLayoutPanel2.RowStyles[1] = new RowStyle(SizeType.Absolute, 0);
+                tableLayoutPanel2.RowStyles[2] = new RowStyle(SizeType.AutoSize);
+
+                label4.Text = "Login";
+                roundedEdgesButton1.Text = "Sign up";
+                label5.Visible = false;
+            }
+        }
+
+        private void timerProgressbar_Tick(object sender, EventArgs e)
+        {
+            if (progressBarEx1.Value < Int32.Parse(progressBarEx1.Tag.ToString()))
+                progressBarEx1.Value += 1;
+            else if (progressBarEx1.Value > Int32.Parse(progressBarEx1.Tag.ToString()))
+                progressBarEx1.Value -= 1;
         }
     }
 }
