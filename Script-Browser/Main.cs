@@ -56,6 +56,8 @@ namespace Script_Browser
             navbarTransitionIn.Add(tableLayoutPanel3);
             lastWinSize = Size;
             lastWinPos = Location;
+
+            settings1.form = this;
         }
 
         private void Main_Load(object sender, EventArgs e)

@@ -40,6 +40,7 @@ namespace Script_Browser
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.materialSingleLineTextField2 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.label4 = new System.Windows.Forms.Label();
+            this.roundedEdgesButton1 = new Script_Browser.Controls.RoundedEdgesButton();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.materialSingleLineTextField6 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.materialSingleLineTextField3 = new MaterialSkin.Controls.MaterialSingleLineTextField();
@@ -47,7 +48,8 @@ namespace Script_Browser
             this.materialSingleLineTextField5 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.roundedEdgesButton1 = new RoundedEdgesButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
             this.progressBarEx1 = new ProgressBarEx.ProgressBarEx();
             this.timerProgressbar = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1.SuspendLayout();
@@ -55,6 +57,7 @@ namespace Script_Browser
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -151,14 +154,14 @@ namespace Script_Browser
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel4, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.label3, 0, 7);
             this.tableLayoutPanel2.Controls.Add(this.label5, 0, 5);
-            this.tableLayoutPanel2.Controls.Add(this.progressBarEx1, 0, 6);
+            this.tableLayoutPanel2.Controls.Add(this.panel1, 0, 6);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 35);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 8;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 0F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -175,7 +178,7 @@ namespace Script_Browser
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.Controls.Add(this.materialSingleLineTextField2, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.materialSingleLineTextField1, 0, 0);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(42, 111);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(42, 26);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -207,13 +210,30 @@ namespace Script_Browser
             this.label4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Silver;
-            this.label4.Location = new System.Drawing.Point(114, 271);
+            this.label4.Location = new System.Drawing.Point(114, 357);
             this.label4.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(55, 15);
             this.label4.TabIndex = 3;
             this.label4.Text = "Sign up";
             this.label4.Click += new System.EventHandler(this.label4_Click);
+            // 
+            // roundedEdgesButton1
+            // 
+            this.roundedEdgesButton1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.roundedEdgesButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(72)))), ((int)(((byte)(70)))));
+            this.roundedEdgesButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.roundedEdgesButton1.FlatAppearance.BorderSize = 0;
+            this.roundedEdgesButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.roundedEdgesButton1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
+            this.roundedEdgesButton1.ForeColor = System.Drawing.Color.White;
+            this.roundedEdgesButton1.Location = new System.Drawing.Point(71, 302);
+            this.roundedEdgesButton1.Margin = new System.Windows.Forms.Padding(3, 30, 3, 3);
+            this.roundedEdgesButton1.Name = "roundedEdgesButton1";
+            this.roundedEdgesButton1.Size = new System.Drawing.Size(140, 42);
+            this.roundedEdgesButton1.TabIndex = 2;
+            this.roundedEdgesButton1.Text = "Login";
+            this.roundedEdgesButton1.UseVisualStyleBackColor = false;
             // 
             // tableLayoutPanel4
             // 
@@ -225,14 +245,14 @@ namespace Script_Browser
             this.tableLayoutPanel4.Controls.Add(this.materialSingleLineTextField3, 0, 1);
             this.tableLayoutPanel4.Controls.Add(this.materialSingleLineTextField4, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.materialSingleLineTextField5, 0, 2);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(42, 189);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(42, 104);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 4;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(198, 1);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(198, 165);
             this.tableLayoutPanel4.TabIndex = 11;
             // 
             // materialSingleLineTextField6
@@ -310,10 +330,10 @@ namespace Script_Browser
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(0, 414);
+            this.label3.Location = new System.Drawing.Point(0, 415);
             this.label3.Margin = new System.Windows.Forms.Padding(0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(283, 21);
+            this.label3.Size = new System.Drawing.Size(283, 20);
             this.label3.TabIndex = 6;
             this.label3.Text = "© 2018 by Digital-Programming";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -326,29 +346,34 @@ namespace Script_Browser
             this.label5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label5.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Underline);
             this.label5.ForeColor = System.Drawing.Color.Silver;
-            this.label5.Location = new System.Drawing.Point(83, 291);
+            this.label5.Location = new System.Drawing.Point(83, 377);
             this.label5.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(117, 15);
             this.label5.TabIndex = 12;
             this.label5.Text = "Forgot Password";
             // 
-            // roundedEdgesButton1
+            // panel1
             // 
-            this.roundedEdgesButton1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.roundedEdgesButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(72)))), ((int)(((byte)(70)))));
-            this.roundedEdgesButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.roundedEdgesButton1.FlatAppearance.BorderSize = 0;
-            this.roundedEdgesButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.roundedEdgesButton1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
-            this.roundedEdgesButton1.ForeColor = System.Drawing.Color.White;
-            this.roundedEdgesButton1.Location = new System.Drawing.Point(71, 216);
-            this.roundedEdgesButton1.Margin = new System.Windows.Forms.Padding(3, 30, 3, 3);
-            this.roundedEdgesButton1.Name = "roundedEdgesButton1";
-            this.roundedEdgesButton1.Size = new System.Drawing.Size(140, 42);
-            this.roundedEdgesButton1.TabIndex = 2;
-            this.roundedEdgesButton1.Text = "Login";
-            this.roundedEdgesButton1.UseVisualStyleBackColor = false;
+            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.progressBarEx1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 392);
+            this.panel1.Margin = new System.Windows.Forms.Padding(0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(283, 23);
+            this.panel1.TabIndex = 14;
+            // 
+            // label6
+            // 
+            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F);
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(0, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(283, 18);
+            this.label6.TabIndex = 14;
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // progressBarEx1
             // 
@@ -361,7 +386,7 @@ namespace Script_Browser
             this.progressBarEx1.GradiantColor = System.Drawing.Color.Transparent;
             this.progressBarEx1.GradiantPosition = ProgressBarEx.ProgressBarEx.GradiantArea.None;
             this.progressBarEx1.Image = null;
-            this.progressBarEx1.Location = new System.Drawing.Point(0, 409);
+            this.progressBarEx1.Location = new System.Drawing.Point(0, 18);
             this.progressBarEx1.Margin = new System.Windows.Forms.Padding(0);
             this.progressBarEx1.Name = "progressBarEx1";
             this.progressBarEx1.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(195)))), ((int)(((byte)(162)))));
@@ -393,6 +418,7 @@ namespace Script_Browser
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -418,5 +444,7 @@ namespace Script_Browser
         private System.Windows.Forms.Label label5;
         private ProgressBarEx.ProgressBarEx progressBarEx1;
         private System.Windows.Forms.Timer timerProgressbar;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label6;
     }
 }
