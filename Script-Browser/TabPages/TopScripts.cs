@@ -76,6 +76,8 @@ namespace Script_Browser.TabPages
                 if (result.Count != 50)
                     button2.Enabled = false;
 
+                button1.Enabled = page > 1;
+
                 label2.Text = "Page " + page;
             }
             catch (WebException) { MetroFramework.MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.OK, MessageBoxIcon.Error, 125); }
@@ -100,7 +102,7 @@ namespace Script_Browser.TabPages
         private void button1_Click(object sender, EventArgs e)
         {
             page--;
-            button1.Enabled = page == 1;
+            button1.Enabled = page > 1;
             button3_Click(null, null);
         }
 

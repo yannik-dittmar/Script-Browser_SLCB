@@ -614,6 +614,7 @@
             this.Controls.Add(this.panelMain);
             this.animatorTabPage.SetDecoration(this, AnimatorNS.DecorationType.None);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MinimumSize = new System.Drawing.Size(645, 464);
             this.Name = "Main";
             this.Opacity = 0D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

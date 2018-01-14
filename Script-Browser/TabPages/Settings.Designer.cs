@@ -59,13 +59,15 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.AutoSize = true;
-            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnCount = 4;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.roundedEdgesButton2, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel4, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.roundedEdgesButton1, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel4, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.roundedEdgesButton2, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.roundedEdgesButton1, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 1, 0);
             this.animator1.SetDecoration(this.tableLayoutPanel1, AnimatorNS.DecorationType.None);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -86,7 +88,8 @@
             this.tableLayoutPanel3.Controls.Add(this.loginPass, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.loginUsername, 0, 0);
             this.animator1.SetDecoration(this.tableLayoutPanel3, AnimatorNS.DecorationType.None);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(87, 59);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(165, 59);
+            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -141,7 +144,8 @@
             this.tableLayoutPanel4.Controls.Add(this.signupUsername, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.signupPassConfirm, 0, 2);
             this.animator1.SetDecoration(this.tableLayoutPanel4, AnimatorNS.DecorationType.None);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(461, 13);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(383, 13);
+            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(10, 3, 3, 3);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 4;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -323,7 +327,7 @@
             this.roundedEdgesButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.roundedEdgesButton2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
             this.roundedEdgesButton2.ForeColor = System.Drawing.Color.White;
-            this.roundedEdgesButton2.Location = new System.Drawing.Point(490, 191);
+            this.roundedEdgesButton2.Location = new System.Drawing.Point(408, 191);
             this.roundedEdgesButton2.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.roundedEdgesButton2.Name = "roundedEdgesButton2";
             this.roundedEdgesButton2.Size = new System.Drawing.Size(140, 41);
@@ -341,7 +345,7 @@
             this.roundedEdgesButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.roundedEdgesButton1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
             this.roundedEdgesButton1.ForeColor = System.Drawing.Color.White;
-            this.roundedEdgesButton1.Location = new System.Drawing.Point(116, 191);
+            this.roundedEdgesButton1.Location = new System.Drawing.Point(197, 191);
             this.roundedEdgesButton1.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.roundedEdgesButton1.Name = "roundedEdgesButton1";
             this.roundedEdgesButton1.Size = new System.Drawing.Size(140, 41);
