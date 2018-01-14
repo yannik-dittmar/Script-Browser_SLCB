@@ -58,6 +58,7 @@ namespace Script_Browser
             lastWinPos = Location;
 
             settings1.form = this;
+            topScripts1.form = this;
         }
 
         private void Main_Load(object sender, EventArgs e)

@@ -79,6 +79,13 @@ namespace Script_Browser
                     goto tryagain;
             }
             form.settings1.progressBarEx1.Tag = "0";
-        } 
+        }
+
+        public static string GetTopScripts(string type, string highest, int page, Main form)
+        {
+            CheckIp(form);
+            using (WebClient web = new WebClient())
+                return web.DownloadString(storageServer + "/Script%20Browser/getTopScripts.php?type=" + type + "&highest=" + highest + "&page=" + page);
+        }
     }
 }
