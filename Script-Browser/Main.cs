@@ -66,6 +66,8 @@ namespace Script_Browser
             animatorTabPage.Hide(panelTab3);
             animatorTabPage.Hide(panelTab2);
             animatorTabPage.Hide(panelTab1);
+
+            topScripts1.button3_Click(null, null);
         }
 
         //

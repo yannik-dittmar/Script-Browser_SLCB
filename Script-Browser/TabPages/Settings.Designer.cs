@@ -32,26 +32,26 @@
             AnimatorNS.Animation animation1 = new AnimatorNS.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Settings));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.loginPass = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.loginUsername = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.signupEmail = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.signupPass = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.signupUsername = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.signupPassConfirm = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.loginPass = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.loginUsername = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.timerProgressbar = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
+            this.timerProgressbar = new System.Windows.Forms.Timer(this.components);
             this.animator1 = new AnimatorNS.Animator(this.components);
             this.roundedEdgesButton3 = new Script_Browser.Controls.RoundedEdgesButton();
             this.roundedEdgesButton2 = new Script_Browser.Controls.RoundedEdgesButton();
             this.roundedEdgesButton1 = new Script_Browser.Controls.RoundedEdgesButton();
             this.progressBarEx1 = new ProgressBarEx.ProgressBarEx();
             this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -78,60 +78,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.Size = new System.Drawing.Size(747, 235);
             this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tableLayoutPanel3.AutoSize = true;
-            this.tableLayoutPanel3.ColumnCount = 1;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.loginPass, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.loginUsername, 0, 0);
-            this.animator1.SetDecoration(this.tableLayoutPanel3, AnimatorNS.DecorationType.None);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(165, 59);
-            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(198, 72);
-            this.tableLayoutPanel3.TabIndex = 11;
-            // 
-            // loginPass
-            // 
-            this.loginPass.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.animator1.SetDecoration(this.loginPass, AnimatorNS.DecorationType.None);
-            this.loginPass.Depth = 0;
-            this.loginPass.Hint = "Password";
-            this.loginPass.Location = new System.Drawing.Point(3, 46);
-            this.loginPass.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.loginPass.MouseState = MaterialSkin.MouseState.HOVER;
-            this.loginPass.Name = "loginPass";
-            this.loginPass.PasswordChar = '•';
-            this.loginPass.SelectedText = "";
-            this.loginPass.SelectionLength = 0;
-            this.loginPass.SelectionStart = 0;
-            this.loginPass.Size = new System.Drawing.Size(192, 23);
-            this.loginPass.TabIndex = 1;
-            this.loginPass.UseSystemPasswordChar = false;
-            // 
-            // loginUsername
-            // 
-            this.loginUsername.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.animator1.SetDecoration(this.loginUsername, AnimatorNS.DecorationType.None);
-            this.loginUsername.Depth = 0;
-            this.loginUsername.Hint = "Username";
-            this.loginUsername.Location = new System.Drawing.Point(3, 3);
-            this.loginUsername.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            this.loginUsername.MouseState = MaterialSkin.MouseState.HOVER;
-            this.loginUsername.Name = "loginUsername";
-            this.loginUsername.PasswordChar = '\0';
-            this.loginUsername.SelectedText = "";
-            this.loginUsername.SelectionLength = 0;
-            this.loginUsername.SelectionStart = 0;
-            this.loginUsername.Size = new System.Drawing.Size(192, 23);
-            this.loginUsername.TabIndex = 0;
-            this.loginUsername.UseSystemPasswordChar = false;
             // 
             // tableLayoutPanel4
             // 
@@ -227,6 +173,60 @@
             this.signupPassConfirm.TabIndex = 5;
             this.signupPassConfirm.UseSystemPasswordChar = false;
             // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tableLayoutPanel3.AutoSize = true;
+            this.tableLayoutPanel3.ColumnCount = 1;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Controls.Add(this.loginPass, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.loginUsername, 0, 0);
+            this.animator1.SetDecoration(this.tableLayoutPanel3, AnimatorNS.DecorationType.None);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(165, 59);
+            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(198, 72);
+            this.tableLayoutPanel3.TabIndex = 11;
+            // 
+            // loginPass
+            // 
+            this.loginPass.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.animator1.SetDecoration(this.loginPass, AnimatorNS.DecorationType.None);
+            this.loginPass.Depth = 0;
+            this.loginPass.Hint = "Password";
+            this.loginPass.Location = new System.Drawing.Point(3, 46);
+            this.loginPass.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.loginPass.MouseState = MaterialSkin.MouseState.HOVER;
+            this.loginPass.Name = "loginPass";
+            this.loginPass.PasswordChar = '•';
+            this.loginPass.SelectedText = "";
+            this.loginPass.SelectionLength = 0;
+            this.loginPass.SelectionStart = 0;
+            this.loginPass.Size = new System.Drawing.Size(192, 23);
+            this.loginPass.TabIndex = 1;
+            this.loginPass.UseSystemPasswordChar = false;
+            // 
+            // loginUsername
+            // 
+            this.loginUsername.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.animator1.SetDecoration(this.loginUsername, AnimatorNS.DecorationType.None);
+            this.loginUsername.Depth = 0;
+            this.loginUsername.Hint = "Username";
+            this.loginUsername.Location = new System.Drawing.Point(3, 3);
+            this.loginUsername.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            this.loginUsername.MouseState = MaterialSkin.MouseState.HOVER;
+            this.loginUsername.Name = "loginUsername";
+            this.loginUsername.PasswordChar = '\0';
+            this.loginUsername.SelectedText = "";
+            this.loginUsername.SelectionLength = 0;
+            this.loginUsername.SelectionStart = 0;
+            this.loginUsername.Size = new System.Drawing.Size(192, 23);
+            this.loginUsername.TabIndex = 0;
+            this.loginUsername.UseSystemPasswordChar = false;
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.tableLayoutPanel2);
@@ -237,12 +237,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(747, 448);
             this.panel1.TabIndex = 3;
-            // 
-            // timerProgressbar
-            // 
-            this.timerProgressbar.Enabled = true;
-            this.timerProgressbar.Interval = 2;
-            this.timerProgressbar.Tick += new System.EventHandler(this.timerProgressbar_Tick);
             // 
             // tableLayoutPanel2
             // 
@@ -278,6 +272,12 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Logged in as ";
             // 
+            // timerProgressbar
+            // 
+            this.timerProgressbar.Enabled = true;
+            this.timerProgressbar.Interval = 2;
+            this.timerProgressbar.Tick += new System.EventHandler(this.timerProgressbar_Tick);
+            // 
             // animator1
             // 
             this.animator1.AnimationType = AnimatorNS.AnimationType.VertSlide;
@@ -290,7 +290,7 @@
             animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
             animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
             animation1.MosaicSize = 0;
-            animation1.Padding = new System.Windows.Forms.Padding(0);
+            animation1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             animation1.RotateCoeff = 0F;
             animation1.RotateLimit = 0F;
             animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
@@ -388,8 +388,8 @@
             this.Size = new System.Drawing.Size(747, 453);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);

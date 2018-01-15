@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Threading;
 using Newtonsoft.Json.Linq;
 using System.Net;
+using Script_Browser.Design;
 
 namespace Script_Browser.TabPages
 {
@@ -22,12 +23,10 @@ namespace Script_Browser.TabPages
         {
             InitializeComponent();
 
-            dataGridView1.Rows.Add("Test1", "Testing it out!", "★★★★★", "1.0.0", "Me");
-            dataGridView1.Rows.Add("Test2", "Testing it out!", "1.0.0", "Me");
-            dataGridView1.Rows.Add("Test3", "Testing it out!", "1.0.0", "Me");
-
             metroComboBox1.SelectedIndex = 0;
             metroComboBox2.SelectedIndex = 0;
+
+            contextMenuStrip1.Renderer = new ArrowRenderer();
         }
 
         private void dataGridView1_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
@@ -49,7 +48,7 @@ namespace Script_Browser.TabPages
             dataGridView1.ClearSelection();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        public void button3_Click(object sender, EventArgs e)
         {
             try
             {
@@ -68,7 +67,7 @@ namespace Script_Browser.TabPages
                         for (int i = 0; i < rating; i++)
                             stars += "★";
 
-                        dataGridView1.Rows.Add(row["Name"], row["ShortDescription"], stars, row["Downloads"], row["Version"], row["Author"]);
+                        dataGridView1.Rows.Add(row["ID"], row["Name"], row["ShortDescription"], stars, row["Downloads"], row["Version"], row["Author"]);
                     }
                     dataGridView1.ClearSelection();
                 }
@@ -90,13 +89,18 @@ namespace Script_Browser.TabPages
             {
                 dataGridView1.ClearSelection();
                 dataGridView1.Rows[e.RowIndex].Selected = true;
+
+                nAMEToolStripMenuItem.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
             }
             catch { }
         }
 
         private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-
+            if (e.Button == MouseButtons.Left)
+            {
+                //TODO: Add Script Show
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
