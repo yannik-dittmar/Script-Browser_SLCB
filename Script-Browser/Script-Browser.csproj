@@ -66,6 +66,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ShowScript.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ShowScript.Designer.cs">
+      <DependentUpon>ShowScript.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SlideShow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SlideShow.Designer.cs">
+      <DependentUpon>SlideShow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Design\ArrowRenderer.cs" />
     <Compile Include="Design\ColorTableMenu.cs" />
     <Compile Include="Controls\ProgressBarEx.cs">
@@ -101,6 +113,12 @@
     <Compile Include="TabPages\TopScripts.Designer.cs">
       <DependentUpon>TopScripts.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Controls\ShowScript.resx">
+      <DependentUpon>ShowScript.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SlideShow.resx">
+      <DependentUpon>SlideShow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
@@ -157,6 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Logo_ICON.ico" />
+    <None Include="Resources\back_arrow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

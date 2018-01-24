@@ -298,7 +298,10 @@ namespace Script_Browser
             if (index > selectedTabPageIndex)
             {
                 Control newControl = ControlByTag(panel2, index + "");
-                animatorTabPage.ShowSync(newControl);
+
+                newControl.Size = panel2.Size;
+                animatorTabPage.Show(newControl);
+                
 
                 foreach (Control c in tableLayoutPanel2.Controls)
                 {
@@ -330,6 +333,8 @@ namespace Script_Browser
                 Control oldControl = ControlByTag(panel2, selectedTabPageIndex + "");
                 Control newControl = ControlByTag(panel2, index + "");
                 newControl.Visible = true;
+
+                oldControl.Size = panel2.Size;
                 animatorTabPage.Hide(oldControl);
 
                 foreach (Control c in tableLayoutPanel2.Controls)
