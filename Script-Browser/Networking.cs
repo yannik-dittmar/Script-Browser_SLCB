@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
@@ -86,6 +87,13 @@ namespace Script_Browser
             CheckIp(form);
             using (WebClient web = new WebClient())
                 return web.DownloadString(storageServer + "/Script%20Browser/getTopScripts.php?type=" + type + "&highest=" + highest + "&page=" + page);
+        }
+
+        public static Image DownloadImage(string path)
+        {
+            using (WebClient client = new WebClient())
+            using (MemoryStream ms = new MemoryStream(client.DownloadData(path)))
+                return Image.FromStream(ms);
         }
     }
 }
