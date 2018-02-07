@@ -66,6 +66,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\Rating.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Rating.Designer.cs">
+      <DependentUpon>Rating.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ShowScript.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -119,6 +125,9 @@
     <Compile Include="Test.Designer.cs">
       <DependentUpon>Test.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Controls\Rating.resx">
+      <DependentUpon>Rating.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ShowScript.resx">
       <DependentUpon>ShowScript.cs</DependentUpon>
     </EmbeddedResource>
@@ -184,6 +193,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Logo_ICON.ico" />
+    <None Include="Resources\sta_outline.png" />
     <None Include="Resources\loading.gif" />
     <None Include="Resources\back_arrow.png" />
   </ItemGroup>
