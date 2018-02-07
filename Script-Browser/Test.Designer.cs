@@ -28,24 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.slideShow1 = new Script_Browser.Controls.SlideShow();
+            this.showScript1 = new Script_Browser.Controls.ShowScript();
             this.SuspendLayout();
             // 
-            // slideShow1
+            // showScript1
             // 
-            this.slideShow1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
-            this.slideShow1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.slideShow1.Location = new System.Drawing.Point(0, 0);
-            this.slideShow1.Name = "slideShow1";
-            this.slideShow1.Size = new System.Drawing.Size(720, 526);
-            this.slideShow1.TabIndex = 0;
+            this.showScript1.AutoScroll = true;
+            this.showScript1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
+            this.showScript1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.showScript1.Location = new System.Drawing.Point(0, 0);
+            this.showScript1.Name = "showScript1";
+            this.showScript1.Size = new System.Drawing.Size(720, 526);
+            this.showScript1.TabIndex = 0;
             // 
             // Test
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(720, 526);
-            this.Controls.Add(this.slideShow1);
+            this.Controls.Add(this.showScript1);
             this.Name = "Test";
             this.Text = "Test";
             this.ResumeLayout(false);
@@ -54,6 +55,6 @@
 
         #endregion
 
-        private Controls.SlideShow slideShow1;
+        private Controls.ShowScript showScript1;
     }
 }
