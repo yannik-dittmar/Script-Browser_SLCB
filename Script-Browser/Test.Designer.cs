@@ -33,7 +33,6 @@
             // 
             // showScript1
             // 
-            this.showScript1.AutoScroll = true;
             this.showScript1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
             this.showScript1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.showScript1.Location = new System.Drawing.Point(0, 0);

@@ -59,7 +59,7 @@ namespace Script_Browser.Controls
             webBrowser1.Document.ForeColor = Color.White;
         }
 
-        private void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+        public void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
         {
             if (e.Url.ToString() != "about:blank")
             {
