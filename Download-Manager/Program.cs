@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Script_Browser
+namespace Download_Manager
 {
     static class Program
     {
@@ -16,7 +16,7 @@ namespace Script_Browser
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Main());
+            Application.Run(new DM());
         }
     }
 }
