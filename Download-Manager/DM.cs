@@ -12,6 +12,9 @@ namespace Download_Manager
 {
     public partial class DM : Form
     {
+        private bool mouseDown;
+        private Point lastLocation;
+
         public DM()
         {
             InitializeComponent();
@@ -22,20 +25,40 @@ namespace Download_Manager
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
+        //Scließen des Fensters bei klicken aus "X"
         private void labelX_Click(object sender, EventArgs e)
         {
             Environment.Exit(0);
         }
 
+        //Minimieren des Fensters bei klicken auf "_"
         private void labelMin_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        //Bewegen des Fensters 
+        //Speichern der ursprünglichen Position bei Mausklick
+        private void tableLayoutPanel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseDown = true;
+            lastLocation = e.Location;
+        }
+        //Berechnen der neuen Position während Maus bewegt wird
+        private void tableLayoutPanel1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mouseDown)
+            {
+                this.Location = new Point(
+                    (this.Location.X - lastLocation.X) + e.X, (this.Location.Y - lastLocation.Y) + e.Y);
+
+                this.Update();
+            }
+        }
+        //Beenden des Bewegens, wenn Taste nicht mehr gedrückt wird
+        private void tableLayoutPanel1_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseDown = false;
         }
     }
 }
