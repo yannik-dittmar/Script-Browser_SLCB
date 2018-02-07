@@ -67,11 +67,13 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.Size = new System.Drawing.Size(430, 102);
             this.tableLayoutPanel1.TabIndex = 0;
+            this.tableLayoutPanel1.MouseLeave += new System.EventHandler(this.tableLayoutPanel1_MouseLeave);
             // 
             // pictureBox4
             // 
             this.pictureBox4.BackgroundImage = global::Script_Browser.Properties.Resources.star_outline;
             this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox4.Dock = System.Windows.Forms.DockStyle.Top;
             this.pictureBox4.Location = new System.Drawing.Point(266, 3);
             this.pictureBox4.Margin = new System.Windows.Forms.Padding(8, 3, 8, 3);
@@ -80,11 +82,14 @@
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox4.TabIndex = 4;
             this.pictureBox4.TabStop = false;
+            this.pictureBox4.Tag = "4";
+            this.pictureBox4.MouseEnter += new System.EventHandler(this.pictureBox_MouseEnter);
             // 
             // pictureBox3
             // 
             this.pictureBox3.BackgroundImage = global::Script_Browser.Properties.Resources.star_outline;
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Top;
             this.pictureBox3.Location = new System.Drawing.Point(180, 3);
             this.pictureBox3.Margin = new System.Windows.Forms.Padding(8, 3, 8, 3);
@@ -93,11 +98,14 @@
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 3;
             this.pictureBox3.TabStop = false;
+            this.pictureBox3.Tag = "3";
+            this.pictureBox3.MouseEnter += new System.EventHandler(this.pictureBox_MouseEnter);
             // 
             // pictureBox2
             // 
             this.pictureBox2.BackgroundImage = global::Script_Browser.Properties.Resources.star_outline;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.pictureBox2.Location = new System.Drawing.Point(94, 3);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(8, 3, 8, 3);
@@ -106,11 +114,14 @@
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 2;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.Tag = "2";
+            this.pictureBox2.MouseEnter += new System.EventHandler(this.pictureBox_MouseEnter);
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImage = global::Script_Browser.Properties.Resources.star_outline;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.pictureBox1.Location = new System.Drawing.Point(8, 3);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(8, 3, 8, 3);
@@ -119,11 +130,14 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Tag = "1";
+            this.pictureBox1.MouseEnter += new System.EventHandler(this.pictureBox_MouseEnter);
             // 
             // pictureBox5
             // 
             this.pictureBox5.BackgroundImage = global::Script_Browser.Properties.Resources.star_outline;
             this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox5.Dock = System.Windows.Forms.DockStyle.Top;
             this.pictureBox5.Location = new System.Drawing.Point(352, 3);
             this.pictureBox5.Margin = new System.Windows.Forms.Padding(8, 3, 8, 3);
@@ -132,6 +146,8 @@
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox5.TabIndex = 1;
             this.pictureBox5.TabStop = false;
+            this.pictureBox5.Tag = "5";
+            this.pictureBox5.MouseEnter += new System.EventHandler(this.pictureBox_MouseEnter);
             // 
             // label1
             // 
