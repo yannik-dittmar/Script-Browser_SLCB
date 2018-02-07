@@ -16,11 +16,23 @@ namespace Script_Browser.Controls
     {
         bool isDrag = false;
         int lastY = 0;
+        int id;
+        string name;
 
-        public ShowScript()
+        public ShowScript(string id, string name, string ver, string author, string shortDesc, string longDesc, string rating, string ratings, string downloads)
         {
             InitializeComponent();
-            webBrowser1.DocumentText = "<html><body>" + Markdown.ToHtml(System.IO.File.ReadAllText(@"C:\Users\Yannik\Desktop\Twitch\test.txt")) + "</body></html>";
+
+            this.name = name;
+            this.id = Int32.Parse(id);
+
+            label4.Text = name;
+            label5.Text = "v" + ver;
+            label3.Text = "by " + author;
+            label1.Text = shortDesc;
+            webBrowser1.DocumentText = "<html><body>" + Markdown.ToHtml(longDesc) + "</body></html>";
+            rating1.SetRating((int)Math.Round(Double.Parse(rating.Replace(".", ","))));
+            rating1.SetInformation(ratings, downloads);
         }
 
         private void panel1_MouseDown(object sender, MouseEventArgs e)
@@ -55,8 +67,14 @@ namespace Script_Browser.Controls
 
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            webBrowser1.Document.BackColor = Color.FromArgb(18, 25, 31);
-            webBrowser1.Document.ForeColor = Color.White;
+            try
+            {
+                webBrowser1.Document.BackColor = Color.FromArgb(18, 25, 31);
+                webBrowser1.Document.ForeColor = Color.White;
+
+                webBrowser1.Document.Body.Style = "overflow:auto;";
+            }
+            catch { }
         }
 
         public void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)

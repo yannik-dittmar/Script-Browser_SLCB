@@ -49,6 +49,11 @@ namespace Script_Browser.Controls
             catch { }
         }
 
+        public void SetInformation(string ratings, string downloads)
+        {
+            label1.Text = ratings + " Ratings and " + downloads + " Downloads";
+        }
+
         private void pictureBox_MouseEnter(object sender, EventArgs e)
         {
             try

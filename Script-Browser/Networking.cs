@@ -89,6 +89,13 @@ namespace Script_Browser
                 return web.DownloadString(storageServer + "/Script%20Browser/getTopScripts.php?type=" + type + "&highest=" + highest + "&page=" + page);
         }
 
+        public static string GetScriptById(Main form, string id)
+        {
+            CheckIp(form);
+            using (WebClient web = new WebClient())
+                return web.DownloadString(storageServer + "/Script%20Browser/getScript.php?id=" + id);
+        }
+
         public static Image DownloadImage(string path)
         {
             using (WebClient client = new WebClient())

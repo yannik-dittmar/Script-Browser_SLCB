@@ -11,6 +11,7 @@ using System.Threading;
 using Newtonsoft.Json.Linq;
 using System.Net;
 using Script_Browser.Design;
+using Script_Browser.Controls;
 
 namespace Script_Browser.TabPages
 {
@@ -67,7 +68,7 @@ namespace Script_Browser.TabPages
                         for (int i = 0; i < rating; i++)
                             stars += "★";
 
-                        dataGridView1.Rows.Add(row["ID"], row["Name"], row["ShortDescription"], stars, row["Downloads"], row["Version"], row["Author"]);
+                        dataGridView1.Rows.Add(row["ID"], row["Name"], row["ShortDescription"], stars, row["Downloads"], row["Version"], row["Username"]);
                     }
                     dataGridView1.ClearSelection();
                 }
@@ -95,14 +96,40 @@ namespace Script_Browser.TabPages
             catch { }
         }
 
+        //Load ScriptView
         private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                //TODO: Add Script Show
+                try
+                {
+                    string result = Networking.GetScriptById(form, dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+                    JObject script = JObject.Parse(result);
+
+                    ShowScript ss = new ShowScript(script["ID"].ToString(), script["Name"].ToString(), script["Version"].ToString(), script["Username"].ToString(), script["ShortDescription"].ToString(), script["LongDescription"].ToString(), script["Rating"].ToString(), script["Ratings"].ToString(), script["Downloads"].ToString());
+                    ss.pictureBox1.MouseClick += new MouseEventHandler(unloadScript);
+                    ss.Dock = DockStyle.Fill;
+                    panelScript.Size = this.Size;
+                    panelScript.Controls.Add(ss);
+                    ss.Size = panelScript.Size;
+                    animatorScript.ShowSync(panelScript);
+                }
+                catch { }
             }
         }
 
+        //Unload ScriptView
+        public void unloadScript(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                animatorScript.HideSync(panelScript);
+                (sender as Control).Parent.Parent.Parent.Dispose();
+            }
+            catch { }
+        }
+
+        //Switch Pages
         private void button1_Click(object sender, EventArgs e)
         {
             page--;

@@ -29,16 +29,18 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.rating1 = new Script_Browser.Controls.Rating();
             this.panel1 = new System.Windows.Forms.Panel();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.label1 = new System.Windows.Forms.Label();
-            this.slideShow1 = new Script_Browser.Controls.SlideShow();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
+            this.rating1 = new Script_Browser.Controls.Rating();
+            this.slideShow1 = new Script_Browser.Controls.SlideShow();
             this.roundedEdgesButton1 = new Script_Browser.Controls.RoundedEdgesButton();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -50,9 +52,13 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.AutoSize = true;
-            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnCount = 4;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.Controls.Add(this.label5, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -64,21 +70,48 @@
             this.tableLayoutPanel1.TabIndex = 2;
             this.tableLayoutPanel1.TabStop = true;
             // 
+            // label5
+            // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(706, 11);
+            this.label5.Margin = new System.Windows.Forms.Padding(10, 3, 3, 3);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(69, 18);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "Version";
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(52, 6);
+            this.label4.Margin = new System.Windows.Forms.Padding(10, 3, 3, 3);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(641, 28);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "NAME";
+            // 
             // label3
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(52, 6);
+            this.label3.Location = new System.Drawing.Point(788, 11);
             this.label3.Margin = new System.Windows.Forms.Padding(10, 3, 3, 3);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(799, 28);
+            this.label3.Size = new System.Drawing.Size(63, 18);
             this.label3.TabIndex = 3;
-            this.label3.Text = "NAME";
+            this.label3.Text = "Author";
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox1.Image = global::Script_Browser.Properties.Resources.back_arrow;
             this.pictureBox1.Location = new System.Drawing.Point(3, 3);
             this.pictureBox1.Name = "pictureBox1";
@@ -110,21 +143,8 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 450F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(860, 1150);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(860, 979);
             this.tableLayoutPanel2.TabIndex = 1;
-            // 
-            // rating1
-            // 
-            this.rating1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.rating1.AutoSize = true;
-            this.rating1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.rating1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
-            this.rating1.Location = new System.Drawing.Point(215, 471);
-            this.rating1.Margin = new System.Windows.Forms.Padding(3, 10, 3, 10);
-            this.rating1.Name = "rating1";
-            this.rating1.Size = new System.Drawing.Size(430, 102);
-            this.rating1.TabIndex = 6;
-            this.rating1.TabStop = false;
             // 
             // panel1
             // 
@@ -137,7 +157,7 @@
             this.panel1.MinimumSize = new System.Drawing.Size(0, 200);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 4);
-            this.panel1.Size = new System.Drawing.Size(800, 371);
+            this.panel1.Size = new System.Drawing.Size(800, 200);
             this.panel1.TabIndex = 7;
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
@@ -150,7 +170,7 @@
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.ScriptErrorsSuppressed = true;
-            this.webBrowser1.Size = new System.Drawing.Size(800, 367);
+            this.webBrowser1.Size = new System.Drawing.Size(800, 196);
             this.webBrowser1.TabIndex = 5;
             this.webBrowser1.TabStop = false;
             this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
@@ -171,18 +191,6 @@
             this.label1.Text = "Short Description";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // slideShow1
-            // 
-            this.slideShow1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
-            this.slideShow1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.slideShow1.Location = new System.Drawing.Point(30, 673);
-            this.slideShow1.Margin = new System.Windows.Forms.Padding(30, 3, 30, 3);
-            this.slideShow1.MinimumSize = new System.Drawing.Size(0, 450);
-            this.slideShow1.Name = "slideShow1";
-            this.slideShow1.Size = new System.Drawing.Size(800, 450);
-            this.slideShow1.TabIndex = 9;
-            this.slideShow1.TabStop = false;
-            // 
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.AutoSize = true;
@@ -191,7 +199,7 @@
             this.tableLayoutPanel3.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.roundedEdgesButton1, 0, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 586);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 415);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
             this.tableLayoutPanel3.RowCount = 2;
@@ -212,6 +220,31 @@
             this.label2.Size = new System.Drawing.Size(119, 15);
             this.label2.TabIndex = 8;
             this.label2.Text = "Report this script";
+            // 
+            // rating1
+            // 
+            this.rating1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.rating1.AutoSize = true;
+            this.rating1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.rating1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
+            this.rating1.Location = new System.Drawing.Point(215, 300);
+            this.rating1.Margin = new System.Windows.Forms.Padding(3, 10, 3, 10);
+            this.rating1.Name = "rating1";
+            this.rating1.Size = new System.Drawing.Size(430, 102);
+            this.rating1.TabIndex = 6;
+            this.rating1.TabStop = false;
+            // 
+            // slideShow1
+            // 
+            this.slideShow1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
+            this.slideShow1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.slideShow1.Location = new System.Drawing.Point(30, 502);
+            this.slideShow1.Margin = new System.Windows.Forms.Padding(30, 3, 30, 3);
+            this.slideShow1.MinimumSize = new System.Drawing.Size(0, 450);
+            this.slideShow1.Name = "slideShow1";
+            this.slideShow1.Size = new System.Drawing.Size(800, 450);
+            this.slideShow1.TabIndex = 9;
+            this.slideShow1.TabStop = false;
             // 
             // roundedEdgesButton1
             // 
@@ -256,7 +289,6 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label3;
         private SlideShow slideShow1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
@@ -267,5 +299,8 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private RoundedEdgesButton roundedEdgesButton1;
         public System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        public System.Windows.Forms.PictureBox pictureBox1;
     }
 }
