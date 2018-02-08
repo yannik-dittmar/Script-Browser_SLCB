@@ -30,6 +30,13 @@ namespace Script_Browser.TabPages
             contextMenuStrip1.Renderer = new ArrowRenderer();
         }
 
+        //Clear DataGridView selection
+        private void TopScripts_Load(object sender, EventArgs e)
+        {
+            dataGridView1.ClearSelection();
+        }
+
+        //Change colors for the rows to get pattern
         private void dataGridView1_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             if (e.RowIndex % 2 == 0)
@@ -44,11 +51,17 @@ namespace Script_Browser.TabPages
             }
         }
 
-        private void TopScripts_Load(object sender, EventArgs e)
+        //Sort numerically
+        private void dataGridView1_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
         {
-            dataGridView1.ClearSelection();
+            if (e.Column.Index == 4)
+            {
+                e.SortResult = int.Parse(e.CellValue1.ToString()).CompareTo(int.Parse(e.CellValue2.ToString()));
+                e.Handled = true;
+            }
         }
 
+        //Refresh & Download data from server
         public void button3_Click(object sender, EventArgs e)
         {
             try
@@ -79,11 +92,16 @@ namespace Script_Browser.TabPages
                 button1.Enabled = page > 1;
 
                 label2.Text = "Page " + page;
+                if (metroComboBox1.Text == "Rating")
+                    dataGridView1.Sort(dataGridView1.Columns[3], ListSortDirection.Descending);
+                else
+                    dataGridView1.Sort(dataGridView1.Columns[4], ListSortDirection.Descending);
             }
             catch (WebException) { MetroFramework.MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.OK, MessageBoxIcon.Error, 125); }
             catch (Exception ex) { MetroFramework.MetroMessageBox.Show(form, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); Console.WriteLine(ex.StackTrace); }
         }
 
+        //No selection when entering a cell
         private void dataGridView1_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -124,7 +142,7 @@ namespace Script_Browser.TabPages
             try
             {
                 animatorScript.HideSync(panelScript);
-                (sender as Control).Parent.Parent.Parent.Dispose();
+                (sender as Control).Parent.Parent.Dispose();
             }
             catch { }
         }
@@ -140,6 +158,12 @@ namespace Script_Browser.TabPages
         private void button2_Click(object sender, EventArgs e)
         {
             page++;
+            button3_Click(null, null);
+        }
+
+        //Refresh page after changing parameters
+        private void metroComboBox_TextChanged(object sender, EventArgs e)
+        {
             button3_Click(null, null);
         }
     }

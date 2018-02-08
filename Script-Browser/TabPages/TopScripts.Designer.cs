@@ -126,6 +126,7 @@
             this.dataGridView1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseClick);
             this.dataGridView1.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellMouseEnter);
             this.dataGridView1.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dataGridView1_RowPrePaint);
+            this.dataGridView1.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.dataGridView1_SortCompare);
             // 
             // Column7
             // 
@@ -341,6 +342,7 @@
             this.metroComboBox1.UseCustomBackColor = true;
             this.metroComboBox1.UseCustomForeColor = true;
             this.metroComboBox1.UseSelectable = true;
+            this.metroComboBox1.TextChanged += new System.EventHandler(this.metroComboBox_TextChanged);
             // 
             // metroComboBox2
             // 
@@ -362,6 +364,7 @@
             this.metroComboBox2.UseCustomBackColor = true;
             this.metroComboBox2.UseCustomForeColor = true;
             this.metroComboBox2.UseSelectable = true;
+            this.metroComboBox2.TextChanged += new System.EventHandler(this.metroComboBox_TextChanged);
             // 
             // label1
             // 
@@ -399,7 +402,7 @@
             animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
             animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
             animation1.MosaicSize = 0;
-            animation1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            animation1.Padding = new System.Windows.Forms.Padding(0);
             animation1.RotateCoeff = 0F;
             animation1.RotateLimit = 0F;
             animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
@@ -407,8 +410,8 @@
             animation1.TimeCoeff = 0F;
             animation1.TransparencyCoeff = 0F;
             this.animatorScript.DefaultAnimation = animation1;
-            this.animatorScript.MaxAnimationTime = 2000;
-            this.animatorScript.TimeStep = 0.01F;
+            this.animatorScript.Interval = 1;
+            this.animatorScript.TimeStep = 0.009F;
             // 
             // TopScripts
             // 
