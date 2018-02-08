@@ -130,6 +130,12 @@ namespace Script_Browser.TabPages
                     panelScript.Size = this.Size;
                     panelScript.Controls.Add(ss);
                     ss.Size = panelScript.Size;
+
+                    int slidecoeff = -1 * (int)(this.Width * 0.002);
+                    if (slidecoeff >= 0)
+                        slidecoeff = -1;
+
+                    animatorScript.DefaultAnimation.SlideCoeff = new PointF(slidecoeff, 0);
                     animatorScript.ShowSync(panelScript);
                 }
                 catch { }
@@ -141,6 +147,11 @@ namespace Script_Browser.TabPages
         {
             try
             {
+                int slidecoeff = -1 * (int)(this.Width * 0.002);
+                if (slidecoeff >= 0)
+                    slidecoeff = -1;
+
+                animatorScript.DefaultAnimation.SlideCoeff = new PointF(slidecoeff, 0);
                 animatorScript.HideSync(panelScript);
                 (sender as Control).Parent.Parent.Dispose();
             }
