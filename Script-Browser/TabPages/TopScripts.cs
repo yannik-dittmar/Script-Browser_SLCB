@@ -19,6 +19,7 @@ namespace Script_Browser.TabPages
     {
         public Main form = null;
         int page = 1;
+        bool contextMenuOpen = false;
 
         public TopScripts()
         {
@@ -61,6 +62,19 @@ namespace Script_Browser.TabPages
             }
         }
 
+        //No selection when entering a cell
+        private void dataGridView1_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                dataGridView1.ClearSelection();
+                dataGridView1.Rows[e.RowIndex].Selected = true;
+
+                nAMEToolStripMenuItem.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+            }
+            catch { }
+        }
+
         //Refresh & Download data from server
         public void button3_Click(object sender, EventArgs e)
         {
@@ -101,25 +115,13 @@ namespace Script_Browser.TabPages
             catch (Exception ex) { MetroFramework.MetroMessageBox.Show(form, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); Console.WriteLine(ex.StackTrace); }
         }
 
-        //No selection when entering a cell
-        private void dataGridView1_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                dataGridView1.ClearSelection();
-                dataGridView1.Rows[e.RowIndex].Selected = true;
-
-                nAMEToolStripMenuItem.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-            }
-            catch { }
-        }
-
         //Load ScriptView
         private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            try
             {
-                try
+                dataGridView1.Rows[e.RowIndex].Selected = true;
+                if (e.Button == MouseButtons.Left && !contextMenuOpen)
                 {
                     string result = Networking.GetScriptById(form, dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
                     JObject script = JObject.Parse(result);
@@ -138,8 +140,9 @@ namespace Script_Browser.TabPages
                     animatorScript.DefaultAnimation.SlideCoeff = new PointF(slidecoeff, 0);
                     animatorScript.ShowSync(panelScript);
                 }
-                catch { }
             }
+            catch { }
+            contextMenuOpen = false;
         }
 
         //Unload ScriptView
@@ -176,6 +179,24 @@ namespace Script_Browser.TabPages
         private void metroComboBox_TextChanged(object sender, EventArgs e)
         {
             button3_Click(null, null);
+        }
+
+        //Load ScriptView over contextMenu
+        private void showDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            contextMenuOpen = false;
+            dataGridView1_CellMouseClick(null, new DataGridViewCellMouseEventArgs(0, dataGridView1.SelectedRows[0].Index, 0, 0, new MouseEventArgs(MouseButtons.Left, 0, 0, 0, 0)));
+        }
+
+        //Hide contextMenu when no row selected
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            e.Cancel = dataGridView1.SelectedRows.Count == 0;
+        }
+
+        private void contextMenuStrip1_Opened(object sender, EventArgs e)
+        {
+            contextMenuOpen = true;
         }
     }
 }

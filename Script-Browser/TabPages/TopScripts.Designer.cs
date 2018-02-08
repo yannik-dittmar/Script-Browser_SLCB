@@ -191,30 +191,33 @@
             this.showDetailsToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(117, 76);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(128, 98);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            this.contextMenuStrip1.Opened += new System.EventHandler(this.contextMenuStrip1_Opened);
             // 
             // nAMEToolStripMenuItem
             // 
             this.nAMEToolStripMenuItem.Name = "nAMEToolStripMenuItem";
-            this.nAMEToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.nAMEToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.nAMEToolStripMenuItem.Text = "NAME";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(113, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(124, 6);
             // 
             // tESTToolStripMenuItem
             // 
             this.tESTToolStripMenuItem.Name = "tESTToolStripMenuItem";
-            this.tESTToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.tESTToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.tESTToolStripMenuItem.Text = "Install";
             // 
             // showDetailsToolStripMenuItem
             // 
             this.showDetailsToolStripMenuItem.Name = "showDetailsToolStripMenuItem";
-            this.showDetailsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.showDetailsToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.showDetailsToolStripMenuItem.Text = "Show Details";
+            this.showDetailsToolStripMenuItem.Click += new System.EventHandler(this.showDetailsToolStripMenuItem_Click);
             // 
             // tableLayoutPanel1
             // 
