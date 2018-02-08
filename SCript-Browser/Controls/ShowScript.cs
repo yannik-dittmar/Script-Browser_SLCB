@@ -15,7 +15,9 @@ namespace Script_Browser.Controls
     public partial class ShowScript : UserControl
     {
         bool isDrag = false;
+        Control dragControl = null;
         int lastY = 0;
+
         int id;
         string name;
 
@@ -35,36 +37,59 @@ namespace Script_Browser.Controls
             rating1.SetInformation(ratings, downloads);
         }
 
-        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        //Resize a Control vertically
+        private void vResize_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Y >= (panel1.ClientRectangle.Bottom - 5) &&
-                e.Y <= (panel1.ClientRectangle.Bottom + 5))
+            try
             {
-                isDrag = true;
-                lastY = e.Y;
-            }
-        }
-
-        private void panel1_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (isDrag)
-            {
-                if (panel1.Height + e.Y - lastY > panel1.MinimumSize.Height)
+                Control c = sender as Control;
+                if (e.Y >= (c.ClientRectangle.Bottom - 3) &&
+                    e.Y <= (c.ClientRectangle.Bottom + 3))
                 {
-                    panel1.Height += (e.Y - lastY);
+                    isDrag = true;
+                    dragControl = c;
                     lastY = e.Y;
                 }
             }
+            catch { }
         }
 
-        private void panel1_MouseUp(object sender, MouseEventArgs e)
+        private void vResize_MouseMove(object sender, MouseEventArgs e)
         {
-            if (isDrag)
+            Control c = sender as Control;
+            if (isDrag && dragControl != null)
             {
+                if (dragControl.Height + e.Y - lastY > dragControl.MinimumSize.Height && (sender as Control) == dragControl)
+                {
+                    dragControl.Height += (e.Y - lastY);
+                    lastY = e.Y;
+                }
+            }
+            else if (e.Y >= (c.ClientRectangle.Bottom - 3) &&
+                    e.Y <= (c.ClientRectangle.Bottom + 3))
+            {
+                c.Cursor = Cursors.SizeNS;
+            }
+            else
+                c.Cursor = Cursors.Default;
+
+        }
+
+        private void vResize_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (isDrag && (sender as Control) == dragControl)
+            {
+                dragControl = null;
                 isDrag = false;
             }
         }
 
+        private void vResize_MouseLeave(object sender, EventArgs e)
+        {
+            (sender as Control).Cursor = Cursors.Default;
+        }
+
+        //WebBrowser set Colors & Style
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             try
@@ -77,6 +102,7 @@ namespace Script_Browser.Controls
             catch { }
         }
 
+        //WebBrowser navigate url to extern browser
         public void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
         {
             if (e.Url.ToString() != "about:blank")
