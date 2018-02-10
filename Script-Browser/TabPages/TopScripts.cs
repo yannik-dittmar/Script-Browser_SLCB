@@ -141,7 +141,8 @@ namespace Script_Browser.TabPages
                     animatorScript.ShowSync(panelScript);
                 }
             }
-            catch { }
+            catch (WebException) { MetroFramework.MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.OK, MessageBoxIcon.Error, 125); }
+            catch (Exception ex) { MetroFramework.MetroMessageBox.Show(form, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); Console.WriteLine(ex.StackTrace); }
             contextMenuOpen = false;
         }
 
@@ -194,6 +195,7 @@ namespace Script_Browser.TabPages
             e.Cancel = dataGridView1.SelectedRows.Count == 0;
         }
 
+        //Set contextMenu state
         private void contextMenuStrip1_Opened(object sender, EventArgs e)
         {
             contextMenuOpen = true;

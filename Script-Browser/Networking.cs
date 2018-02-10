@@ -18,6 +18,7 @@ namespace Script_Browser
         public static string username = "";
         public static string password = "";
 
+        //Encrypt passwords
         static string Hash(string input)
         {
             var hash = (new SHA1Managed()).ComputeHash(Encoding.UTF8.GetBytes(input));
@@ -53,16 +54,12 @@ namespace Script_Browser
             tryagain:
             try
             {
-                form.settings1.progressBarEx1.Tag = "0";
-                form.settings1.progressBarEx1.Value = 0;
-                form.settings1.progressBarEx1.Visible = true;
                 CheckIp(form);
-                form.settings1.progressBarEx1.Tag = "50";
 
                 using (WebClient web = new WebClient())
                 {
                     if (web.DownloadString(storageServer + "/Script%20Browser/login.php?user=" + _username + "&pass=" + Hash(_password)).Contains("false"))
-                        MetroMessageBox.Show(form, "The username or password was incorrect.", "Login error", MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1, 100);
+                        MetroMessageBox.Show(form, "The username or password was incorrect.", "Login error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 100);
                     else
                     {
                         username = _username;
@@ -76,10 +73,47 @@ namespace Script_Browser
             }
             catch
             {
-                if (DialogResult.Retry == MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1, 150))
+                if (DialogResult.Retry == MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150))
                     goto tryagain;
             }
-            form.settings1.progressBarEx1.Tag = "0";
+        }
+
+        public static void SignUp(string _username, string _password, string email, Main form)
+        {
+            _password = Hash(_password);
+            tryagain:
+            try
+            {
+                CheckIp(form);
+
+                using (WebClient web = new WebClient())
+                {
+                    string result = web.DownloadString(storageServer + "/Script%20Browser/signUp.php?username=" + _username + "&pass=" + _password + "&email=" + email);
+
+                    if (result.Contains("username"))
+                        MetroMessageBox.Show(form, "The username \"" + _username + "\" is allready registered!\nPlease select another one.", "Sign up error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150);
+                    else if (result.Contains("email"))
+                        MetroMessageBox.Show(form, "The email address \"" + email + "\" is allready registered!\nPlease select another one.", "Sign up error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150);
+                    else if (result.Contains("false"))
+                        MetroMessageBox.Show(form, "There was an unexected sign up error.\nPlease try again later.", "Sign up error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150);
+                    else
+                    {
+                        MetroMessageBox.Show(form, "You signed up successfully!\nA verification email has been send to your email account. Please check your inbox.", "Sign up success", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, 150);
+
+                        username = _username;
+                        password = _password;
+                        form.settings1.label1.Text = "Logged in as " + username;
+
+                        form.settings1.animator1.Hide(form.settings1.tableLayoutPanel1);
+                        form.settings1.animator1.Show(form.settings1.tableLayoutPanel2);
+                    }
+                }
+            }
+            catch
+            {
+                if (DialogResult.Retry == MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150))
+                    goto tryagain;
+            }
         }
 
         public static string GetTopScripts(string type, string highest, int page, Main form)
