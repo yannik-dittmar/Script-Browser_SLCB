@@ -26,26 +26,46 @@ namespace Script_Browser.TabPages
             signupEmail.SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
         }
 
-        private void timerProgressbar_Tick(object sender, EventArgs e)
-        {
-            try
-            {
-                if (progressBarEx1.Value < Int32.Parse(progressBarEx1.Tag.ToString()))
-                    progressBarEx1.Value += 1;
-                else if (progressBarEx1.Value > Int32.Parse(progressBarEx1.Tag.ToString()))
-                    progressBarEx1.Value -= 1;
-            }
-            catch { }
-        }
-
+        //Login
         private void roundedEdgesButton1_Click(object sender, EventArgs e)
         {
             if (loginUsername.Text.Trim(' ').Length != 0 && loginPass.Text.Trim(' ').Length != 0)
-            {
                 Networking.Login(loginUsername.Text, loginPass.Text, form);
+            else
+                MetroMessageBox.Show(this, "Please make sure your entries are completely!", "Login error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
+        }
+
+        //Sign up
+        private void roundedEdgesButton2_Click(object sender, EventArgs e)
+        {
+            if (signupUsername.Text.Trim(' ').Length != 0 && signupPass.Text.Trim(' ').Length != 0 && signupPassConfirm.Text.Trim(' ').Length != 0 && signupEmail.Text.Trim(' ').Length != 0 && IsValidEmail(signupEmail.Text))
+            {
+                if (signupPass.Text.Trim(' ').Length >= 6)
+                {
+                    if (signupPass.Text == signupPassConfirm.Text)
+                        Networking.SignUp(signupUsername.Text, signupPass.Text, signupEmail.Text, form);
+                    else
+                        MetroMessageBox.Show(this, "The password does not match the confirmation.", "Sign up error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
+                }
+                else
+                    MetroMessageBox.Show(this, "Your password has to be at least 6 characters long!", "Sign up error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
             }
             else
-                MetroMessageBox.Show(this, "Please make sure your entries are completely!", "Login error", MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1, 125);
+                MetroMessageBox.Show(this, "Please make sure your entries are completely and correct!", "Sign up error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
+        }
+
+        //Verify Email address
+        bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
