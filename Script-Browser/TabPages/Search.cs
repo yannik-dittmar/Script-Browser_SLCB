@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
 using System.Net;
+using Script_Browser.Controls;
+using Script_Browser.Design;
 
 namespace Script_Browser.TabPages
 {
@@ -20,6 +22,8 @@ namespace Script_Browser.TabPages
         public Search()
         {
             InitializeComponent();
+
+            contextMenuStrip1.Renderer = new ArrowRenderer();
         }
 
         //Change colors for the rows to get pattern
@@ -108,6 +112,72 @@ namespace Script_Browser.TabPages
                     catch (Exception ex) { MetroFramework.MetroMessageBox.Show(form, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); Console.WriteLine(ex.StackTrace); }
                 }
             }
+        }
+
+        //Load ScriptView
+        private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            try
+            {
+                dataGridView1.Rows[e.RowIndex].Selected = true;
+                if (e.Button == MouseButtons.Left && !contextMenuOpen)
+                {
+                    string result = Networking.GetScriptById(form, dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+                    JObject script = JObject.Parse(result);
+
+                    ShowScript ss = new ShowScript(script["ID"].ToString(), script["Name"].ToString(), script["Version"].ToString(), script["Username"].ToString(), script["ShortDescription"].ToString(), script["LongDescription"].ToString(), script["Rating"].ToString(), script["Ratings"].ToString(), script["Downloads"].ToString());
+                    ss.pictureBox1.MouseClick += new MouseEventHandler(unloadScript);
+                    ss.Dock = DockStyle.Fill;
+                    panelScript.Size = this.Size;
+                    panelScript.Controls.Add(ss);
+                    ss.Size = panelScript.Size;
+
+                    int slidecoeff = -1 * (int)(this.Width * 0.002);
+                    if (slidecoeff >= 0)
+                        slidecoeff = -1;
+
+                    animatorScript.DefaultAnimation.SlideCoeff = new PointF(slidecoeff, 0);
+                    animatorScript.ShowSync(panelScript);
+                }
+            }
+            catch (WebException) { MetroFramework.MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.OK, MessageBoxIcon.Error, 125); }
+            catch (Exception ex) { MetroFramework.MetroMessageBox.Show(form, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); Console.WriteLine(ex.StackTrace); }
+            contextMenuOpen = false;
+        }
+
+        //Unload ScriptView
+        public void unloadScript(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                int slidecoeff = -1 * (int)(this.Width * 0.002);
+                if (slidecoeff >= 0)
+                    slidecoeff = -1;
+
+                animatorScript.DefaultAnimation.SlideCoeff = new PointF(slidecoeff, 0);
+                animatorScript.HideSync(panelScript);
+                (sender as Control).Parent.Parent.Dispose();
+            }
+            catch { }
+        }
+
+        //Load ScriptView over contextMenu
+        private void showDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            contextMenuOpen = false;
+            dataGridView1_CellMouseClick(null, new DataGridViewCellMouseEventArgs(0, dataGridView1.SelectedRows[0].Index, 0, 0, new MouseEventArgs(MouseButtons.Left, 0, 0, 0, 0)));
+        }
+
+        //Hide contextMenu when no row selected
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            e.Cancel = dataGridView1.SelectedRows.Count == 0;
+        }
+
+        //Set contextMenu state
+        private void contextMenuStrip1_Opened(object sender, EventArgs e)
+        {
+            contextMenuOpen = true;
         }
     }
 }

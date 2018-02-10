@@ -34,11 +34,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.rating1 = new Script_Browser.Controls.Rating();
             this.panel1 = new System.Windows.Forms.Panel();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
+            this.roundedEdgesButton1 = new Script_Browser.Controls.RoundedEdgesButton();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
@@ -47,8 +49,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panelTabPage1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.rating1 = new Script_Browser.Controls.Rating();
-            this.roundedEdgesButton1 = new Script_Browser.Controls.RoundedEdgesButton();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
@@ -159,6 +159,19 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(860, 812);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
+            // rating1
+            // 
+            this.rating1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.rating1.AutoSize = true;
+            this.rating1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.rating1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
+            this.rating1.Location = new System.Drawing.Point(215, 253);
+            this.rating1.Margin = new System.Windows.Forms.Padding(3, 10, 3, 10);
+            this.rating1.Name = "rating1";
+            this.rating1.Size = new System.Drawing.Size(430, 102);
+            this.rating1.TabIndex = 6;
+            this.rating1.TabStop = false;
+            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
@@ -233,6 +246,24 @@
             this.label2.Size = new System.Drawing.Size(119, 15);
             this.label2.TabIndex = 8;
             this.label2.Text = "Report this script";
+            // 
+            // roundedEdgesButton1
+            // 
+            this.roundedEdgesButton1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.roundedEdgesButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
+            this.roundedEdgesButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.roundedEdgesButton1.FlatAppearance.BorderSize = 0;
+            this.roundedEdgesButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.roundedEdgesButton1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
+            this.roundedEdgesButton1.ForeColor = System.Drawing.Color.White;
+            this.roundedEdgesButton1.Location = new System.Drawing.Point(316, 10);
+            this.roundedEdgesButton1.Margin = new System.Windows.Forms.Padding(0);
+            this.roundedEdgesButton1.Name = "roundedEdgesButton1";
+            this.roundedEdgesButton1.Size = new System.Drawing.Size(222, 41);
+            this.roundedEdgesButton1.TabIndex = 7;
+            this.roundedEdgesButton1.TabStop = false;
+            this.roundedEdgesButton1.Text = "Download and Install";
+            this.roundedEdgesButton1.UseVisualStyleBackColor = false;
             // 
             // tableLayoutPanel4
             // 
@@ -346,37 +377,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(860, 1172);
             this.panel3.TabIndex = 3;
-            // 
-            // rating1
-            // 
-            this.rating1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.rating1.AutoSize = true;
-            this.rating1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.rating1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
-            this.rating1.Location = new System.Drawing.Point(215, 253);
-            this.rating1.Margin = new System.Windows.Forms.Padding(3, 10, 3, 10);
-            this.rating1.Name = "rating1";
-            this.rating1.Size = new System.Drawing.Size(430, 102);
-            this.rating1.TabIndex = 6;
-            this.rating1.TabStop = false;
-            // 
-            // roundedEdgesButton1
-            // 
-            this.roundedEdgesButton1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.roundedEdgesButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
-            this.roundedEdgesButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.roundedEdgesButton1.FlatAppearance.BorderSize = 0;
-            this.roundedEdgesButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.roundedEdgesButton1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
-            this.roundedEdgesButton1.ForeColor = System.Drawing.Color.White;
-            this.roundedEdgesButton1.Location = new System.Drawing.Point(316, 10);
-            this.roundedEdgesButton1.Margin = new System.Windows.Forms.Padding(0);
-            this.roundedEdgesButton1.Name = "roundedEdgesButton1";
-            this.roundedEdgesButton1.Size = new System.Drawing.Size(222, 41);
-            this.roundedEdgesButton1.TabIndex = 7;
-            this.roundedEdgesButton1.TabStop = false;
-            this.roundedEdgesButton1.Text = "Download and Install";
-            this.roundedEdgesButton1.UseVisualStyleBackColor = false;
             // 
             // ShowScript
             // 
