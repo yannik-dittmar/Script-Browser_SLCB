@@ -20,31 +20,26 @@ namespace Download_Manager
             InitializeComponent();
         }
 
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        //Scließen des Fensters bei klicken aus "X"
+        //close window by clicking on "X"
         private void labelX_Click(object sender, EventArgs e)
         {
             Environment.Exit(0);
         }
 
-        //Minimieren des Fensters bei klicken auf "_"
+        //minimize form by clicking on "_"
         private void labelMin_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
 
-        //Bewegen des Fensters 
-        //Speichern der ursprünglichen Position bei Mausklick
+        //moving of form
+        //saving position if mouse button down
         private void tableLayoutPanel1_MouseDown(object sender, MouseEventArgs e)
         {
             mouseDown = true;
             lastLocation = e.Location;
         }
-        //Berechnen der neuen Position während Maus bewegt wird
+        //calculating nwe position while mouse moves
         private void tableLayoutPanel1_MouseMove(object sender, MouseEventArgs e)
         {
             if (mouseDown)
@@ -55,10 +50,31 @@ namespace Download_Manager
                 this.Update();
             }
         }
-        //Beenden des Bewegens, wenn Taste nicht mehr gedrückt wird
+        //stop moving when mouse button up
         private void tableLayoutPanel1_MouseUp(object sender, MouseEventArgs e)
         {
             mouseDown = false;
+        }
+
+        //enable button "next" when user scrolled to end of richTextBoxTerms
+        private void richTextBoxTerms_VScroll(object sender, EventArgs e)
+        {
+            if (richTextBoxTerms.ReachedBottom())
+            {
+                checkBoxAgree.Enabled = true;
+            }
+        }
+
+        private void checkBoxAgree_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxAgree.Checked == true)
+            {
+                button1.Enabled = true;
+            }
+            else
+            {
+                button1.Enabled = false;
+            }
         }
     }
 }

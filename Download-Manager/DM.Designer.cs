@@ -34,10 +34,17 @@
             this.label1 = new System.Windows.Forms.Label();
             this.labelX = new System.Windows.Forms.Label();
             this.labelMin = new System.Windows.Forms.Label();
-            this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
-            this.materialCheckBox1 = new MaterialSkin.Controls.MaterialCheckBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.checkBoxAgree = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.richTextBoxTerms = new System.Windows.Forms.RichTextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.linkLabelDP = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -60,7 +67,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(645, 35);
             this.tableLayoutPanel1.TabIndex = 0;
-            this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             this.tableLayoutPanel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel1_MouseDown);
             this.tableLayoutPanel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel1_MouseMove);
             this.tableLayoutPanel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel1_MouseUp);
@@ -81,11 +87,11 @@
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.label1.Location = new System.Drawing.Point(43, 7);
+            this.label1.Location = new System.Drawing.Point(43, 5);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(163, 20);
+            this.label1.Size = new System.Drawing.Size(191, 24);
             this.label1.TabIndex = 1;
             this.label1.Text = "Download Manager";
             // 
@@ -118,33 +124,105 @@
             this.labelMin.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.labelMin.Click += new System.EventHandler(this.labelMin_Click);
             // 
-            // metroProgressSpinner1
+            // panel1
             // 
-            this.metroProgressSpinner1.Location = new System.Drawing.Point(450, 291);
-            this.metroProgressSpinner1.Maximum = 100;
-            this.metroProgressSpinner1.Name = "metroProgressSpinner1";
-            this.metroProgressSpinner1.Size = new System.Drawing.Size(183, 161);
-            this.metroProgressSpinner1.TabIndex = 3;
-            this.metroProgressSpinner1.UseCustomBackColor = true;
-            this.metroProgressSpinner1.UseCustomForeColor = true;
-            this.metroProgressSpinner1.UseSelectable = true;
+            this.panel1.Controls.Add(this.checkBoxAgree);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.button2);
+            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.richTextBoxTerms);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel1.Location = new System.Drawing.Point(0, 50);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(642, 357);
+            this.panel1.TabIndex = 5;
             // 
-            // materialCheckBox1
+            // checkBoxAgree
             // 
-            this.materialCheckBox1.AutoSize = true;
-            this.materialCheckBox1.Depth = 0;
-            this.materialCheckBox1.Font = new System.Drawing.Font("Roboto", 10F);
-            this.materialCheckBox1.ForeColor = System.Drawing.Color.White;
-            this.materialCheckBox1.Location = new System.Drawing.Point(281, 362);
-            this.materialCheckBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.materialCheckBox1.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.materialCheckBox1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialCheckBox1.Name = "materialCheckBox1";
-            this.materialCheckBox1.Ripple = true;
-            this.materialCheckBox1.Size = new System.Drawing.Size(150, 30);
-            this.materialCheckBox1.TabIndex = 4;
-            this.materialCheckBox1.Text = "materialCheckBox1";
-            this.materialCheckBox1.UseVisualStyleBackColor = true;
+            this.checkBoxAgree.AutoSize = true;
+            this.checkBoxAgree.Enabled = false;
+            this.checkBoxAgree.Location = new System.Drawing.Point(15, 281);
+            this.checkBoxAgree.Name = "checkBoxAgree";
+            this.checkBoxAgree.Size = new System.Drawing.Size(75, 22);
+            this.checkBoxAgree.TabIndex = 9;
+            this.checkBoxAgree.Text = "I agree.";
+            this.checkBoxAgree.UseVisualStyleBackColor = true;
+            this.checkBoxAgree.CheckedChanged += new System.EventHandler(this.checkBoxAgree_CheckedChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 28);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(567, 36);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Please review the terms of use before installing StreamLabs Chatbot Script-Browse" +
+    "r. \r\nYou have to agree to continue.\r\n";
+            // 
+            // button2
+            // 
+            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(558, 276);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 30);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "Cancel";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Enabled = false;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(477, 276);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 30);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "Next";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // richTextBoxTerms
+            // 
+            this.richTextBoxTerms.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.richTextBoxTerms.Location = new System.Drawing.Point(15, 78);
+            this.richTextBoxTerms.Name = "richTextBoxTerms";
+            this.richTextBoxTerms.ReadOnly = true;
+            this.richTextBoxTerms.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.richTextBoxTerms.Size = new System.Drawing.Size(618, 184);
+            this.richTextBoxTerms.TabIndex = 1;
+            this.richTextBoxTerms.Text = "asdasdddddddddddddddddddddddddd\nasd\nasd\nasd\ndfg\ndfg\ngj\nhjkl\nhjk\nhjkzui\n78678678\n6" +
+    "78";
+            this.richTextBoxTerms.VScroll += new System.EventHandler(this.richTextBoxTerms_VScroll);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(12, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(108, 18);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Terms of use";
+            // 
+            // linkLabelDP
+            // 
+            this.linkLabelDP.ActiveLinkColor = System.Drawing.Color.White;
+            this.linkLabelDP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.linkLabelDP.DisabledLinkColor = System.Drawing.Color.White;
+            this.linkLabelDP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabelDP.ForeColor = System.Drawing.Color.White;
+            this.linkLabelDP.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.linkLabelDP.LinkColor = System.Drawing.Color.DimGray;
+            this.linkLabelDP.Location = new System.Drawing.Point(0, 439);
+            this.linkLabelDP.Name = "linkLabelDP";
+            this.linkLabelDP.Size = new System.Drawing.Size(645, 16);
+            this.linkLabelDP.TabIndex = 7;
+            this.linkLabelDP.TabStop = true;
+            this.linkLabelDP.Text = "© Digital-Programming";
+            this.linkLabelDP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.linkLabelDP.VisitedLinkColor = System.Drawing.Color.White;
             // 
             // DM
             // 
@@ -152,8 +230,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
             this.ClientSize = new System.Drawing.Size(645, 464);
-            this.Controls.Add(this.materialCheckBox1);
-            this.Controls.Add(this.metroProgressSpinner1);
+            this.Controls.Add(this.linkLabelDP);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -163,8 +241,9 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -175,8 +254,14 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelX;
         private System.Windows.Forms.Label labelMin;
-        private MetroFramework.Controls.MetroProgressSpinner metroProgressSpinner1;
-        private MaterialSkin.Controls.MaterialCheckBox materialCheckBox1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.RichTextBox richTextBoxTerms;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.LinkLabel linkLabelDP;
+        private System.Windows.Forms.CheckBox checkBoxAgree;
     }
 }
 
