@@ -62,7 +62,7 @@ namespace Script_Browser.TabPages
             }
         }
 
-        //No selection when entering a cell
+        //Only row-selection when entering a cell
         private void dataGridView1_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -97,7 +97,6 @@ namespace Script_Browser.TabPages
 
                         dataGridView1.Rows.Add(row["ID"], row["Name"], row["ShortDescription"], stars, row["Downloads"], row["Version"], row["Username"]);
                     }
-                    dataGridView1.ClearSelection();
                 }
 
                 if (result.Count != 50)
@@ -110,6 +109,7 @@ namespace Script_Browser.TabPages
                     dataGridView1.Sort(dataGridView1.Columns[3], ListSortDirection.Descending);
                 else
                     dataGridView1.Sort(dataGridView1.Columns[4], ListSortDirection.Descending);
+                dataGridView1.ClearSelection();
             }
             catch (WebException) { MetroFramework.MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.OK, MessageBoxIcon.Error, 125); }
             catch (Exception ex) { MetroFramework.MetroMessageBox.Show(form, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); Console.WriteLine(ex.StackTrace); }
