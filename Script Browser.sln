@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27130.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Script-Browser", "SCript-Browser\Script-Browser.csproj", "{B8997731-77A0-4AE2-A2A1-05680061B9C3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Download-Manager", "Download-Manager\Download-Manager.csproj", "{D0AE5B91-B6B5-40AB-8AD9-9805579E8F70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaveManager", "SaveManager\SaveManager.csproj", "{9E42AF62-DE0F-41CB-9DA2-393FB4BDCA6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{D0AE5B91-B6B5-40AB-8AD9-9805579E8F70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0AE5B91-B6B5-40AB-8AD9-9805579E8F70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0AE5B91-B6B5-40AB-8AD9-9805579E8F70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E42AF62-DE0F-41CB-9DA2-393FB4BDCA6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E42AF62-DE0F-41CB-9DA2-393FB4BDCA6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E42AF62-DE0F-41CB-9DA2-393FB4BDCA6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E42AF62-DE0F-41CB-9DA2-393FB4BDCA6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

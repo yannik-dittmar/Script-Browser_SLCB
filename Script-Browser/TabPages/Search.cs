@@ -7,34 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Threading;
 using Newtonsoft.Json.Linq;
 using System.Net;
-using Script_Browser.Design;
 using Script_Browser.Controls;
+using Script_Browser.Design;
 
 namespace Script_Browser.TabPages
 {
-    public partial class TopScripts : UserControl
+    public partial class Search : UserControl
     {
         public Main form = null;
-        int page = 1;
         bool contextMenuOpen = false;
 
-        public TopScripts()
+        public Search()
         {
             InitializeComponent();
 
-            metroComboBox1.SelectedIndex = 0;
-            metroComboBox2.SelectedIndex = 0;
-
             contextMenuStrip1.Renderer = new ArrowRenderer();
-        }
-
-        //Clear DataGridView selection
-        private void TopScripts_Load(object sender, EventArgs e)
-        {
-            dataGridView1.ClearSelection();
         }
 
         //Change colors for the rows to get pattern
@@ -55,7 +44,7 @@ namespace Script_Browser.TabPages
         //Sort numerically
         private void dataGridView1_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
         {
-            if (e.Column.Index == 4)
+            if (e.Column.Index == 4 || e.Column.Index == 7)
             {
                 e.SortResult = int.Parse(e.CellValue1.ToString()).CompareTo(int.Parse(e.CellValue2.ToString()));
                 e.Handled = true;
@@ -75,44 +64,54 @@ namespace Script_Browser.TabPages
             catch { }
         }
 
-        //Refresh & Download data from server
-        public void button3_Click(object sender, EventArgs e)
+        //Search
+        private void metroTextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            try
+            if (e.KeyChar == (char)Keys.Enter)
             {
-                JArray result = JArray.Parse(Networking.GetTopScripts(metroComboBox2.Text, metroComboBox1.Text, page, form));
-
-                if (result.Count == 0 && page > 1)
-                    page--;
-                else
-                {
-                    button2.Enabled = true;
-                    dataGridView1.Rows.Clear();
-                    foreach (JObject row in result)
-                    {
-                        int rating = (int)Math.Round(Double.Parse(row["Rating"].ToString().Replace(".", ",")));
-                        string stars = "";
-                        for (int i = 0; i < rating; i++)
-                            stars += "★";
-
-                        dataGridView1.Rows.Add(row["ID"], row["Name"], row["ShortDescription"], stars, row["Downloads"], row["Version"], row["Username"]);
-                    }
-                }
-
-                if (result.Count != 50)
-                    button2.Enabled = false;
-
-                button1.Enabled = page > 1;
-
-                label2.Text = "Page " + page;
-                if (metroComboBox1.Text == "Rating")
-                    dataGridView1.Sort(dataGridView1.Columns[3], ListSortDirection.Descending);
-                else
-                    dataGridView1.Sort(dataGridView1.Columns[4], ListSortDirection.Descending);
-                dataGridView1.ClearSelection();
+                button1_Click(null, null);
+                e.Handled = true;
             }
-            catch (WebException) { MetroFramework.MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.OK, MessageBoxIcon.Error, 125); }
-            catch (Exception ex) { MetroFramework.MetroMessageBox.Show(form, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); Console.WriteLine(ex.StackTrace); }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (metroTextBox1.Text.Trim(' ') != "")
+            {
+                string[] tags = metroTextBox1.Text.ToLower().Split(' ');
+                if (tags.Count() > 0)
+                {
+                    try
+                    {
+                        string plainResult = Networking.SearchScripts(tags, form);
+                        if (plainResult.Contains("empty"))
+                        {
+                            label1.Visible = true;
+                            label1.Text = "No results found matching your tags.";
+                        }
+                        else
+                        {
+                            JObject result = JObject.Parse(plainResult);
+                            label1.Visible = false;
+
+                            dataGridView1.Rows.Clear();
+                            foreach (KeyValuePair<string, JToken> row in result)
+                            {
+                                int rating = (int)Math.Round(Double.Parse(row.Value["Rating"].ToString().Replace(".", ",")));
+                                string stars = "";
+                                for (int i = 0; i < rating; i++)
+                                    stars += "★";
+
+                                dataGridView1.Rows.Add(row.Value["ID"], row.Value["Name"], row.Value["ShortDescription"], stars, row.Value["Downloads"], row.Value["Version"], row.Value["Username"], row.Value["Count"]);
+                            }
+                            dataGridView1.Sort(dataGridView1.Columns[7], ListSortDirection.Descending);
+                            dataGridView1.ClearSelection();
+                        }
+                    }
+                    catch (WebException) { MetroFramework.MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.OK, MessageBoxIcon.Error, 125); }
+                    catch (Exception ex) { MetroFramework.MetroMessageBox.Show(form, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); Console.WriteLine(ex.StackTrace); }
+                }
+            }
         }
 
         //Load ScriptView
@@ -160,26 +159,6 @@ namespace Script_Browser.TabPages
                 (sender as Control).Parent.Parent.Dispose();
             }
             catch { }
-        }
-
-        //Switch Pages
-        private void button1_Click(object sender, EventArgs e)
-        {
-            page--;
-            button1.Enabled = page > 1;
-            button3_Click(null, null);
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            page++;
-            button3_Click(null, null);
-        }
-
-        //Refresh page after changing parameters
-        private void metroComboBox_TextChanged(object sender, EventArgs e)
-        {
-            button3_Click(null, null);
         }
 
         //Load ScriptView over contextMenu

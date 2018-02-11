@@ -54,9 +54,12 @@
             this.label8 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panelTab3 = new System.Windows.Forms.Panel();
+            this.settings1 = new Script_Browser.TabPages.Settings();
             this.panelTab2 = new System.Windows.Forms.Panel();
             this.panelTab1 = new System.Windows.Forms.Panel();
+            this.search1 = new Script_Browser.TabPages.Search();
             this.panelTab0 = new System.Windows.Forms.Panel();
+            this.topScripts1 = new Script_Browser.TabPages.TopScripts();
             this.NavTransitionIn = new System.Windows.Forms.Timer(this.components);
             this.NavTransitionOut = new System.Windows.Forms.Timer(this.components);
             this.minimized = new System.Windows.Forms.Timer(this.components);
@@ -64,8 +67,6 @@
             this.panelMain = new System.Windows.Forms.Panel();
             this.animatorTabPage = new AnimatorNS.Animator(this.components);
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.settings1 = new Script_Browser.TabPages.Settings();
-            this.topScripts1 = new Script_Browser.TabPages.TopScripts();
             this.metroPanel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -81,6 +82,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.panel2.SuspendLayout();
             this.panelTab3.SuspendLayout();
+            this.panelTab1.SuspendLayout();
             this.panelTab0.SuspendLayout();
             this.panelMain.SuspendLayout();
             this.SuspendLayout();
@@ -497,6 +499,16 @@
             this.panelTab3.TabIndex = 3;
             this.panelTab3.Tag = "3";
             // 
+            // settings1
+            // 
+            this.settings1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
+            this.animatorTabPage.SetDecoration(this.settings1, AnimatorNS.DecorationType.None);
+            this.settings1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.settings1.Location = new System.Drawing.Point(0, 0);
+            this.settings1.Name = "settings1";
+            this.settings1.Size = new System.Drawing.Size(869, 487);
+            this.settings1.TabIndex = 0;
+            // 
             // panelTab2
             // 
             this.panelTab2.BackColor = System.Drawing.Color.Yellow;
@@ -511,6 +523,7 @@
             // panelTab1
             // 
             this.panelTab1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.panelTab1.Controls.Add(this.search1);
             this.animatorTabPage.SetDecoration(this.panelTab1, AnimatorNS.DecorationType.None);
             this.panelTab1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelTab1.Location = new System.Drawing.Point(0, 0);
@@ -518,6 +531,15 @@
             this.panelTab1.Size = new System.Drawing.Size(869, 487);
             this.panelTab1.TabIndex = 1;
             this.panelTab1.Tag = "1";
+            // 
+            // search1
+            // 
+            this.animatorTabPage.SetDecoration(this.search1, AnimatorNS.DecorationType.None);
+            this.search1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.search1.Location = new System.Drawing.Point(0, 0);
+            this.search1.Name = "search1";
+            this.search1.Size = new System.Drawing.Size(869, 487);
+            this.search1.TabIndex = 0;
             // 
             // panelTab0
             // 
@@ -530,6 +552,16 @@
             this.panelTab0.Size = new System.Drawing.Size(869, 487);
             this.panelTab0.TabIndex = 0;
             this.panelTab0.Tag = "0";
+            // 
+            // topScripts1
+            // 
+            this.topScripts1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
+            this.animatorTabPage.SetDecoration(this.topScripts1, AnimatorNS.DecorationType.None);
+            this.topScripts1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.topScripts1.Location = new System.Drawing.Point(0, 0);
+            this.topScripts1.Name = "topScripts1";
+            this.topScripts1.Size = new System.Drawing.Size(869, 487);
+            this.topScripts1.TabIndex = 0;
             // 
             // NavTransitionIn
             // 
@@ -592,26 +624,6 @@
             this.notifyIcon1.Text = "notifyIcon1";
             this.notifyIcon1.Visible = true;
             // 
-            // settings1
-            // 
-            this.settings1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
-            this.animatorTabPage.SetDecoration(this.settings1, AnimatorNS.DecorationType.None);
-            this.settings1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.settings1.Location = new System.Drawing.Point(0, 0);
-            this.settings1.Name = "settings1";
-            this.settings1.Size = new System.Drawing.Size(869, 487);
-            this.settings1.TabIndex = 0;
-            // 
-            // topScripts1
-            // 
-            this.topScripts1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
-            this.animatorTabPage.SetDecoration(this.topScripts1, AnimatorNS.DecorationType.None);
-            this.topScripts1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.topScripts1.Location = new System.Drawing.Point(0, 0);
-            this.topScripts1.Name = "topScripts1";
-            this.topScripts1.Size = new System.Drawing.Size(869, 487);
-            this.topScripts1.TabIndex = 0;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -648,6 +660,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panelTab3.ResumeLayout(false);
+            this.panelTab1.ResumeLayout(false);
             this.panelTab0.ResumeLayout(false);
             this.panelMain.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -691,6 +704,7 @@
         public TabPages.Settings settings1;
         private TabPages.TopScripts topScripts1;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private TabPages.Search search1;
     }
 }
 

@@ -1,6 +1,6 @@
 ﻿namespace Script_Browser.TabPages
 {
-    partial class TopScripts
+    partial class Search
     {
         /// <summary> 
         /// Erforderliche Designervariable.
@@ -32,8 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             AnimatorNS.Animation animation1 = new AnimatorNS.Animation();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TopScripts));
-            this.panelBrowse = new System.Windows.Forms.Panel();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Search));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,38 +41,24 @@
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.nAMEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tESTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.metroComboBox1 = new MetroFramework.Controls.MetroComboBox();
-            this.metroComboBox2 = new MetroFramework.Controls.MetroComboBox();
+            this.metroTextBox1 = new MetroFramework.Controls.MetroTextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.panelScript = new System.Windows.Forms.Panel();
             this.animatorScript = new AnimatorNS.Animator(this.components);
-            this.panelBrowse.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // panelBrowse
-            // 
-            this.panelBrowse.Controls.Add(this.dataGridView1);
-            this.panelBrowse.Controls.Add(this.tableLayoutPanel1);
-            this.animatorScript.SetDecoration(this.panelBrowse, AnimatorNS.DecorationType.None);
-            this.panelBrowse.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelBrowse.Location = new System.Drawing.Point(0, 0);
-            this.panelBrowse.Name = "panelBrowse";
-            this.panelBrowse.Size = new System.Drawing.Size(620, 402);
-            this.panelBrowse.TabIndex = 0;
             // 
             // dataGridView1
             // 
@@ -100,7 +85,8 @@
             this.Column6,
             this.Column5,
             this.Column3,
-            this.Column4});
+            this.Column4,
+            this.Column8});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.animatorScript.SetDecoration(this.dataGridView1, AnimatorNS.DecorationType.None);
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -121,8 +107,8 @@
             this.dataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dataGridView1.Size = new System.Drawing.Size(620, 367);
-            this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.Size = new System.Drawing.Size(588, 372);
+            this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseClick);
             this.dataGridView1.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellMouseEnter);
             this.dataGridView1.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dataGridView1_RowPrePaint);
@@ -181,6 +167,13 @@
             this.Column4.ReadOnly = true;
             this.Column4.Width = 69;
             // 
+            // Column8
+            // 
+            this.Column8.HeaderText = "Match";
+            this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
+            this.Column8.Visible = false;
+            // 
             // contextMenuStrip1
             // 
             this.animatorScript.SetDecoration(this.contextMenuStrip1, AnimatorNS.DecorationType.None);
@@ -222,166 +215,113 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.AutoSize = true;
-            this.tableLayoutPanel1.ColumnCount = 9;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
+            this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this.button3, 8, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button2, 7, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 6, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button1, 5, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.metroComboBox1, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.metroComboBox2, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.button1, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.metroTextBox1, 0, 0);
             this.animatorScript.SetDecoration(this.tableLayoutPanel1, AnimatorNS.DecorationType.None);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 367);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 372);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(3);
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(620, 35);
-            this.tableLayoutPanel1.TabIndex = 1;
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
-            this.animatorScript.SetDecoration(this.button3, AnimatorNS.DecorationType.None);
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Image = global::Script_Browser.Properties.Resources.refresh;
-            this.button3.Location = new System.Drawing.Point(590, 3);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(27, 27);
-            this.button3.TabIndex = 4;
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
-            this.animatorScript.SetDecoration(this.button2, AnimatorNS.DecorationType.None);
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(557, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(27, 27);
-            this.button2.TabIndex = 3;
-            this.button2.Text = ">";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // label2
-            // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label2.AutoSize = true;
-            this.animatorScript.SetDecoration(this.label2, AnimatorNS.DecorationType.None);
-            this.label2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(500, 10);
-            this.label2.Margin = new System.Windows.Forms.Padding(3);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 15);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Page 1";
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(588, 30);
+            this.tableLayoutPanel1.TabIndex = 2;
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button1.AutoSize = true;
+            this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
+            this.button1.Cursor = System.Windows.Forms.Cursors.Default;
             this.animatorScript.SetDecoration(this.button1, AnimatorNS.DecorationType.None);
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(467, 3);
+            this.button1.Location = new System.Drawing.Point(527, 3);
+            this.button1.Margin = new System.Windows.Forms.Padding(0);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(27, 27);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "<";
+            this.button1.Size = new System.Drawing.Size(58, 24);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Search";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // label3
+            // metroTextBox1
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label3.AutoSize = true;
-            this.animatorScript.SetDecoration(this.label3, AnimatorNS.DecorationType.None);
-            this.label3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(179, 10);
-            this.label3.Margin = new System.Windows.Forms.Padding(10, 3, 3, 3);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(61, 15);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Highest:";
+            this.metroTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.metroTextBox1.BackColor = System.Drawing.Color.White;
             // 
-            // metroComboBox1
             // 
-            this.metroComboBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.metroComboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
-            this.animatorScript.SetDecoration(this.metroComboBox1, AnimatorNS.DecorationType.None);
-            this.metroComboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.metroComboBox1.ForeColor = System.Drawing.Color.White;
-            this.metroComboBox1.FormattingEnabled = true;
-            this.metroComboBox1.ItemHeight = 23;
-            this.metroComboBox1.Items.AddRange(new object[] {
-            "Rating",
-            "Downloads"});
-            this.metroComboBox1.Location = new System.Drawing.Point(246, 3);
-            this.metroComboBox1.Name = "metroComboBox1";
-            this.metroComboBox1.Size = new System.Drawing.Size(109, 29);
-            this.metroComboBox1.TabIndex = 1;
-            this.metroComboBox1.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.metroComboBox1.UseCustomBackColor = true;
-            this.metroComboBox1.UseCustomForeColor = true;
-            this.metroComboBox1.UseSelectable = true;
-            this.metroComboBox1.TextChanged += new System.EventHandler(this.metroComboBox_TextChanged);
             // 
-            // metroComboBox2
-            // 
-            this.metroComboBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.metroComboBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
-            this.animatorScript.SetDecoration(this.metroComboBox2, AnimatorNS.DecorationType.None);
-            this.metroComboBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.metroComboBox2.ForeColor = System.Drawing.Color.White;
-            this.metroComboBox2.FormattingEnabled = true;
-            this.metroComboBox2.ItemHeight = 23;
-            this.metroComboBox2.Items.AddRange(new object[] {
-            "Command",
-            "Parameter"});
-            this.metroComboBox2.Location = new System.Drawing.Point(61, 3);
-            this.metroComboBox2.Name = "metroComboBox2";
-            this.metroComboBox2.Size = new System.Drawing.Size(105, 29);
-            this.metroComboBox2.TabIndex = 5;
-            this.metroComboBox2.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.metroComboBox2.UseCustomBackColor = true;
-            this.metroComboBox2.UseCustomForeColor = true;
-            this.metroComboBox2.UseSelectable = true;
-            this.metroComboBox2.TextChanged += new System.EventHandler(this.metroComboBox_TextChanged);
+            this.metroTextBox1.CustomButton.AccessibleName = "test";
+            this.metroTextBox1.CustomButton.Enabled = false;
+            this.metroTextBox1.CustomButton.FlatAppearance.BorderSize = 0;
+            this.metroTextBox1.CustomButton.Image = null;
+            this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(499, 1);
+            this.metroTextBox1.CustomButton.Name = "";
+            this.metroTextBox1.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.metroTextBox1.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBox1.CustomButton.TabIndex = 1;
+            this.metroTextBox1.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBox1.CustomButton.UseSelectable = true;
+            this.metroTextBox1.CustomButton.Visible = false;
+            this.animatorScript.SetDecoration(this.metroTextBox1, AnimatorNS.DecorationType.None);
+            this.metroTextBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
+            this.metroTextBox1.Lines = new string[0];
+            this.metroTextBox1.Location = new System.Drawing.Point(3, 3);
+            this.metroTextBox1.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.metroTextBox1.MaxLength = 200;
+            this.metroTextBox1.Name = "metroTextBox1";
+            this.metroTextBox1.PasswordChar = '\0';
+            this.metroTextBox1.PromptText = "Search Tags";
+            this.metroTextBox1.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBox1.SelectedText = "";
+            this.metroTextBox1.SelectionLength = 0;
+            this.metroTextBox1.SelectionStart = 0;
+            this.metroTextBox1.ShortcutsEnabled = true;
+            this.metroTextBox1.ShowClearButton = true;
+            this.metroTextBox1.Size = new System.Drawing.Size(521, 23);
+            this.metroTextBox1.TabIndex = 0;
+            this.metroTextBox1.UseCustomBackColor = true;
+            this.metroTextBox1.UseCustomForeColor = true;
+            this.metroTextBox1.UseSelectable = true;
+            this.metroTextBox1.WaterMark = "Search Tags";
+            this.metroTextBox1.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBox1.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.metroTextBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.metroTextBox1_KeyPress);
             // 
             // label1
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label1.AutoSize = true;
             this.animatorScript.SetDecoration(this.label1, AnimatorNS.DecorationType.None);
-            this.label1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(10, 10);
-            this.label1.Margin = new System.Windows.Forms.Padding(10, 3, 3, 3);
+            this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Type: ";
+            this.label1.Size = new System.Drawing.Size(588, 372);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Enter tags to search for a script";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.dataGridView1);
+            this.panel1.Controls.Add(this.tableLayoutPanel1);
+            this.animatorScript.SetDecoration(this.panel1, AnimatorNS.DecorationType.None);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(588, 402);
+            this.panel1.TabIndex = 5;
             // 
             // panelScript
             // 
@@ -389,8 +329,8 @@
             this.panelScript.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelScript.Location = new System.Drawing.Point(0, 0);
             this.panelScript.Name = "panelScript";
-            this.panelScript.Size = new System.Drawing.Size(620, 402);
-            this.panelScript.TabIndex = 1;
+            this.panelScript.Size = new System.Drawing.Size(588, 402);
+            this.panelScript.TabIndex = 6;
             this.panelScript.Visible = false;
             // 
             // animatorScript
@@ -416,45 +356,38 @@
             this.animatorScript.Interval = 1;
             this.animatorScript.TimeStep = 0.009F;
             // 
-            // TopScripts
+            // Search
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
             this.Controls.Add(this.panelScript);
-            this.Controls.Add(this.panelBrowse);
+            this.Controls.Add(this.panel1);
             this.animatorScript.SetDecoration(this, AnimatorNS.DecorationType.None);
-            this.Name = "TopScripts";
-            this.Size = new System.Drawing.Size(620, 402);
-            this.Load += new System.EventHandler(this.TopScripts_Load);
-            this.panelBrowse.ResumeLayout(false);
-            this.panelBrowse.PerformLayout();
+            this.Name = "Search";
+            this.Size = new System.Drawing.Size(588, 402);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panelBrowse;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label label1;
-        private MetroFramework.Controls.MetroComboBox metroComboBox1;
-        private System.Windows.Forms.Label label2;
+        private MetroFramework.Controls.MetroTextBox metroTextBox1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private MetroFramework.Controls.MetroComboBox metroComboBox2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem tESTToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem showDetailsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nAMEToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem tESTToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showDetailsToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
@@ -462,6 +395,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panelScript;
         private AnimatorNS.Animator animatorScript;
     }

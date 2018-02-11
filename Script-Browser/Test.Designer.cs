@@ -28,7 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
             // Test
             // 
@@ -42,5 +48,7 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }

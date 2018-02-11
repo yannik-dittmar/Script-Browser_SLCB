@@ -1,4 +1,5 @@
 ﻿using MetroFramework;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -123,6 +124,13 @@ namespace Script_Browser
             CheckIp(form);
             using (WebClient web = new WebClient())
                 return web.DownloadString(storageServer + "/Script%20Browser/getTopScripts.php?type=" + type + "&highest=" + highest + "&page=" + page);
+        }
+
+        public static string SearchScripts(string[] tags, Main form)
+        {
+            CheckIp(form);
+            using (WebClient web = new WebClient())
+                return web.DownloadString(storageServer + "/Script%20Browser/searchByTags.php?tags=" + JArray.FromObject(tags).ToString());
         }
 
         public static string GetScriptById(Main form, string id)

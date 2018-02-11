@@ -57,8 +57,9 @@ namespace Script_Browser
             lastWinSize = Size;
             lastWinPos = Location;
 
-            settings1.form = this;
             topScripts1.form = this;
+            search1.form = this;
+            settings1.form = this;
         }
 
         private void Main_Load(object sender, EventArgs e)
