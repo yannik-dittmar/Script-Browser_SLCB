@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace SaveManager
 {
+    [Serializable]
     public class SaveFile
     {
+
     }
 }

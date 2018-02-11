@@ -110,6 +110,12 @@
     <Compile Include="Networking.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TabPages\LocalScripts.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabPages\LocalScripts.Designer.cs">
+      <DependentUpon>LocalScripts.cs</DependentUpon>
+    </Compile>
     <Compile Include="TabPages\Search.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -133,6 +139,12 @@
     </Compile>
     <Compile Include="Test.Designer.cs">
       <DependentUpon>Test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UploadScript.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UploadScript.Designer.cs">
+      <DependentUpon>UploadScript.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Controls\Rating.resx">
       <DependentUpon>Rating.cs</DependentUpon>
@@ -159,6 +171,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="TabPages\LocalScripts.resx">
+      <DependentUpon>LocalScripts.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TabPages\Search.resx">
       <DependentUpon>Search.cs</DependentUpon>
     </EmbeddedResource>
@@ -170,6 +185,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Test.resx">
       <DependentUpon>Test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UploadScript.resx">
+      <DependentUpon>UploadScript.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

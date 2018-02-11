@@ -99,8 +99,7 @@ namespace Script_Browser.TabPages
                     }
                 }
 
-                if (result.Count != 50)
-                    button2.Enabled = false;
+                button2.Enabled = result.Count == 30;
 
                 button1.Enabled = page > 1;
 
@@ -179,6 +178,7 @@ namespace Script_Browser.TabPages
         //Refresh page after changing parameters
         private void metroComboBox_TextChanged(object sender, EventArgs e)
         {
+            page = 1;
             button3_Click(null, null);
         }
 
