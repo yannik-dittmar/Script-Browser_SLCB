@@ -386,6 +386,7 @@
             // panelScript
             // 
             this.animatorScript.SetDecoration(this.panelScript, AnimatorNS.DecorationType.None);
+            this.panelScript.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelScript.Location = new System.Drawing.Point(0, 0);
             this.panelScript.Name = "panelScript";
             this.panelScript.Size = new System.Drawing.Size(620, 402);
