@@ -65,6 +65,7 @@ namespace Download_Manager
             }
         }
 
+        //checkbox "I agree." -> activation of button "next"
         private void checkBoxAgree_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxAgree.Checked == true)
@@ -75,6 +76,21 @@ namespace Download_Manager
             {
                 button1.Enabled = false;
             }
+        }
+
+        //button "cancel" -> dialogue 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MetroFramework.MetroMessageBox.Show(this, "Are you sure?", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2,100);
+            if (result == DialogResult.Yes)
+            {
+                Environment.Exit(0);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            panel1.Visible = false;   
         }
     }
 }

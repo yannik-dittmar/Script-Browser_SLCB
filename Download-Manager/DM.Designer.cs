@@ -133,16 +133,16 @@
             this.panel1.Controls.Add(this.richTextBoxTerms);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel1.Location = new System.Drawing.Point(0, 50);
+            this.panel1.Location = new System.Drawing.Point(0, 52);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(642, 357);
+            this.panel1.Size = new System.Drawing.Size(645, 370);
             this.panel1.TabIndex = 5;
             // 
             // checkBoxAgree
             // 
             this.checkBoxAgree.AutoSize = true;
             this.checkBoxAgree.Enabled = false;
-            this.checkBoxAgree.Location = new System.Drawing.Point(15, 281);
+            this.checkBoxAgree.Location = new System.Drawing.Point(16, 345);
             this.checkBoxAgree.Name = "checkBoxAgree";
             this.checkBoxAgree.Size = new System.Drawing.Size(75, 22);
             this.checkBoxAgree.TabIndex = 9;
@@ -164,24 +164,26 @@
             // 
             this.button2.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(558, 276);
+            this.button2.Location = new System.Drawing.Point(558, 340);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 30);
             this.button2.TabIndex = 7;
             this.button2.Text = "Cancel";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
             this.button1.Enabled = false;
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(477, 276);
+            this.button1.Location = new System.Drawing.Point(477, 340);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 30);
             this.button1.TabIndex = 6;
             this.button1.Text = "Next";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // richTextBoxTerms
             // 
@@ -190,10 +192,10 @@
             this.richTextBoxTerms.Name = "richTextBoxTerms";
             this.richTextBoxTerms.ReadOnly = true;
             this.richTextBoxTerms.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.richTextBoxTerms.Size = new System.Drawing.Size(618, 184);
+            this.richTextBoxTerms.Size = new System.Drawing.Size(618, 243);
             this.richTextBoxTerms.TabIndex = 1;
             this.richTextBoxTerms.Text = "asdasdddddddddddddddddddddddddd\nasd\nasd\nasd\ndfg\ndfg\ngj\nhjkl\nhjk\nhjkzui\n78678678\n6" +
-    "78";
+    "78\nqw\nqw\nqwe\nert\ncbf\nyd\ncy\nxc\nyx\nc\nyx\nc\nyx\nc\nyx\nc\nyx\nc\nyx\nc";
             this.richTextBoxTerms.VScroll += new System.EventHandler(this.richTextBoxTerms_VScroll);
             // 
             // label2
@@ -237,6 +239,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DM";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
