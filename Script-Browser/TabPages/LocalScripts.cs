@@ -15,9 +15,6 @@ namespace Script_Browser.TabPages
 {
     public partial class LocalScripts : UserControl
     {
-        Task uuButton = new Task(delegate() { });
-        bool stillUuButton = true;
-
         public LocalScripts()
         {
             InitializeComponent();
