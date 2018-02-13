@@ -15,8 +15,8 @@ namespace Script_Browser.Design
             base.UseSystemColors = false;
         }
         
-        Color color = Color.FromArgb(15, 43, 62);
-        Color color2 = Color.FromArgb(31, 77, 120);
+        Color color = Color.FromArgb(18, 25, 31);
+        Color color2 = Color.FromArgb(51, 139, 118);
         Color color3 = Color.FromArgb(51, 139, 118);
 
         public override Color MenuItemSelected
