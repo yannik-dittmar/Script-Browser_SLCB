@@ -227,5 +227,11 @@
     <None Include="Resources\loading.gif" />
     <None Include="Resources\back_arrow.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SaveManager\SaveManager.csproj">
+      <Project>{9e42af62-de0f-41cb-9da2-393fb4bdca6a}</Project>
+      <Name>SaveManager</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

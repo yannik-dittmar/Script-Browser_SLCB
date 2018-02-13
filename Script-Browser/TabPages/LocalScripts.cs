@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using SaveManager;
 
 namespace Script_Browser.TabPages
 {
@@ -16,7 +17,12 @@ namespace Script_Browser.TabPages
         public LocalScripts()
         {
             InitializeComponent();
-            UpdateList(@"D:\Streamlabs Chatbot\");
+            //UpdateList(@"D:\Streamlabs Chatbot\");
+        }
+
+        private void LocalScripts_Load(object sender, EventArgs e)
+        {
+            UpdateList(@"C:\Users\18diyann\Desktop\Test Ordner\");
         }
 
         public void UpdateList(string path)
@@ -29,11 +35,13 @@ namespace Script_Browser.TabPages
                 foreach (string dir in dirs)
                 {
                     string[] files = Directory.GetFiles(dir);
+                    string scriptFile = "UNDEF";
                     string type = "UNDEF";
                     string name = dir.Split('\\')[dir.Split('\\').Length - 1];
                     string description = "UNDEF";
                     string author = "UNDEF";
                     string version = "UNDEF";
+                    int id = 0;
 
                     foreach (string file in files)
                     {
@@ -44,6 +52,8 @@ namespace Script_Browser.TabPages
 
                         if (type != "UNDEF")
                         {
+                            scriptFile = file;
+
                             string[] lines = File.ReadAllLines(file);
                             foreach (string line in lines)
                             {
@@ -55,14 +65,54 @@ namespace Script_Browser.TabPages
                                     author = GetLineItem(line);
                                 else if (line.ToLower().Contains("version") && version == "UNDEF")
                                     version = GetLineItem(line);
+                                else if (line.ToLower().Contains("scriptbrowserid"))
+                                    id = Int32.Parse(GetLineItem(line));
                             }
 
                             break;
                         }
                     }
 
-                    dataGridView1.Rows.Add(-1, name, description, type, version, author, dir);
+                    if (scriptFile != "UNDEF")
+                    {
+                        if (id == 0)
+                            dataGridView1.Rows.Add(name, description, type, version, author, scriptFile);
+                        else
+                            dataGridView3.Rows.Add(name, description, type, version, author, scriptFile, id);
+                    }
                 }
+
+                if (dataGridView1.RowCount == 0)
+                {
+                    label1.Visible = false;
+                    dataGridView1.Visible = false;
+                    tableLayoutPanel1.RowStyles[1].SizeType = SizeType.AutoSize;
+                }
+                else
+                {
+                    label1.Visible = true;
+                    dataGridView1.Visible = true;
+                    tableLayoutPanel1.RowStyles[1].SizeType = SizeType.Percent;
+                    tableLayoutPanel1.RowStyles[1].Height = 50f;
+                }
+
+                if (dataGridView3.RowCount == 0)
+                {
+                    label2.Visible = false;
+                    dataGridView3.Visible = false;
+                    tableLayoutPanel1.RowStyles[3].SizeType = SizeType.AutoSize;
+                }
+                else
+                {
+                    label2.Visible = true;
+                    dataGridView3.Visible = true;
+                    tableLayoutPanel1.RowStyles[3].SizeType = SizeType.Percent;
+                    tableLayoutPanel1.RowStyles[3].Height = 50;
+                }
+
+                label4.Visible = dataGridView1.RowCount == 0 && dataGridView3.RowCount == 0;
+                dataGridView1.ClearSelection();
+                dataGridView3.ClearSelection();
             }
             catch { }
         }
@@ -85,16 +135,21 @@ namespace Script_Browser.TabPages
         //Change colors for the rows to get pattern
         private void dataGridView1_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
-            if (e.RowIndex % 2 == 0)
+            try
             {
-                dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(22, 36, 45);
-                dataGridView1.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = Color.FromArgb(32, 53, 66);
+                DataGridView dgv = sender as DataGridView;
+                if (e.RowIndex % 2 == 0)
+                {
+                    dgv.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(22, 36, 45);
+                    dgv.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = Color.FromArgb(32, 53, 66);
+                }
+                else
+                {
+                    dgv.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(18, 31, 39);
+                    dgv.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = Color.FromArgb(34, 55, 69);
+                }
             }
-            else
-            {
-                dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(18, 31, 39);
-                dataGridView1.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = Color.FromArgb(34, 55, 69);
-            }
+            catch { }
         }
 
         //Only row-selection when entering a cell
@@ -102,10 +157,34 @@ namespace Script_Browser.TabPages
         {
             try
             {
-                dataGridView1.ClearSelection();
-                dataGridView1.Rows[e.RowIndex].Selected = true;
+                DataGridView dgv = sender as DataGridView;
+                dgv.ClearSelection();
+                dgv.Rows[e.RowIndex].Selected = true;
 
                 //nAMEToolStripMenuItem.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+            }
+            catch { }
+        }
+
+        private void dataGridView1_MouseLeave(object sender, EventArgs e)
+        {
+            DataGridView dgv = sender as DataGridView;
+            dgv.ClearSelection();
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                DataGridView dgv = sender as DataGridView;
+                dgv.Rows[e.RowIndex].Selected = true;
+
+                button1.Visible = dgv.Tag.ToString().Contains("upload");
+                button3.Visible = dgv.Tag.ToString().Contains("update");
+                button4.Visible = dgv.Tag.ToString().Contains("update");
+                label3.Text = dgv.Rows[e.RowIndex].Cells[0].Value.ToString();
+
+                tableLayoutPanel2.Visible = true;
             }
             catch { }
         }
