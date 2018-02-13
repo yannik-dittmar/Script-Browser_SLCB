@@ -9,20 +9,24 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using SaveManager;
+using System.Threading;
 
 namespace Script_Browser.TabPages
 {
     public partial class LocalScripts : UserControl
     {
+        Task uuButton = new Task(delegate() { });
+        bool stillUuButton = true;
+
         public LocalScripts()
         {
             InitializeComponent();
-            //UpdateList(@"D:\Streamlabs Chatbot\");
         }
 
         private void LocalScripts_Load(object sender, EventArgs e)
         {
-            UpdateList(@"C:\Users\18diyann\Desktop\Test Ordner\");
+            UpdateList(@"D:\Streamlabs Chatbot\");
+            //UpdateList(@"C:\Users\18diyann\Desktop\Test Ordner\");
         }
 
         public void UpdateList(string path)
@@ -155,15 +159,18 @@ namespace Script_Browser.TabPages
         //Only row-selection when entering a cell
         private void dataGridView1_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
         {
-            try
+            if (e.RowIndex >= 0)
             {
-                DataGridView dgv = sender as DataGridView;
-                dgv.ClearSelection();
-                dgv.Rows[e.RowIndex].Selected = true;
+                try
+                {
+                    DataGridView dgv = sender as DataGridView;
+                    dgv.ClearSelection();
+                    dgv.Rows[e.RowIndex].Selected = true;
 
-                //nAMEToolStripMenuItem.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+                    //nAMEToolStripMenuItem.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+                }
+                catch { }
             }
-            catch { }
         }
 
         private void dataGridView1_MouseLeave(object sender, EventArgs e)
@@ -174,19 +181,34 @@ namespace Script_Browser.TabPages
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
+            if (e.RowIndex >= 0)
             {
-                DataGridView dgv = sender as DataGridView;
-                dgv.Rows[e.RowIndex].Selected = true;
+                try
+                {
+                    DataGridView dgv = sender as DataGridView;
+                    dgv.Rows[e.RowIndex].Selected = true;
 
-                button1.Visible = dgv.Tag.ToString().Contains("upload");
-                button3.Visible = dgv.Tag.ToString().Contains("update");
-                button4.Visible = dgv.Tag.ToString().Contains("update");
-                label3.Text = dgv.Rows[e.RowIndex].Cells[0].Value.ToString();
+                    button5.Visible = false;
+                    button1.Visible = dgv.Tag.ToString().Contains("upload");
+                    if (dgv.Tag.ToString().Contains("update"))
+                    {
+                        button3.Visible = !Networking.scripts.Contains(dgv.Rows[e.RowIndex].Cells[6].Value.ToString());
+                        button4.Visible = !Networking.scripts.Contains(dgv.Rows[e.RowIndex].Cells[6].Value.ToString());
+                        button5.Visible = Networking.scripts.Contains(dgv.Rows[e.RowIndex].Cells[6].Value.ToString());
+                    }
+                    else
+                    {
+                        button3.Visible = false;
+                        button4.Visible = false;
+                        button5.Visible = false;
+                    }
 
-                tableLayoutPanel2.Visible = true;
+                    label3.Text = dgv.Rows[e.RowIndex].Cells[0].Value.ToString();
+
+                    tableLayoutPanel2.Visible = true;
+                }
+                catch { }
             }
-            catch { }
         }
     }
 }

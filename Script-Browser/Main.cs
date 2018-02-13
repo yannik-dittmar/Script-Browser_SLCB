@@ -64,10 +64,9 @@ namespace Script_Browser
 
         private void Main_Load(object sender, EventArgs e)
         {
-            animatorTabPage.Hide(panelTab3);
-            animatorTabPage.Hide(panelTab2);
-            animatorTabPage.Hide(panelTab1);
-
+            panelTab1.Visible = false;
+            panelTab2.Visible = false;
+            panelTab3.Visible = false;
             topScripts1.button3_Click(null, null);
         }
 
@@ -329,7 +328,7 @@ namespace Script_Browser
                         if (c.Tag.ToString() != index + "" && c.Tag.ToString() != selectedTabPageIndex + "")
                             c.Visible = false;
                     }
-                    catch { }
+                    catch (Exception ex) { Console.WriteLine(ex.StackTrace); }
                 }
                 Control oldControl = ControlByTag(panel2, selectedTabPageIndex + "");
                 Control newControl = ControlByTag(panel2, index + "");

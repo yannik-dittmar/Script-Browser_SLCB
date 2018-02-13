@@ -18,6 +18,7 @@ namespace Script_Browser
         public static string storageServer = "";
         public static string username = "";
         public static string password = "";
+        public static List<string> scripts = new List<string>();
 
         //Encrypt passwords
         static string Hash(string input)
@@ -52,6 +53,7 @@ namespace Script_Browser
 
         public static void Login(string _username, string _password, Main form)
         {
+            _password = Hash(_password);
             tryagain:
             try
             {
@@ -59,21 +61,27 @@ namespace Script_Browser
 
                 using (WebClient web = new WebClient())
                 {
-                    if (web.DownloadString(storageServer + "/Script%20Browser/login.php?user=" + _username + "&pass=" + Hash(_password)).Contains("false"))
+                    string result = web.DownloadString(storageServer + "/Script%20Browser/login.php?user=" + _username + "&pass=" + _password + "&getinfo=true");
+                    if (result.Contains("false"))
                         MetroMessageBox.Show(form, "The username or password was incorrect.", "Login error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 100);
                     else
                     {
-                        username = _username;
+                        JObject info = JObject.Parse(result);
+                        username = info["Username"].ToString();
                         password = _password;
                         form.settings1.label1.Text = "Logged in as " + username;
 
                         form.settings1.animator1.Hide(form.settings1.tableLayoutPanel1);
                         form.settings1.animator1.Show(form.settings1.tableLayoutPanel2);
+
+                        foreach (JToken i in info["Scripts"] as JArray)
+                            scripts.Add(i.ToString());
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.StackTrace);
                 if (DialogResult.Retry == MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150))
                     goto tryagain;
             }
@@ -138,6 +146,13 @@ namespace Script_Browser
             CheckIp(form);
             using (WebClient web = new WebClient())
                 return web.DownloadString(storageServer + "/Script%20Browser/getScript.php?id=" + id);
+        }
+
+        public static bool CheckForUpdate(string id, string ver)
+        {
+            CheckIp(null);
+            using (WebClient web = new WebClient())
+                return web.DownloadString(storageServer + "/Script%20Browser/checkForUpdate.php?id=" + id + "&ver=" + ver).Contains("UPDATE");
         }
 
         public static Image DownloadImage(string path)
