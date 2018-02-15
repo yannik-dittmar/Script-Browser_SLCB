@@ -15,6 +15,8 @@ namespace Script_Browser.TabPages
 {
     public partial class LocalScripts : UserControl
     {
+        public Main form;
+
         public LocalScripts()
         {
             InitializeComponent();
@@ -206,6 +208,27 @@ namespace Script_Browser.TabPages
                 }
                 catch { }
             }
+            else
+                tableLayoutPanel2.Visible = false;
+        }
+
+        private void hideFooter_MouseClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                DataGridView dgv = sender as DataGridView;
+                if (dgv.HitTest(e.X, e.Y).Type == DataGridViewHitTestType.None)
+                    tableLayoutPanel2.Visible = false;
+            }
+            catch { tableLayoutPanel2.Visible = false; }
+        }
+
+        //Upload
+        private void button1_Click(object sender, EventArgs e)
+        {
+            form.Opacity = 0.5;
+            new UploadScript().ShowDialog();
+            form.Opacity = 1;
         }
     }
 }

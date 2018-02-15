@@ -60,6 +60,7 @@ namespace Script_Browser
             topScripts1.form = this;
             search1.form = this;
             settings1.form = this;
+            localScripts1.form = this;
         }
 
         private void Main_Load(object sender, EventArgs e)
