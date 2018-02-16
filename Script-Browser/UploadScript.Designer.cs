@@ -48,13 +48,25 @@
             this.metroComboBox1 = new MetroFramework.Controls.MetroComboBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.panelTabControl = new System.Windows.Forms.Panel();
+            this.panelMarkdown = new System.Windows.Forms.Panel();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.panelTextBox = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.noFocusBorderBtn6 = new Script_Browser.Controls.NoFocusBorderBtn();
+            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+            this.button4 = new System.Windows.Forms.Button();
+            this.metroTextBox1 = new MetroFramework.Controls.MetroTextBox();
+            this.flowLayoutPanelTags = new System.Windows.Forms.FlowLayoutPanel();
+            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.noFocusBorderBtn7 = new Script_Browser.Controls.NoFocusBorderBtn();
+            this.noFocusBorderBtn6 = new Script_Browser.Controls.NoFocusBorderBtn();
+            this.labelHelp = new System.Windows.Forms.Label();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.noFocusBorderBtn1 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.noFocusBorderBtn2 = new Script_Browser.Controls.NoFocusBorderBtn();
@@ -62,11 +74,6 @@
             this.noFocusBorderBtn4 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.noFocusBorderBtn5 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.label3 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.panelTextBox = new System.Windows.Forms.Panel();
-            this.label9 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.panelMain.SuspendLayout();
@@ -75,11 +82,13 @@
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.panelTabControl.SuspendLayout();
-            this.tableLayoutPanel6.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
             this.panelTextBox.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
+            this.tableLayoutPanel7.SuspendLayout();
+            this.tableLayoutPanel8.SuspendLayout();
+            this.tableLayoutPanel9.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -178,13 +187,14 @@
             this.tableLayoutTabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
             this.tableLayoutTabControl.ColumnCount = 5;
             this.tableLayoutTabControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 0F));
-            this.tableLayoutTabControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutTabControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 0F));
+            this.tableLayoutTabControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutTabControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 0F));
             this.tableLayoutTabControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 0F));
             this.tableLayoutTabControl.Controls.Add(this.tableLayoutPanel5, 0, 0);
             this.tableLayoutTabControl.Controls.Add(this.tableLayoutPanel3, 1, 0);
-            this.tableLayoutTabControl.Controls.Add(this.flowLayoutPanel1, 0, 1);
+            this.tableLayoutTabControl.Controls.Add(this.tableLayoutPanel7, 2, 0);
+            this.tableLayoutTabControl.Controls.Add(this.tableLayoutPanel9, 0, 1);
             this.tableLayoutTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutTabControl.Location = new System.Drawing.Point(0, 50);
             this.tableLayoutTabControl.Margin = new System.Windows.Forms.Padding(0);
@@ -224,7 +234,7 @@
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28531F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28531F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28816F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(1, 315);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(1, 316);
             this.tableLayoutPanel5.TabIndex = 1;
             // 
             // materialSingleLineTextField1
@@ -234,7 +244,7 @@
             this.materialSingleLineTextField1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.materialSingleLineTextField1.ForeColor = System.Drawing.Color.White;
             this.materialSingleLineTextField1.Hint = "";
-            this.materialSingleLineTextField1.Location = new System.Drawing.Point(262, 54);
+            this.materialSingleLineTextField1.Location = new System.Drawing.Point(-115, 56);
             this.materialSingleLineTextField1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialSingleLineTextField1.Name = "materialSingleLineTextField1";
             this.materialSingleLineTextField1.PasswordChar = '\0';
@@ -253,10 +263,10 @@
             this.label4.Dock = System.Windows.Forms.DockStyle.Right;
             this.label4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(200, 44);
+            this.label4.Location = new System.Drawing.Point(-177, 45);
             this.label4.Margin = new System.Windows.Forms.Padding(0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(59, 44);
+            this.label4.Size = new System.Drawing.Size(59, 45);
             this.label4.TabIndex = 5;
             this.label4.Text = "Name: ";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -267,10 +277,10 @@
             this.label5.Dock = System.Windows.Forms.DockStyle.Right;
             this.label5.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(114, 88);
+            this.label5.Location = new System.Drawing.Point(-263, 90);
             this.label5.Margin = new System.Windows.Forms.Padding(0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(145, 44);
+            this.label5.Size = new System.Drawing.Size(145, 45);
             this.label5.TabIndex = 6;
             this.label5.Text = "Short Description: ";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -281,10 +291,10 @@
             this.label7.Dock = System.Windows.Forms.DockStyle.Right;
             this.label7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(207, 220);
+            this.label7.Location = new System.Drawing.Point(-170, 225);
             this.label7.Margin = new System.Windows.Forms.Padding(0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(52, 44);
+            this.label7.Size = new System.Drawing.Size(52, 45);
             this.label7.TabIndex = 8;
             this.label7.Text = "Type: ";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -295,10 +305,10 @@
             this.label6.Dock = System.Windows.Forms.DockStyle.Right;
             this.label6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(152, 176);
+            this.label6.Location = new System.Drawing.Point(-225, 180);
             this.label6.Margin = new System.Windows.Forms.Padding(0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(107, 44);
+            this.label6.Size = new System.Drawing.Size(107, 45);
             this.label6.TabIndex = 7;
             this.label6.Text = "Author Alias: ";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -309,10 +319,10 @@
             this.label8.Dock = System.Windows.Forms.DockStyle.Right;
             this.label8.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(186, 132);
+            this.label8.Location = new System.Drawing.Point(-191, 135);
             this.label8.Margin = new System.Windows.Forms.Padding(0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(73, 44);
+            this.label8.Size = new System.Drawing.Size(73, 45);
             this.label8.TabIndex = 9;
             this.label8.Text = "Version: ";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -324,7 +334,7 @@
             this.materialSingleLineTextField2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.materialSingleLineTextField2.ForeColor = System.Drawing.Color.White;
             this.materialSingleLineTextField2.Hint = "";
-            this.materialSingleLineTextField2.Location = new System.Drawing.Point(262, 98);
+            this.materialSingleLineTextField2.Location = new System.Drawing.Point(-115, 101);
             this.materialSingleLineTextField2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialSingleLineTextField2.Name = "materialSingleLineTextField2";
             this.materialSingleLineTextField2.PasswordChar = '\0';
@@ -344,7 +354,7 @@
             this.materialSingleLineTextField3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.materialSingleLineTextField3.ForeColor = System.Drawing.Color.White;
             this.materialSingleLineTextField3.Hint = "";
-            this.materialSingleLineTextField3.Location = new System.Drawing.Point(262, 142);
+            this.materialSingleLineTextField3.Location = new System.Drawing.Point(-115, 146);
             this.materialSingleLineTextField3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialSingleLineTextField3.Name = "materialSingleLineTextField3";
             this.materialSingleLineTextField3.PasswordChar = '\0';
@@ -364,7 +374,7 @@
             this.materialSingleLineTextField4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.materialSingleLineTextField4.ForeColor = System.Drawing.Color.White;
             this.materialSingleLineTextField4.Hint = "";
-            this.materialSingleLineTextField4.Location = new System.Drawing.Point(262, 186);
+            this.materialSingleLineTextField4.Location = new System.Drawing.Point(-115, 191);
             this.materialSingleLineTextField4.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialSingleLineTextField4.Name = "materialSingleLineTextField4";
             this.materialSingleLineTextField4.PasswordChar = '\0';
@@ -388,7 +398,7 @@
             this.metroComboBox1.Items.AddRange(new object[] {
             "Streamlabs Commands",
             "Streamlabs Parameters"});
-            this.metroComboBox1.Location = new System.Drawing.Point(262, 227);
+            this.metroComboBox1.Location = new System.Drawing.Point(-115, 233);
             this.metroComboBox1.Name = "metroComboBox1";
             this.metroComboBox1.Size = new System.Drawing.Size(376, 29);
             this.metroComboBox1.TabIndex = 13;
@@ -412,13 +422,14 @@
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(695, 295);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(1, 296);
             this.tableLayoutPanel3.TabIndex = 10;
             this.tableLayoutPanel3.Visible = false;
             // 
             // panelTabControl
             // 
             this.panelTabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
+            this.panelTabControl.Controls.Add(this.panelMarkdown);
             this.panelTabControl.Controls.Add(this.webBrowser1);
             this.panelTabControl.Controls.Add(this.panelTextBox);
             this.panelTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -426,8 +437,87 @@
             this.panelTabControl.Margin = new System.Windows.Forms.Padding(0);
             this.panelTabControl.Name = "panelTabControl";
             this.panelTabControl.Padding = new System.Windows.Forms.Padding(3);
-            this.panelTabControl.Size = new System.Drawing.Size(695, 271);
+            this.panelTabControl.Size = new System.Drawing.Size(1, 272);
             this.panelTabControl.TabIndex = 2;
+            // 
+            // panelMarkdown
+            // 
+            this.panelMarkdown.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
+            this.panelMarkdown.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelMarkdown.Location = new System.Drawing.Point(3, 3);
+            this.panelMarkdown.Name = "panelMarkdown";
+            this.panelMarkdown.Size = new System.Drawing.Size(0, 266);
+            this.panelMarkdown.TabIndex = 3;
+            this.panelMarkdown.Visible = false;
+            // 
+            // webBrowser1
+            // 
+            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webBrowser1.Location = new System.Drawing.Point(3, 3);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.ScriptErrorsSuppressed = true;
+            this.webBrowser1.Size = new System.Drawing.Size(20, 266);
+            this.webBrowser1.TabIndex = 2;
+            this.webBrowser1.TabStop = false;
+            this.webBrowser1.Visible = false;
+            this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
+            this.webBrowser1.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.webBrowser1_Navigating);
+            // 
+            // panelTextBox
+            // 
+            this.panelTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
+            this.panelTextBox.Controls.Add(this.panel1);
+            this.panelTextBox.Controls.Add(this.label9);
+            this.panelTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelTextBox.Location = new System.Drawing.Point(3, 3);
+            this.panelTextBox.Margin = new System.Windows.Forms.Padding(0);
+            this.panelTextBox.Name = "panelTextBox";
+            this.panelTextBox.Size = new System.Drawing.Size(0, 266);
+            this.panelTextBox.TabIndex = 1;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
+            this.panel1.Controls.Add(this.richTextBox1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(3);
+            this.panel1.Size = new System.Drawing.Size(0, 246);
+            this.panel1.TabIndex = 6;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.AcceptsTab = true;
+            this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.EnableAutoDragDrop = true;
+            this.richTextBox1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox1.ForeColor = System.Drawing.Color.White;
+            this.richTextBox1.Location = new System.Drawing.Point(3, 3);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(0, 240);
+            this.richTextBox1.TabIndex = 0;
+            this.richTextBox1.TabStop = false;
+            this.richTextBox1.Text = "";
+            this.richTextBox1.TextChanged += new System.EventHandler(this.CheckDescription);
+            // 
+            // label9
+            // 
+            this.label9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
+            this.label9.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label9.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label9.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(0, 246);
+            this.label9.Margin = new System.Windows.Forms.Padding(0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(0, 20);
+            this.label9.TabIndex = 5;
+            this.label9.Text = "This text supports the Markdown language";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel6
             // 
@@ -446,7 +536,7 @@
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 1;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(695, 24);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(1, 24);
             this.tableLayoutPanel6.TabIndex = 3;
             // 
             // button2
@@ -462,7 +552,7 @@
             this.button2.Location = new System.Drawing.Point(73, 0);
             this.button2.Margin = new System.Windows.Forms.Padding(0);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(64, 24);
+            this.button2.Size = new System.Drawing.Size(1, 24);
             this.button2.TabIndex = 1;
             this.button2.Text = "Preview";
             this.button2.UseVisualStyleBackColor = false;
@@ -479,13 +569,14 @@
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(548, 0);
+            this.button3.Location = new System.Drawing.Point(-146, 0);
             this.button3.Margin = new System.Windows.Forms.Padding(0);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(147, 24);
             this.button3.TabIndex = 2;
             this.button3.Text = "Markdown Information";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button1
             // 
@@ -507,20 +598,155 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // flowLayoutPanel1
+            // tableLayoutPanel7
             // 
-            this.flowLayoutPanel1.AutoSize = true;
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
-            this.tableLayoutTabControl.SetColumnSpan(this.flowLayoutPanel1, 5);
-            this.flowLayoutPanel1.Controls.Add(this.noFocusBorderBtn6);
-            this.flowLayoutPanel1.Controls.Add(this.noFocusBorderBtn7);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 315);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(755, 41);
-            this.flowLayoutPanel1.TabIndex = 0;
+            this.tableLayoutPanel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
+            this.tableLayoutPanel7.ColumnCount = 1;
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel8, 0, 1);
+            this.tableLayoutPanel7.Controls.Add(this.flowLayoutPanelTags, 0, 0);
+            this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(30, 10);
+            this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(30, 10, 30, 10);
+            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
+            this.tableLayoutPanel7.RowCount = 2;
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(695, 296);
+            this.tableLayoutPanel7.TabIndex = 11;
+            // 
+            // tableLayoutPanel8
+            // 
+            this.tableLayoutPanel8.AutoSize = true;
+            this.tableLayoutPanel8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
+            this.tableLayoutPanel8.ColumnCount = 2;
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel8.Controls.Add(this.button4, 1, 0);
+            this.tableLayoutPanel8.Controls.Add(this.metroTextBox1, 0, 0);
+            this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(0, 266);
+            this.tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
+            this.tableLayoutPanel8.Padding = new System.Windows.Forms.Padding(3);
+            this.tableLayoutPanel8.RowCount = 1;
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(695, 30);
+            this.tableLayoutPanel8.TabIndex = 3;
+            // 
+            // button4
+            // 
+            this.button4.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button4.AutoSize = true;
+            this.button4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
+            this.button4.Cursor = System.Windows.Forms.Cursors.Default;
+            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
+            this.button4.FlatAppearance.BorderSize = 0;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.ForeColor = System.Drawing.Color.White;
+            this.button4.Location = new System.Drawing.Point(624, 3);
+            this.button4.Margin = new System.Windows.Forms.Padding(0);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(68, 24);
+            this.button4.TabIndex = 1;
+            this.button4.Text = "Add Tag";
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.AddTags);
+            // 
+            // metroTextBox1
+            // 
+            this.metroTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.metroTextBox1.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.metroTextBox1.CustomButton.AccessibleName = "test";
+            this.metroTextBox1.CustomButton.Enabled = false;
+            this.metroTextBox1.CustomButton.FlatAppearance.BorderSize = 0;
+            this.metroTextBox1.CustomButton.Image = null;
+            this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(596, 1);
+            this.metroTextBox1.CustomButton.Name = "";
+            this.metroTextBox1.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.metroTextBox1.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBox1.CustomButton.TabIndex = 1;
+            this.metroTextBox1.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBox1.CustomButton.UseSelectable = true;
+            this.metroTextBox1.CustomButton.Visible = false;
+            this.metroTextBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
+            this.metroTextBox1.Lines = new string[0];
+            this.metroTextBox1.Location = new System.Drawing.Point(3, 3);
+            this.metroTextBox1.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.metroTextBox1.MaxLength = 200;
+            this.metroTextBox1.Name = "metroTextBox1";
+            this.metroTextBox1.PasswordChar = '\0';
+            this.metroTextBox1.PromptText = "Search Tag";
+            this.metroTextBox1.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBox1.SelectedText = "";
+            this.metroTextBox1.SelectionLength = 0;
+            this.metroTextBox1.SelectionStart = 0;
+            this.metroTextBox1.ShortcutsEnabled = true;
+            this.metroTextBox1.ShowClearButton = true;
+            this.metroTextBox1.Size = new System.Drawing.Size(618, 23);
+            this.metroTextBox1.TabIndex = 0;
+            this.metroTextBox1.UseCustomBackColor = true;
+            this.metroTextBox1.UseCustomForeColor = true;
+            this.metroTextBox1.UseSelectable = true;
+            this.metroTextBox1.WaterMark = "Search Tag";
+            this.metroTextBox1.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBox1.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.metroTextBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.metroTextBox1_KeyPress);
+            // 
+            // flowLayoutPanelTags
+            // 
+            this.flowLayoutPanelTags.AutoScroll = true;
+            this.flowLayoutPanelTags.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanelTags.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanelTags.Name = "flowLayoutPanelTags";
+            this.flowLayoutPanelTags.Size = new System.Drawing.Size(689, 260);
+            this.flowLayoutPanelTags.TabIndex = 4;
+            this.flowLayoutPanelTags.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.CheckTags);
+            this.flowLayoutPanelTags.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.CheckTags);
+            // 
+            // tableLayoutPanel9
+            // 
+            this.tableLayoutPanel9.AutoSize = true;
+            this.tableLayoutPanel9.ColumnCount = 3;
+            this.tableLayoutTabControl.SetColumnSpan(this.tableLayoutPanel9, 5);
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel9.Controls.Add(this.noFocusBorderBtn7, 1, 0);
+            this.tableLayoutPanel9.Controls.Add(this.noFocusBorderBtn6, 2, 0);
+            this.tableLayoutPanel9.Controls.Add(this.labelHelp, 0, 0);
+            this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tableLayoutPanel9.Location = new System.Drawing.Point(0, 316);
+            this.tableLayoutPanel9.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
+            this.tableLayoutPanel9.RowCount = 1;
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(755, 40);
+            this.tableLayoutPanel9.TabIndex = 12;
+            this.tableLayoutPanel9.Tag = "footer";
+            // 
+            // noFocusBorderBtn7
+            // 
+            this.noFocusBorderBtn7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.noFocusBorderBtn7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
+            this.noFocusBorderBtn7.FlatAppearance.BorderSize = 0;
+            this.noFocusBorderBtn7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.noFocusBorderBtn7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.noFocusBorderBtn7.ForeColor = System.Drawing.Color.White;
+            this.noFocusBorderBtn7.Location = new System.Drawing.Point(585, 5);
+            this.noFocusBorderBtn7.Margin = new System.Windows.Forms.Padding(5);
+            this.noFocusBorderBtn7.Name = "noFocusBorderBtn7";
+            this.noFocusBorderBtn7.Size = new System.Drawing.Size(80, 30);
+            this.noFocusBorderBtn7.TabIndex = 2;
+            this.noFocusBorderBtn7.TabStop = false;
+            this.noFocusBorderBtn7.Text = "Back";
+            this.noFocusBorderBtn7.UseVisualStyleBackColor = false;
+            this.noFocusBorderBtn7.Click += new System.EventHandler(this.previousPage_Click);
             // 
             // noFocusBorderBtn6
             // 
@@ -533,30 +759,24 @@
             this.noFocusBorderBtn6.Location = new System.Drawing.Point(670, 5);
             this.noFocusBorderBtn6.Margin = new System.Windows.Forms.Padding(0, 5, 5, 5);
             this.noFocusBorderBtn6.Name = "noFocusBorderBtn6";
-            this.noFocusBorderBtn6.Size = new System.Drawing.Size(80, 31);
+            this.noFocusBorderBtn6.Size = new System.Drawing.Size(80, 30);
             this.noFocusBorderBtn6.TabIndex = 1;
             this.noFocusBorderBtn6.TabStop = false;
             this.noFocusBorderBtn6.Text = "Next";
             this.noFocusBorderBtn6.UseVisualStyleBackColor = false;
             this.noFocusBorderBtn6.Click += new System.EventHandler(this.nextPage_Click);
             // 
-            // noFocusBorderBtn7
+            // labelHelp
             // 
-            this.noFocusBorderBtn7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.noFocusBorderBtn7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
-            this.noFocusBorderBtn7.FlatAppearance.BorderSize = 0;
-            this.noFocusBorderBtn7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.noFocusBorderBtn7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.noFocusBorderBtn7.ForeColor = System.Drawing.Color.White;
-            this.noFocusBorderBtn7.Location = new System.Drawing.Point(585, 5);
-            this.noFocusBorderBtn7.Margin = new System.Windows.Forms.Padding(0, 5, 5, 5);
-            this.noFocusBorderBtn7.Name = "noFocusBorderBtn7";
-            this.noFocusBorderBtn7.Size = new System.Drawing.Size(80, 31);
-            this.noFocusBorderBtn7.TabIndex = 2;
-            this.noFocusBorderBtn7.TabStop = false;
-            this.noFocusBorderBtn7.Text = "Back";
-            this.noFocusBorderBtn7.UseVisualStyleBackColor = false;
-            this.noFocusBorderBtn7.Click += new System.EventHandler(this.previousPage_Click);
+            this.labelHelp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelHelp.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelHelp.ForeColor = System.Drawing.Color.White;
+            this.labelHelp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelHelp.Location = new System.Drawing.Point(3, 0);
+            this.labelHelp.Name = "labelHelp";
+            this.labelHelp.Size = new System.Drawing.Size(574, 40);
+            this.labelHelp.TabIndex = 3;
+            this.labelHelp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tableLayoutPanel4
             // 
@@ -695,74 +915,6 @@
             this.label3.Text = "Script Location";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // richTextBox1
-            // 
-            this.richTextBox1.AcceptsTab = true;
-            this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.EnableAutoDragDrop = true;
-            this.richTextBox1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.ForeColor = System.Drawing.Color.White;
-            this.richTextBox1.Location = new System.Drawing.Point(3, 3);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(683, 239);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.TabStop = false;
-            this.richTextBox1.Text = "";
-            // 
-            // panelTextBox
-            // 
-            this.panelTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
-            this.panelTextBox.Controls.Add(this.panel1);
-            this.panelTextBox.Controls.Add(this.label9);
-            this.panelTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelTextBox.Location = new System.Drawing.Point(3, 3);
-            this.panelTextBox.Margin = new System.Windows.Forms.Padding(0);
-            this.panelTextBox.Name = "panelTextBox";
-            this.panelTextBox.Size = new System.Drawing.Size(689, 265);
-            this.panelTextBox.TabIndex = 1;
-            // 
-            // label9
-            // 
-            this.label9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
-            this.label9.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label9.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label9.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(0, 245);
-            this.label9.Margin = new System.Windows.Forms.Padding(0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(689, 20);
-            this.label9.TabIndex = 5;
-            this.label9.Text = "This text supports the Markdown language";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
-            this.panel1.Controls.Add(this.richTextBox1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(3);
-            this.panel1.Size = new System.Drawing.Size(689, 245);
-            this.panel1.TabIndex = 6;
-            // 
-            // webBrowser1
-            // 
-            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowser1.Location = new System.Drawing.Point(3, 3);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.ScriptErrorsSuppressed = true;
-            this.webBrowser1.Size = new System.Drawing.Size(689, 265);
-            this.webBrowser1.TabIndex = 2;
-            this.webBrowser1.TabStop = false;
-            this.webBrowser1.Visible = false;
-            this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
-            this.webBrowser1.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.webBrowser1_Navigating);
-            // 
             // UploadScript
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -788,12 +940,16 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.panelTabControl.ResumeLayout(false);
-            this.tableLayoutPanel6.ResumeLayout(false);
-            this.tableLayoutPanel6.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel4.ResumeLayout(false);
             this.panelTextBox.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel6.PerformLayout();
+            this.tableLayoutPanel7.ResumeLayout(false);
+            this.tableLayoutPanel7.PerformLayout();
+            this.tableLayoutPanel8.ResumeLayout(false);
+            this.tableLayoutPanel8.PerformLayout();
+            this.tableLayoutPanel9.ResumeLayout(false);
+            this.tableLayoutPanel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -814,7 +970,6 @@
         private Controls.NoFocusBorderBtn noFocusBorderBtn3;
         private Controls.NoFocusBorderBtn noFocusBorderBtn2;
         private Controls.NoFocusBorderBtn noFocusBorderBtn4;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private Controls.NoFocusBorderBtn noFocusBorderBtn6;
         private Controls.NoFocusBorderBtn noFocusBorderBtn7;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
@@ -839,5 +994,13 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.WebBrowser webBrowser1;
+        private System.Windows.Forms.Panel panelMarkdown;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
+        private System.Windows.Forms.Button button4;
+        private MetroFramework.Controls.MetroTextBox metroTextBox1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelTags;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
+        private System.Windows.Forms.Label labelHelp;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Markdig;
 using MaterialSkin.Controls;
+using Script_Browser.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,6 +38,7 @@ namespace Script_Browser
 
         int currentStep = 1;
         int currentPage = 1;
+        List<string> searchTags = new List<string>();
 
         public UploadScript()
         {
@@ -49,6 +51,7 @@ namespace Script_Browser
             materialSingleLineTextField4.SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
 
             CheckScriptInformation(null, null);
+            SetPage(1, true);
         }
 
         //
@@ -107,7 +110,7 @@ namespace Script_Browser
             }
         }
 
-        private void SetPage(int page)
+        private void SetPage(int page, bool updateTable)
         {
             if (page <= currentStep && page > 0)
             {
@@ -119,31 +122,50 @@ namespace Script_Browser
                         tableLayoutPanel4.Controls[i].BackColor = Color.FromArgb(51, 139, 118);
                 }
 
-                for (int i = 0; i < tableLayoutTabControl.ColumnStyles.Count; i++)
+                if (updateTable)
                 {
-                    try
+                    for (int i = 0; i < tableLayoutTabControl.ColumnStyles.Count; i++)
                     {
-                        if (i == page - 1)
+                        try
                         {
-                            tableLayoutTabControl.ColumnStyles[i].SizeType = SizeType.Percent;
-                            tableLayoutTabControl.ColumnStyles[i].Width = 100f;
-                            if (tableLayoutTabControl.Controls[i].GetType().ToString() != "System.Windows.Forms.FlowLayoutPanel")
-                                tableLayoutTabControl.Controls[i].Visible = true;
+                            if (i == page - 1)
+                            {
+                                tableLayoutTabControl.ColumnStyles[i].SizeType = SizeType.Percent;
+                                tableLayoutTabControl.ColumnStyles[i].Width = 100f;
+                                if (tableLayoutTabControl.Controls[i].Tag == null)
+                                    tableLayoutTabControl.Controls[i].Visible = true;
+                            }
+                            else
+                            {
+                                tableLayoutTabControl.ColumnStyles[i].SizeType = SizeType.Absolute;
+                                tableLayoutTabControl.ColumnStyles[i].Width = 0;
+                                if (tableLayoutTabControl.Controls[i].Tag == null)
+                                    tableLayoutTabControl.Controls[i].Visible = false;
+                            }
                         }
-                        else
-                        {
-                            tableLayoutTabControl.ColumnStyles[i].SizeType = SizeType.Absolute;
-                            tableLayoutTabControl.ColumnStyles[i].Width = 0;
-                            if (tableLayoutTabControl.Controls[i].GetType().ToString() != "System.Windows.Forms.FlowLayoutPanel")
-                                tableLayoutTabControl.Controls[i].Visible = false;
-                        }
+                        catch { }
                     }
-                    catch { }
                 }
 
                 noFocusBorderBtn6.Enabled = page != currentStep;
                 noFocusBorderBtn7.Enabled = page != 1;
                 currentPage = page;
+
+                switch (page)
+                {
+                    case 1:
+                        labelHelp.Text = "The general information to your script.\nThese will be shown in the browser and written into the script file itself.";
+                        break;
+                    case 2:
+                        labelHelp.Text = "The long description will be shown when a user clicks on your script in the browser.\nThe text supports the Markdown language! For more details look in the \"Markdown Information\" tab.";
+                        break;
+                    case 3:
+                        labelHelp.Text = "These tags help the user to find your script over the search function.\nTry to explain the script as detailed as possible.";
+                        break;
+                    default:
+                        labelHelp.Text = "";
+                        break;
+                }
             }
         }
 
@@ -152,21 +174,24 @@ namespace Script_Browser
             for (int i = 0; i < tableLayoutPanel4.Controls.Count; i++)
                 tableLayoutPanel4.Controls[i].Enabled = i < step;
             currentStep = step;
+
+            noFocusBorderBtn6.Enabled = currentPage != currentStep;
+            noFocusBorderBtn7.Enabled = currentPage != 1;
         }
 
         private void noFocusBorderBtn1_MouseClick(object sender, MouseEventArgs e)
         {
-            try { SetPage(Int32.Parse((sender as Control).Tag.ToString())); } catch { }
+            try { SetPage(Int32.Parse((sender as Control).Tag.ToString()), true); } catch { }
         }
 
         private void nextPage_Click(object sender, EventArgs e)
         {
-            SetPage(currentPage + 1);
+            SetPage(currentPage + 1, true);
         }
 
         private void previousPage_Click(object sender, EventArgs e)
         {
-            SetPage(currentPage - 1);
+            SetPage(currentPage - 1, true);
         }
 
         //
@@ -177,22 +202,30 @@ namespace Script_Browser
         {
             List<MaterialSingleLineTextField> textfields = new List<MaterialSingleLineTextField> { materialSingleLineTextField1, materialSingleLineTextField2, materialSingleLineTextField3, materialSingleLineTextField4 };
 
+            bool ok = true;
             foreach (MaterialSingleLineTextField textfield in textfields)
             {
                 if (textfield.Text.Trim(' ').Length == 0 && textfield.Tag.ToString() != "empty")
                 {
                     EnableStep(1);
+                    ok = false;
                     break;
                 }
-                else if (currentStep == 1)
-                    EnableStep(2);
             }
-            SetPage(1);
+
+            if (ok && currentStep == 1)
+            {
+                EnableStep(2);
+                CheckDescription(null, null);
+            }
+
+            SetPage(1, sender != null);
         }
 
         //
         // Tab Description
         //
+        //TODO: Add Markdown Info
 
         private void SwitchBtn(Button btn, bool enabled)
         {
@@ -208,6 +241,7 @@ namespace Script_Browser
             SwitchBtn(button2, false);
             SwitchBtn(button3, false);
             webBrowser1.Visible = false;
+            panelMarkdown.Visible = false;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -219,8 +253,17 @@ namespace Script_Browser
                 SwitchBtn(button2, true);
                 SwitchBtn(button3, false);
                 webBrowser1.Visible = true;
+                panelMarkdown.Visible = false;
             }
             catch { }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            SwitchBtn(button1, false);
+            SwitchBtn(button2, false);
+            SwitchBtn(button3, true);
+            panelMarkdown.Visible = true;
         }
 
         //WebBrowser set Colors & Style
@@ -244,6 +287,70 @@ namespace Script_Browser
                 try { Process.Start(e.Url.ToString()); } catch { }
                 e.Cancel = true;
             }
+        }
+
+        private void CheckDescription(object sender, EventArgs e)
+        {
+            if (richTextBox1.Text.Trim(' ').Trim('\n').Length > 0)
+            {
+                EnableStep(3);
+                CheckTags(null, null);
+            }
+            else
+                EnableStep(2);
+            SetPage(2, sender != null);
+        }
+
+        //
+        // Tab Tags
+        //
+
+        private void AddTags(object sender, EventArgs e)
+        {
+            try
+            {
+                if (metroTextBox1.Text.Trim(' ').Length > 0)
+                {
+                    string[] tags = metroTextBox1.Text.ToLower().Split(' ');
+                    foreach (string tag in tags)
+                    {
+                        if (!searchTags.Contains(tag))
+                        {
+                            searchTags.Add(tag);
+                            SearchTag st = new SearchTag(tag);
+                            flowLayoutPanelTags.Controls.Add(st);
+                            flowLayoutPanelTags.Controls.SetChildIndex(st, 0);
+                            st.Disposed += new EventHandler(RemoveTag);
+                            st.Tag = tag;
+                        }
+                    }
+                    metroTextBox1.Text = "";
+                }
+            }
+            catch { }
+        }
+
+        private void metroTextBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                AddTags(null, null);
+                e.Handled = true;
+            }
+        }
+
+        private void RemoveTag(object sender, EventArgs e)
+        {
+            try { searchTags.Remove((sender as Control).Tag.ToString()); } catch { }
+        }
+
+        private void CheckTags(object sender, ControlEventArgs e)
+        {
+            if (searchTags.Count > 0)
+                EnableStep(4);
+            else
+                EnableStep(3);
+            SetPage(3, sender != null);
         }
     }
 }

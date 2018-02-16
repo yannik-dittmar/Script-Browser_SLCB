@@ -78,6 +78,12 @@
     <Compile Include="Controls\Rating.Designer.cs">
       <DependentUpon>Rating.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SearchTag.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SearchTag.Designer.cs">
+      <DependentUpon>SearchTag.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ShowScript.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -151,6 +157,9 @@
     </Compile>
     <EmbeddedResource Include="Controls\Rating.resx">
       <DependentUpon>Rating.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SearchTag.resx">
+      <DependentUpon>SearchTag.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ShowScript.resx">
       <DependentUpon>ShowScript.cs</DependentUpon>
