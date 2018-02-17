@@ -8,6 +8,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -40,15 +41,19 @@ namespace Script_Browser
         int currentPage = 1;
         List<string> searchTags = new List<string>();
 
-        public UploadScript()
+        public UploadScript(string path)
         {
             InitializeComponent();
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
 
+            metroComboBox1.SelectedIndex = 0;
             materialSingleLineTextField1.SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
             materialSingleLineTextField2.SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
             materialSingleLineTextField3.SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
             materialSingleLineTextField4.SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
+
+            fileSystemWatcher1.Path = path;
+            UpdateDgvFiles(null, null);
 
             CheckScriptInformation(null, null);
             SetPage(1, true);
@@ -118,7 +123,7 @@ namespace Script_Browser
                 {
                     tableLayoutPanel4.Controls[i].BackColor = Color.FromArgb(25, 72, 70);
 
-                    if (i == page - 1)
+                    if ((i == page - 1 && updateTable) || (i == currentPage - 1 && !updateTable))
                         tableLayoutPanel4.Controls[i].BackColor = Color.FromArgb(51, 139, 118);
                 }
 
@@ -147,24 +152,34 @@ namespace Script_Browser
                     }
                 }
 
-                noFocusBorderBtn6.Enabled = page != currentStep;
-                noFocusBorderBtn7.Enabled = page != 1;
-                currentPage = page;
-
-                switch (page)
+                if (updateTable)
                 {
-                    case 1:
-                        labelHelp.Text = "The general information to your script.\nThese will be shown in the browser and written into the script file itself.";
-                        break;
-                    case 2:
-                        labelHelp.Text = "The long description will be shown when a user clicks on your script in the browser.\nThe text supports the Markdown language! For more details look in the \"Markdown Information\" tab.";
-                        break;
-                    case 3:
-                        labelHelp.Text = "These tags help the user to find your script over the search function.\nTry to explain the script as detailed as possible.";
-                        break;
-                    default:
-                        labelHelp.Text = "";
-                        break;
+                    if (page != 5)
+                        noFocusBorderBtn6.Text = "Next";
+                    else
+                        noFocusBorderBtn6.Text = "Upload";
+                    noFocusBorderBtn6.Enabled = page != currentStep || page == 5;
+                    noFocusBorderBtn7.Enabled = page != 1;
+                    currentPage = page;
+
+                    switch (page)
+                    {
+                        case 1:
+                            labelHelp.Text = "The general information to your script.\nThese will be shown in the browser and written into the script file itself.";
+                            break;
+                        case 2:
+                            labelHelp.Text = "The long description will be shown when a user clicks on your script in the browser.\nThe text supports the Markdown language! For more details look in the \"Markdown Information\" tab.";
+                            break;
+                        case 3:
+                            labelHelp.Text = "These tags help the user to find your script over the search function.\nTry to explain the script as detailed as possible.";
+                            break;
+                        case 4:
+                            labelHelp.Text = "Select the files that should be installed for the user.\nWe recomend to deselect the settings files.";
+                            break;
+                        default:
+                            labelHelp.Text = "";
+                            break;
+                    }
                 }
             }
         }
@@ -347,10 +362,124 @@ namespace Script_Browser
         private void CheckTags(object sender, ControlEventArgs e)
         {
             if (searchTags.Count > 0)
+            {
                 EnableStep(4);
+                CheckFiles(null, null);
+            }
             else
                 EnableStep(3);
             SetPage(3, sender != null);
+        }
+
+        //
+        // Tab Files
+        //
+
+        private void dataGridView1_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            try
+            {
+                DataGridView dgv = sender as DataGridView;
+                if (e.RowIndex % 2 == 0)
+                {
+                    dgv.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(22, 36, 45);
+                    dgv.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = Color.FromArgb(32, 53, 66);
+                }
+                else
+                {
+                    dgv.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(18, 31, 39);
+                    dgv.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = Color.FromArgb(34, 55, 69);
+                }
+            }
+            catch { }
+        }
+
+        private void dataGridView1_MouseLeave(object sender, EventArgs e)
+        {
+            DataGridView dgv = sender as DataGridView;
+            dgv.ClearSelection();
+        }
+
+        //Only row-selection when entering a cell
+        private void dataGridView1_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                try
+                {
+                    DataGridView dgv = sender as DataGridView;
+                    dgv.ClearSelection();
+                    dgv.Rows[e.RowIndex].Selected = true;
+                }
+                catch { }
+            }
+        }
+
+        private void CheckFiles(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (sender != null)
+                    dataGridView1.Rows[e.RowIndex].Selected = true;
+            }
+            catch { }
+
+            bool found = false;
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                string path = row.Cells[2].Value.ToString();
+                if ((bool)(row.Cells[0] as DataGridViewCheckBoxCell).Value && path.Split('\\')[path.Split('\\').Length - 1].Contains("_StreamlabsSystem.py") || path.Split('\\')[path.Split('\\').Length - 1].Contains("_AnkhBotSystem.py"))
+                {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (found)
+            {
+                if (currentStep >= 4)
+                    EnableStep(5);
+            }
+            else if (currentStep >= 4)
+                EnableStep(4);
+            SetPage(4, currentPage == 5);
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dataGridView1.Rows[e.RowIndex].Selected = true;
+            dataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit);
+        }
+
+        private void UpdateDgvFiles(object sender, FileSystemEventArgs e)
+        {
+            try
+            {
+                dataGridView1.CellValueChanged -= new DataGridViewCellEventHandler(CheckFiles);
+                dataGridView1.Rows.Clear();
+                foreach (string file in Directory.GetFiles(Path.GetDirectoryName(fileSystemWatcher1.Path), "*.*", SearchOption.AllDirectories))
+                {
+                    try
+                    {
+                        Icon ico = SystemIcons.Warning;
+                        try
+                        {
+                            ico = Icon.ExtractAssociatedIcon(file);
+                        }
+                        catch { }
+                        dataGridView1.Rows.Add(!file.Contains("settings.js") && !file.Contains("settings.json"), ico, file.Replace(fileSystemWatcher1.Path, ""));
+                    }
+                    catch { }
+                }
+                dataGridView1.CellValueChanged += new DataGridViewCellEventHandler(CheckFiles);
+            }
+            catch { }
+            CheckFiles(null, null);
+        }
+
+        private void fileSystemWatcher1_Renamed(object sender, RenamedEventArgs e)
+        {
+            UpdateDgvFiles(null, null);
         }
     }
 }

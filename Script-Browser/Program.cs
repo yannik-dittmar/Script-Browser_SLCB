@@ -16,7 +16,7 @@ namespace Script_Browser
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new UploadScript());
+            Application.Run(new UploadScript(@"D:\Streamlabs Chatbot\Twitch\Scripts\WelcomeMat\"));
         }
     }
 }

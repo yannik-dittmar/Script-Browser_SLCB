@@ -28,6 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UploadScript));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -63,17 +68,25 @@
             this.button4 = new System.Windows.Forms.Button();
             this.metroTextBox1 = new MetroFramework.Controls.MetroTextBox();
             this.flowLayoutPanelTags = new System.Windows.Forms.FlowLayoutPanel();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-            this.noFocusBorderBtn7 = new Script_Browser.Controls.NoFocusBorderBtn();
-            this.noFocusBorderBtn6 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.labelHelp = new System.Windows.Forms.Label();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.noFocusBorderBtn7 = new Script_Browser.Controls.NoFocusBorderBtn();
+            this.noFocusBorderBtn6 = new Script_Browser.Controls.NoFocusBorderBtn();
+            this.noFocusBorderBtn8 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.noFocusBorderBtn1 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.noFocusBorderBtn2 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.noFocusBorderBtn3 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.noFocusBorderBtn4 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.noFocusBorderBtn5 = new Script_Browser.Controls.NoFocusBorderBtn();
-            this.label3 = new System.Windows.Forms.Label();
+            this.Column1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.panelMain.SuspendLayout();
@@ -87,8 +100,11 @@
             this.tableLayoutPanel6.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel9.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
+            this.tableLayoutPanel10.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -188,13 +204,15 @@
             this.tableLayoutTabControl.ColumnCount = 5;
             this.tableLayoutTabControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 0F));
             this.tableLayoutTabControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 0F));
-            this.tableLayoutTabControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutTabControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 0F));
+            this.tableLayoutTabControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutTabControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 0F));
             this.tableLayoutTabControl.Controls.Add(this.tableLayoutPanel5, 0, 0);
             this.tableLayoutTabControl.Controls.Add(this.tableLayoutPanel3, 1, 0);
             this.tableLayoutTabControl.Controls.Add(this.tableLayoutPanel7, 2, 0);
+            this.tableLayoutTabControl.Controls.Add(this.dataGridView1, 3, 0);
             this.tableLayoutTabControl.Controls.Add(this.tableLayoutPanel9, 0, 1);
+            this.tableLayoutTabControl.Controls.Add(this.tableLayoutPanel10, 4, 0);
             this.tableLayoutTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutTabControl.Location = new System.Drawing.Point(0, 50);
             this.tableLayoutTabControl.Margin = new System.Windows.Forms.Padding(0);
@@ -396,8 +414,8 @@
             this.metroComboBox1.FormattingEnabled = true;
             this.metroComboBox1.ItemHeight = 23;
             this.metroComboBox1.Items.AddRange(new object[] {
-            "Streamlabs Commands",
-            "Streamlabs Parameters"});
+            "Streamlabs Command (*_StreamlabsSystem.py)",
+            "Streamlabs Parameter (*_StreamlabsParameter.py)"});
             this.metroComboBox1.Location = new System.Drawing.Point(-115, 233);
             this.metroComboBox1.Name = "metroComboBox1";
             this.metroComboBox1.Size = new System.Drawing.Size(376, 29);
@@ -612,7 +630,7 @@
             this.tableLayoutPanel7.RowCount = 2;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(695, 296);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(1, 296);
             this.tableLayoutPanel7.TabIndex = 11;
             // 
             // tableLayoutPanel8
@@ -631,7 +649,7 @@
             this.tableLayoutPanel8.Padding = new System.Windows.Forms.Padding(3);
             this.tableLayoutPanel8.RowCount = 1;
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(695, 30);
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(1, 30);
             this.tableLayoutPanel8.TabIndex = 3;
             // 
             // button4
@@ -646,7 +664,7 @@
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.ForeColor = System.Drawing.Color.White;
-            this.button4.Location = new System.Drawing.Point(624, 3);
+            this.button4.Location = new System.Drawing.Point(-64, 3);
             this.button4.Margin = new System.Windows.Forms.Padding(0);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(68, 24);
@@ -666,7 +684,7 @@
             this.metroTextBox1.CustomButton.Enabled = false;
             this.metroTextBox1.CustomButton.FlatAppearance.BorderSize = 0;
             this.metroTextBox1.CustomButton.Image = null;
-            this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(596, 1);
+            this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(-21, 1);
             this.metroTextBox1.CustomButton.Name = "";
             this.metroTextBox1.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.metroTextBox1.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -688,7 +706,7 @@
             this.metroTextBox1.SelectionStart = 0;
             this.metroTextBox1.ShortcutsEnabled = true;
             this.metroTextBox1.ShowClearButton = true;
-            this.metroTextBox1.Size = new System.Drawing.Size(618, 23);
+            this.metroTextBox1.Size = new System.Drawing.Size(1, 23);
             this.metroTextBox1.TabIndex = 0;
             this.metroTextBox1.UseCustomBackColor = true;
             this.metroTextBox1.UseCustomForeColor = true;
@@ -704,10 +722,59 @@
             this.flowLayoutPanelTags.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanelTags.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanelTags.Name = "flowLayoutPanelTags";
-            this.flowLayoutPanelTags.Size = new System.Drawing.Size(689, 260);
+            this.flowLayoutPanelTags.Size = new System.Drawing.Size(1, 260);
             this.flowLayoutPanelTags.TabIndex = 4;
             this.flowLayoutPanelTags.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.CheckTags);
             this.flowLayoutPanelTags.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.CheckTags);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
+            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3});
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.EnableHeadersVisualStyles = false;
+            this.dataGridView1.GridColor = System.Drawing.Color.White;
+            this.dataGridView1.Location = new System.Drawing.Point(30, 10);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(30, 10, 30, 10);
+            this.dataGridView1.MultiSelect = false;
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dataGridView1.Size = new System.Drawing.Size(695, 296);
+            this.dataGridView1.TabIndex = 13;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellMouseEnter);
+            this.dataGridView1.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dataGridView1_RowPrePaint);
+            this.dataGridView1.MouseLeave += new System.EventHandler(this.dataGridView1_MouseLeave);
             // 
             // tableLayoutPanel9
             // 
@@ -729,6 +796,97 @@
             this.tableLayoutPanel9.Size = new System.Drawing.Size(755, 40);
             this.tableLayoutPanel9.TabIndex = 12;
             this.tableLayoutPanel9.Tag = "footer";
+            // 
+            // labelHelp
+            // 
+            this.labelHelp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelHelp.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelHelp.ForeColor = System.Drawing.Color.White;
+            this.labelHelp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelHelp.Location = new System.Drawing.Point(3, 0);
+            this.labelHelp.Name = "labelHelp";
+            this.labelHelp.Size = new System.Drawing.Size(574, 40);
+            this.labelHelp.TabIndex = 3;
+            this.labelHelp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.AutoSize = true;
+            this.tableLayoutPanel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(72)))), ((int)(((byte)(70)))));
+            this.tableLayoutPanel4.ColumnCount = 5;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel4.Controls.Add(this.noFocusBorderBtn1, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.noFocusBorderBtn2, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.noFocusBorderBtn3, 2, 0);
+            this.tableLayoutPanel4.Controls.Add(this.noFocusBorderBtn4, 3, 0);
+            this.tableLayoutPanel4.Controls.Add(this.noFocusBorderBtn5, 4, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 5);
+            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 1;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(755, 40);
+            this.tableLayoutPanel4.TabIndex = 0;
+            // 
+            // label3
+            // 
+            this.label3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(0, 441);
+            this.label3.Margin = new System.Windows.Forms.Padding(0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(755, 35);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Script Location";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // fileSystemWatcher1
+            // 
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.IncludeSubdirectories = true;
+            this.fileSystemWatcher1.NotifyFilter = ((System.IO.NotifyFilters)((System.IO.NotifyFilters.FileName | System.IO.NotifyFilters.DirectoryName)));
+            this.fileSystemWatcher1.SynchronizingObject = this;
+            this.fileSystemWatcher1.Created += new System.IO.FileSystemEventHandler(this.UpdateDgvFiles);
+            this.fileSystemWatcher1.Deleted += new System.IO.FileSystemEventHandler(this.UpdateDgvFiles);
+            this.fileSystemWatcher1.Renamed += new System.IO.RenamedEventHandler(this.fileSystemWatcher1_Renamed);
+            // 
+            // tableLayoutPanel10
+            // 
+            this.tableLayoutPanel10.ColumnCount = 1;
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel10.Controls.Add(this.noFocusBorderBtn8, 0, 2);
+            this.tableLayoutPanel10.Controls.Add(this.label10, 0, 1);
+            this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel10.Location = new System.Drawing.Point(758, 3);
+            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
+            this.tableLayoutPanel10.RowCount = 4;
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(1, 310);
+            this.tableLayoutPanel10.TabIndex = 14;
+            // 
+            // label10
+            // 
+            this.label10.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label10.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label10.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.White;
+            this.label10.Location = new System.Drawing.Point(0, 115);
+            this.label10.Margin = new System.Windows.Forms.Padding(0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(749, 40);
+            this.label10.TabIndex = 5;
+            this.label10.Text = "All settings correct?";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // noFocusBorderBtn7
             // 
@@ -766,41 +924,23 @@
             this.noFocusBorderBtn6.UseVisualStyleBackColor = false;
             this.noFocusBorderBtn6.Click += new System.EventHandler(this.nextPage_Click);
             // 
-            // labelHelp
+            // noFocusBorderBtn8
             // 
-            this.labelHelp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelHelp.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelHelp.ForeColor = System.Drawing.Color.White;
-            this.labelHelp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelHelp.Location = new System.Drawing.Point(3, 0);
-            this.labelHelp.Name = "labelHelp";
-            this.labelHelp.Size = new System.Drawing.Size(574, 40);
-            this.labelHelp.TabIndex = 3;
-            this.labelHelp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // tableLayoutPanel4
-            // 
-            this.tableLayoutPanel4.AutoSize = true;
-            this.tableLayoutPanel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(72)))), ((int)(((byte)(70)))));
-            this.tableLayoutPanel4.ColumnCount = 5;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel4.Controls.Add(this.noFocusBorderBtn1, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.noFocusBorderBtn2, 1, 0);
-            this.tableLayoutPanel4.Controls.Add(this.noFocusBorderBtn3, 2, 0);
-            this.tableLayoutPanel4.Controls.Add(this.noFocusBorderBtn4, 3, 0);
-            this.tableLayoutPanel4.Controls.Add(this.noFocusBorderBtn5, 4, 0);
-            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 5);
-            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 1;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(755, 40);
-            this.tableLayoutPanel4.TabIndex = 0;
+            this.noFocusBorderBtn8.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.noFocusBorderBtn8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
+            this.noFocusBorderBtn8.FlatAppearance.BorderSize = 0;
+            this.noFocusBorderBtn8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.noFocusBorderBtn8.Font = new System.Drawing.Font("Arial Rounded MT Bold", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.noFocusBorderBtn8.ForeColor = System.Drawing.Color.White;
+            this.noFocusBorderBtn8.Location = new System.Drawing.Point(232, 155);
+            this.noFocusBorderBtn8.Margin = new System.Windows.Forms.Padding(0);
+            this.noFocusBorderBtn8.Name = "noFocusBorderBtn8";
+            this.noFocusBorderBtn8.Size = new System.Drawing.Size(284, 40);
+            this.noFocusBorderBtn8.TabIndex = 6;
+            this.noFocusBorderBtn8.TabStop = false;
+            this.noFocusBorderBtn8.Tag = "1";
+            this.noFocusBorderBtn8.Text = "Upload && Publish Script";
+            this.noFocusBorderBtn8.UseVisualStyleBackColor = false;
             // 
             // noFocusBorderBtn1
             // 
@@ -901,19 +1041,36 @@
             this.noFocusBorderBtn5.UseVisualStyleBackColor = false;
             this.noFocusBorderBtn5.MouseClick += new System.Windows.Forms.MouseEventHandler(this.noFocusBorderBtn1_MouseClick);
             // 
-            // label3
+            // Column1
             // 
-            this.label3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(0, 441);
-            this.label3.Margin = new System.Windows.Forms.Padding(0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(755, 35);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Script Location";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.NullValue = false;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(5);
+            this.Column1.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Column1.HeaderText = "";
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 5;
+            // 
+            // Column2
+            // 
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle3.NullValue")));
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Column2.HeaderText = "";
+            this.Column2.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Width = 5;
+            // 
+            // Column3
+            // 
+            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column3.HeaderText = "File Path";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
             // 
             // UploadScript
             // 
@@ -948,8 +1105,11 @@
             this.tableLayoutPanel7.PerformLayout();
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tableLayoutPanel9.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
+            this.tableLayoutPanel10.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1002,5 +1162,13 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelTags;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
         private System.Windows.Forms.Label labelHelp;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.IO.FileSystemWatcher fileSystemWatcher1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
+        private Controls.NoFocusBorderBtn noFocusBorderBtn8;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewImageColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
     }
 }

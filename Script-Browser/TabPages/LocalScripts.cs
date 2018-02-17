@@ -227,7 +227,7 @@ namespace Script_Browser.TabPages
         private void button1_Click(object sender, EventArgs e)
         {
             form.Opacity = 0.5;
-            new UploadScript().ShowDialog();
+            //new UploadScript().ShowDialog();
             form.Opacity = 1;
         }
     }
