@@ -1,5 +1,6 @@
 ﻿using Markdig;
 using MaterialSkin.Controls;
+using Newtonsoft.Json.Linq;
 using Script_Browser.Controls;
 using System;
 using System.Collections.Generic;
@@ -9,9 +10,11 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -37,6 +40,7 @@ namespace Script_Browser
         const int WM_NCLBUTTONDOWN = 0xA1;
         const int HT_CAPTION = 0x2;
 
+        string path = "";
         int currentStep = 1;
         int currentPage = 1;
         List<string> searchTags = new List<string>();
@@ -52,7 +56,8 @@ namespace Script_Browser
             materialSingleLineTextField3.SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
             materialSingleLineTextField4.SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
 
-            fileSystemWatcher1.Path = path;
+            this.path = path;
+            fileSystemWatcher1.Path = Path.GetDirectoryName(path) + "\\";
             UpdateDgvFiles(null, null);
 
             CheckScriptInformation(null, null);
@@ -480,6 +485,58 @@ namespace Script_Browser
         private void fileSystemWatcher1_Renamed(object sender, RenamedEventArgs e)
         {
             UpdateDgvFiles(null, null);
+        }
+
+        //
+        // Tab Upload
+        //
+
+        private void Upload(object sender, EventArgs e)
+        {
+            try
+            {
+                //Copy files to temp dir
+                string path = Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Script\";
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+
+                foreach (string file in Directory.GetFiles(path))
+                    File.Delete(file);
+                foreach (string dir in Directory.GetDirectories(path))
+                    Directory.Delete(dir, true);
+                File.Delete(Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip");
+
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    if ((bool)(row.Cells[0] as DataGridViewCheckBoxCell).Value)
+                    {
+                        Directory.CreateDirectory(Path.GetDirectoryName(path + row.Cells[2].Value.ToString()));
+                        File.Copy(Path.GetDirectoryName(this.path) + "\\" + row.Cells[2].Value.ToString(), path + row.Cells[2].Value.ToString(), true);
+                    }
+                }
+
+                ZipFile.CreateFromDirectory(path, Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip");
+
+                foreach (string file in Directory.GetFiles(path))
+                    File.Delete(file);
+                foreach (string dir in Directory.GetDirectories(path))
+                    Directory.Delete(dir, true);
+
+                JObject info = new JObject();
+                info["Name"] = materialSingleLineTextField1.Text;
+                info["ShortDescription"] = materialSingleLineTextField2.Text;
+                info["Version"] = materialSingleLineTextField3.Text;
+                info["Alias"] = materialSingleLineTextField4.Text;
+                if (metroComboBox1.SelectedIndex == 0)
+                    info["Type"] = "Command";
+                else
+                    info["Type"] = "Parameter";
+                info["LongDescription"] = richTextBox1.Text;
+                info["Tags"] = new JArray(searchTags.ToArray());
+
+                Console.WriteLine(Networking.UploadScript(this, info.ToString(), Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip"));
+            }
+            catch (Exception ex) { Console.WriteLine(ex.StackTrace); }
         }
     }
 }

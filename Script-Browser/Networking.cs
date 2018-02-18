@@ -2,10 +2,12 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,8 +18,8 @@ namespace Script_Browser
     static class Networking
     {
         public static string storageServer = "";
-        public static string username = "";
-        public static string password = "";
+        public static string username = "test";
+        public static string password = "a94a8fe5ccb19ba61c4c0873d391e987982fbbd3";
         public static List<string> scripts = new List<string>();
 
         //Encrypt passwords
@@ -38,7 +40,7 @@ namespace Script_Browser
             catch { return false; }
         }
 
-        public static void CheckIp(Main form)
+        public static void CheckIp(Form form)
         {
             tryagain:
             if (storageServer == "")
@@ -154,6 +156,20 @@ namespace Script_Browser
             using (WebClient web = new WebClient())
                 return web.DownloadString(storageServer + "/Script%20Browser/checkForUpdate.php?id=" + id + "&ver=" + ver).Contains("UPDATE");
         }
+
+        public static string UploadScript(UploadScript form, string info, string path)
+        {
+            CheckIp(form);
+            using (MultipartFormDataContent data = new MultipartFormDataContent
+            {
+                { new StringContent(info), "info" },
+                { new StreamContent(File.Open(path, FileMode.Open)), "file", "script.zip" }
+            })
+            using (HttpClient web = new HttpClient())
+                return web.PostAsync(storageServer + "/Script%20Browser/uploadScript.php?user=" + username + "&pass=" + password, data).Result.Content.ReadAsStringAsync().Result;
+        }
+
+
 
         public static Image DownloadImage(string path)
         {
