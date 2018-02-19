@@ -36,7 +36,8 @@ namespace Download_Manager.Pages
         //FolderBrowser for selection of path of Streamlabs Chatbot
         private void button2_Click(object sender, EventArgs e)
         {
-
+            //Disable new folder button
+            this.folderBrowserDialog1.ShowNewFolderButton = false;
         }
     }
 }

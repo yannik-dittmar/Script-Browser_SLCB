@@ -92,5 +92,6 @@ namespace Download_Manager
         {
             panel1.Visible = false;   
         }
+
     }
 }
