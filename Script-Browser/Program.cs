@@ -16,8 +16,9 @@ namespace Script_Browser
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new UploadScript(@"D:\Streamlabs Chatbot\Twitch\Scripts\WelcomeMat\WelcomeMat_StreamlabsSystem.py"));
-            Application.Run(new Main());
+            Application.Run(new UploadScript(@"D:\Streamlabs Chatbot\Twitch\Scripts\WelcomeMat\WelcomeMat_StreamlabsSystem.py"));
+            //Application.Run(new UploadScript(@"C:\Users\brude\Desktop\Neuer Ordner\test_StreamlabsSystem.py"));
+            //Application.Run(new Main());
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Markdig;
 using MaterialSkin.Controls;
+using MetroFramework;
 using Newtonsoft.Json.Linq;
 using Script_Browser.Controls;
 using System;
@@ -44,24 +45,35 @@ namespace Script_Browser
         int currentStep = 1;
         int currentPage = 1;
         List<string> searchTags = new List<string>();
+        bool uploaded = false;
 
         public UploadScript(string path)
         {
             InitializeComponent();
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
 
-            metroComboBox1.SelectedIndex = 0;
             materialSingleLineTextField1.SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
             materialSingleLineTextField2.SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
             materialSingleLineTextField3.SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
             materialSingleLineTextField4.SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
 
             this.path = path;
+            label3.Text = Path.GetDirectoryName(path) + "\\";
             fileSystemWatcher1.Path = Path.GetDirectoryName(path) + "\\";
             UpdateDgvFiles(null, null);
 
+            if (path.Split('\\')[path.Split('\\').Length - 1].Contains("_StreamlabsParameter.py") || path.Split('\\')[path.Split('\\').Length - 1].Contains("_AnkhBotParameter.py"))
+                metroComboBox1.SelectedIndex = 0;
+            else
+                metroComboBox1.SelectedIndex = 1;
+
             CheckScriptInformation(null, null);
             SetPage(1, true);
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+            try { Process.Start(Path.GetDirectoryName(path)); } catch { }
         }
 
         //
@@ -163,7 +175,7 @@ namespace Script_Browser
                         noFocusBorderBtn6.Text = "Next";
                     else
                         noFocusBorderBtn6.Text = "Upload";
-                    noFocusBorderBtn6.Enabled = page != currentStep || page == 5;
+                    noFocusBorderBtn6.Enabled = page != currentStep || (page == 5 && !uploaded);
                     noFocusBorderBtn7.Enabled = page != 1;
                     currentPage = page;
 
@@ -206,7 +218,10 @@ namespace Script_Browser
 
         private void nextPage_Click(object sender, EventArgs e)
         {
-            SetPage(currentPage + 1, true);
+            if (noFocusBorderBtn6.Text == "Upload" && !uploaded)
+                Upload(null, null);
+            else
+                SetPage(currentPage + 1, true);
         }
 
         private void previousPage_Click(object sender, EventArgs e)
@@ -447,7 +462,7 @@ namespace Script_Browser
             }
             else if (currentStep >= 4)
                 EnableStep(4);
-            SetPage(4, currentPage == 5);
+            SetPage(4, currentPage == 4);
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -495,6 +510,10 @@ namespace Script_Browser
         {
             try
             {
+                noFocusBorderBtn8.Visible = false;
+                label10.Text = "Uploading your script... This could take some seconds!";
+                label10.Refresh();
+
                 //Copy files to temp dir
                 string path = Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Script\";
                 if (!Directory.Exists(path))
@@ -522,6 +541,13 @@ namespace Script_Browser
                 foreach (string dir in Directory.GetDirectories(path))
                     Directory.Delete(dir, true);
 
+                long size = new FileInfo(Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip").Length;
+                if (size >= 31457280)
+                {
+                    MetroFramework.MetroMessageBox.Show(this, "The file you are trying to upload has a size of " + ((size / 1024f) / 1024f) + "MB.\n But only files up to 30MB are allowed.", "File is too large", MessageBoxButtons.OK, 150);
+                    return;
+                }
+
                 JObject info = new JObject();
                 info["Name"] = materialSingleLineTextField1.Text;
                 info["ShortDescription"] = materialSingleLineTextField2.Text;
@@ -534,9 +560,22 @@ namespace Script_Browser
                 info["LongDescription"] = richTextBox1.Text;
                 info["Tags"] = new JArray(searchTags.ToArray());
 
-                Console.WriteLine(Networking.UploadScript(this, info.ToString(), Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip"));
+                string result = Networking.UploadScript(this, info.ToString(), Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip");
+
+                if (result.Contains("verify"))
+                    MetroMessageBox.Show(this, "Your email address has not been verified yet.\nPlease check your inbox or contact us over ", "Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); //TODO: Add Email
+                else if (result.Contains("enough"))
+                    MetroMessageBox.Show(this, "You have reached the maximum amount of scripts for a single user!\nDelete some to upload new ones.", "Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150);
+                else if (result.Contains("true"))
+                {
+                    label10.Text = "Your script has been successfully uploaded and published!";
+                    uploaded = true;
+                    return;
+                }
             }
             catch (Exception ex) { Console.WriteLine(ex.StackTrace); }
+            label10.Text = "There was an error while uploading your script :/";
+            noFocusBorderBtn8.Visible = true;
         }
     }
 }
