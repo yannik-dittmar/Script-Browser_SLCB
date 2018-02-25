@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace SaveManager
 {
     [Serializable]
-    public class SaveFile
+    public static class SaveFile
     {
-
+        public static string streamlabsPath = @"D:\Streamlabs Chatbot\";
     }
 }

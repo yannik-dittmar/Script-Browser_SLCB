@@ -24,7 +24,8 @@ namespace Script_Browser.TabPages
 
         private void LocalScripts_Load(object sender, EventArgs e)
         {
-            UpdateList(@"D:\Streamlabs Chatbot\");
+            UpdateList(SaveFile.streamlabsPath);
+            //UpdateList(@"D:\Streamlabs Chatbot\");
             //UpdateList(@"C:\Users\18diyann\Desktop\Test Ordner\");
         }
 
@@ -205,6 +206,7 @@ namespace Script_Browser.TabPages
                     label3.Text = dgv.Rows[e.RowIndex].Cells[0].Value.ToString();
 
                     tableLayoutPanel2.Visible = true;
+                    tableLayoutPanel2.Tag = dgv.Rows[e.RowIndex].Cells[5].Value.ToString();
                 }
                 catch { }
             }
@@ -227,8 +229,20 @@ namespace Script_Browser.TabPages
         private void button1_Click(object sender, EventArgs e)
         {
             form.Opacity = 0.5;
-            //new UploadScript().ShowDialog();
+            new UploadScript(tableLayoutPanel2.Tag.ToString()).ShowDialog();
             form.Opacity = 1;
+            UpdateList(SaveFile.streamlabsPath);
+        }
+
+        //Update List on file changes
+        private void fileSystemWatcher1_Changed(object sender, FileSystemEventArgs e)
+        {
+            UpdateList(SaveFile.streamlabsPath);
+        }
+
+        private void fileSystemWatcher1_Renamed(object sender, RenamedEventArgs e)
+        {
+            UpdateList(SaveFile.streamlabsPath);
         }
     }
 }

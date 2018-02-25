@@ -57,6 +57,23 @@ namespace Script_Browser
             materialSingleLineTextField3.SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
             materialSingleLineTextField4.SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
 
+            try
+            {
+                string[] lines = File.ReadAllLines(path);
+                foreach (string line in lines)
+                {
+                    if (line.ToLower().Contains("scriptname") && materialSingleLineTextField1.Text == "")
+                        materialSingleLineTextField1.Text = GetLineItem(line);
+                    else if (line.ToLower().Contains("description") && materialSingleLineTextField2.Text == "")
+                        materialSingleLineTextField2.Text = GetLineItem(line);
+                    else if (line.ToLower().Contains("version") && materialSingleLineTextField3.Text == "")
+                        materialSingleLineTextField3.Text = GetLineItem(line);
+                    else if (line.ToLower().Contains("creator") && materialSingleLineTextField4.Text == "" && GetLineItem(line) != Networking.username)
+                        materialSingleLineTextField4.Text = GetLineItem(line);
+                }
+            }
+            catch { }
+
             this.path = path;
             label3.Text = Path.GetDirectoryName(path) + "\\";
             fileSystemWatcher1.Path = Path.GetDirectoryName(path) + "\\";
@@ -69,6 +86,21 @@ namespace Script_Browser
 
             CheckScriptInformation(null, null);
             SetPage(1, true);
+        }
+
+        public static string GetLineItem(string line)
+        {
+            try
+            {
+                if (line.IndexOf('"') != -1)
+                {
+                    string result = line.Substring(line.IndexOf('"') + 1);
+                    result = result.Substring(0, result.IndexOf('"'));
+                    return result;
+                }
+            }
+            catch { }
+            return "";
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -171,7 +203,9 @@ namespace Script_Browser
 
                 if (updateTable)
                 {
-                    if (page != 5)
+                    if (uploaded)
+                        noFocusBorderBtn6.Text = "Finish";
+                    else if (page != 5)
                         noFocusBorderBtn6.Text = "Next";
                     else
                         noFocusBorderBtn6.Text = "Upload";
@@ -220,6 +254,8 @@ namespace Script_Browser
         {
             if (noFocusBorderBtn6.Text == "Upload" && !uploaded)
                 Upload(null, null);
+            else if (noFocusBorderBtn6.Text == "Finish")
+                this.Dispose();
             else
                 SetPage(currentPage + 1, true);
         }
@@ -544,9 +580,12 @@ namespace Script_Browser
                 long size = new FileInfo(Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip").Length;
                 if (size >= 31457280)
                 {
-                    MetroFramework.MetroMessageBox.Show(this, "The file you are trying to upload has a size of " + ((size / 1024f) / 1024f) + "MB.\n But only files up to 30MB are allowed.", "File is too large", MessageBoxButtons.OK, 150);
+                    MetroMessageBox.Show(this, "The file you are trying to upload has a size of " + ((size / 1024f) / 1024f) + "MB.\n But only files up to 30MB are allowed.", "File is too large", MessageBoxButtons.OK, 150);
                     return;
                 }
+
+                string[] add = new string[] { materialSingleLineTextField1.Text, materialSingleLineTextField4.Text };
+                AddToListNotExists(add);
 
                 JObject info = new JObject();
                 info["Name"] = materialSingleLineTextField1.Text;
@@ -570,12 +609,29 @@ namespace Script_Browser
                 {
                     label10.Text = "Your script has been successfully uploaded and published!";
                     uploaded = true;
+                    Networking.scripts.Add(result.Replace("true", ""));
+                    noFocusBorderBtn6.Text = "Finish";
                     return;
                 }
+
+                File.Delete(Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip");
             }
             catch (Exception ex) { Console.WriteLine(ex.StackTrace); }
             label10.Text = "There was an error while uploading your script :/";
             noFocusBorderBtn8.Visible = true;
+        }
+
+        private void AddToListNotExists(string[] add)
+        {
+            foreach (string item in add)
+            {
+                string[] tags = item.Split(' ');
+                foreach (string tag in tags)
+                {
+                    if (!searchTags.Contains(item.ToLower()) && item != "")
+                        searchTags.Add(item);
+                }
+            }
         }
     }
 }

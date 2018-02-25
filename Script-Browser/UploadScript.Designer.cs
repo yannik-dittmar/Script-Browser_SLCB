@@ -73,20 +73,20 @@
             this.Column2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-            this.noFocusBorderBtn7 = new Script_Browser.Controls.NoFocusBorderBtn();
-            this.noFocusBorderBtn6 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.labelHelp = new System.Windows.Forms.Label();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
-            this.noFocusBorderBtn8 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.label10 = new System.Windows.Forms.Label();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            this.noFocusBorderBtn7 = new Script_Browser.Controls.NoFocusBorderBtn();
+            this.noFocusBorderBtn6 = new Script_Browser.Controls.NoFocusBorderBtn();
+            this.noFocusBorderBtn8 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.noFocusBorderBtn1 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.noFocusBorderBtn2 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.noFocusBorderBtn3 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.noFocusBorderBtn4 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.noFocusBorderBtn5 = new Script_Browser.Controls.NoFocusBorderBtn();
-            this.label3 = new System.Windows.Forms.Label();
-            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.panelMain.SuspendLayout();
@@ -202,11 +202,11 @@
             // 
             this.tableLayoutTabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
             this.tableLayoutTabControl.ColumnCount = 5;
-            this.tableLayoutTabControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 0F));
-            this.tableLayoutTabControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 0F));
-            this.tableLayoutTabControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 0F));
-            this.tableLayoutTabControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 0F));
             this.tableLayoutTabControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutTabControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 0F));
+            this.tableLayoutTabControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 0F));
+            this.tableLayoutTabControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 0F));
+            this.tableLayoutTabControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 0F));
             this.tableLayoutTabControl.Controls.Add(this.tableLayoutPanel5, 0, 0);
             this.tableLayoutTabControl.Controls.Add(this.tableLayoutPanel3, 1, 0);
             this.tableLayoutTabControl.Controls.Add(this.tableLayoutPanel7, 2, 0);
@@ -252,7 +252,7 @@
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28531F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28531F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28816F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(1, 316);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(755, 316);
             this.tableLayoutPanel5.TabIndex = 1;
             // 
             // materialSingleLineTextField1
@@ -262,7 +262,7 @@
             this.materialSingleLineTextField1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.materialSingleLineTextField1.ForeColor = System.Drawing.Color.White;
             this.materialSingleLineTextField1.Hint = "";
-            this.materialSingleLineTextField1.Location = new System.Drawing.Point(-115, 56);
+            this.materialSingleLineTextField1.Location = new System.Drawing.Point(262, 56);
             this.materialSingleLineTextField1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialSingleLineTextField1.Name = "materialSingleLineTextField1";
             this.materialSingleLineTextField1.PasswordChar = '\0';
@@ -281,7 +281,7 @@
             this.label4.Dock = System.Windows.Forms.DockStyle.Right;
             this.label4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(-177, 45);
+            this.label4.Location = new System.Drawing.Point(200, 45);
             this.label4.Margin = new System.Windows.Forms.Padding(0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 45);
@@ -295,7 +295,7 @@
             this.label5.Dock = System.Windows.Forms.DockStyle.Right;
             this.label5.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(-263, 90);
+            this.label5.Location = new System.Drawing.Point(114, 90);
             this.label5.Margin = new System.Windows.Forms.Padding(0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(145, 45);
@@ -309,7 +309,7 @@
             this.label7.Dock = System.Windows.Forms.DockStyle.Right;
             this.label7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(-170, 225);
+            this.label7.Location = new System.Drawing.Point(207, 225);
             this.label7.Margin = new System.Windows.Forms.Padding(0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(52, 45);
@@ -323,7 +323,7 @@
             this.label6.Dock = System.Windows.Forms.DockStyle.Right;
             this.label6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(-225, 180);
+            this.label6.Location = new System.Drawing.Point(152, 180);
             this.label6.Margin = new System.Windows.Forms.Padding(0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(107, 45);
@@ -337,7 +337,7 @@
             this.label8.Dock = System.Windows.Forms.DockStyle.Right;
             this.label8.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(-191, 135);
+            this.label8.Location = new System.Drawing.Point(186, 135);
             this.label8.Margin = new System.Windows.Forms.Padding(0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(73, 45);
@@ -352,7 +352,7 @@
             this.materialSingleLineTextField2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.materialSingleLineTextField2.ForeColor = System.Drawing.Color.White;
             this.materialSingleLineTextField2.Hint = "";
-            this.materialSingleLineTextField2.Location = new System.Drawing.Point(-115, 101);
+            this.materialSingleLineTextField2.Location = new System.Drawing.Point(262, 101);
             this.materialSingleLineTextField2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialSingleLineTextField2.Name = "materialSingleLineTextField2";
             this.materialSingleLineTextField2.PasswordChar = '\0';
@@ -372,7 +372,7 @@
             this.materialSingleLineTextField3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.materialSingleLineTextField3.ForeColor = System.Drawing.Color.White;
             this.materialSingleLineTextField3.Hint = "";
-            this.materialSingleLineTextField3.Location = new System.Drawing.Point(-115, 146);
+            this.materialSingleLineTextField3.Location = new System.Drawing.Point(262, 146);
             this.materialSingleLineTextField3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialSingleLineTextField3.Name = "materialSingleLineTextField3";
             this.materialSingleLineTextField3.PasswordChar = '\0';
@@ -392,7 +392,7 @@
             this.materialSingleLineTextField4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.materialSingleLineTextField4.ForeColor = System.Drawing.Color.White;
             this.materialSingleLineTextField4.Hint = "";
-            this.materialSingleLineTextField4.Location = new System.Drawing.Point(-115, 191);
+            this.materialSingleLineTextField4.Location = new System.Drawing.Point(262, 191);
             this.materialSingleLineTextField4.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialSingleLineTextField4.Name = "materialSingleLineTextField4";
             this.materialSingleLineTextField4.PasswordChar = '\0';
@@ -416,7 +416,7 @@
             this.metroComboBox1.Items.AddRange(new object[] {
             "Streamlabs Command (*_StreamlabsSystem.py)",
             "Streamlabs Parameter (*_StreamlabsParameter.py)"});
-            this.metroComboBox1.Location = new System.Drawing.Point(-115, 233);
+            this.metroComboBox1.Location = new System.Drawing.Point(262, 233);
             this.metroComboBox1.Name = "metroComboBox1";
             this.metroComboBox1.Size = new System.Drawing.Size(376, 29);
             this.metroComboBox1.TabIndex = 13;
@@ -434,7 +434,7 @@
             this.tableLayoutPanel3.Controls.Add(this.panelTabControl, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel6, 0, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(30, 10);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(785, 10);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(30, 10, 30, 10);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 2;
@@ -624,7 +624,7 @@
             this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel8, 0, 1);
             this.tableLayoutPanel7.Controls.Add(this.flowLayoutPanelTags, 0, 0);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(30, 10);
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(785, 10);
             this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(30, 10, 30, 10);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 2;
@@ -762,7 +762,7 @@
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.EnableHeadersVisualStyles = false;
             this.dataGridView1.GridColor = System.Drawing.Color.White;
-            this.dataGridView1.Location = new System.Drawing.Point(30, 10);
+            this.dataGridView1.Location = new System.Drawing.Point(785, 10);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(30, 10, 30, 10);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
@@ -828,42 +828,6 @@
             this.tableLayoutPanel9.TabIndex = 12;
             this.tableLayoutPanel9.Tag = "footer";
             // 
-            // noFocusBorderBtn7
-            // 
-            this.noFocusBorderBtn7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.noFocusBorderBtn7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
-            this.noFocusBorderBtn7.FlatAppearance.BorderSize = 0;
-            this.noFocusBorderBtn7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.noFocusBorderBtn7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.noFocusBorderBtn7.ForeColor = System.Drawing.Color.White;
-            this.noFocusBorderBtn7.Location = new System.Drawing.Point(585, 5);
-            this.noFocusBorderBtn7.Margin = new System.Windows.Forms.Padding(5);
-            this.noFocusBorderBtn7.Name = "noFocusBorderBtn7";
-            this.noFocusBorderBtn7.Size = new System.Drawing.Size(80, 30);
-            this.noFocusBorderBtn7.TabIndex = 2;
-            this.noFocusBorderBtn7.TabStop = false;
-            this.noFocusBorderBtn7.Text = "Back";
-            this.noFocusBorderBtn7.UseVisualStyleBackColor = false;
-            this.noFocusBorderBtn7.Click += new System.EventHandler(this.previousPage_Click);
-            // 
-            // noFocusBorderBtn6
-            // 
-            this.noFocusBorderBtn6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.noFocusBorderBtn6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
-            this.noFocusBorderBtn6.FlatAppearance.BorderSize = 0;
-            this.noFocusBorderBtn6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.noFocusBorderBtn6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.noFocusBorderBtn6.ForeColor = System.Drawing.Color.White;
-            this.noFocusBorderBtn6.Location = new System.Drawing.Point(670, 5);
-            this.noFocusBorderBtn6.Margin = new System.Windows.Forms.Padding(0, 5, 5, 5);
-            this.noFocusBorderBtn6.Name = "noFocusBorderBtn6";
-            this.noFocusBorderBtn6.Size = new System.Drawing.Size(80, 30);
-            this.noFocusBorderBtn6.TabIndex = 1;
-            this.noFocusBorderBtn6.TabStop = false;
-            this.noFocusBorderBtn6.Text = "Next";
-            this.noFocusBorderBtn6.UseVisualStyleBackColor = false;
-            this.noFocusBorderBtn6.Click += new System.EventHandler(this.nextPage_Click);
-            // 
             // labelHelp
             // 
             this.labelHelp.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -883,34 +847,15 @@
             this.tableLayoutPanel10.Controls.Add(this.noFocusBorderBtn8, 0, 2);
             this.tableLayoutPanel10.Controls.Add(this.label10, 0, 1);
             this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel10.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel10.Location = new System.Drawing.Point(758, 3);
             this.tableLayoutPanel10.Name = "tableLayoutPanel10";
             this.tableLayoutPanel10.RowCount = 4;
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel10.Size = new System.Drawing.Size(749, 310);
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(1, 310);
             this.tableLayoutPanel10.TabIndex = 14;
-            // 
-            // noFocusBorderBtn8
-            // 
-            this.noFocusBorderBtn8.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.noFocusBorderBtn8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
-            this.noFocusBorderBtn8.FlatAppearance.BorderSize = 0;
-            this.noFocusBorderBtn8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.noFocusBorderBtn8.Font = new System.Drawing.Font("Arial Rounded MT Bold", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.noFocusBorderBtn8.ForeColor = System.Drawing.Color.White;
-            this.noFocusBorderBtn8.Location = new System.Drawing.Point(232, 155);
-            this.noFocusBorderBtn8.Margin = new System.Windows.Forms.Padding(0);
-            this.noFocusBorderBtn8.Name = "noFocusBorderBtn8";
-            this.noFocusBorderBtn8.Size = new System.Drawing.Size(284, 40);
-            this.noFocusBorderBtn8.TabIndex = 6;
-            this.noFocusBorderBtn8.TabStop = false;
-            this.noFocusBorderBtn8.Tag = "1";
-            this.noFocusBorderBtn8.Text = "Upload && Publish Script";
-            this.noFocusBorderBtn8.UseVisualStyleBackColor = false;
-            this.noFocusBorderBtn8.Click += new System.EventHandler(this.Upload);
             // 
             // label10
             // 
@@ -949,6 +894,86 @@
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(755, 40);
             this.tableLayoutPanel4.TabIndex = 0;
+            // 
+            // label3
+            // 
+            this.label3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(0, 441);
+            this.label3.Margin = new System.Windows.Forms.Padding(0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(755, 35);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Script Location";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label3.Click += new System.EventHandler(this.label3_Click);
+            // 
+            // fileSystemWatcher1
+            // 
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.IncludeSubdirectories = true;
+            this.fileSystemWatcher1.NotifyFilter = ((System.IO.NotifyFilters)((System.IO.NotifyFilters.FileName | System.IO.NotifyFilters.DirectoryName)));
+            this.fileSystemWatcher1.SynchronizingObject = this;
+            this.fileSystemWatcher1.Created += new System.IO.FileSystemEventHandler(this.UpdateDgvFiles);
+            this.fileSystemWatcher1.Deleted += new System.IO.FileSystemEventHandler(this.UpdateDgvFiles);
+            this.fileSystemWatcher1.Renamed += new System.IO.RenamedEventHandler(this.fileSystemWatcher1_Renamed);
+            // 
+            // noFocusBorderBtn7
+            // 
+            this.noFocusBorderBtn7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.noFocusBorderBtn7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
+            this.noFocusBorderBtn7.FlatAppearance.BorderSize = 0;
+            this.noFocusBorderBtn7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.noFocusBorderBtn7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.noFocusBorderBtn7.ForeColor = System.Drawing.Color.White;
+            this.noFocusBorderBtn7.Location = new System.Drawing.Point(585, 5);
+            this.noFocusBorderBtn7.Margin = new System.Windows.Forms.Padding(5);
+            this.noFocusBorderBtn7.Name = "noFocusBorderBtn7";
+            this.noFocusBorderBtn7.Size = new System.Drawing.Size(80, 30);
+            this.noFocusBorderBtn7.TabIndex = 2;
+            this.noFocusBorderBtn7.TabStop = false;
+            this.noFocusBorderBtn7.Text = "Back";
+            this.noFocusBorderBtn7.UseVisualStyleBackColor = false;
+            this.noFocusBorderBtn7.Click += new System.EventHandler(this.previousPage_Click);
+            // 
+            // noFocusBorderBtn6
+            // 
+            this.noFocusBorderBtn6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.noFocusBorderBtn6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
+            this.noFocusBorderBtn6.FlatAppearance.BorderSize = 0;
+            this.noFocusBorderBtn6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.noFocusBorderBtn6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.noFocusBorderBtn6.ForeColor = System.Drawing.Color.White;
+            this.noFocusBorderBtn6.Location = new System.Drawing.Point(670, 5);
+            this.noFocusBorderBtn6.Margin = new System.Windows.Forms.Padding(0, 5, 5, 5);
+            this.noFocusBorderBtn6.Name = "noFocusBorderBtn6";
+            this.noFocusBorderBtn6.Size = new System.Drawing.Size(80, 30);
+            this.noFocusBorderBtn6.TabIndex = 1;
+            this.noFocusBorderBtn6.TabStop = false;
+            this.noFocusBorderBtn6.Text = "Next";
+            this.noFocusBorderBtn6.UseVisualStyleBackColor = false;
+            this.noFocusBorderBtn6.Click += new System.EventHandler(this.nextPage_Click);
+            // 
+            // noFocusBorderBtn8
+            // 
+            this.noFocusBorderBtn8.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.noFocusBorderBtn8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
+            this.noFocusBorderBtn8.FlatAppearance.BorderSize = 0;
+            this.noFocusBorderBtn8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.noFocusBorderBtn8.Font = new System.Drawing.Font("Arial Rounded MT Bold", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.noFocusBorderBtn8.ForeColor = System.Drawing.Color.White;
+            this.noFocusBorderBtn8.Location = new System.Drawing.Point(232, 155);
+            this.noFocusBorderBtn8.Margin = new System.Windows.Forms.Padding(0);
+            this.noFocusBorderBtn8.Name = "noFocusBorderBtn8";
+            this.noFocusBorderBtn8.Size = new System.Drawing.Size(284, 40);
+            this.noFocusBorderBtn8.TabIndex = 6;
+            this.noFocusBorderBtn8.TabStop = false;
+            this.noFocusBorderBtn8.Tag = "1";
+            this.noFocusBorderBtn8.Text = "Upload && Publish Script";
+            this.noFocusBorderBtn8.UseVisualStyleBackColor = false;
+            this.noFocusBorderBtn8.Click += new System.EventHandler(this.Upload);
             // 
             // noFocusBorderBtn1
             // 
@@ -1048,31 +1073,6 @@
             this.noFocusBorderBtn5.Text = "Upload";
             this.noFocusBorderBtn5.UseVisualStyleBackColor = false;
             this.noFocusBorderBtn5.MouseClick += new System.Windows.Forms.MouseEventHandler(this.noFocusBorderBtn1_MouseClick);
-            // 
-            // label3
-            // 
-            this.label3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(0, 441);
-            this.label3.Margin = new System.Windows.Forms.Padding(0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(755, 35);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Script Location";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label3.Click += new System.EventHandler(this.label3_Click);
-            // 
-            // fileSystemWatcher1
-            // 
-            this.fileSystemWatcher1.EnableRaisingEvents = true;
-            this.fileSystemWatcher1.IncludeSubdirectories = true;
-            this.fileSystemWatcher1.NotifyFilter = ((System.IO.NotifyFilters)((System.IO.NotifyFilters.FileName | System.IO.NotifyFilters.DirectoryName)));
-            this.fileSystemWatcher1.SynchronizingObject = this;
-            this.fileSystemWatcher1.Created += new System.IO.FileSystemEventHandler(this.UpdateDgvFiles);
-            this.fileSystemWatcher1.Deleted += new System.IO.FileSystemEventHandler(this.UpdateDgvFiles);
-            this.fileSystemWatcher1.Renamed += new System.IO.RenamedEventHandler(this.fileSystemWatcher1_Renamed);
             // 
             // UploadScript
             // 

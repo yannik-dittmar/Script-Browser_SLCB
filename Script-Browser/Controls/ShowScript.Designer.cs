@@ -28,19 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.rating1 = new Script_Browser.Controls.Rating();
             this.panel1 = new System.Windows.Forms.Panel();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
-            this.roundedEdgesButton1 = new Script_Browser.Controls.RoundedEdgesButton();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
@@ -49,6 +48,13 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panelTabPage1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.rating1 = new Script_Browser.Controls.Rating();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.installForTwitchOnlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.installForYouTubeOnlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
@@ -58,6 +64,8 @@
             this.flowLayoutPanel1.SuspendLayout();
             this.panelTabControl.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -159,19 +167,6 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(860, 812);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
-            // rating1
-            // 
-            this.rating1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.rating1.AutoSize = true;
-            this.rating1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.rating1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
-            this.rating1.Location = new System.Drawing.Point(215, 253);
-            this.rating1.Margin = new System.Windows.Forms.Padding(3, 10, 3, 10);
-            this.rating1.Name = "rating1";
-            this.rating1.Size = new System.Drawing.Size(430, 102);
-            this.rating1.TabIndex = 6;
-            this.rating1.TabStop = false;
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
@@ -219,17 +214,16 @@
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.AutoSize = true;
             this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.Controls.Add(this.label2, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.roundedEdgesButton1, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel5, 0, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 368);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
             this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.Size = new System.Drawing.Size(854, 81);
             this.tableLayoutPanel3.TabIndex = 8;
@@ -246,24 +240,6 @@
             this.label2.Size = new System.Drawing.Size(119, 15);
             this.label2.TabIndex = 8;
             this.label2.Text = "Report this script";
-            // 
-            // roundedEdgesButton1
-            // 
-            this.roundedEdgesButton1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.roundedEdgesButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
-            this.roundedEdgesButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.roundedEdgesButton1.FlatAppearance.BorderSize = 0;
-            this.roundedEdgesButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.roundedEdgesButton1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
-            this.roundedEdgesButton1.ForeColor = System.Drawing.Color.White;
-            this.roundedEdgesButton1.Location = new System.Drawing.Point(316, 10);
-            this.roundedEdgesButton1.Margin = new System.Windows.Forms.Padding(0);
-            this.roundedEdgesButton1.Name = "roundedEdgesButton1";
-            this.roundedEdgesButton1.Size = new System.Drawing.Size(222, 41);
-            this.roundedEdgesButton1.TabIndex = 7;
-            this.roundedEdgesButton1.TabStop = false;
-            this.roundedEdgesButton1.Text = "Download and Install";
-            this.roundedEdgesButton1.UseVisualStyleBackColor = false;
             // 
             // tableLayoutPanel4
             // 
@@ -375,8 +351,101 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 40);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(860, 1172);
+            this.panel3.Size = new System.Drawing.Size(860, 821);
             this.panel3.TabIndex = 3;
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tableLayoutPanel5.AutoSize = true;
+            this.tableLayoutPanel5.BackColor = System.Drawing.Color.White;
+            this.tableLayoutPanel5.ColumnCount = 3;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 1F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel5.Controls.Add(this.button3, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.button4, 2, 0);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(295, 10);
+            this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 1;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(264, 40);
+            this.tableLayoutPanel5.TabIndex = 9;
+            // 
+            // button3
+            // 
+            this.button3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.ForeColor = System.Drawing.Color.White;
+            this.button3.Location = new System.Drawing.Point(0, 0);
+            this.button3.Margin = new System.Windows.Forms.Padding(0);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(237, 40);
+            this.button3.TabIndex = 10;
+            this.button3.Text = "Download and Install";
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button4
+            // 
+            this.button4.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
+            this.button4.FlatAppearance.BorderSize = 0;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.ForeColor = System.Drawing.Color.White;
+            this.button4.Location = new System.Drawing.Point(238, 0);
+            this.button4.Margin = new System.Windows.Forms.Padding(0);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(26, 40);
+            this.button4.TabIndex = 11;
+            this.button4.Text = "▼";
+            this.button4.UseVisualStyleBackColor = false;
+            // 
+            // rating1
+            // 
+            this.rating1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.rating1.AutoSize = true;
+            this.rating1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.rating1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
+            this.rating1.Location = new System.Drawing.Point(215, 253);
+            this.rating1.Margin = new System.Windows.Forms.Padding(3, 10, 3, 10);
+            this.rating1.Name = "rating1";
+            this.rating1.Size = new System.Drawing.Size(430, 102);
+            this.rating1.TabIndex = 6;
+            this.rating1.TabStop = false;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
+            this.contextMenuStrip1.DropShadowEnabled = false;
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.installForTwitchOnlyToolStripMenuItem,
+            this.installForYouTubeOnlyToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.ShowImageMargin = false;
+            this.contextMenuStrip1.Size = new System.Drawing.Size(200, 48);
+            // 
+            // installForTwitchOnlyToolStripMenuItem
+            // 
+            this.installForTwitchOnlyToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.installForTwitchOnlyToolStripMenuItem.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.installForTwitchOnlyToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.installForTwitchOnlyToolStripMenuItem.Name = "installForTwitchOnlyToolStripMenuItem";
+            this.installForTwitchOnlyToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.installForTwitchOnlyToolStripMenuItem.Text = "Install for Twitch only";
+            // 
+            // installForYouTubeOnlyToolStripMenuItem
+            // 
+            this.installForYouTubeOnlyToolStripMenuItem.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.installForYouTubeOnlyToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.installForYouTubeOnlyToolStripMenuItem.Name = "installForYouTubeOnlyToolStripMenuItem";
+            this.installForYouTubeOnlyToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.installForYouTubeOnlyToolStripMenuItem.Text = "Install for YouTube only";
             // 
             // ShowScript
             // 
@@ -387,7 +456,7 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "ShowScript";
-            this.Size = new System.Drawing.Size(860, 1212);
+            this.Size = new System.Drawing.Size(860, 861);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -403,6 +472,8 @@
             this.panelTabControl.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -418,7 +489,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.WebBrowser webBrowser1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private RoundedEdgesButton roundedEdgesButton1;
         public System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -431,5 +501,11 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panelTabPage1;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem installForTwitchOnlyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem installForYouTubeOnlyToolStripMenuItem;
     }
 }

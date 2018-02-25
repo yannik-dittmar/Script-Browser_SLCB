@@ -175,13 +175,19 @@ namespace Script_Browser
             return "false";
         }
 
-
-
-        public static Image DownloadImage(string path)
+        public static bool DownloadScript(Main form, int id)
         {
-            using (WebClient client = new WebClient())
-            using (MemoryStream ms = new MemoryStream(client.DownloadData(path)))
-                return Image.FromStream(ms);
+            try
+            {
+                if (CheckIp(form))
+                {
+                    using (WebClient web = new WebClient())
+                        web.DownloadFile(storageServer + "/Script%20Browser/Uploads/" + id, Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Install.zip");
+                    return true;
+                }
+            }
+            catch { }
+            return false;
         }
     }
 }

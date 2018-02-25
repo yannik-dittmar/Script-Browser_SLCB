@@ -20,36 +20,7 @@ namespace Script_Browser.Controls
 
         private void DownloadImages(string[] paths)
         {
-            new Thread(delegate() 
-            {
-                foreach (string path in paths.Reverse())
-                {
-                    try
-                    {
-                        Image img = Networking.DownloadImage(path);
-                        PictureBox pb = new PictureBox
-                        {
-                            Dock = DockStyle.Left,
-                            Image = img,
-                            SizeMode = PictureBoxSizeMode.Zoom
-                        };
-                        pb.Resize += new EventHandler(SmallImageResize);
 
-                        IAsyncResult wait = this.BeginInvoke(new MethodInvoker(delegate ()
-                        {
-                            try
-                            {
-                                panel1.Controls.Add(pb);
-                                SmallImageResize(pb, null);
-                            }
-                            catch { }
-                        }));
-                        while (!wait.IsCompleted)
-                            Thread.Sleep(50);
-                    }
-                    catch { }
-                }
-            }).Start();
         }
 
         private void SmallImageResize(object sender, EventArgs e)
