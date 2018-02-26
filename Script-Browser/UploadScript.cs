@@ -80,9 +80,9 @@ namespace Script_Browser
             UpdateDgvFiles(null, null);
 
             if (path.Split('\\')[path.Split('\\').Length - 1].Contains("_StreamlabsParameter.py") || path.Split('\\')[path.Split('\\').Length - 1].Contains("_AnkhBotParameter.py"))
-                metroComboBox1.SelectedIndex = 0;
-            else
                 metroComboBox1.SelectedIndex = 1;
+            else
+                metroComboBox1.SelectedIndex = 0;
 
             CheckScriptInformation(null, null);
             SetPage(1, true);
@@ -561,6 +561,22 @@ namespace Script_Browser
                     Directory.Delete(dir, true);
                 File.Delete(Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip");
 
+                string[] lines = File.ReadAllLines(this.path);
+                using (StreamWriter writer = new StreamWriter(this.path))
+                {
+                    for (int i = 0; i < lines.Length; i++)
+                    {
+                        if (lines[i].ToLower().Contains("scriptname"))
+                            writer.WriteLine(PutInValue(lines[i], materialSingleLineTextField1.Text));
+                        else if (lines[i].ToLower().Contains("description"))
+                            writer.WriteLine(PutInValue(lines[i], materialSingleLineTextField2.Text));
+                        else if (lines[i].ToLower().Contains("version"))
+                            writer.WriteLine(PutInValue(lines[i], materialSingleLineTextField3.Text));
+                        else if (lines[i].ToLower().Contains("creator"))
+                            writer.WriteLine(PutInValue(lines[i], materialSingleLineTextField4.Text));
+                    }
+                }
+
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
                     if ((bool)(row.Cells[0] as DataGridViewCheckBoxCell).Value)
@@ -621,6 +637,38 @@ namespace Script_Browser
             noFocusBorderBtn8.Visible = true;
         }
 
+        private string PutInValue(string line, string value)
+        {
+            List<char> charLine = line.ToList();
+
+            bool found = false;
+            for (int i = 0; i < charLine.Count; i++)
+            {
+                if (charLine[i] == '\"')
+                {
+                    if (!found)
+                        found = true;
+                    else
+                    {
+                        foreach (char c in value.ToCharArray().Reverse())
+                            charLine.Insert(i, c);
+
+                        string result = "";
+                        foreach (char c in charLine)
+                            result += c;
+                        return result;
+                    }
+                }
+                else if (found)
+                {
+                    charLine.RemoveAt(i);
+                    i--;
+                }
+            }
+
+            return line;
+        }
+
         private void AddToListNotExists(string[] add)
         {
             foreach (string item in add)
@@ -628,8 +676,8 @@ namespace Script_Browser
                 string[] tags = item.Split(' ');
                 foreach (string tag in tags)
                 {
-                    if (!searchTags.Contains(item.ToLower()) && item != "")
-                        searchTags.Add(item);
+                    if (!searchTags.Contains(tag.ToLower()) && tag != "")
+                        searchTags.Add(tag);
                 }
             }
         }

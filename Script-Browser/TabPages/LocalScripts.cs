@@ -20,6 +20,7 @@ namespace Script_Browser.TabPages
         public LocalScripts()
         {
             InitializeComponent();
+            fileSystemWatcher1.Path = SaveFile.streamlabsPath;
         }
 
         private void LocalScripts_Load(object sender, EventArgs e)
@@ -36,12 +37,13 @@ namespace Script_Browser.TabPages
                 string[] dirs = Directory.GetDirectories(path + @"Twitch\Scripts\");
 
                 dataGridView1.Rows.Clear();
+                dataGridView3.Rows.Clear();
                 foreach (string dir in dirs)
                 {
                     string[] files = Directory.GetFiles(dir);
                     string scriptFile = "UNDEF";
                     string type = "UNDEF";
-                    string name = dir.Split('\\')[dir.Split('\\').Length - 1];
+                    string name = "UNDEF";
                     string description = "UNDEF";
                     string author = "UNDEF";
                     string version = "UNDEF";

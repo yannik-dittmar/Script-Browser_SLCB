@@ -866,7 +866,7 @@
             this.label10.Location = new System.Drawing.Point(0, 115);
             this.label10.Margin = new System.Windows.Forms.Padding(0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(749, 40);
+            this.label10.Size = new System.Drawing.Size(1, 40);
             this.label10.TabIndex = 5;
             this.label10.Text = "All settings correct?";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -964,10 +964,11 @@
             this.noFocusBorderBtn8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.noFocusBorderBtn8.Font = new System.Drawing.Font("Arial Rounded MT Bold", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.noFocusBorderBtn8.ForeColor = System.Drawing.Color.White;
-            this.noFocusBorderBtn8.Location = new System.Drawing.Point(232, 155);
+            this.noFocusBorderBtn8.Location = new System.Drawing.Point(0, 155);
             this.noFocusBorderBtn8.Margin = new System.Windows.Forms.Padding(0);
+            this.noFocusBorderBtn8.MinimumSize = new System.Drawing.Size(288, 40);
             this.noFocusBorderBtn8.Name = "noFocusBorderBtn8";
-            this.noFocusBorderBtn8.Size = new System.Drawing.Size(284, 40);
+            this.noFocusBorderBtn8.Size = new System.Drawing.Size(288, 40);
             this.noFocusBorderBtn8.TabIndex = 6;
             this.noFocusBorderBtn8.TabStop = false;
             this.noFocusBorderBtn8.Tag = "1";

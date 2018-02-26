@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Markdig;
 using System.Diagnostics;
+using System.IO.Compression;
+using System.IO;
+using SaveManager;
 
 namespace Script_Browser.Controls
 {
@@ -20,10 +23,13 @@ namespace Script_Browser.Controls
 
         int id;
         string name;
+        Main form;
 
-        public ShowScript(string id, string name, string ver, string author, string shortDesc, string longDesc, string rating, string ratings, string downloads)
+        public ShowScript(Main _form, string id, string name, string ver, string author, string shortDesc, string longDesc, string rating, string ratings, string downloads)
         {
             InitializeComponent();
+
+            form = _form;
 
             this.name = name;
             this.id = Int32.Parse(id);
@@ -110,6 +116,33 @@ namespace Script_Browser.Controls
                 try { Process.Start(e.Url.ToString()); } catch { }
                 e.Cancel = true;
             }
+        }
+
+        //Install Script
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                button3.Text = "Installing...";
+                button3.Refresh();
+
+                if (File.Exists(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Install.zip"))
+                    File.Delete(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Install.zip");
+
+                if (Networking.DownloadScript(form, id))
+                {
+                    try { Directory.Delete(SaveFile.streamlabsPath + @"Twitch\Scripts\" + name + "\\", true); } catch { }
+                    Directory.CreateDirectory(SaveFile.streamlabsPath + @"Twitch\Scripts\" + name + "\\");
+
+                    ZipFile.ExtractToDirectory(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Install.zip", SaveFile.streamlabsPath +  @"Twitch\Scripts\" + name + "\\");
+                    File.Delete(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Install.zip");
+
+                    button3.Text = "Uninstall";
+                    return;
+                }
+            }
+            catch { }
+            button3.Text = "Download and Install";
         }
     }
 }
