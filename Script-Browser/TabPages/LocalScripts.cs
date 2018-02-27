@@ -20,12 +20,13 @@ namespace Script_Browser.TabPages
         public LocalScripts()
         {
             InitializeComponent();
-            fileSystemWatcher1.Path = SaveFile.streamlabsPath;
+
+            fileSystemWatcher1.Path = Main.sf.streamlabsPath; //TODO: check path
         }
 
         private void LocalScripts_Load(object sender, EventArgs e)
         {
-            UpdateList(SaveFile.streamlabsPath);
+            UpdateList(Main.sf.streamlabsPath);
             //UpdateList(@"D:\Streamlabs Chatbot\");
             //UpdateList(@"C:\Users\18diyann\Desktop\Test Ordner\");
         }
@@ -233,18 +234,18 @@ namespace Script_Browser.TabPages
             form.Opacity = 0.5;
             new UploadScript(tableLayoutPanel2.Tag.ToString()).ShowDialog();
             form.Opacity = 1;
-            UpdateList(SaveFile.streamlabsPath);
+            UpdateList(Main.sf.streamlabsPath);
         }
 
         //Update List on file changes
         private void fileSystemWatcher1_Changed(object sender, FileSystemEventArgs e)
         {
-            UpdateList(SaveFile.streamlabsPath);
+            UpdateList(Main.sf.streamlabsPath);
         }
 
         private void fileSystemWatcher1_Renamed(object sender, RenamedEventArgs e)
         {
-            UpdateList(SaveFile.streamlabsPath);
+            UpdateList(Main.sf.streamlabsPath);
         }
     }
 }

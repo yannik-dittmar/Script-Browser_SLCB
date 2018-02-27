@@ -12,6 +12,8 @@ using MaterialSkin;
 using MaterialSkin.Controls;
 using MaterialSkin.Animations;
 using System.Runtime.InteropServices;
+using SaveManager;
+using System.IO;
 
 namespace Script_Browser
 {
@@ -47,11 +49,13 @@ namespace Script_Browser
         Size lastWinSize;
         Point lastWinPos;
 
+        public static SaveFile sf = new SaveFile(Path.GetDirectoryName(Application.ExecutablePath) + @"\settings.save");
+
         public Main()
         {
             InitializeComponent();
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
-
+            
             selectedTabPage = tableLayoutPanel3;
             navbarTransitionIn.Add(tableLayoutPanel3);
             lastWinSize = Size;

@@ -559,7 +559,8 @@ namespace Script_Browser
                     File.Delete(file);
                 foreach (string dir in Directory.GetDirectories(path))
                     Directory.Delete(dir, true);
-                File.Delete(Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip");
+                if (File.Exists(Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip"))
+                    File.Delete(Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip");
 
                 string[] lines = File.ReadAllLines(this.path);
                 using (StreamWriter writer = new StreamWriter(this.path))
@@ -620,13 +621,14 @@ namespace Script_Browser
                 if (result.Contains("verify"))
                     MetroMessageBox.Show(this, "Your email address has not been verified yet.\nPlease check your inbox or contact us over ", "Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); //TODO: Add Email
                 else if (result.Contains("enough"))
-                    MetroMessageBox.Show(this, "You have reached the maximum amount of scripts for a single user!\nDelete some to upload new ones.", "Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150);
+                    MetroMessageBox.Show(this, "You have reached the maximum amount of scripts for a single user!\nDelete some to upload new ones.", "Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); //TODO: Add delete script from cloud
                 else if (result.Contains("true"))
                 {
                     label10.Text = "Your script has been successfully uploaded and published!";
                     uploaded = true;
                     Networking.scripts.Add(result.Replace("true", ""));
                     noFocusBorderBtn6.Text = "Finish";
+                    File.Delete(Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip");
                     return;
                 }
 
