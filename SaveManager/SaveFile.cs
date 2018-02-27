@@ -14,8 +14,8 @@ namespace SaveManager
         private string path = "";
         public string username = "";
         public string password = "";
-        //public string streamlabsPath = @"D:\Streamlabs Chatbot\";
-        public string streamlabsPath = @"C:\Users\18diyann\Desktop\Test Ordner\";
+        public string streamlabsPath = @"D:\Streamlabs Chatbot\";
+        //public string streamlabsPath = @"C:\Users\18diyann\Desktop\Test Ordner\";
         public List<int> currentInstalled = new List<int>();
 
         public SaveFile(string _path)

@@ -20,12 +20,11 @@ namespace Script_Browser.TabPages
         public LocalScripts()
         {
             InitializeComponent();
-
-            fileSystemWatcher1.Path = Main.sf.streamlabsPath; //TODO: check path
         }
 
         private void LocalScripts_Load(object sender, EventArgs e)
         {
+            fileSystemWatcher1.Path = Main.sf.streamlabsPath; //TODO: check path
             UpdateList(Main.sf.streamlabsPath);
             //UpdateList(@"D:\Streamlabs Chatbot\");
             //UpdateList(@"C:\Users\18diyann\Desktop\Test Ordner\");
