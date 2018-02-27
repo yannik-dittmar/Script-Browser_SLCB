@@ -131,10 +131,10 @@ namespace Script_Browser.Controls
 
                 if (Networking.DownloadScript(form, id))
                 {
-                    try { Directory.Delete(Main.sf.streamlabsPath + @"Twitch\Scripts\" + name + "\\", true); } catch { }
-                    Directory.CreateDirectory(Main.sf.streamlabsPath + @"Twitch\Scripts\" + name + "\\");
+                    try { Directory.Delete(Main.sf.streamlabsPath + @"Services\Scripts\" + name + "\\", true); } catch { }
+                    Directory.CreateDirectory(Main.sf.streamlabsPath + @"Services\Scripts\" + name + "\\");
 
-                    ZipFile.ExtractToDirectory(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Install.zip", Main.sf.streamlabsPath +  @"Twitch\Scripts\" + name + "\\");
+                    ZipFile.ExtractToDirectory(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Install.zip", Main.sf.streamlabsPath +  @"Services\Scripts\" + name + "\\");
                     File.Delete(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Install.zip");
 
                     button3.Text = "Uninstall";

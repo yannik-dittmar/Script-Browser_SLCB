@@ -34,7 +34,7 @@ namespace Script_Browser.TabPages
         {
             try
             {
-                string[] dirs = Directory.GetDirectories(path + @"Twitch\Scripts\");
+                string[] dirs = Directory.GetDirectories(path + @"Services\Scripts\");
 
                 dataGridView1.Rows.Clear();
                 dataGridView3.Rows.Clear();
