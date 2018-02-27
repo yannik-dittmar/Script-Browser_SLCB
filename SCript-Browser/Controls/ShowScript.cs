@@ -25,7 +25,7 @@ namespace Script_Browser.Controls
         string name;
         Main form;
 
-        public ShowScript(Main _form, string id, string name, string ver, string author, string shortDesc, string longDesc, string rating, string ratings, string downloads)
+        public ShowScript(Main _form, string id, string name, string ver, string author, string alias, string shortDesc, string longDesc, string rating, string ratings, string downloads)
         {
             InitializeComponent();
 
@@ -36,7 +36,12 @@ namespace Script_Browser.Controls
 
             label4.Text = name;
             label5.Text = "v" + ver;
-            label3.Text = "by " + author;
+
+            if (alias.Replace(" ", "") == "")
+                label3.Text = "by " + author;
+            else
+                label3.Text = "by " + alias + " (" + author + ")";
+
             label1.Text = shortDesc;
             webBrowser1.DocumentText = "<html><body>" + Markdown.ToHtml(longDesc) + "</body></html>";
             rating1.SetRating((int)Math.Round(Double.Parse(rating.Replace(".", ","))));
@@ -131,10 +136,10 @@ namespace Script_Browser.Controls
 
                 if (Networking.DownloadScript(form, id))
                 {
-                    try { Directory.Delete(Main.sf.streamlabsPath + @"Twitch\Scripts\" + name + "\\", true); } catch { }
-                    Directory.CreateDirectory(Main.sf.streamlabsPath + @"Twitch\Scripts\" + name + "\\");
+                    try { Directory.Delete(Main.sf.streamlabsPath + @"Services\Scripts\" + name + "\\", true); } catch { }
+                    Directory.CreateDirectory(Main.sf.streamlabsPath + @"Services\Scripts\" + name + "\\");
 
-                    ZipFile.ExtractToDirectory(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Install.zip", Main.sf.streamlabsPath +  @"Twitch\Scripts\" + name + "\\");
+                    ZipFile.ExtractToDirectory(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Install.zip", Main.sf.streamlabsPath +  @"Services\Scripts\" + name + "\\");
                     File.Delete(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Install.zip");
 
                     button3.Text = "Uninstall";
