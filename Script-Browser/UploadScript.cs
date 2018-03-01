@@ -565,16 +565,31 @@ namespace Script_Browser
                 string[] lines = File.ReadAllLines(this.path);
                 using (StreamWriter writer = new StreamWriter(this.path))
                 {
+                    bool s = false, d = false, v = false, c = false;
                     for (int i = 0; i < lines.Length; i++)
                     {
-                        if (lines[i].ToLower().Contains("scriptname"))
+                        if (lines[i].ToLower().Contains("scriptname") && !s)
+                        {
                             writer.WriteLine(PutInValue(lines[i], materialSingleLineTextField1.Text));
-                        else if (lines[i].ToLower().Contains("description"))
+                            s = true;
+                        }
+                        else if (lines[i].ToLower().Contains("description") && !d)
+                        { 
                             writer.WriteLine(PutInValue(lines[i], materialSingleLineTextField2.Text));
-                        else if (lines[i].ToLower().Contains("version"))
+                            d = true;
+                        }
+                        else if (lines[i].ToLower().Contains("version") && !v)
+                        {
                             writer.WriteLine(PutInValue(lines[i], materialSingleLineTextField3.Text));
-                        else if (lines[i].ToLower().Contains("creator"))
+                            v = true;
+                        }
+                        else if (lines[i].ToLower().Contains("creator") && !c)
+                        { 
                             writer.WriteLine(PutInValue(lines[i], materialSingleLineTextField4.Text));
+                            c = true;
+                        }
+                        else
+                            writer.WriteLine(lines[i]);
                     }
                 }
 
@@ -629,6 +644,28 @@ namespace Script_Browser
                     Networking.scripts.Add(result.Replace("true", ""));
                     noFocusBorderBtn6.Text = "Finish";
                     File.Delete(Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip");
+
+                    //Update local script file
+                    lines = File.ReadAllLines(this.path);
+                    using (StreamWriter writer = new StreamWriter(this.path))
+                    {
+                        bool found = false;
+                        for (int i = 0; i < lines.Length; i++)
+                        {
+                            writer.WriteLine(lines[i]);
+                            if (lines[i].ToLower().Contains("version") && !found)
+                            {
+                                writer.WriteLine("ScriptBrowserID = \"" + result.Replace("true", "") + "\"");
+                                found = true;
+                            }  
+                        }
+
+                        if (!found)
+                        {
+                            writer.WriteLine("");
+                            writer.WriteLine("ScriptBrowserID = \"" + result.Replace("true", "") + "\"");
+                        }
+                    }
                     return;
                 }
 
