@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.IO.Compression;
 using System.IO;
 using SaveManager;
+using System.Collections.Specialized;
 
 namespace Script_Browser.Controls
 {
@@ -25,7 +26,7 @@ namespace Script_Browser.Controls
         string name;
         Main form;
 
-        public ShowScript(Main _form, string id, string name, string ver, string author, string shortDesc, string longDesc, string rating, string ratings, string downloads)
+        public ShowScript(Main _form, string id, string name, string ver, string author, string alias, string shortDesc, string longDesc, string rating, string ratings, string downloads)
         {
             InitializeComponent();
 
@@ -36,11 +37,19 @@ namespace Script_Browser.Controls
 
             label4.Text = name;
             label5.Text = "v" + ver;
-            label3.Text = "by " + author;
+
+            if (alias.Replace(" ", "") == "")
+                label3.Text = "by " + author;
+            else
+                label3.Text = "by " + alias + " (" + author + ")";
+
             label1.Text = shortDesc;
             webBrowser1.DocumentText = "<html><body>" + Markdown.ToHtml(longDesc) + "</body></html>";
             rating1.SetRating((int)Math.Round(Double.Parse(rating.Replace(".", ","))));
             rating1.SetInformation(ratings, downloads);
+
+            Main.sf.currentInstalled.CollectionChanged += listChanged;
+            listChanged(null, null);
         }
 
         //Resize a Control vertically
@@ -116,6 +125,24 @@ namespace Script_Browser.Controls
                 try { Process.Start(e.Url.ToString()); } catch { }
                 e.Cancel = true;
             }
+        }
+
+        //Update button if user deletes script outside app
+        private void listChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            try
+            {
+                foreach (KeyValuePair<int, string> item in Main.sf.currentInstalled)
+                {
+                    if (item.Key == id)
+                    {
+                        button3.Text = "Uninstall";
+                        return;
+                    }
+                }
+                button3.Text = "Download and Install";
+            }
+            catch { }
         }
 
         //Install Script
