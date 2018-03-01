@@ -35,11 +35,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.rating1 = new Script_Browser.Controls.Rating();
             this.panel1 = new System.Windows.Forms.Panel();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
@@ -48,10 +52,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panelTabPage1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.rating1 = new Script_Browser.Controls.Rating();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.installForTwitchOnlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.installForYouTubeOnlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,11 +60,11 @@
             this.tableLayoutPanel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panelTabControl.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.tableLayoutPanel5.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -167,6 +167,19 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(860, 812);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
+            // rating1
+            // 
+            this.rating1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.rating1.AutoSize = true;
+            this.rating1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.rating1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
+            this.rating1.Location = new System.Drawing.Point(215, 253);
+            this.rating1.Margin = new System.Windows.Forms.Padding(3, 10, 3, 10);
+            this.rating1.Name = "rating1";
+            this.rating1.Size = new System.Drawing.Size(430, 102);
+            this.rating1.TabIndex = 6;
+            this.rating1.TabStop = false;
+            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
@@ -240,6 +253,59 @@
             this.label2.Size = new System.Drawing.Size(119, 15);
             this.label2.TabIndex = 8;
             this.label2.Text = "Report this script";
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tableLayoutPanel5.AutoSize = true;
+            this.tableLayoutPanel5.BackColor = System.Drawing.Color.White;
+            this.tableLayoutPanel5.ColumnCount = 3;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 0F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 0F));
+            this.tableLayoutPanel5.Controls.Add(this.button3, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.button4, 2, 0);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(308, 10);
+            this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 1;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(237, 40);
+            this.tableLayoutPanel5.TabIndex = 9;
+            // 
+            // button3
+            // 
+            this.button3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.ForeColor = System.Drawing.Color.White;
+            this.button3.Location = new System.Drawing.Point(0, 0);
+            this.button3.Margin = new System.Windows.Forms.Padding(0);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(237, 40);
+            this.button3.TabIndex = 10;
+            this.button3.Text = "Download and Install";
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button4
+            // 
+            this.button4.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
+            this.button4.FlatAppearance.BorderSize = 0;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.ForeColor = System.Drawing.Color.White;
+            this.button4.Location = new System.Drawing.Point(237, 0);
+            this.button4.Margin = new System.Windows.Forms.Padding(0);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(1, 40);
+            this.button4.TabIndex = 11;
+            this.button4.Text = "▼";
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Visible = false;
             // 
             // tableLayoutPanel4
             // 
@@ -354,71 +420,6 @@
             this.panel3.Size = new System.Drawing.Size(860, 821);
             this.panel3.TabIndex = 3;
             // 
-            // tableLayoutPanel5
-            // 
-            this.tableLayoutPanel5.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tableLayoutPanel5.AutoSize = true;
-            this.tableLayoutPanel5.BackColor = System.Drawing.Color.White;
-            this.tableLayoutPanel5.ColumnCount = 3;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 1F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel5.Controls.Add(this.button3, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.button4, 2, 0);
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(295, 10);
-            this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.tableLayoutPanel5.RowCount = 1;
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(264, 40);
-            this.tableLayoutPanel5.TabIndex = 9;
-            // 
-            // button3
-            // 
-            this.button3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(0, 0);
-            this.button3.Margin = new System.Windows.Forms.Padding(0);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(237, 40);
-            this.button3.TabIndex = 10;
-            this.button3.Text = "Download and Install";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button4
-            // 
-            this.button4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.Color.White;
-            this.button4.Location = new System.Drawing.Point(238, 0);
-            this.button4.Margin = new System.Windows.Forms.Padding(0);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(26, 40);
-            this.button4.TabIndex = 11;
-            this.button4.Text = "▼";
-            this.button4.UseVisualStyleBackColor = false;
-            // 
-            // rating1
-            // 
-            this.rating1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.rating1.AutoSize = true;
-            this.rating1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.rating1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
-            this.rating1.Location = new System.Drawing.Point(215, 253);
-            this.rating1.Margin = new System.Windows.Forms.Padding(3, 10, 3, 10);
-            this.rating1.Name = "rating1";
-            this.rating1.Size = new System.Drawing.Size(430, 102);
-            this.rating1.TabIndex = 6;
-            this.rating1.TabStop = false;
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
@@ -465,6 +466,7 @@
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
+            this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
@@ -472,7 +474,6 @@
             this.panelTabControl.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            this.tableLayoutPanel5.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

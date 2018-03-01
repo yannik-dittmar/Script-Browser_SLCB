@@ -60,6 +60,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            this.button6 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -176,6 +177,7 @@
             this.flowLayoutPanel1.Controls.Add(this.button1);
             this.flowLayoutPanel1.Controls.Add(this.button4);
             this.flowLayoutPanel1.Controls.Add(this.button5);
+            this.flowLayoutPanel1.Controls.Add(this.button6);
             this.flowLayoutPanel1.Controls.Add(this.button2);
             this.flowLayoutPanel1.Controls.Add(this.button3);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -255,7 +257,7 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(360, 3);
+            this.button2.Location = new System.Drawing.Point(457, 3);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(81, 27);
@@ -274,7 +276,7 @@
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(444, 3);
+            this.button3.Location = new System.Drawing.Point(541, 3);
             this.button3.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(68, 27);
@@ -501,6 +503,26 @@
             this.fileSystemWatcher1.Deleted += new System.IO.FileSystemEventHandler(this.fileSystemWatcher1_Changed);
             this.fileSystemWatcher1.Renamed += new System.IO.RenamedEventHandler(this.fileSystemWatcher1_Renamed);
             // 
+            // button6
+            // 
+            this.button6.AutoSize = true;
+            this.button6.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.button6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
+            this.button6.Cursor = System.Windows.Forms.Cursors.Default;
+            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
+            this.button6.FlatAppearance.BorderSize = 0;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button6.ForeColor = System.Drawing.Color.White;
+            this.button6.Location = new System.Drawing.Point(360, 3);
+            this.button6.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(94, 27);
+            this.button6.TabIndex = 6;
+            this.button6.Text = "Open Path";
+            this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
             // LocalScripts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -555,5 +577,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.Button button5;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
+        private System.Windows.Forms.Button button6;
     }
 }

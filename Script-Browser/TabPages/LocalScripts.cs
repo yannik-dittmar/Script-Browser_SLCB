@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using SaveManager;
 using System.Threading;
+using System.Diagnostics;
 
 namespace Script_Browser.TabPages
 {
@@ -34,6 +35,7 @@ namespace Script_Browser.TabPages
         {
             try
             {
+                Main.sf.currentInstalled.Clear();
                 string[] dirs = Directory.GetDirectories(path + @"Services\Scripts\");
 
                 dataGridView1.Rows.Clear();
@@ -84,7 +86,10 @@ namespace Script_Browser.TabPages
                         if (id == 0)
                             dataGridView1.Rows.Add(name, description, type, version, author, scriptFile);
                         else
+                        {
                             dataGridView3.Rows.Add(name, description, type, version, author, scriptFile, id);
+                            Main.sf.currentInstalled.Add(new KeyValuePair<int, string>(id, Path.GetDirectoryName(scriptFile)));
+                        }
                     }
                 }
 
@@ -234,6 +239,12 @@ namespace Script_Browser.TabPages
             new UploadScript(tableLayoutPanel2.Tag.ToString()).ShowDialog();
             form.Opacity = 1;
             UpdateList(Main.sf.streamlabsPath);
+        }
+
+        //Open Script Path
+        private void button6_Click(object sender, EventArgs e)
+        {
+            try { Process.Start(Path.GetDirectoryName(tableLayoutPanel2.Tag.ToString())); } catch { }
         }
 
         //Update List on file changes

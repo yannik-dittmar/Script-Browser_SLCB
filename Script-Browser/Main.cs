@@ -149,8 +149,10 @@ namespace Script_Browser
             }
         }
 
+        //Close App
         private void label2_Click(object sender, EventArgs e)
         {
+            sf.Save();
             Environment.Exit(0);
         }
 
@@ -203,6 +205,12 @@ namespace Script_Browser
                 Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width + 1, Height + 1, 0, 0));
             else
                 Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
+        }
+
+        // Save settings on dispose
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            sf.Save();
         }
 
         //

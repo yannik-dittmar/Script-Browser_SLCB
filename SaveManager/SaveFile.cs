@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -16,7 +17,7 @@ namespace SaveManager
         public string password = "";
         public string streamlabsPath = @"D:\Streamlabs Chatbot\";
         //public string streamlabsPath = @"C:\Users\18diyann\Desktop\Test Ordner\";
-        public List<int> currentInstalled = new List<int>();
+        public ObservableCollection<KeyValuePair<int, string>> currentInstalled = new ObservableCollection<KeyValuePair<int, string>>();
 
         public SaveFile(string _path)
         {
@@ -28,7 +29,7 @@ namespace SaveManager
                 streamlabsPath = sf.streamlabsPath;
                 currentInstalled = sf.currentInstalled;
             }
-            catch { }
+            catch { Console.WriteLine("Could not load SaveFile!"); }
         }
 
         public void Save()
@@ -38,7 +39,7 @@ namespace SaveManager
                 BinaryFormatter bf = new BinaryFormatter();
                 bf.Serialize(File.Open(path, FileMode.Create), this);
             }
-            catch { }
+            catch { Console.WriteLine("Could not save SaveFile!"); }
         }
     }
 }
