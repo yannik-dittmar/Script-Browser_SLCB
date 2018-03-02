@@ -229,6 +229,7 @@
             this.uploadUpdateToolStripMenuItem.Name = "uploadUpdateToolStripMenuItem";
             this.uploadUpdateToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.uploadUpdateToolStripMenuItem.Text = "Upload Update";
+            this.uploadUpdateToolStripMenuItem.Click += new System.EventHandler(this.button5_Click);
             // 
             // openPathToolStripMenuItem
             // 
@@ -330,6 +331,7 @@
             this.button5.TabIndex = 5;
             this.button5.Text = "Upload Update";
             this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button6
             // 

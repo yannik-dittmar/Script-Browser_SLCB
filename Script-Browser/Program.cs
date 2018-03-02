@@ -14,6 +14,7 @@ namespace Script_Browser
         [STAThread]
         static void Main()
         {
+            //TODO: Add crash report: https://github.com/ravibpatel/CrashReporter.NET
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new UploadScript(@"D:\Streamlabs Chatbot\Twitch\Scripts\WelcomeMat\WelcomeMat_StreamlabsSystem.py"));

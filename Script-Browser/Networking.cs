@@ -18,7 +18,7 @@ namespace Script_Browser
     static class Networking
     {
         public static string storageServer = "";
-        public static string username = "test";
+        public static string username = "krypto";
         public static string password = "a94a8fe5ccb19ba61c4c0873d391e987982fbbd3";
         public static List<string> scripts = new List<string>();
 
@@ -188,6 +188,20 @@ namespace Script_Browser
             }
             catch { }
             return false;
+        }
+
+        public static string GetUploadUpdateInfo(Main form, string id)
+        {
+            try
+            {
+                if (CheckIp(form))
+                {
+                    using (WebClient web = new WebClient())
+                        return web.DownloadString(storageServer + "/Script%20Browser/getUUInfo.php?id=" + id);
+                }
+            }
+            catch { }
+            return "";
         }
     }
 }

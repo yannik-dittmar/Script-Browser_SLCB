@@ -13,12 +13,14 @@ using System.Threading;
 using System.Diagnostics;
 using MetroFramework;
 using Script_Browser.Design;
+using Newtonsoft.Json.Linq;
 
 namespace Script_Browser.TabPages
 {
     public partial class LocalScripts : UserControl
     {
         public Main form;
+        string currentScriptID = "";
 
         public LocalScripts()
         {
@@ -233,6 +235,9 @@ namespace Script_Browser.TabPages
 
                     tableLayoutPanel2.Visible = true;
                     tableLayoutPanel2.Tag = dgv.Rows[e.RowIndex].Cells[5].Value.ToString();
+
+                    if (dgv.ColumnCount == 7)
+                        currentScriptID = dgv.Rows[e.RowIndex].Cells[6].Value.ToString();
                 }
                 catch { }
             }
@@ -251,13 +256,27 @@ namespace Script_Browser.TabPages
             catch { tableLayoutPanel2.Visible = false; }
         }
 
-        //Upload
+        //Upload script
         private void button1_Click(object sender, EventArgs e)
         {
             form.Opacity = 0.5;
-            new UploadScript(tableLayoutPanel2.Tag.ToString()).ShowDialog();
+            new UploadScript(tableLayoutPanel2.Tag.ToString(), null).ShowDialog();
             form.Opacity = 1;
             UpdateList(Main.sf.streamlabsPath);
+        }
+
+        //Upload update
+        private void button5_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                JObject info = JObject.Parse(Networking.GetUploadUpdateInfo(form, currentScriptID));
+                form.Opacity = 0.5;
+                new UploadScript(tableLayoutPanel2.Tag.ToString(), info).ShowDialog();
+                form.Opacity = 1;
+                UpdateList(Main.sf.streamlabsPath);
+            }
+            catch { }
         }
 
         //Open Script Path

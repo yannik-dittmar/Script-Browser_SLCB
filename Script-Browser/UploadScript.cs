@@ -46,8 +46,9 @@ namespace Script_Browser
         int currentPage = 1;
         List<string> searchTags = new List<string>();
         bool uploaded = false;
+        JObject uuInfo;
 
-        public UploadScript(string path)
+        public UploadScript(string path, JObject _uuInfo)
         {
             InitializeComponent();
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
@@ -84,8 +85,20 @@ namespace Script_Browser
             else
                 metroComboBox1.SelectedIndex = 0;
 
-            CheckScriptInformation(null, null);
-            SetPage(1, true);
+            uuInfo = _uuInfo;
+            if (uuInfo != null)
+            {
+                this.Text = "Upload Update";
+                label1.Text = "Script Browser - Upload Update";
+
+                richTextBox1.Text = uuInfo["LongDescription"].ToString();
+
+                string tags = "";
+                foreach (JToken tag in uuInfo["Tags"] as JArray)
+                    tags += tag + " ";
+                metroTextBox1.Text = tags;
+                AddTags(null, null);
+            }
         }
 
         public static string GetLineItem(string line)
@@ -132,6 +145,14 @@ namespace Script_Browser
             ShapeArrow(noFocusBorderBtn3, 1);
             ShapeArrow(noFocusBorderBtn4, 1);
             ShapeArrow(noFocusBorderBtn5, 2);
+
+            CheckScriptInformation(null, null);
+            SetPage(1, true);
+            SetPage(2, true);
+            SetPage(3, true);
+            SetPage(4, true);
+            SetPage(5, true);
+            SetPage(1, true);
         }
 
         private void ShapeArrow(Control btn, int pos)
@@ -213,23 +234,47 @@ namespace Script_Browser
                     noFocusBorderBtn7.Enabled = page != 1;
                     currentPage = page;
 
-                    switch (page)
+                    if (uuInfo == null)
                     {
-                        case 1:
-                            labelHelp.Text = "The general information to your script.\nThese will be shown in the browser and written into the script file itself.";
-                            break;
-                        case 2:
-                            labelHelp.Text = "The long description will be shown when a user clicks on your script in the browser.\nThe text supports the Markdown language! For more details look in the \"Markdown Information\" tab.";
-                            break;
-                        case 3:
-                            labelHelp.Text = "These tags help the user to find your script over the search function.\nTry to explain the script as detailed as possible.";
-                            break;
-                        case 4:
-                            labelHelp.Text = "Select the files that should be installed for the user.\nWe recomend to deselect the settings files.";
-                            break;
-                        default:
-                            labelHelp.Text = "";
-                            break;
+                        switch (page)
+                        {
+                            case 1:
+                                labelHelp.Text = "The general information to your script.\nThese will be shown in the browser and written into the script file itself.";
+                                break;
+                            case 2:
+                                labelHelp.Text = "The long description will be shown when a user clicks on your script in the browser.\nThe text supports the Markdown language! For more details look in the \"Markdown Information\" tab.";
+                                break;
+                            case 3:
+                                labelHelp.Text = "These tags help the user to find your script over the search function.\nTry to explain the script as detailed as possible.";
+                                break;
+                            case 4:
+                                labelHelp.Text = "Select the files that should be installed for the user.\nWe recomend to deselect the settings files.";
+                                break;
+                            default:
+                                labelHelp.Text = "";
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        switch (page)
+                        {
+                            case 1:
+                                labelHelp.Text = "Please notice if you don't change the version, you only change the information of your script.\nFiles will not be updated.";
+                                break;
+                            case 2:
+                                labelHelp.Text = "The long description will be shown when a user clicks on your script in the browser.\nThe text supports the Markdown language! For more details look in the \"Markdown Information\" tab.";
+                                break;
+                            case 3:
+                                labelHelp.Text = "These tags help the user to find your script over the search function.\nTry to explain the script as detailed as possible.";
+                                break;
+                            case 4:
+                                labelHelp.Text = "Select the files that should be installed for the user.\nWe recomend to deselect the settings files.";
+                                break;
+                            default:
+                                labelHelp.Text = "";
+                                break;
+                        }
                     }
                 }
             }
@@ -319,7 +364,7 @@ namespace Script_Browser
         {
             try
             {
-                webBrowser1.DocumentText = "<html><body>" + Markdown.ToHtml(richTextBox1.Text) + "</body></html>";
+                webBrowser1.DocumentText = "<html><body>" + Markdown.ToHtml(richTextBox1.Text).Replace("\n", "<br>") + "</body></html>";
                 SwitchBtn(button1, false);
                 SwitchBtn(button2, true);
                 SwitchBtn(button3, false);
@@ -385,7 +430,7 @@ namespace Script_Browser
                     string[] tags = metroTextBox1.Text.ToLower().Split(' ');
                     foreach (string tag in tags)
                     {
-                        if (!searchTags.Contains(tag))
+                        if (!searchTags.Contains(tag) && tag.Length > 0 && searchTags.Count < 45)
                         {
                             searchTags.Add(tag);
                             SearchTag st = new SearchTag(tag);
@@ -715,8 +760,8 @@ namespace Script_Browser
                 string[] tags = item.Split(' ');
                 foreach (string tag in tags)
                 {
-                    if (!searchTags.Contains(tag.ToLower()) && tag != "")
-                        searchTags.Add(tag);
+                    if (!searchTags.Contains(tag.ToLower()) && tag != "" && searchTags.Count < 49)
+                        searchTags.Add(tag.ToLower());
                 }
             }
         }
