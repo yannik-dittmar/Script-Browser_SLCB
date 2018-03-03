@@ -19,6 +19,8 @@ namespace Script_Browser
 {
     public partial class Main : Form
     {
+        #region DLL-Methodes & Variables
+
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
         (
@@ -40,6 +42,8 @@ namespace Script_Browser
         const int WM_NCHITTEST = 132;
         const int HTBOTTOMRIGHT = 17;
         Rectangle sizeGripRectangle;
+
+        #endregion
 
         List<TableLayoutPanel> navbarTransitionIn = new List<TableLayoutPanel>();
         List<TableLayoutPanel> navbarTransitionOut = new List<TableLayoutPanel>();
@@ -75,9 +79,8 @@ namespace Script_Browser
             topScripts1.button3_Click(null, null);
         }
 
-        //
-        // Windows API, Window Settings
-        //
+        #region Windows API, Window Settings
+
         protected override CreateParams CreateParams
         {
             get
@@ -153,6 +156,7 @@ namespace Script_Browser
         private void label2_Click(object sender, EventArgs e)
         {
             sf.Save();
+            try { notifyIcon1.Dispose(); } catch { }
             Environment.Exit(0);
         }
 
@@ -213,9 +217,9 @@ namespace Script_Browser
             sf.Save();
         }
 
-        //
-        // Animations
-        //
+        #endregion
+
+        #region  Animations
 
         // Navbar
         private void NavTransitionIn_Tick(object sender, EventArgs e)
@@ -381,5 +385,7 @@ namespace Script_Browser
             }
             return null;
         }
+
+        #endregion
     }
 }

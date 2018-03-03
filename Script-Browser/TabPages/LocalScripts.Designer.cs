@@ -217,6 +217,7 @@
             this.uploadToolStripMenuItem.Name = "uploadToolStripMenuItem";
             this.uploadToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.uploadToolStripMenuItem.Text = "Upload";
+            this.uploadToolStripMenuItem.Click += new System.EventHandler(this.button1_Click);
             // 
             // checkForUpdatesToolStripMenuItem
             // 

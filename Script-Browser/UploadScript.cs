@@ -23,6 +23,8 @@ namespace Script_Browser
 {
     public partial class UploadScript : Form
     {
+        #region DLL-Methodes & Variables
+
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
         (
@@ -41,8 +43,10 @@ namespace Script_Browser
         const int WM_NCLBUTTONDOWN = 0xA1;
         const int HT_CAPTION = 0x2;
 
+        #endregion
+
         string path = "";
-        int currentStep = 1;
+        int currentStep = 5;
         int currentPage = 1;
         List<string> searchTags = new List<string>();
         bool uploaded = false;
@@ -121,9 +125,8 @@ namespace Script_Browser
             try { Process.Start(Path.GetDirectoryName(path)); } catch { }
         }
 
-        //
-        // Windows API, Window Settings
-        //
+        #region Windows API, Window Settings
+
         private void MoveForm_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -146,13 +149,14 @@ namespace Script_Browser
             ShapeArrow(noFocusBorderBtn4, 1);
             ShapeArrow(noFocusBorderBtn5, 2);
 
-            CheckScriptInformation(null, null);
+            currentStep = 5;
             SetPage(1, true);
             SetPage(2, true);
             SetPage(3, true);
             SetPage(4, true);
             SetPage(5, true);
             SetPage(1, true);
+            CheckScriptInformation(null, null);
         }
 
         private void ShapeArrow(Control btn, int pos)
@@ -185,6 +189,8 @@ namespace Script_Browser
             }
         }
 
+        #endregion
+
         private void SetPage(int page, bool updateTable)
         {
             if (page <= currentStep && page > 0)
@@ -205,6 +211,7 @@ namespace Script_Browser
                         {
                             if (i == page - 1)
                             {
+                                Console.WriteLine(i + "|" + page);
                                 tableLayoutTabControl.ColumnStyles[i].SizeType = SizeType.Percent;
                                 tableLayoutTabControl.ColumnStyles[i].Width = 100f;
                                 if (tableLayoutTabControl.Controls[i].Tag == null)
@@ -220,6 +227,7 @@ namespace Script_Browser
                         }
                         catch { }
                     }
+                    panelTabControl.PerformLayout();
                 }
 
                 if (updateTable)
@@ -310,9 +318,7 @@ namespace Script_Browser
             SetPage(currentPage - 1, true);
         }
 
-        //
-        // Tab Script Information
-        //
+        #region Tab: Script Information
 
         private void CheckScriptInformation(object sender, EventArgs e)
         {
@@ -338,9 +344,9 @@ namespace Script_Browser
             SetPage(1, sender != null);
         }
 
-        //
-        // Tab Description
-        //
+        #endregion
+
+        #region Tab: Description
         //TODO: Add Markdown Info
 
         private void SwitchBtn(Button btn, bool enabled)
@@ -417,9 +423,9 @@ namespace Script_Browser
             SetPage(2, sender != null);
         }
 
-        //
-        // Tab Tags
-        //
+        #endregion
+
+        #region Tab: Tags
 
         private void AddTags(object sender, EventArgs e)
         {
@@ -472,9 +478,9 @@ namespace Script_Browser
             SetPage(3, sender != null);
         }
 
-        //
-        // Tab Files
-        //
+        #endregion
+
+        #region Tab: Files
 
         private void dataGridView1_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
@@ -583,9 +589,9 @@ namespace Script_Browser
             UpdateDgvFiles(null, null);
         }
 
-        //
-        // Tab Upload
-        //
+        #endregion
+
+        #region Tab: Upload
 
         private void Upload(object sender, EventArgs e)
         {
@@ -765,5 +771,7 @@ namespace Script_Browser
                 }
             }
         }
+
+        #endregion
     }
 }
