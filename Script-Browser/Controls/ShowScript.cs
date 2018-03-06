@@ -45,7 +45,7 @@ namespace Script_Browser.Controls
                 label3.Text = "by " + alias + " (" + author + ")";
 
             label1.Text = shortDesc;
-            webBrowser1.DocumentText = "<html><body>" + Markdown.ToHtml(longDesc) + "</body></html>";
+            webBrowser1.DocumentText = "<html><body>" + Markdown.ToHtml(longDesc).Replace("\n", "<br>") + "</body></html>";
             rating1.SetRating((int)Math.Round(Double.Parse(rating.Replace(".", ","))));
             rating1.SetInformation(ratings, downloads);
 

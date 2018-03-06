@@ -51,6 +51,7 @@ namespace Script_Browser
         List<string> searchTags = new List<string>();
         bool uploaded = false;
         JObject uuInfo;
+        JObject fileChanges = new JObject { ["Delete"] = new JArray(), ["Move"] = new JArray(), ["Copy"] = new JArray() };
 
         public UploadScript(string path, JObject _uuInfo)
         {
@@ -102,7 +103,11 @@ namespace Script_Browser
                     tags += tag + " ";
                 metroTextBox1.Text = tags;
                 AddTags(null, null);
+
+                flowLayoutPanel1.Visible = true;
+                tableLayoutPanel11.Visible = true;
             }
+
         }
 
         public static string GetLineItem(string line)
@@ -211,7 +216,6 @@ namespace Script_Browser
                         {
                             if (i == page - 1)
                             {
-                                Console.WriteLine(i + "|" + page);
                                 tableLayoutTabControl.ColumnStyles[i].SizeType = SizeType.Percent;
                                 tableLayoutTabControl.ColumnStyles[i].Width = 100f;
                                 if (tableLayoutTabControl.Controls[i].Tag == null)
@@ -227,7 +231,6 @@ namespace Script_Browser
                         }
                         catch { }
                     }
-                    panelTabControl.PerformLayout();
                 }
 
                 if (updateTable)
@@ -333,6 +336,8 @@ namespace Script_Browser
                     ok = false;
                     break;
                 }
+                if (textfield.Tag.ToString() == "version" && uuInfo != null)
+                    label11.Visible = textfield.Text == uuInfo["Version"].ToString();
             }
 
             if (ok && currentStep == 1)
@@ -773,5 +778,38 @@ namespace Script_Browser
         }
 
         #endregion
+
+        private void noFocusBorderBtn10_Click(object sender, EventArgs e)
+        {
+            JObject output = new JObject();
+            this.Opacity = 0.5;
+            new FileChangesForUpdate(FileChangesForUpdate.Types.Delete, output).ShowDialog();
+            this.Opacity = 1;
+
+            if (output.Count > 0)
+                (fileChanges["Delete"] as JArray).Add(output["Value"]);
+        }
+
+        private void noFocusBorderBtn11_Click(object sender, EventArgs e)
+        {
+            JObject output = new JObject();
+            this.Opacity = 0.5;
+            new FileChangesForUpdate(FileChangesForUpdate.Types.MoveOrCopy, output).ShowDialog();
+            this.Opacity = 1;
+
+            if (output.Count > 0)
+                (fileChanges["Move"] as JArray).Add(output);
+        }
+
+        private void noFocusBorderBtn12_Click(object sender, EventArgs e)
+        {
+            JObject output = new JObject();
+            this.Opacity = 0.5;
+            new FileChangesForUpdate(FileChangesForUpdate.Types.MoveOrCopy, output).ShowDialog();
+            this.Opacity = 1;
+
+            if (output.Count > 0)
+                (fileChanges["Copy"] as JArray).Add(output);
+        }
     }
 }
