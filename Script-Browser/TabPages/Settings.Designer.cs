@@ -244,6 +244,7 @@
             this.loginPass.SelectionStart = 0;
             this.loginPass.Size = new System.Drawing.Size(192, 23);
             this.loginPass.TabIndex = 1;
+            this.loginPass.Text = "test";
             this.loginPass.UseSystemPasswordChar = false;
             // 
             // loginUsername
@@ -262,6 +263,7 @@
             this.loginUsername.SelectionStart = 0;
             this.loginUsername.Size = new System.Drawing.Size(192, 23);
             this.loginUsername.TabIndex = 0;
+            this.loginUsername.Text = "krypto";
             this.loginUsername.UseSystemPasswordChar = false;
             // 
             // panel1

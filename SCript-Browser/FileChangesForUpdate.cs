@@ -92,11 +92,8 @@ namespace Script_Browser
                 output["Value"] = materialSingleLineTextField1.Text;
             else if (type != Types.Delete && materialSingleLineTextField1.Text.Trim(' ') != "" && materialSingleLineTextField2.Text.Trim(' ') != "" && materialSingleLineTextField1.Text != materialSingleLineTextField2.Text)
             {
-                output = new JObject
-                {
-                    ["From"] = materialSingleLineTextField1.Text,
-                    ["To"] = materialSingleLineTextField2.Text
-                };
+                output["From"] = materialSingleLineTextField1.Text;
+                output["To"] = materialSingleLineTextField2.Text;
             }
             this.Dispose();
         }

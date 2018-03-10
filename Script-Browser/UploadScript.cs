@@ -563,6 +563,56 @@ namespace Script_Browser
             dataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit);
         }
 
+        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (!(bool)dataGridView1.Rows[e.RowIndex].Cells[0].Value && dataGridView1.Rows[e.RowIndex].Cells[3].Value + "" != "")
+                {
+                    JObject info = JObject.Parse(dataGridView1.Rows[e.RowIndex].Cells[3].Value + "");
+                    if (info["Type"].ToString() == "Delete")
+                    {
+                        for (int i = 0; i < (fileChanges["Delete"] as JArray).Count; i++)
+                        {
+                            if ((fileChanges["Delete"] as JArray)[i].ToString() == info["Value"].ToString())
+                            {
+                                (fileChanges["Delete"] as JArray).RemoveAt(i);
+                                break;
+                            }
+                        }
+                    }
+                    else if (info["Type"].ToString() == "Move")
+                    {
+                        for (int i = 0; i < (fileChanges["Move"] as JArray).Count; i++)
+                        {
+                            JToken token = ((fileChanges["Move"] as JArray)[i] as JToken);
+                            if (token["From"].ToString() == info["From"].ToString() && token["To"].ToString() == info["To"].ToString())
+                            {
+                                (fileChanges["Move"] as JArray).RemoveAt(i);
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 0; i < (fileChanges["Copy"] as JArray).Count; i++)
+                        {
+                            JToken token = ((fileChanges["Copy"] as JArray)[i] as JToken);
+                            if (token["From"].ToString() == info["From"].ToString() && token["To"].ToString() == info["To"].ToString())
+                            {
+                                (fileChanges["Copy"] as JArray).RemoveAt(i);
+                                break;
+                            }
+                        }
+                    }
+
+                    dataGridView1.Rows.RemoveAt(e.RowIndex);
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.StackTrace); }
+            CheckFiles(null, null);
+        }
+
         private void UpdateDgvFiles(object sender, FileSystemEventArgs e)
         {
             try
@@ -732,6 +782,11 @@ namespace Script_Browser
             noFocusBorderBtn8.Visible = true;
         }
 
+        private void UploadUpdate(object sender, EventArgs e)
+        {
+
+        }
+
         private string PutInValue(string line, string value)
         {
             List<char> charLine = line.ToList();
@@ -786,8 +841,11 @@ namespace Script_Browser
             new FileChangesForUpdate(FileChangesForUpdate.Types.Delete, output).ShowDialog();
             this.Opacity = 1;
 
-            if (output.Count > 0)
+            if (output.Count > 0 && !(fileChanges["Delete"] as JArray).Contains(output["Value"]))
+            {
                 (fileChanges["Delete"] as JArray).Add(output["Value"]);
+                dataGridView1.Rows.Add(true, Properties.Resources.delete_file, output["Value"], new JObject() { ["Type"] = "Delete", ["Value"] = output["Value"] }.ToString());
+            }
         }
 
         private void noFocusBorderBtn11_Click(object sender, EventArgs e)
@@ -797,8 +855,11 @@ namespace Script_Browser
             new FileChangesForUpdate(FileChangesForUpdate.Types.MoveOrCopy, output).ShowDialog();
             this.Opacity = 1;
 
-            if (output.Count > 0)
+            if (output.Count > 0 && !(fileChanges["Move"] as JArray).Contains(output))
+            {
                 (fileChanges["Move"] as JArray).Add(output);
+                dataGridView1.Rows.Add(true, Properties.Resources.move_file, output["From"] + " ▶ " + output["To"], new JObject() { ["Type"] = "Move", ["From"] = output["From"], ["To"] = output["To"] }.ToString());
+            }
         }
 
         private void noFocusBorderBtn12_Click(object sender, EventArgs e)
@@ -808,8 +869,11 @@ namespace Script_Browser
             new FileChangesForUpdate(FileChangesForUpdate.Types.MoveOrCopy, output).ShowDialog();
             this.Opacity = 1;
 
-            if (output.Count > 0)
+            if (output.Count > 0 && !(fileChanges["Copy"] as JArray).Contains(output))
+            {
                 (fileChanges["Copy"] as JArray).Add(output);
+                dataGridView1.Rows.Add(true, Properties.Resources.copy_file, output["From"] + " ▶ " + output["To"], new JObject() { ["Type"] = "Copy", ["From"] = output["From"], ["To"] = output["To"] }.ToString());
+            }
         }
     }
 }
