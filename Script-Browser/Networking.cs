@@ -203,5 +203,34 @@ namespace Script_Browser
             catch { }
             return "";
         }
+
+        public static string UploadUpdate(UploadScript form, string info, string path)
+        {
+            if (CheckIp(form))
+            {
+                using (MultipartFormDataContent data = new MultipartFormDataContent
+                {
+                    { new StringContent(info), "info" },
+                    { new StreamContent(File.Open(path, FileMode.Open)), "file", "script.zip" }
+                })
+                using (HttpClient web = new HttpClient())
+                    return web.PostAsync(storageServer + "/Script%20Browser/uploadUpdate.php?user=" + username + "&pass=" + password, data).Result.Content.ReadAsStringAsync().Result;
+            }
+            return "false";
+        }
+
+        public static string UploadUpdate(UploadScript form, string info)
+        {
+            if (CheckIp(form))
+            {
+                using (MultipartFormDataContent data = new MultipartFormDataContent
+                {
+                    { new StringContent(info), "info" }
+                })
+                using (HttpClient web = new HttpClient())
+                    return web.PostAsync(storageServer + "/Script%20Browser/uploadUpdate.php?user=" + username + "&pass=" + password, data).Result.Content.ReadAsStringAsync().Result;
+            }
+            return "false";
+        }
     }
 }

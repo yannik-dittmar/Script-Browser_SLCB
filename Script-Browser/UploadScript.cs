@@ -609,7 +609,7 @@ namespace Script_Browser
                     dataGridView1.Rows.RemoveAt(e.RowIndex);
                 }
             }
-            catch (Exception ex) { Console.WriteLine(ex.StackTrace); }
+            catch { }
             CheckFiles(null, null);
         }
 
@@ -656,71 +656,8 @@ namespace Script_Browser
                 label10.Text = "Uploading your script... This could take some seconds!";
                 label10.Refresh();
 
-                //Copy files to temp dir
                 string path = Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Script\";
-                if (!Directory.Exists(path))
-                    Directory.CreateDirectory(path);
-
-                foreach (string file in Directory.GetFiles(path))
-                    File.Delete(file);
-                foreach (string dir in Directory.GetDirectories(path))
-                    Directory.Delete(dir, true);
-                if (File.Exists(Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip"))
-                    File.Delete(Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip");
-
-                string[] lines = File.ReadAllLines(this.path);
-                using (StreamWriter writer = new StreamWriter(this.path))
-                {
-                    bool s = false, d = false, v = false, c = false;
-                    for (int i = 0; i < lines.Length; i++)
-                    {
-                        if (lines[i].ToLower().Contains("scriptname") && !s)
-                        {
-                            writer.WriteLine(PutInValue(lines[i], materialSingleLineTextField1.Text));
-                            s = true;
-                        }
-                        else if (lines[i].ToLower().Contains("description") && !d)
-                        { 
-                            writer.WriteLine(PutInValue(lines[i], materialSingleLineTextField2.Text));
-                            d = true;
-                        }
-                        else if (lines[i].ToLower().Contains("version") && !v)
-                        {
-                            writer.WriteLine(PutInValue(lines[i], materialSingleLineTextField3.Text));
-                            v = true;
-                        }
-                        else if (lines[i].ToLower().Contains("creator") && !c)
-                        { 
-                            writer.WriteLine(PutInValue(lines[i], materialSingleLineTextField4.Text));
-                            c = true;
-                        }
-                        else
-                            writer.WriteLine(lines[i]);
-                    }
-                }
-
-                foreach (DataGridViewRow row in dataGridView1.Rows)
-                {
-                    if ((bool)(row.Cells[0] as DataGridViewCheckBoxCell).Value)
-                    {
-                        Directory.CreateDirectory(Path.GetDirectoryName(path + row.Cells[2].Value.ToString()));
-                        File.Copy(Path.GetDirectoryName(this.path) + "\\" + row.Cells[2].Value.ToString(), path + row.Cells[2].Value.ToString(), true);
-                    }
-                }
-
-                ZipFile.CreateFromDirectory(path, Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip");
-
-                foreach (string file in Directory.GetFiles(path))
-                    File.Delete(file);
-                foreach (string dir in Directory.GetDirectories(path))
-                    Directory.Delete(dir, true);
-
-                long size = new FileInfo(Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip").Length;
-                if (size >= 31457280)
-                {
-                    MetroMessageBox.Show(this, "The file you are trying to upload has a size of " + ((size / 1024f) / 1024f) + "MB.\n But only files up to 30MB are allowed.", "File is too large", MessageBoxButtons.OK, 150);
-                    return;
-                }
+                PrepareFile();
 
                 string[] add = new string[] { materialSingleLineTextField1.Text, materialSingleLineTextField4.Text };
                 AddToListNotExists(add);
@@ -749,10 +686,11 @@ namespace Script_Browser
                     uploaded = true;
                     Networking.scripts.Add(result.Replace("true", ""));
                     noFocusBorderBtn6.Text = "Finish";
+                    noFocusBorderBtn8.Enabled = false; 
                     File.Delete(Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip");
 
                     //Update local script file
-                    lines = File.ReadAllLines(this.path);
+                    string[] lines = File.ReadAllLines(this.path);
                     using (StreamWriter writer = new StreamWriter(this.path))
                     {
                         bool found = false;
@@ -784,7 +722,128 @@ namespace Script_Browser
 
         private void UploadUpdate(object sender, EventArgs e)
         {
+            try
+            {
+                noFocusBorderBtn9.Text = "Uploading...";
+                noFocusBorderBtn9.Refresh();
 
+                string path = Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Script\";
+                if (materialSingleLineTextField3.Text != uuInfo["Version"].ToString())
+                    PrepareFile();
+
+                string[] add = new string[] { materialSingleLineTextField1.Text, materialSingleLineTextField4.Text };
+                AddToListNotExists(add);
+
+                JObject info = new JObject();
+                info["Name"] = materialSingleLineTextField1.Text;
+                info["ShortDescription"] = materialSingleLineTextField2.Text;
+                info["Version"] = materialSingleLineTextField3.Text;
+                info["Alias"] = materialSingleLineTextField4.Text;
+                if (metroComboBox1.SelectedIndex == 0)
+                    info["Type"] = "Command";
+                else
+                    info["Type"] = "Parameter";
+                info["LongDescription"] = richTextBox1.Text;
+                info["Tags"] = new JArray(searchTags.ToArray());
+                info["FileChanges"] = fileChanges;
+                info["Message"] = richTextBox2.Text;
+                info["ID"] = uuInfo["ID"];
+
+                string result = "";
+                if (materialSingleLineTextField3.Text != uuInfo["Version"].ToString())
+                    result = Networking.UploadUpdate(this, info.ToString(), Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip");
+                else
+                    result = Networking.UploadUpdate(this, info.ToString());
+
+                if (result.Contains("verify"))
+                    MetroMessageBox.Show(this, "Your email address has not been verified yet.\nPlease check your inbox or contact us over ", "Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); //TODO: Add Email
+                else if (result.Contains("enough"))
+                    MetroMessageBox.Show(this, "You have reached the maximum amount of scripts for a single user!\nDelete some to upload new ones.", "Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); //TODO: Add delete script from cloud
+                else if (result.Contains("true"))
+                {
+                    noFocusBorderBtn9.Text = "Success";
+                    noFocusBorderBtn9.Enabled = false;
+                    uploaded = true;
+                    noFocusBorderBtn6.Text = "Finish";
+                    noFocusBorderBtn8.Enabled = false;
+
+                    try { File.Delete(Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip"); } catch { }
+                    return;
+                }
+
+                try { File.Delete(Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip"); } catch { }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.StackTrace); }
+            noFocusBorderBtn9.Text = "Update Script";
+        }
+
+        //Copy files to temp dir and compress them
+        private void PrepareFile()
+        {
+            string path = Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Script\";
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+
+            foreach (string file in Directory.GetFiles(path))
+                File.Delete(file);
+            foreach (string dir in Directory.GetDirectories(path))
+                Directory.Delete(dir, true);
+            if (File.Exists(Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip"))
+                File.Delete(Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip");
+
+            string[] lines = File.ReadAllLines(this.path);
+            using (StreamWriter writer = new StreamWriter(this.path))
+            {
+                bool s = false, d = false, v = false, c = false;
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    if (lines[i].ToLower().Contains("scriptname") && !s)
+                    {
+                        writer.WriteLine(PutInValue(lines[i], materialSingleLineTextField1.Text));
+                        s = true;
+                    }
+                    else if (lines[i].ToLower().Contains("description") && !d)
+                    {
+                        writer.WriteLine(PutInValue(lines[i], materialSingleLineTextField2.Text));
+                        d = true;
+                    }
+                    else if (lines[i].ToLower().Contains("version") && !v)
+                    {
+                        writer.WriteLine(PutInValue(lines[i], materialSingleLineTextField3.Text));
+                        v = true;
+                    }
+                    else if (lines[i].ToLower().Contains("creator") && !c)
+                    {
+                        writer.WriteLine(PutInValue(lines[i], materialSingleLineTextField4.Text));
+                        c = true;
+                    }
+                    else
+                        writer.WriteLine(lines[i]);
+                }
+            }
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if ((bool)(row.Cells[0] as DataGridViewCheckBoxCell).Value && row.Cells[3].Value + "" == "")
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(path + row.Cells[2].Value.ToString()));
+                    File.Copy(Path.GetDirectoryName(this.path) + "\\" + row.Cells[2].Value.ToString(), path + row.Cells[2].Value.ToString(), true);
+                }
+            }
+
+            ZipFile.CreateFromDirectory(path, Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip");
+
+            foreach (string file in Directory.GetFiles(path))
+                File.Delete(file);
+            foreach (string dir in Directory.GetDirectories(path))
+                Directory.Delete(dir, true);
+
+            long size = new FileInfo(Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip").Length;
+            if (size >= 31457280)
+            {
+                MetroMessageBox.Show(this, "The file you are trying to upload has a size of " + ((size / 1024f) / 1024f) + "MB.\n But only files up to 30MB are allowed.", "File is too large", MessageBoxButtons.OK, 150);
+                throw new Exception();
+            }
         }
 
         private string PutInValue(string line, string value)
