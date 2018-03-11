@@ -62,9 +62,9 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(456, 172);
+            this.pictureBox1.Location = new System.Drawing.Point(77, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 50);
+            this.pictureBox1.Size = new System.Drawing.Size(38, 18);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
@@ -149,9 +149,9 @@
             this.checkBox2.AutoSize = true;
             this.checkBox2.Location = new System.Drawing.Point(10, 181);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(162, 22);
+            this.checkBox2.Size = new System.Drawing.Size(154, 22);
             this.checkBox2.TabIndex = 10;
-            this.checkBox2.Text = "Create Desktop Link";
+            this.checkBox2.Text = "Create desktop link";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
             // checkBox3
@@ -159,14 +159,10 @@
             this.checkBox3.AutoSize = true;
             this.checkBox3.Location = new System.Drawing.Point(10, 209);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(145, 22);
+            this.checkBox3.Size = new System.Drawing.Size(143, 22);
             this.checkBox3.TabIndex = 11;
-            this.checkBox3.Text = "Add to Start menu";
+            this.checkBox3.Text = "Add to start menu";
             this.checkBox3.UseVisualStyleBackColor = true;
-            // 
-            // folderBrowserDialog1
-            // 
-            this.folderBrowserDialog1.RootFolder = System.Environment.SpecialFolder.CommonProgramFilesX86;
             // 
             // buttonInstall
             // 
@@ -183,7 +179,7 @@
             // labelSpeed
             // 
             this.labelSpeed.AutoSize = true;
-            this.labelSpeed.Location = new System.Drawing.Point(114, 311);
+            this.labelSpeed.Location = new System.Drawing.Point(317, 306);
             this.labelSpeed.Name = "labelSpeed";
             this.labelSpeed.Size = new System.Drawing.Size(46, 18);
             this.labelSpeed.TabIndex = 13;
@@ -205,8 +201,8 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.metroProgressBar1);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.pictureBox1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
             this.Margin = new System.Windows.Forms.Padding(4);

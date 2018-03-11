@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Net;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 
 namespace Download_Manager.Pages
 {
@@ -35,19 +36,29 @@ namespace Download_Manager.Pages
             if (result == DialogResult.OK)
             {
                 pathInstallation = folderBrowserDialog1.SelectedPath;
-                textBox1.Text = pathInstallation;
+                textBox1.Text = pathInstallation + "\\Script-Browser";
             }
         }
 
         private void buttonInstall_Click(object sender, EventArgs e)
         {
-            String urlAddress;
-            String location;
+            String urlAddress = "http://www.digital-programming.de/ScriptBrowser/setup.zip";
+            String location = pathInstallation + "\\Script-Browser";
             WebClient webClient;               //webclient for downloading
             Stopwatch sw = new Stopwatch();
 
-            void DownloadFile(String urlAddress, string location)
+            if (Directory.Exists(location))
             {
+                DialogResult result = MetroFramework.MetroMessageBox.Show(this, "You already installed the Script-Browser.", " ", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2, 100);
+            }
+
+            if (textBox1.Text != "" && !Directory.Exists(location))
+            {
+                
+
+                Directory.CreateDirectory(location);
+
+
                 using (webClient = new WebClient())
                 {
                     webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
@@ -62,7 +73,7 @@ namespace Download_Manager.Pages
                     //start download
                     try
                     {
-                        webClient.DownloadFileAsync(URL, location);
+                        webClient.DownloadFileAsync(URL, location + "\\setup.zip");
                     }
                     catch { }
                 }
@@ -85,10 +96,13 @@ namespace Download_Manager.Pages
                 {
                     //cancelled
                 }
+                //completed
                 else
                 {
+                    Console.WriteLine("test");
+                    ZipFile.ExtractToDirectory(location + "\\setup.zip", location);
+                    File.Delete(location + "\\setup.zip");
                 }
-                    //complete ☺
             }
         }
 
