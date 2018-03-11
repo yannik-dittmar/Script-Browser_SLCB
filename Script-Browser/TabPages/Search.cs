@@ -125,7 +125,7 @@ namespace Script_Browser.TabPages
                     string result = Networking.GetScriptById(form, dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
                     JObject script = JObject.Parse(result);
 
-                    ShowScript ss = new ShowScript(script["ID"].ToString(), script["Name"].ToString(), script["Version"].ToString(), script["Username"].ToString(), script["ShortDescription"].ToString(), script["LongDescription"].ToString(), script["Rating"].ToString(), script["Ratings"].ToString(), script["Downloads"].ToString());
+                    ShowScript ss = new ShowScript(form, script["ID"].ToString(), script["Name"].ToString(), script["Version"].ToString(), script["Username"].ToString(), script["Alias"].ToString(), script["ShortDescription"].ToString(), script["LongDescription"].ToString(), script["Rating"].ToString(), script["Ratings"].ToString(), script["Downloads"].ToString());
                     ss.pictureBox1.MouseClick += new MouseEventHandler(unloadScript);
                     ss.Dock = DockStyle.Fill;
                     panelScript.Size = this.Size;

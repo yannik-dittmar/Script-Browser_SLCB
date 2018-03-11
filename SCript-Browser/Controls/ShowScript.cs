@@ -9,6 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Markdig;
 using System.Diagnostics;
+using System.IO.Compression;
+using System.IO;
+using SaveManager;
+using System.Collections.Specialized;
+using Script_Browser.TabPages;
 
 namespace Script_Browser.Controls
 {
@@ -20,21 +25,32 @@ namespace Script_Browser.Controls
 
         int id;
         string name;
+        Main form;
 
-        public ShowScript(string id, string name, string ver, string author, string shortDesc, string longDesc, string rating, string ratings, string downloads)
+        public ShowScript(Main _form, string id, string name, string ver, string author, string alias, string shortDesc, string longDesc, string rating, string ratings, string downloads)
         {
             InitializeComponent();
+
+            form = _form;
 
             this.name = name;
             this.id = Int32.Parse(id);
 
             label4.Text = name;
             label5.Text = "v" + ver;
-            label3.Text = "by " + author;
+
+            if (alias.Replace(" ", "") == "")
+                label3.Text = "by " + author;
+            else
+                label3.Text = "by " + alias + " (" + author + ")";
+
             label1.Text = shortDesc;
-            webBrowser1.DocumentText = "<html><body>" + Markdown.ToHtml(longDesc) + "</body></html>";
+            webBrowser1.DocumentText = "<html><body>" + Markdown.ToHtml(longDesc).Replace("\n", "<br>") + "</body></html>";
             rating1.SetRating((int)Math.Round(Double.Parse(rating.Replace(".", ","))));
             rating1.SetInformation(ratings, downloads);
+
+            Main.sf.currentInstalled.CollectionChanged += listChanged;
+            listChanged(null, null);
         }
 
         //Resize a Control vertically
@@ -110,6 +126,88 @@ namespace Script_Browser.Controls
                 try { Process.Start(e.Url.ToString()); } catch { }
                 e.Cancel = true;
             }
+        }
+
+        //Update button if user deletes script outside app
+        private void listChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            try
+            {
+                foreach (KeyValuePair<int, string> item in Main.sf.currentInstalled)
+                {
+                    if (item.Key == id)
+                    {
+                        button3.Text = "Uninstall";
+                        button3.Tag = item.Value;
+                        return;
+                    }
+                }
+                button3.Text = "Download and Install";
+            }
+            catch { }
+        }
+
+        //Install Script
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (button3.Text == "Uninstall")
+                {
+                    LocalScripts.UninstallScript(form, button3.Tag.ToString(), name);
+                    return;
+                }
+                else
+                {
+                    button3.Text = "Installing..."; //TODO: Exceptions
+                    button3.Refresh();
+
+                    if (File.Exists(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Install.zip"))
+                        File.Delete(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Install.zip");
+
+                    if (Networking.DownloadScript(form, id))
+                    {
+                        try { Directory.Delete(Main.sf.streamlabsPath + @"Services\Scripts\" + name + "\\", true); } catch { }
+                        Directory.CreateDirectory(Main.sf.streamlabsPath + @"Services\Scripts\" + name + "\\");
+
+                        ZipFile.ExtractToDirectory(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Install.zip", Main.sf.streamlabsPath + @"Services\Scripts\" + name + "\\");
+                        File.Delete(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Install.zip");
+
+                        foreach (FileInfo file in new DirectoryInfo(Main.sf.streamlabsPath + @"Services\Scripts\" + name + "\\").GetFiles())
+                        {
+                            if (file.Name.Contains("_StreamlabsSystem.py") || file.Name.Contains("_AnkhBotSystem.py") || file.Name.Contains("_StreamlabsParameter.py") || file.Name.Contains("_AnkhBotParameter.py"))
+                            {
+                                bool found = false;
+                                string[] lines = File.ReadAllLines(file.FullName);
+                                using (StreamWriter writer = new StreamWriter(file.FullName))
+                                {
+                                    for (int i = 0; i < lines.Length; i++)
+                                    {
+                                        writer.WriteLine(lines[i]);
+
+                                        if (lines[i].ToLower().Contains("version") && !found)
+                                        {
+                                            writer.WriteLine("ScriptBrowserID = \"" + id + "\"");
+                                            found = true;
+                                        }
+                                    }
+
+                                    if (!found)
+                                    {
+                                        writer.WriteLine("");
+                                        writer.WriteLine("ScriptBrowserID = \"" + id + "\"");
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                        return;
+                    }
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.StackTrace); }
+            try { Directory.Delete(Main.sf.streamlabsPath + @"Services\Scripts\" + name + "\\", true); } catch { }
+            button3.Text = "Download and Install";
         }
     }
 }

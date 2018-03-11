@@ -18,7 +18,7 @@ namespace Script_Browser
     static class Networking
     {
         public static string storageServer = "";
-        public static string username = "test";
+        public static string username = "krypto";
         public static string password = "a94a8fe5ccb19ba61c4c0873d391e987982fbbd3";
         public static List<string> scripts = new List<string>();
 
@@ -40,7 +40,7 @@ namespace Script_Browser
             catch { return false; }
         }
 
-        public static void CheckIp(Form form)
+        public static bool CheckIp(Form form)
         {
             tryagain:
             if (storageServer == "")
@@ -49,8 +49,11 @@ namespace Script_Browser
                 {
                     if (DialogResult.Retry == MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.\n\nCould not connect to mediation server!", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1, 175))
                         goto tryagain;
+                    else
+                        return false;
                 }
             }
+            return true;
         }
 
         public static void Login(string _username, string _password, Main form)
@@ -159,23 +162,75 @@ namespace Script_Browser
 
         public static string UploadScript(UploadScript form, string info, string path)
         {
-            CheckIp(form);
-            using (MultipartFormDataContent data = new MultipartFormDataContent
+            if (CheckIp(form))
             {
-                { new StringContent(info), "info" },
-                { new StreamContent(File.Open(path, FileMode.Open)), "file", "script.zip" }
-            })
-            using (HttpClient web = new HttpClient())
-                return web.PostAsync(storageServer + "/Script%20Browser/uploadScript.php?user=" + username + "&pass=" + password, data).Result.Content.ReadAsStringAsync().Result;
+                using (MultipartFormDataContent data = new MultipartFormDataContent
+                {
+                    { new StringContent(info), "info" },
+                    { new StreamContent(File.Open(path, FileMode.Open)), "file", "script.zip" }
+                })
+                using (HttpClient web = new HttpClient())
+                    return web.PostAsync(storageServer + "/Script%20Browser/uploadScript.php?user=" + username + "&pass=" + password, data).Result.Content.ReadAsStringAsync().Result;
+            }
+            return "false";
         }
 
-
-
-        public static Image DownloadImage(string path)
+        public static bool DownloadScript(Main form, int id)
         {
-            using (WebClient client = new WebClient())
-            using (MemoryStream ms = new MemoryStream(client.DownloadData(path)))
-                return Image.FromStream(ms);
+            try
+            {
+                if (CheckIp(form))
+                {
+                    using (WebClient web = new WebClient())
+                        web.DownloadFile(storageServer + "/Script%20Browser/Uploads/" + id, Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Install.zip");
+                    return true;
+                }
+            }
+            catch { }
+            return false;
+        }
+
+        public static string GetUploadUpdateInfo(Main form, string id)
+        {
+            try
+            {
+                if (CheckIp(form))
+                {
+                    using (WebClient web = new WebClient())
+                        return web.DownloadString(storageServer + "/Script%20Browser/getUUInfo.php?id=" + id);
+                }
+            }
+            catch { }
+            return "";
+        }
+
+        public static string UploadUpdate(UploadScript form, string info, string path)
+        {
+            if (CheckIp(form))
+            {
+                using (MultipartFormDataContent data = new MultipartFormDataContent
+                {
+                    { new StringContent(info), "info" },
+                    { new StreamContent(File.Open(path, FileMode.Open)), "file", "script.zip" }
+                })
+                using (HttpClient web = new HttpClient())
+                    return web.PostAsync(storageServer + "/Script%20Browser/uploadUpdate.php?user=" + username + "&pass=" + password, data).Result.Content.ReadAsStringAsync().Result;
+            }
+            return "false";
+        }
+
+        public static string UploadUpdate(UploadScript form, string info)
+        {
+            if (CheckIp(form))
+            {
+                using (MultipartFormDataContent data = new MultipartFormDataContent
+                {
+                    { new StringContent(info), "info" }
+                })
+                using (HttpClient web = new HttpClient())
+                    return web.PostAsync(storageServer + "/Script%20Browser/uploadUpdate.php?user=" + username + "&pass=" + password, data).Result.Content.ReadAsStringAsync().Result;
+            }
+            return "false";
         }
     }
 }

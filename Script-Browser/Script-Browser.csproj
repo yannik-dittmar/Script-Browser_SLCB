@@ -105,6 +105,12 @@
     <Compile Include="Controls\RoundedEdgesButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="FileChangesForUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FileChangesForUpdate.Designer.cs">
+      <DependentUpon>FileChangesForUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -167,6 +173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\SlideShow.resx">
       <DependentUpon>SlideShow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FileChangesForUpdate.resx">
+      <DependentUpon>FileChangesForUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
@@ -236,6 +245,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Logo_ICON.ico" />
+    <None Include="Resources\move_file.png" />
+    <None Include="Resources\copy_file.png" />
+    <None Include="Resources\delete_file.png" />
     <None Include="Resources\sta_outline.png" />
     <None Include="Resources\loading.gif" />
     <None Include="Resources\back_arrow.png" />

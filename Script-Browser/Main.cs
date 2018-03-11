@@ -12,11 +12,15 @@ using MaterialSkin;
 using MaterialSkin.Controls;
 using MaterialSkin.Animations;
 using System.Runtime.InteropServices;
+using SaveManager;
+using System.IO;
 
 namespace Script_Browser
 {
     public partial class Main : Form
     {
+        #region DLL-Methodes & Variables
+
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
         (
@@ -39,6 +43,8 @@ namespace Script_Browser
         const int HTBOTTOMRIGHT = 17;
         Rectangle sizeGripRectangle;
 
+        #endregion
+
         List<TableLayoutPanel> navbarTransitionIn = new List<TableLayoutPanel>();
         List<TableLayoutPanel> navbarTransitionOut = new List<TableLayoutPanel>();
         TableLayoutPanel selectedTabPage = null;
@@ -47,11 +53,13 @@ namespace Script_Browser
         Size lastWinSize;
         Point lastWinPos;
 
+        public static SaveFile sf = new SaveFile(Path.GetDirectoryName(Application.ExecutablePath) + @"\settings.save");
+
         public Main()
         {
             InitializeComponent();
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
-
+            
             selectedTabPage = tableLayoutPanel3;
             navbarTransitionIn.Add(tableLayoutPanel3);
             lastWinSize = Size;
@@ -71,9 +79,8 @@ namespace Script_Browser
             topScripts1.button3_Click(null, null);
         }
 
-        //
-        // Windows API, Window Settings
-        //
+        #region Windows API, Window Settings
+
         protected override CreateParams CreateParams
         {
             get
@@ -145,8 +152,11 @@ namespace Script_Browser
             }
         }
 
+        //Close App
         private void label2_Click(object sender, EventArgs e)
         {
+            sf.Save();
+            try { notifyIcon1.Dispose(); } catch { }
             Environment.Exit(0);
         }
 
@@ -201,9 +211,15 @@ namespace Script_Browser
                 Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
         }
 
-        //
-        // Animations
-        //
+        // Save settings on dispose
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            sf.Save();
+        }
+
+        #endregion
+
+        #region  Animations
 
         // Navbar
         private void NavTransitionIn_Tick(object sender, EventArgs e)
@@ -369,5 +385,7 @@ namespace Script_Browser
             }
             return null;
         }
+
+        #endregion
     }
 }

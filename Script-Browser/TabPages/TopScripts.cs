@@ -12,6 +12,7 @@ using Newtonsoft.Json.Linq;
 using System.Net;
 using Script_Browser.Design;
 using Script_Browser.Controls;
+using MetroFramework;
 
 namespace Script_Browser.TabPages
 {
@@ -72,7 +73,7 @@ namespace Script_Browser.TabPages
 
                 nAMEToolStripMenuItem.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
             }
-            catch { }
+            catch { dataGridView1.ClearSelection(); }
         }
 
         //Refresh & Download data from server
@@ -95,7 +96,10 @@ namespace Script_Browser.TabPages
                         for (int i = 0; i < rating; i++)
                             stars += "★";
 
-                        dataGridView1.Rows.Add(row["ID"], row["Name"], row["ShortDescription"], stars, row["Downloads"], row["Version"], row["Username"]);
+                        if (row["Alias"].ToString().Replace(" ", "") == "")
+                            dataGridView1.Rows.Add(row["ID"], row["Name"], row["ShortDescription"], stars, row["Downloads"], row["Version"], row["Username"]);
+                        else
+                            dataGridView1.Rows.Add(row["ID"], row["Name"], row["ShortDescription"], stars, row["Downloads"], row["Version"], row["Alias"]);
                     }
                 }
 
@@ -119,29 +123,32 @@ namespace Script_Browser.TabPages
         {
             try
             {
-                dataGridView1.Rows[e.RowIndex].Selected = true;
-                if (e.Button == MouseButtons.Left && !contextMenuOpen)
+                if (e.RowIndex >= 0)
                 {
-                    string result = Networking.GetScriptById(form, dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
-                    JObject script = JObject.Parse(result);
+                    dataGridView1.Rows[e.RowIndex].Selected = true;
+                    if (e.Button == MouseButtons.Left && !contextMenuOpen)
+                    {
+                        string result = Networking.GetScriptById(form, dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+                        JObject script = JObject.Parse(result);
 
-                    ShowScript ss = new ShowScript(script["ID"].ToString(), script["Name"].ToString(), script["Version"].ToString(), script["Username"].ToString(), script["ShortDescription"].ToString(), script["LongDescription"].ToString(), script["Rating"].ToString(), script["Ratings"].ToString(), script["Downloads"].ToString());
-                    ss.pictureBox1.MouseClick += new MouseEventHandler(unloadScript);
-                    ss.Dock = DockStyle.Fill;
-                    panelScript.Size = this.Size;
-                    panelScript.Controls.Add(ss);
-                    ss.Size = panelScript.Size;
+                        ShowScript ss = new ShowScript(form, script["ID"].ToString(), script["Name"].ToString(), script["Version"].ToString(), script["Username"].ToString(), script["Alias"].ToString(), script["ShortDescription"].ToString(), script["LongDescription"].ToString(), script["Rating"].ToString(), script["Ratings"].ToString(), script["Downloads"].ToString());
+                        ss.pictureBox1.MouseClick += new MouseEventHandler(unloadScript);
+                        ss.Dock = DockStyle.Fill;
+                        panelScript.Size = this.Size;
+                        panelScript.Controls.Add(ss);
+                        ss.Size = panelScript.Size;
 
-                    int slidecoeff = -1 * (int)(this.Width * 0.002);
-                    if (slidecoeff >= 0)
-                        slidecoeff = -1;
+                        int slidecoeff = -1 * (int)(this.Width * 0.002);
+                        if (slidecoeff >= 0)
+                            slidecoeff = -1;
 
-                    animatorScript.DefaultAnimation.SlideCoeff = new PointF(slidecoeff, 0);
-                    animatorScript.ShowSync(panelScript);
+                        animatorScript.DefaultAnimation.SlideCoeff = new PointF(slidecoeff, 0);
+                        animatorScript.ShowSync(panelScript);
+                    }
                 }
             }
-            catch (WebException) { MetroFramework.MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.OK, MessageBoxIcon.Error, 125); }
-            catch (Exception ex) { MetroFramework.MetroMessageBox.Show(form, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); Console.WriteLine(ex.StackTrace); }
+            catch (WebException) { MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.OK, MessageBoxIcon.Error, 125); }
+            catch (Exception ex) { MetroMessageBox.Show(form, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); Console.WriteLine(ex.StackTrace); }
             contextMenuOpen = false;
         }
 

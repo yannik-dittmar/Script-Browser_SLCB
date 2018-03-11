@@ -10,21 +10,29 @@ using System.Windows.Forms;
 using System.IO;
 using SaveManager;
 using System.Threading;
+using System.Diagnostics;
+using MetroFramework;
+using Script_Browser.Design;
+using Newtonsoft.Json.Linq;
 
 namespace Script_Browser.TabPages
 {
     public partial class LocalScripts : UserControl
     {
         public Main form;
+        string currentScriptID = "";
 
         public LocalScripts()
         {
             InitializeComponent();
+            contextMenuStrip1.Renderer = new ArrowRenderer();
         }
 
         private void LocalScripts_Load(object sender, EventArgs e)
         {
-            UpdateList(@"D:\Streamlabs Chatbot\");
+            fileSystemWatcher1.Path = Main.sf.streamlabsPath; //TODO: check path
+            UpdateList(Main.sf.streamlabsPath);
+            //UpdateList(@"D:\Streamlabs Chatbot\");
             //UpdateList(@"C:\Users\18diyann\Desktop\Test Ordner\");
         }
 
@@ -32,15 +40,17 @@ namespace Script_Browser.TabPages
         {
             try
             {
-                string[] dirs = Directory.GetDirectories(path + @"Twitch\Scripts\");
+                Main.sf.currentInstalled.Clear();
+                string[] dirs = Directory.GetDirectories(path + @"Services\Scripts\");
 
                 dataGridView1.Rows.Clear();
+                dataGridView2.Rows.Clear();
                 foreach (string dir in dirs)
                 {
                     string[] files = Directory.GetFiles(dir);
                     string scriptFile = "UNDEF";
                     string type = "UNDEF";
-                    string name = dir.Split('\\')[dir.Split('\\').Length - 1];
+                    string name = "UNDEF";
                     string description = "UNDEF";
                     string author = "UNDEF";
                     string version = "UNDEF";
@@ -81,7 +91,10 @@ namespace Script_Browser.TabPages
                         if (id == 0)
                             dataGridView1.Rows.Add(name, description, type, version, author, scriptFile);
                         else
-                            dataGridView3.Rows.Add(name, description, type, version, author, scriptFile, id);
+                        {
+                            dataGridView2.Rows.Add(name, description, type, version, author, scriptFile, id);
+                            Main.sf.currentInstalled.Add(new KeyValuePair<int, string>(id, Path.GetDirectoryName(scriptFile)));
+                        }
                     }
                 }
 
@@ -99,23 +112,23 @@ namespace Script_Browser.TabPages
                     tableLayoutPanel1.RowStyles[1].Height = 50f;
                 }
 
-                if (dataGridView3.RowCount == 0)
+                if (dataGridView2.RowCount == 0)
                 {
                     label2.Visible = false;
-                    dataGridView3.Visible = false;
+                    dataGridView2.Visible = false;
                     tableLayoutPanel1.RowStyles[3].SizeType = SizeType.AutoSize;
                 }
                 else
                 {
                     label2.Visible = true;
-                    dataGridView3.Visible = true;
+                    dataGridView2.Visible = true;
                     tableLayoutPanel1.RowStyles[3].SizeType = SizeType.Percent;
                     tableLayoutPanel1.RowStyles[3].Height = 50;
                 }
 
-                label4.Visible = dataGridView1.RowCount == 0 && dataGridView3.RowCount == 0;
+                label4.Visible = dataGridView1.RowCount == 0 && dataGridView2.RowCount == 0;
                 dataGridView1.ClearSelection();
-                dataGridView3.ClearSelection();
+                dataGridView2.ClearSelection();
             }
             catch { }
         }
@@ -166,10 +179,26 @@ namespace Script_Browser.TabPages
                     dgv.ClearSelection();
                     dgv.Rows[e.RowIndex].Selected = true;
 
-                    //nAMEToolStripMenuItem.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+                    nameToolStripMenuItem.Text = dgv.Rows[e.RowIndex].Cells[0].Value.ToString();
+                    uploadUpdateToolStripMenuItem.Visible = false;
+                    uploadToolStripMenuItem.Visible = dgv.Tag.ToString().Contains("upload");
+                    if (dgv.Tag.ToString().Contains("update"))
+                    {
+                        reportToolStripMenuItem.Visible = !Networking.scripts.Contains(dgv.Rows[e.RowIndex].Cells[6].Value.ToString());
+                        checkForUpdatesToolStripMenuItem.Visible = !Networking.scripts.Contains(dgv.Rows[e.RowIndex].Cells[6].Value.ToString());
+                        uploadUpdateToolStripMenuItem.Visible = Networking.scripts.Contains(dgv.Rows[e.RowIndex].Cells[6].Value.ToString());
+                    }
+                    else
+                    {
+                        reportToolStripMenuItem.Visible = false;
+                        checkForUpdatesToolStripMenuItem.Visible = false;
+                        uploadUpdateToolStripMenuItem.Visible = false;
+                    }
                 }
                 catch { }
             }
+            else
+                (sender as DataGridView).ClearSelection();
         }
 
         private void dataGridView1_MouseLeave(object sender, EventArgs e)
@@ -205,6 +234,10 @@ namespace Script_Browser.TabPages
                     label3.Text = dgv.Rows[e.RowIndex].Cells[0].Value.ToString();
 
                     tableLayoutPanel2.Visible = true;
+                    tableLayoutPanel2.Tag = dgv.Rows[e.RowIndex].Cells[5].Value.ToString();
+
+                    if (dgv.ColumnCount == 7)
+                        currentScriptID = dgv.Rows[e.RowIndex].Cells[6].Value.ToString();
                 }
                 catch { }
             }
@@ -223,12 +256,76 @@ namespace Script_Browser.TabPages
             catch { tableLayoutPanel2.Visible = false; }
         }
 
-        //Upload
+        //Upload script
         private void button1_Click(object sender, EventArgs e)
         {
             form.Opacity = 0.5;
-            //new UploadScript().ShowDialog();
+            new UploadScript(tableLayoutPanel2.Tag.ToString(), null).ShowDialog();
             form.Opacity = 1;
+            UpdateList(Main.sf.streamlabsPath);
+        }
+
+        //Upload update
+        private void button5_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                JObject info = JObject.Parse(Networking.GetUploadUpdateInfo(form, currentScriptID));
+                form.Opacity = 0.5;
+                new UploadScript(tableLayoutPanel2.Tag.ToString(), info).ShowDialog();
+                form.Opacity = 1;
+                UpdateList(Main.sf.streamlabsPath);
+            }
+            catch { }
+        }
+
+        //Open Script Path
+        private void button6_Click(object sender, EventArgs e)
+        {
+            try { Process.Start(Path.GetDirectoryName(tableLayoutPanel2.Tag.ToString())); } catch { }
+        }
+
+        //UpdateList on file changes
+        private void fileSystemWatcher1_Changed(object sender, FileSystemEventArgs e)
+        {
+            UpdateList(Main.sf.streamlabsPath);
+        }
+
+        private void fileSystemWatcher1_Renamed(object sender, RenamedEventArgs e)
+        {
+            UpdateList(Main.sf.streamlabsPath);
+        }
+
+        //Uninstall script
+        public static void UninstallScript(Main form, string path, string name)
+        {
+            try
+            {
+                DialogResult dr = MetroMessageBox.Show(form, "Do you really want to remove the script \"" + name + "\" from your PC?\nThis deletes all your save files & settings to!", "Delete Script", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button3, 150);
+
+                if (dr == DialogResult.Yes)
+                    Directory.Delete(Path.GetDirectoryName(path), true);
+            }
+            catch (Exception ex) { MetroMessageBox.Show(form, "there was an unexpected exception during the process:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2, 150); }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            UninstallScript(form, tableLayoutPanel2.Tag.ToString(), label3.Text);
+            tableLayoutPanel2.Visible = false;
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                DataGridView dgv = (DataGridView)contextMenuStrip1.SourceControl;
+                if (dgv.SelectedRows.Count < 1)
+                    e.Cancel = true;
+                else
+                    dataGridView1_CellClick(dgv, new DataGridViewCellEventArgs(0, dgv.SelectedRows[0].Index));
+            }
+            catch { e.Cancel = true; }
         }
     }
 }
