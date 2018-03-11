@@ -42,7 +42,6 @@
             this.richTextBoxTerms = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.linkLabelDP = new System.Windows.Forms.LinkLabel();
-            this.installation1 = new Download_Manager.Pages.Installation();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -127,7 +126,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.installation1);
             this.panel1.Controls.Add(this.checkBoxAgree);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.button2);
@@ -228,17 +226,6 @@
             this.linkLabelDP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.linkLabelDP.VisitedLinkColor = System.Drawing.Color.White;
             // 
-            // installation1
-            // 
-            this.installation1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
-            this.installation1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.installation1.ForeColor = System.Drawing.Color.White;
-            this.installation1.Location = new System.Drawing.Point(0, 0);
-            this.installation1.Margin = new System.Windows.Forms.Padding(4);
-            this.installation1.Name = "installation1";
-            this.installation1.Size = new System.Drawing.Size(645, 370);
-            this.installation1.TabIndex = 8;
-            // 
             // DM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -278,7 +265,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.LinkLabel linkLabelDP;
         private System.Windows.Forms.CheckBox checkBoxAgree;
-        private Pages.Installation installation1;
     }
 }
 

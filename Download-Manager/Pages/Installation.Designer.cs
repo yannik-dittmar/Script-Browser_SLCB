@@ -43,6 +43,8 @@
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.folderBrowserDialog2 = new System.Windows.Forms.FolderBrowserDialog();
+            this.buttonInstall = new System.Windows.Forms.Button();
+            this.labelSpeed = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,7 +62,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(365, 125);
+            this.pictureBox1.Location = new System.Drawing.Point(456, 172);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 50);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -135,7 +137,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(10, 97);
+            this.checkBox1.Location = new System.Drawing.Point(10, 153);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(161, 22);
             this.checkBox1.TabIndex = 9;
@@ -145,7 +147,7 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(10, 125);
+            this.checkBox2.Location = new System.Drawing.Point(10, 181);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(162, 22);
             this.checkBox2.TabIndex = 10;
@@ -155,7 +157,7 @@
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(10, 153);
+            this.checkBox3.Location = new System.Drawing.Point(10, 209);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(145, 22);
             this.checkBox3.TabIndex = 11;
@@ -166,10 +168,33 @@
             // 
             this.folderBrowserDialog1.RootFolder = System.Environment.SpecialFolder.CommonProgramFilesX86;
             // 
+            // buttonInstall
+            // 
+            this.buttonInstall.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.buttonInstall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonInstall.Location = new System.Drawing.Point(12, 91);
+            this.buttonInstall.Name = "buttonInstall";
+            this.buttonInstall.Size = new System.Drawing.Size(621, 27);
+            this.buttonInstall.TabIndex = 12;
+            this.buttonInstall.Text = "Install";
+            this.buttonInstall.UseVisualStyleBackColor = true;
+            this.buttonInstall.Click += new System.EventHandler(this.buttonInstall_Click);
+            // 
+            // labelSpeed
+            // 
+            this.labelSpeed.AutoSize = true;
+            this.labelSpeed.Location = new System.Drawing.Point(114, 311);
+            this.labelSpeed.Name = "labelSpeed";
+            this.labelSpeed.Size = new System.Drawing.Size(46, 18);
+            this.labelSpeed.TabIndex = 13;
+            this.labelSpeed.Text = "label4";
+            // 
             // Installation
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
+            this.Controls.Add(this.labelSpeed);
+            this.Controls.Add(this.buttonInstall);
             this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.checkBox1);
@@ -209,5 +234,7 @@
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog2;
+        private System.Windows.Forms.Button buttonInstall;
+        private System.Windows.Forms.Label labelSpeed;
     }
 }

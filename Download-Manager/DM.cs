@@ -88,9 +88,14 @@ namespace Download_Manager
             }
         }
 
+        //button "next" -> show installation panel
         private void button1_Click(object sender, EventArgs e)
         {
-            panel1.Visible = false;   
+            panel1.Visible = false;
+            Pages.Installation x = new Pages.Installation();
+            this.Controls.Add(x);
+            x.Size = new Size(645, 370);
+            x.Location = new Point(0,52);
         }
 
     }

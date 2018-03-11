@@ -7,11 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net;
+using System.Diagnostics;
+using System.IO;
 
 namespace Download_Manager.Pages
 {
     public partial class Installation : UserControl
     {
+        String pathInstallation, pathStreamlabs;
+
         public Installation()
         {
             InitializeComponent();
@@ -29,7 +34,61 @@ namespace Download_Manager.Pages
 
             if (result == DialogResult.OK)
             {
-                textBox1.Text = folderBrowserDialog1.SelectedPath;
+                pathInstallation = folderBrowserDialog1.SelectedPath;
+                textBox1.Text = pathInstallation;
+            }
+        }
+
+        private void buttonInstall_Click(object sender, EventArgs e)
+        {
+            String urlAddress;
+            String location;
+            WebClient webClient;               //webclient for downloading
+            Stopwatch sw = new Stopwatch();
+
+            void DownloadFile(String urlAddress, string location)
+            {
+                using (webClient = new WebClient())
+                {
+                    webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
+                    webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
+
+                    //url address
+                    Uri URL = urlAddress.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ? new Uri(urlAddress) : new Uri("http://" + urlAddress);
+
+                    //start stopwatch used to calculate download speed
+                    sw.Start();
+
+                    //start download
+                    try
+                    {
+                        webClient.DownloadFileAsync(URL, location);
+                    }
+                    catch { }
+                }
+            }
+
+            void ProgressChanged(object sender2, DownloadProgressChangedEventArgs e2)
+            {
+                //update label for downloadspeed
+                labelSpeed.Text = string.Format("{0} kb/s", (e2.BytesReceived / 1024d / sw.Elapsed.TotalSeconds).ToString());
+
+                //update progressbar
+                metroProgressBar1.Value = e2.ProgressPercentage;
+            }
+
+            void Completed(object sender2, AsyncCompletedEventArgs e2)
+            {
+                sw.Reset();
+
+                if(e2.Cancelled)
+                {
+                    //cancelled
+                }
+                else
+                {
+                }
+                    //complete ☺
             }
         }
 
@@ -37,7 +96,14 @@ namespace Download_Manager.Pages
         private void button2_Click(object sender, EventArgs e)
         {
             //Disable new folder button
-            this.folderBrowserDialog1.ShowNewFolderButton = false;
+            this.folderBrowserDialog2.ShowNewFolderButton = false;
+            DialogResult result = folderBrowserDialog2.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                pathStreamlabs = folderBrowserDialog2.SelectedPath;
+                textBox2.Text = pathStreamlabs;
+            }
         }
     }
 }
