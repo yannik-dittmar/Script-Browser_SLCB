@@ -194,8 +194,7 @@
             this.richTextBoxTerms.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
             this.richTextBoxTerms.Size = new System.Drawing.Size(618, 243);
             this.richTextBoxTerms.TabIndex = 1;
-            this.richTextBoxTerms.Text = "asdasdddddddddddddddddddddddddd\nasd\nasd\nasd\ndfg\ndfg\ngj\nhjkl\nhjk\nhjkzui\n78678678\n6" +
-    "78\nqw\nqw\nqwe\nert\ncbf\nyd\ncy\nxc\nyx\nc\nyx\nc\nyx\nc\nyx\nc\nyx\nc\nyx\nc";
+            this.richTextBoxTerms.Text = resources.GetString("richTextBoxTerms.Text");
             this.richTextBoxTerms.VScroll += new System.EventHandler(this.richTextBoxTerms_VScroll);
             // 
             // label2

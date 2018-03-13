@@ -81,7 +81,7 @@ namespace Download_Manager
         //button "cancel" -> dialogue 
         private void button2_Click(object sender, EventArgs e)
         {
-            DialogResult result = MetroFramework.MetroMessageBox.Show(this, "Are you sure?", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2,100);
+            DialogResult result = MessageBox.Show("Are you sure?", "", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
                 Environment.Exit(0);

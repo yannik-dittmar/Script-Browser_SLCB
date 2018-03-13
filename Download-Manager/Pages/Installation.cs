@@ -42,23 +42,37 @@ namespace Download_Manager.Pages
 
         private void buttonInstall_Click(object sender, EventArgs e)
         {
+
             String urlAddress = "http://www.digital-programming.de/ScriptBrowser/setup.zip";
             String location = pathInstallation + "\\Script-Browser";
             WebClient webClient;               //webclient for downloading
             Stopwatch sw = new Stopwatch();
 
-            if (Directory.Exists(location))
+            Boolean download = true;
+            //test if chatbot folder is correct
+            if (!File.Exists(pathStreamlabs + "\\Streamlabs Chatbot.exe"))
             {
-                DialogResult result = MetroFramework.MetroMessageBox.Show(this, "You already installed the Script-Browser.", " ", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2, 100);
+                DialogResult result = MessageBox.Show("The selected path for the Streamlabs Chatbot doesn't contain it.", "Error", MessageBoxButtons.OK);
+                //DialogResult result2 = MetroFramework.MetroMessageBox.Show(this, "The selected path for the Streamlabs Chatbot doesn't contain it.", " ", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2, 100);
+                download = false;
+
             }
 
-            if (textBox1.Text != "" && !Directory.Exists(location))
+            //check if Script-Browser already exists -> error
+            if (Directory.Exists(location))
             {
-                
+                DialogResult result = MessageBox.Show("You already installed the Script-Browser.", "Error", MessageBoxButtons.OK);
+                //DialogResult result = MetroFramework.MetroMessageBox.Show(this, "You already installed the Script-Browser.", " ", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2, 100);
+                download = false;
+            }
 
+
+            if (textBox1.Text != "" && download)
+            {
+                //create directory for Script-Browser
                 Directory.CreateDirectory(location);
 
-
+                //Downloading
                 using (webClient = new WebClient())
                 {
                     webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
@@ -70,7 +84,7 @@ namespace Download_Manager.Pages
                     //start stopwatch used to calculate download speed
                     sw.Start();
 
-                    //start download
+                    //download
                     try
                     {
                         webClient.DownloadFileAsync(URL, location + "\\setup.zip");
@@ -79,18 +93,22 @@ namespace Download_Manager.Pages
                 }
             }
 
+            //updating ui while downloading
             void ProgressChanged(object sender2, DownloadProgressChangedEventArgs e2)
             {
                 //update label for downloadspeed
                 labelSpeed.Text = string.Format("{0} kb/s", (e2.BytesReceived / 1024d / sw.Elapsed.TotalSeconds).ToString());
 
                 //update progressbar
-                metroProgressBar1.Value = e2.ProgressPercentage;
+                progressBar1.Value = e2.ProgressPercentage;
             }
 
+            //download completed
             void Completed(object sender2, AsyncCompletedEventArgs e2)
             {
+                //reset stopwatch
                 sw.Reset();
+
 
                 if(e2.Cancelled)
                 {
@@ -99,11 +117,51 @@ namespace Download_Manager.Pages
                 //completed
                 else
                 {
+                    //enable button for finishing process 
+                    button3.Enabled = true;
                     Console.WriteLine("test");
+
+                    //extract downloaded zip file
                     ZipFile.ExtractToDirectory(location + "\\setup.zip", location);
+                    //delete zip file
                     File.Delete(location + "\\setup.zip");
+                    //check if user wants to create desktop link
+                    if (checkBox2.Checked == true)
+                    {
+                        string deskDir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+
+                        //create desktop shortcut
+                        using (StreamWriter writer = new StreamWriter(deskDir + "\\Script-Browser.url"))
+                        {
+                            string app = pathInstallation + "\\Script-Browser\\Script-Browser.exe";
+                            writer.WriteLine("[InternetShortcut]");
+                            writer.WriteLine("URL=file:///" + app);
+                            writer.WriteLine("IconIndex=0");
+                            string icon = app.Replace('\\', '/');
+                            writer.WriteLine("IconFile=" + icon);
+                            writer.Flush();
+                        }
+                    }
                 }
             }
+        }
+
+        //finish installation
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        //change path for installation if user changes text of textbox
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            pathStreamlabs = textBox2.Text;
+        }
+
+        //change path of Streamlabs folder if user changes text of textbox
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            pathInstallation = textBox1.Text;
         }
 
         //FolderBrowser for selection of path of Streamlabs Chatbot

@@ -3366,6 +3366,27 @@
         8Nu//gvb5PWvyzxY7wAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="richTextBoxTerms.Text" xml:space="preserve">
+    <value>1. The user is responsible for his uploaded content. We assume no liability.
+
+2. The upload of offending or political uncorrect content is forbidden. 
+Users doing so will be banned from the program.
+
+3. Spamming is not allowed.
+
+4. We are not responsible for links to other third party websites. 
+Users have to agree with the terms and conditions of these third parties.
+
+5. You are not allowed to upload content protected by copyright.
+
+6. Using 10-Minutes-Mails will result in disabling the account. 
+We will not give away your email address.
+
+7. By agreeing to use our service to agree to this terms of use too. 
+Incorrect acts will not be tolerated. Accounts can be disabled or terminated if abuse happens!
+
+Have fun!</value>
+  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAAAAAAAEAIADKpgAAFgAAAIlQTkcNChoKAAAADUlIRFIAAAgjAAAIIwgGAAAAl/UcewAAIABJ
