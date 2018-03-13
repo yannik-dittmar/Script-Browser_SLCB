@@ -644,6 +644,48 @@ namespace Script_Browser
             UpdateDgvFiles(null, null);
         }
 
+        private void noFocusBorderBtn10_Click(object sender, EventArgs e)
+        {
+            JObject output = new JObject();
+            this.Opacity = 0.5;
+            new FileChangesForUpdate(FileChangesForUpdate.Types.Delete, output).ShowDialog();
+            this.Opacity = 1;
+
+            if (output.Count > 0 && !(fileChanges["Delete"] as JArray).Contains(output["Value"]))
+            {
+                (fileChanges["Delete"] as JArray).Add(output["Value"]);
+                dataGridView1.Rows.Add(true, Properties.Resources.delete_file, output["Value"], new JObject() { ["Type"] = "Delete", ["Value"] = output["Value"] }.ToString());
+            }
+        }
+
+        private void noFocusBorderBtn11_Click(object sender, EventArgs e)
+        {
+            JObject output = new JObject();
+            this.Opacity = 0.5;
+            new FileChangesForUpdate(FileChangesForUpdate.Types.MoveOrCopy, output).ShowDialog();
+            this.Opacity = 1;
+
+            if (output.Count > 0 && !(fileChanges["Move"] as JArray).Contains(output))
+            {
+                (fileChanges["Move"] as JArray).Add(output);
+                dataGridView1.Rows.Add(true, Properties.Resources.move_file, output["From"] + " ▶ " + output["To"], new JObject() { ["Type"] = "Move", ["From"] = output["From"], ["To"] = output["To"] }.ToString());
+            }
+        }
+
+        private void noFocusBorderBtn12_Click(object sender, EventArgs e)
+        {
+            JObject output = new JObject();
+            this.Opacity = 0.5;
+            new FileChangesForUpdate(FileChangesForUpdate.Types.MoveOrCopy, output).ShowDialog();
+            this.Opacity = 1;
+
+            if (output.Count > 0 && !(fileChanges["Copy"] as JArray).Contains(output))
+            {
+                (fileChanges["Copy"] as JArray).Add(output);
+                dataGridView1.Rows.Add(true, Properties.Resources.copy_file, output["From"] + " ▶ " + output["To"], new JObject() { ["Type"] = "Copy", ["From"] = output["From"], ["To"] = output["To"] }.ToString());
+            }
+        }
+
         #endregion
 
         #region Tab: Upload
@@ -892,47 +934,5 @@ namespace Script_Browser
         }
 
         #endregion
-
-        private void noFocusBorderBtn10_Click(object sender, EventArgs e)
-        {
-            JObject output = new JObject();
-            this.Opacity = 0.5;
-            new FileChangesForUpdate(FileChangesForUpdate.Types.Delete, output).ShowDialog();
-            this.Opacity = 1;
-
-            if (output.Count > 0 && !(fileChanges["Delete"] as JArray).Contains(output["Value"]))
-            {
-                (fileChanges["Delete"] as JArray).Add(output["Value"]);
-                dataGridView1.Rows.Add(true, Properties.Resources.delete_file, output["Value"], new JObject() { ["Type"] = "Delete", ["Value"] = output["Value"] }.ToString());
-            }
-        }
-
-        private void noFocusBorderBtn11_Click(object sender, EventArgs e)
-        {
-            JObject output = new JObject();
-            this.Opacity = 0.5;
-            new FileChangesForUpdate(FileChangesForUpdate.Types.MoveOrCopy, output).ShowDialog();
-            this.Opacity = 1;
-
-            if (output.Count > 0 && !(fileChanges["Move"] as JArray).Contains(output))
-            {
-                (fileChanges["Move"] as JArray).Add(output);
-                dataGridView1.Rows.Add(true, Properties.Resources.move_file, output["From"] + " ▶ " + output["To"], new JObject() { ["Type"] = "Move", ["From"] = output["From"], ["To"] = output["To"] }.ToString());
-            }
-        }
-
-        private void noFocusBorderBtn12_Click(object sender, EventArgs e)
-        {
-            JObject output = new JObject();
-            this.Opacity = 0.5;
-            new FileChangesForUpdate(FileChangesForUpdate.Types.MoveOrCopy, output).ShowDialog();
-            this.Opacity = 1;
-
-            if (output.Count > 0 && !(fileChanges["Copy"] as JArray).Contains(output))
-            {
-                (fileChanges["Copy"] as JArray).Add(output);
-                dataGridView1.Rows.Add(true, Properties.Resources.copy_file, output["From"] + " ▶ " + output["To"], new JObject() { ["Type"] = "Copy", ["From"] = output["From"], ["To"] = output["To"] }.ToString());
-            }
-        }
     }
 }
