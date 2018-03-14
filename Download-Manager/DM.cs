@@ -23,7 +23,7 @@ namespace Download_Manager
         //close window by clicking on "X"
         private void labelX_Click(object sender, EventArgs e)
         {
-            Environment.Exit(0);
+            Application.Exit();
         }
 
         //minimize form by clicking on "_"
@@ -39,7 +39,7 @@ namespace Download_Manager
             mouseDown = true;
             lastLocation = e.Location;
         }
-        //calculating nwe position while mouse moves
+        //calculating new position while mouse moves
         private void tableLayoutPanel1_MouseMove(object sender, MouseEventArgs e)
         {
             if (mouseDown)
@@ -84,7 +84,7 @@ namespace Download_Manager
             DialogResult result = MessageBox.Show("Are you sure?", "", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
-                Environment.Exit(0);
+                Application.Exit();
             }
         }
 
