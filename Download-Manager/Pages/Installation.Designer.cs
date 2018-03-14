@@ -45,6 +45,7 @@
             this.labelSpeed = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -131,18 +132,19 @@
             // 
             // checkBox2
             // 
+            this.checkBox2.AccessibleRole = System.Windows.Forms.AccessibleRole.ScrollBar;
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(7, 145);
+            this.checkBox2.Location = new System.Drawing.Point(10, 139);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(154, 22);
+            this.checkBox2.Size = new System.Drawing.Size(186, 22);
             this.checkBox2.TabIndex = 10;
-            this.checkBox2.Text = "Create desktop link";
+            this.checkBox2.Text = "Create desktop shortcut";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(7, 173);
+            this.checkBox3.Location = new System.Drawing.Point(10, 167);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(143, 22);
             this.checkBox3.TabIndex = 11;
@@ -153,9 +155,9 @@
             // 
             this.buttonInstall.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.buttonInstall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonInstall.Location = new System.Drawing.Point(12, 91);
+            this.buttonInstall.Location = new System.Drawing.Point(10, 215);
             this.buttonInstall.Name = "buttonInstall";
-            this.buttonInstall.Size = new System.Drawing.Size(621, 27);
+            this.buttonInstall.Size = new System.Drawing.Size(623, 27);
             this.buttonInstall.TabIndex = 12;
             this.buttonInstall.Text = "Install";
             this.buttonInstall.UseVisualStyleBackColor = true;
@@ -164,7 +166,7 @@
             // labelSpeed
             // 
             this.labelSpeed.AutoSize = true;
-            this.labelSpeed.Location = new System.Drawing.Point(298, 259);
+            this.labelSpeed.Location = new System.Drawing.Point(301, 306);
             this.labelSpeed.Name = "labelSpeed";
             this.labelSpeed.Size = new System.Drawing.Size(36, 18);
             this.labelSpeed.TabIndex = 13;
@@ -176,7 +178,7 @@
             this.button3.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(559, 268);
+            this.button3.Location = new System.Drawing.Point(562, 315);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(71, 24);
             this.button3.TabIndex = 14;
@@ -186,15 +188,26 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(7, 205);
+            this.progressBar1.Location = new System.Drawing.Point(10, 264);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(623, 25);
             this.progressBar1.TabIndex = 15;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(10, 111);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(161, 22);
+            this.checkBox1.TabIndex = 16;
+            this.checkBox1.Text = "Start Script-Browser";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // Installation
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.labelSpeed);
@@ -238,5 +251,6 @@
         private System.Windows.Forms.Label labelSpeed;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

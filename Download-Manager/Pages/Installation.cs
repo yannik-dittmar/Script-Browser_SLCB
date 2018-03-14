@@ -23,11 +23,6 @@ namespace Download_Manager.Pages
             InitializeComponent();
         }
 
-        private void domainUpDown1_SelectedItemChanged(object sender, EventArgs e)
-        {
-
-        }
-
         //FolderBrowser for selection of path for download
         private void button1_Click(object sender, EventArgs e)
         {
@@ -35,8 +30,8 @@ namespace Download_Manager.Pages
 
             if (result == DialogResult.OK)
             {
-                pathInstallation = folderBrowserDialog1.SelectedPath;
-                textBox1.Text = pathInstallation + "\\Script-Browser";
+                pathInstallation = folderBrowserDialog1.SelectedPath + "\\Script-Browser";
+                textBox1.Text = pathInstallation;
             }
         }
 
@@ -44,7 +39,7 @@ namespace Download_Manager.Pages
         {
 
             String urlAddress = "http://www.digital-programming.de/ScriptBrowser/setup.zip";
-            String location = pathInstallation + "\\Script-Browser";
+            String location = pathInstallation;
             WebClient webClient;               //webclient for downloading
             Stopwatch sw = new Stopwatch();
 
@@ -62,13 +57,15 @@ namespace Download_Manager.Pages
             if (Directory.Exists(location))
             {
                 DialogResult result = MessageBox.Show("You already installed the Script-Browser.", "Error", MessageBoxButtons.OK);
-                //DialogResult result = MetroFramework.MetroMessageBox.Show(this, "You already installed the Script-Browser.", " ", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2, 100);
                 download = false;
             }
 
-
-            if (textBox1.Text != "" && download)
+            if (download)
             {
+                //disable brwose buttons
+                button1.Enabled = false;
+                button2.Enabled = false;
+
                 //create directory for Script-Browser
                 Directory.CreateDirectory(location);
 
@@ -97,7 +94,7 @@ namespace Download_Manager.Pages
             void ProgressChanged(object sender2, DownloadProgressChangedEventArgs e2)
             {
                 //update label for downloadspeed
-                labelSpeed.Text = string.Format("{0} kb/s", (e2.BytesReceived / 1024d / sw.Elapsed.TotalSeconds).ToString());
+                labelSpeed.Text = string.Format("{0} kb/s", (Math.Round(e2.BytesReceived / 1024d / sw.Elapsed.TotalSeconds)).ToString());
 
                 //update progressbar
                 progressBar1.Value = e2.ProgressPercentage;
@@ -125,21 +122,54 @@ namespace Download_Manager.Pages
                     ZipFile.ExtractToDirectory(location + "\\setup.zip", location);
                     //delete zip file
                     File.Delete(location + "\\setup.zip");
+
+                    //start SB?
+                    if (checkBox1.Checked)
+                    {
+                        Process.Start(pathInstallation + "\\Script-Browser.exe", "\"" + pathStreamlabs + "\" true");
+                    }
+                    else
+                    {
+                        Process.Start(pathInstallation + "\\Script-Browser.exe", "\"" + pathStreamlabs + "\" false");
+                    }
+
                     //check if user wants to create desktop link
                     if (checkBox2.Checked == true)
                     {
-                        string deskDir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+                        string desktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
 
                         //create desktop shortcut
-                        using (StreamWriter writer = new StreamWriter(deskDir + "\\Script-Browser.url"))
+                        using (StreamWriter writer = new StreamWriter(desktop + "\\Script-Browser.url"))
                         {
-                            string app = pathInstallation + "\\Script-Browser\\Script-Browser.exe";
+                            string app = pathInstallation + "\\Script-Browser.exe";
                             writer.WriteLine("[InternetShortcut]");
                             writer.WriteLine("URL=file:///" + app);
                             writer.WriteLine("IconIndex=0");
                             string icon = app.Replace('\\', '/');
                             writer.WriteLine("IconFile=" + icon);
                             writer.Flush();
+                        }
+                    }
+
+                    if (checkBox3.Checked)
+                    {
+                        //create start menu folder
+                        string startMenu = Environment.GetFolderPath(Environment.SpecialFolder.Programs) + "\\Script-Browser";
+                        
+                        if (!Directory.Exists(startMenu))
+                        {
+                            Directory.CreateDirectory(startMenu);
+                        }
+
+
+                        using (StreamWriter writer2 = new StreamWriter(startMenu + ".url"))
+                        {
+                            writer2.WriteLine("[InternetShortcut]");
+                            writer2.WriteLine("URL=file:///" + pathInstallation + "\\Script-Browser.exe");
+                            writer2.WriteLine("IconIndex=0");
+                            string icon = (pathInstallation + "\\Script-Browser.exe").Replace('\\', '/');
+                            writer2.WriteLine("IconFile=" + icon);
+                            writer2.Flush();
                         }
                     }
                 }

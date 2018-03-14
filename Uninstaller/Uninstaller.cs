@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace Uninstaller
 {
-    public partial class Form1 : Form
+    public partial class Uninstaller : Form
     {
-        public Form1()
+        public Uninstaller()
         {
             InitializeComponent();
         }
@@ -26,24 +26,16 @@ namespace Uninstaller
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //delete desktop shortcut
-            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            try
-            {
-                File.Delete(Path.Combine(desktopPath, "Script-Browser.lnk"));
-            }
-            catch { }
-
             //uninstall script-Browser
             Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
 
-            DirectoryInfo di = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
+            DirectoryInfo directory = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
 
-            foreach (FileInfo file in di.GetFiles())
+            foreach (FileInfo file in directory.GetFiles())
             {
                 //file.Delete();
             }
-            foreach (DirectoryInfo dir in di.GetDirectories())
+            foreach (DirectoryInfo dir in directory.GetDirectories())
             {
                 //dir.Delete(true);
             }
