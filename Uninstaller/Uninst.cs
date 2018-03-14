@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace Uninstaller
 {
-    public partial class Form1 : Form
+    public partial class Uninst : Form
     {
-        public Form1()
+        public Uninst()
         {
             InitializeComponent();
             textBox1.Text = "" + AppDomain.CurrentDomain.BaseDirectory;
@@ -61,8 +61,14 @@ namespace Uninstaller
 
             //delete uninstaller using cmd
 
-            Process.Start("cmd.exe", "/C ping 1.1.1.1 -n 1 -w 3000 > Nul & Del " + Application.ExecutablePath);
+            //Process.Start("cmd.exe", "/C ping 1.1.1.1 -n 1 -w 3000 > Nul & Del " + Application.ExecutablePath);
             //Process.Start("cmd.exe", "/C ping 1.1.1.1 -n 1 -w 3000 > Nul & Del " + AppDomain.CurrentDomain.BaseDirectory);
+            ProcessStartInfo deleteApp = new ProcessStartInfo();
+            deleteApp.Arguments = "/C ping 1.1.1.1 -n 1 -w 3000 > Nul & Del \"" + Application.ExecutablePath + "\"";
+            deleteApp.WindowStyle = ProcessWindowStyle.Hidden;
+            deleteApp.CreateNoWindow = true;
+            deleteApp.FileName = "cmd.exe";
+            Process.Start(deleteApp);
             Application.Exit();
         }
     }

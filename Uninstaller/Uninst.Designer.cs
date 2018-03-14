@@ -1,6 +1,6 @@
 ﻿namespace Uninstaller
 {
-    partial class Form1
+    partial class Uninst
     {
         /// <summary>
         /// Erforderliche Designervariable.

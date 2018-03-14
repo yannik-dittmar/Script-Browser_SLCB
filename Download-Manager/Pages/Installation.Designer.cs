@@ -151,6 +151,14 @@
             this.checkBox3.Text = "Add to start menu";
             this.checkBox3.UseVisualStyleBackColor = true;
             // 
+            // folderBrowserDialog1
+            // 
+            this.folderBrowserDialog1.RootFolder = System.Environment.SpecialFolder.MyComputer;
+            // 
+            // folderBrowserDialog2
+            // 
+            this.folderBrowserDialog2.RootFolder = System.Environment.SpecialFolder.MyComputer;
+            // 
             // buttonInstall
             // 
             this.buttonInstall.FlatAppearance.BorderColor = System.Drawing.Color.White;

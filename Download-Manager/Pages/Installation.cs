@@ -11,6 +11,7 @@ using System.Net;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
+using Microsoft.Win32;
 
 namespace Download_Manager.Pages
 {
@@ -172,6 +173,10 @@ namespace Download_Manager.Pages
                             writer2.Flush();
                         }
                     }
+
+                    //add Updater to registry
+                    RegistryKey key = Registry.CurrentUser.OpenSubKey("Computer\\HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+                    key.SetValue("Updater SB", pathInstallation + "\\Updater.exe");
                 }
             }
         }
