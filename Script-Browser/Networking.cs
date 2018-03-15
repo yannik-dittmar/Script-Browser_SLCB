@@ -229,13 +229,17 @@ namespace Script_Browser
         //Update hochladen mit Datei-Änderungen
         public static string UploadUpdate(UploadScript form, string info, string path)
         {
+            //IP des Datenbank-Servers überprüfen
             if (CheckIp(form))
             {
+                //Ein MultipartFormDataContent erstellen
                 using (MultipartFormDataContent data = new MultipartFormDataContent
                 {
                     { new StringContent(info), "info" },
                     { new StreamContent(File.Open(path, FileMode.Open)), "file", "script.zip" }
                 })
+                
+                //Abfrage starten und Ergebnis zurückgeben
                 using (HttpClient web = new HttpClient())
                     return web.PostAsync(storageServer + "/Script%20Browser/uploadUpdate.php?user=" + username + "&pass=" + password, data).Result.Content.ReadAsStringAsync().Result;
             }
@@ -245,12 +249,16 @@ namespace Script_Browser
         //Update hochladen ohne Datei-Änderungen
         public static string UploadUpdate(UploadScript form, string info)
         {
+            //IP des Datenbank-Servers überprüfen
             if (CheckIp(form))
             {
+                //Ein MultipartFormDataContent erstellen
                 using (MultipartFormDataContent data = new MultipartFormDataContent
                 {
                     { new StringContent(info), "info" }
                 })
+
+                //Abfrage starten und Ergebnis zurückgeben
                 using (HttpClient web = new HttpClient())
                     return web.PostAsync(storageServer + "/Script%20Browser/uploadUpdate.php?user=" + username + "&pass=" + password, data).Result.Content.ReadAsStringAsync().Result;
             }

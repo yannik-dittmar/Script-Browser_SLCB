@@ -759,6 +759,8 @@ namespace Script_Browser
                 info["LongDescription"] = richTextBox1.Text;
                 info["Tags"] = new JArray(searchTags.ToArray());
 
+                Console.WriteLine(info.ToString());
+
                 //Script versuchen hochzuladen
                 string result = Networking.UploadScript(this, info.ToString(), Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip");
 
