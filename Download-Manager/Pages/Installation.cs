@@ -24,11 +24,12 @@ namespace Download_Manager.Pages
             InitializeComponent();
         }
 
-        //FolderBrowser for selection of path for download
+        //FolderBrowser für das Wählen eines Pfades
         private void button1_Click(object sender, EventArgs e)
         {
             DialogResult result = folderBrowserDialog1.ShowDialog();
 
+            //bei Bestätigung Speichern des Pfades in Variable
             if (result == DialogResult.OK)
             {
                 pathInstallation = folderBrowserDialog1.SelectedPath + "\\Script-Browser";
@@ -36,38 +37,39 @@ namespace Download_Manager.Pages
             }
         }
 
+        //Knopf "Installieren"
         private void buttonInstall_Click(object sender, EventArgs e)
         {
-
+            //URL Adresse, Installationspfad, WebClient um Daten zu senden und zu empfangen, Stoppuhr
             String urlAddress = "http://www.digital-programming.de/ScriptBrowser/setup.zip";
             String location = pathInstallation;
             WebClient webClient;               //webclient for downloading
             Stopwatch sw = new Stopwatch();
 
             Boolean download = true;
-            //test if chatbot folder is correct
+            //Testen, ob der Streamlabs Chatbot installiert ist
             if (!File.Exists(pathStreamlabs + "\\Streamlabs Chatbot.exe"))
             {
                 DialogResult result = MessageBox.Show("The selected path for the Streamlabs Chatbot doesn't contain it.", "Error", MessageBoxButtons.OK);
-                //DialogResult result2 = MetroFramework.MetroMessageBox.Show(this, "The selected path for the Streamlabs Chatbot doesn't contain it.", " ", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2, 100);
                 download = false;
 
             }
 
-            //check if Script-Browser already exists -> error
-            if (Directory.Exists(location))
+            //Prüfen, ob der Script-Browser bereits existiert
+            if (Directory.Exists(location) && File.Exists(location+"\\Script-Browser.exe"))
             {
                 DialogResult result = MessageBox.Show("You already installed the Script-Browser.", "Error", MessageBoxButtons.OK);
                 download = false;
             }
 
+            //Downloaden, wenn keine Fehlermeldung
             if (download)
             {
-                //disable brwose buttons
+                //Brwose Buttons deaktivieren
                 button1.Enabled = false;
                 button2.Enabled = false;
 
-                //create directory for Script-Browser
+                //Ordner für Script-Browser erstellen
                 Directory.CreateDirectory(location);
 
                 //Downloading
@@ -76,10 +78,10 @@ namespace Download_Manager.Pages
                     webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
                     webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
 
-                    //url address
+                    //url Adresse
                     Uri URL = urlAddress.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ? new Uri(urlAddress) : new Uri("http://" + urlAddress);
 
-                    //start stopwatch used to calculate download speed
+                    //Starten der Stoppuhr um Downloadgeschwindigkeit zu berechnen
                     sw.Start();
 
                     //download
@@ -91,20 +93,20 @@ namespace Download_Manager.Pages
                 }
             }
 
-            //updating ui while downloading
+            //Ladebalken aktualisieren
             void ProgressChanged(object sender2, DownloadProgressChangedEventArgs e2)
             {
-                //update label for downloadspeed
+                //label für Geschwindigkeit aktualisieren
                 labelSpeed.Text = string.Format("{0} kb/s", (Math.Round(e2.BytesReceived / 1024d / sw.Elapsed.TotalSeconds)).ToString());
 
-                //update progressbar
+                //Ladebalken aktualisieren
                 progressBar1.Value = e2.ProgressPercentage;
             }
 
-            //download completed
+            //download fertig
             void Completed(object sender2, AsyncCompletedEventArgs e2)
             {
-                //reset stopwatch
+                //Stoppuhr zurücksetzen
                 sw.Reset();
 
 
@@ -112,34 +114,36 @@ namespace Download_Manager.Pages
                 {
                     //cancelled
                 }
-                //completed
+                //fertiger Download
                 else
                 {
-                    //enable button for finishing process 
+                    //Button "finish" aktivieren
                     button3.Enabled = true;
-                    Console.WriteLine("test");
 
-                    //extract downloaded zip file
+                    //Zip entpacken
                     ZipFile.ExtractToDirectory(location + "\\setup.zip", location);
-                    //delete zip file
+                    //Zip Datei löschen
                     File.Delete(location + "\\setup.zip");
 
-                    //start SB?
+                    //Prüfen, ob SB gestartet werden soll
+                    //ja -> starten des SB mit Parametern Pfad und Start im Vordergrund
                     if (checkBox1.Checked)
                     {
                         Process.Start(pathInstallation + "\\Script-Browser.exe", "\"" + pathStreamlabs + "\" true");
                     }
+                    //nein -> starten des SB mit Parametern Pfad und Start im Hintergrund
                     else
                     {
                         Process.Start(pathInstallation + "\\Script-Browser.exe", "\"" + pathStreamlabs + "\" false");
                     }
 
-                    //check if user wants to create desktop link
+                    //Desktop Link?
                     if (checkBox2.Checked == true)
                     {
+                        //Pfad des Desktops
                         string desktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
 
-                        //create desktop shortcut
+                        //Erstellen eines Links
                         using (StreamWriter writer = new StreamWriter(desktop + "\\Script-Browser.url"))
                         {
                             string app = pathInstallation + "\\Script-Browser.exe";
@@ -152,17 +156,19 @@ namespace Download_Manager.Pages
                         }
                     }
 
+                    //Startmenüeintrag?
                     if (checkBox3.Checked)
                     {
-                        //create start menu folder
+                        //Startmenüordner Pfad
                         string startMenu = Environment.GetFolderPath(Environment.SpecialFolder.Programs) + "\\Script-Browser";
                         
+                        //bei Nichtexistenz erstellen eines Ordners
                         if (!Directory.Exists(startMenu))
                         {
                             Directory.CreateDirectory(startMenu);
                         }
 
-
+                        //Eintrag erstellen
                         using (StreamWriter writer2 = new StreamWriter(startMenu + ".url"))
                         {
                             writer2.WriteLine("[InternetShortcut]");
@@ -174,35 +180,35 @@ namespace Download_Manager.Pages
                         }
                     }
 
-                    //add Updater to registry
+                    //Updater zu regestry hizufügen
                     RegistryKey key = Registry.CurrentUser.OpenSubKey("Computer\\HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run", true);
                     key.SetValue("Updater SB", pathInstallation + "\\Updater.exe");
                 }
             }
         }
 
-        //finish installation
+        //Button finish
         private void button3_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        //change path for installation if user changes text of textbox
+        //Pfad bei Nutzereingabe überschreiben
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
             pathStreamlabs = textBox2.Text;
         }
 
-        //change path of Streamlabs folder if user changes text of textbox
+        //Pfad bei Nutzereingabe überschreiben
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             pathInstallation = textBox1.Text;
         }
 
-        //FolderBrowser for selection of path of Streamlabs Chatbot
+        //FolderBrowser für das Wählen eines Pfades für Streamlabs Chatbot
         private void button2_Click(object sender, EventArgs e)
         {
-            //Disable new folder button
+            //Verhindern, dass ein neuer Ornder erstellt wird
             this.folderBrowserDialog2.ShowNewFolderButton = false;
             DialogResult result = folderBrowserDialog2.ShowDialog();
 
