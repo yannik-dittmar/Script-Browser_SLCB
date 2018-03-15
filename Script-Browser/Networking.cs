@@ -22,13 +22,14 @@ namespace Script_Browser
         public static string password = "a94a8fe5ccb19ba61c4c0873d391e987982fbbd3";
         public static List<string> scripts = new List<string>();
 
-        //Encrypt passwords
+        //Encrypt passwords SHA1
         static string Hash(string input)
         {
             var hash = (new SHA1Managed()).ComputeHash(Encoding.UTF8.GetBytes(input));
             return string.Join("", hash.Select(b => b.ToString("x2")).ToArray());
         }
 
+        //IP des Datenbanks-Server abrufen
         public static bool UpdateIp()
         {
             try
@@ -40,6 +41,7 @@ namespace Script_Browser
             catch { return false; }
         }
 
+        //Überprüfen ob die IP vom Datenbank-Server existiert
         public static bool CheckIp(Form form)
         {
             tryagain:
@@ -56,70 +58,82 @@ namespace Script_Browser
             return true;
         }
 
+        //Anmeldung
         public static void Login(string _username, string _password, Main form)
         {
-            _password = Hash(_password);
+            _password = Hash(_password); //Passwort verschlüsseln 
             tryagain:
             try
             {
-                CheckIp(form);
+                CheckIp(form); //IP überprüfen
 
                 using (WebClient web = new WebClient())
                 {
+                    //Serverabfrage starten
                     string result = web.DownloadString(storageServer + "/Script%20Browser/login.php?user=" + _username + "&pass=" + _password + "&getinfo=true");
+
+                    //Anmeldedaten sind falsch
                     if (result.Contains("false"))
                         MetroMessageBox.Show(form, "The username or password was incorrect.", "Login error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 100);
+                    //Anmeldedaten sind korrekt
                     else
                     {
+                        //Erstellen des JObjects aus der Serverantwort
                         JObject info = JObject.Parse(result);
                         username = info["Username"].ToString();
                         password = _password;
                         form.settings1.label1.Text = "Logged in as " + username;
 
+                        //Login-Bereich verstecken und Logout-Bereich anzeigen
                         form.settings1.animator1.Hide(form.settings1.tableLayoutPanel1);
                         form.settings1.animator1.Show(form.settings1.tableLayoutPanel2);
 
+                        //Scripts, die dem Nutzer gehören erfassen
                         foreach (JToken i in info["Scripts"] as JArray)
                             scripts.Add(i.ToString());
                     }
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                Console.WriteLine(ex.StackTrace);
+                //Unerwarteter Fehler (z.B. kein Internet)
                 if (DialogResult.Retry == MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150))
                     goto tryagain;
             }
         }
 
+        //Regestrieren
         public static void SignUp(string _username, string _password, string email, Main form)
         {
-            _password = Hash(_password);
+            _password = Hash(_password); //Passwort verschlüsseln
             tryagain:
             try
             {
-                CheckIp(form);
+                CheckIp(form); //IP überprüfen
 
                 using (WebClient web = new WebClient())
                 {
+                    //Serverabfrage starten
                     string result = web.DownloadString(storageServer + "/Script%20Browser/signUp.php?username=" + _username + "&pass=" + _password + "&email=" + email);
 
-                    if (result.Contains("username"))
+                    if (result.Contains("username")) //Benutzername bereits vorhanden
                         MetroMessageBox.Show(form, "The username \"" + _username + "\" is allready registered!\nPlease select another one.", "Sign up error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150);
-                    else if (result.Contains("email"))
+                    else if (result.Contains("email")) //EMail bereits vorhanden
                         MetroMessageBox.Show(form, "The email address \"" + email + "\" is allready registered!\nPlease select another one.", "Sign up error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150);
-                    else if (result.Contains("blacklist"))
+                    else if (result.Contains("blacklist")) //EMail darf nicht benutzt werden
                         MetroMessageBox.Show(form, "The email address \"" + email + "\" is blacklisted!\nContact us under \"sl.chatbot.script.browser@gmail.com\" for more information.", "Sign up error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150);
-                    else if (result.Contains("false"))
+                    else if (result.Contains("false")) //Unerwarteter Fehler
                         MetroMessageBox.Show(form, "There was an unexected sign up error.\nPlease try again later.", "Sign up error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150);
-                    else
+                    else //Regestrierung erfolgreich
                     {
                         MetroMessageBox.Show(form, "You signed up successfully!\nA verification email has been send to your email account. Please check your inbox.", "Sign up success", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, 150);
 
+                        //Anmeldedaten setzen
                         username = _username;
                         password = _password;
                         form.settings1.label1.Text = "Logged in as " + username;
 
+                        //Login-Bereich verstecken und Logout-Bereich anzeigen
                         form.settings1.animator1.Hide(form.settings1.tableLayoutPanel1);
                         form.settings1.animator1.Show(form.settings1.tableLayoutPanel2);
                     }
@@ -127,11 +141,13 @@ namespace Script_Browser
             }
             catch
             {
+                //Unerwarteter Fehler (z.B. kein Internet)
                 if (DialogResult.Retry == MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150))
                     goto tryagain;
             }
         }
 
+        //TopScripts aufrufen
         public static string GetTopScripts(string type, string highest, int page, Main form)
         {
             CheckIp(form);
@@ -139,6 +155,7 @@ namespace Script_Browser
                 return web.DownloadString(storageServer + "/Script%20Browser/getTopScripts.php?type=" + type + "&highest=" + highest + "&page=" + page);
         }
 
+        //Nach Scripts suchen
         public static string SearchScripts(string[] tags, Main form)
         {
             CheckIp(form);
@@ -146,6 +163,7 @@ namespace Script_Browser
                 return web.DownloadString(storageServer + "/Script%20Browser/searchByTags.php?tags=" + JArray.FromObject(tags).ToString());
         }
 
+        //Script-Informationen nach ID abrufen
         public static string GetScriptById(Main form, string id)
         {
             CheckIp(form);
@@ -153,6 +171,7 @@ namespace Script_Browser
                 return web.DownloadString(storageServer + "/Script%20Browser/getScript.php?id=" + id);
         }
 
+        //Überprüfen ob ein Update für ein Script vorliegt
         public static bool CheckForUpdate(string id, string ver)
         {
             CheckIp(null);
@@ -160,6 +179,7 @@ namespace Script_Browser
                 return web.DownloadString(storageServer + "/Script%20Browser/checkForUpdate.php?id=" + id + "&ver=" + ver).Contains("UPDATE");
         }
 
+        //Script hochladen
         public static string UploadScript(UploadScript form, string info, string path)
         {
             if (CheckIp(form))
@@ -175,6 +195,7 @@ namespace Script_Browser
             return "false";
         }
 
+        //Script herunterladen
         public static bool DownloadScript(Main form, int id)
         {
             try
@@ -190,6 +211,7 @@ namespace Script_Browser
             return false;
         }
 
+        //Informationen zu einem Script bekommen um ein Update durchzuführen
         public static string GetUploadUpdateInfo(Main form, string id)
         {
             try
@@ -204,6 +226,7 @@ namespace Script_Browser
             return "";
         }
 
+        //Update hochladen mit Datei-Änderungen
         public static string UploadUpdate(UploadScript form, string info, string path)
         {
             if (CheckIp(form))
@@ -219,6 +242,7 @@ namespace Script_Browser
             return "false";
         }
 
+        //Update hochladen ohne Datei-Änderungen
         public static string UploadUpdate(UploadScript form, string info)
         {
             if (CheckIp(form))
