@@ -27,7 +27,7 @@ namespace Uninstaller
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //delete desktop shortcut
+            //Desktopverlinkung löschen
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             try
             {
@@ -35,15 +35,16 @@ namespace Uninstaller
             }
             catch {}
 
-            //remove start menu shortcut
+            //Startmenüverlinkung löschen
             if (Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.Programs) + "\\Script-Browser"))
             {
                 File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.Programs) + "\\Script-Browser" + "\\Script-Browser.url");
             }
 
-            //uninstall script-Browser
+            //Deinstallieren
             DirectoryInfo di = new DirectoryInfo("" + AppDomain.CurrentDomain.BaseDirectory);
 
+            //Löschen aller Dateien im Ordner
             foreach (FileInfo file in di.GetFiles())
             {
                 if (file.Name != "Uninstaller.exe")
@@ -54,12 +55,13 @@ namespace Uninstaller
                     catch { }
                 }
             }
+            //Löschen aller Ordner in diesem Ordner
             foreach (DirectoryInfo dir in di.GetDirectories())
             {
                 dir.Delete(true);
             }
 
-            //delete uninstaller using cmd
+            //Löschen von Uninstaller.exe mit cmd
 
             //Process.Start("cmd.exe", "/C ping 1.1.1.1 -n 1 -w 3000 > Nul & Del " + Application.ExecutablePath);
             //Process.Start("cmd.exe", "/C ping 1.1.1.1 -n 1 -w 3000 > Nul & Del " + AppDomain.CurrentDomain.BaseDirectory);

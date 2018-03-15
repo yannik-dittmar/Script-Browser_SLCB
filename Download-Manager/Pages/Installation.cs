@@ -182,7 +182,7 @@ namespace Download_Manager.Pages
 
                     //Updater zu regestry hizufügen
                     RegistryKey key = Registry.CurrentUser.OpenSubKey("Computer\\HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-                    key.SetValue("Updater SB", pathInstallation + "\\Updater.exe");
+                    //key.SetValue("Updater SB", pathInstallation + "\\Updater.exe");
                 }
             }
         }
