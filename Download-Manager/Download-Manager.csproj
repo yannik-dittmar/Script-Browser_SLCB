@@ -67,12 +67,6 @@
     <Compile Include="DM.Designer.cs">
       <DependentUpon>DM.cs</DependentUpon>
     </Compile>
-    <Compile Include="MsgBox.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MsgBox.Designer.cs">
-      <DependentUpon>MsgBox.cs</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Installation.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -84,9 +78,6 @@
     <Compile Include="RichTextBoxExtension.cs" />
     <EmbeddedResource Include="DM.resx">
       <DependentUpon>DM.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MsgBox.resx">
-      <DependentUpon>MsgBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\Installation.resx">
       <DependentUpon>Installation.cs</DependentUpon>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Download_Manager
 {
-    //class for checking if user scrolled to end of a richTextBox
+    //Prüfen, ob der Nutzer zum Ende der TextBox gescrollt hat
     //credits: https://stackoverflow.com/questions/19343794/how-to-know-if-richtextbox-vertical-scrollbar-reached-the-max-value
     public static class RichTextBoxExtension
     {
@@ -27,7 +27,6 @@ namespace Download_Manager
         {
             SCROLLINFO scrollInfo = new SCROLLINFO();
             scrollInfo.cbSize = System.Runtime.InteropServices.Marshal.SizeOf(scrollInfo);
-            //SIF_RANGE = 0x1, SIF_TRACKPOS = 0x10,  SIF_PAGE= 0x2
             scrollInfo.fMask = 0x10 | 0x1 | 0x2;
             GetScrollInfo(rtb.Handle, 1, ref scrollInfo);//nBar = 1 -> VScrollbar
             return scrollInfo.max == scrollInfo.nTrackPos + scrollInfo.nPage;
