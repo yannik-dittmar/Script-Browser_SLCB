@@ -58,6 +58,7 @@ namespace Script_Browser
             InitializeComponent();
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
 
+            //Style für Textfelder setzen
             materialSingleLineTextField1.SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
             materialSingleLineTextField2.SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
             materialSingleLineTextField3.SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
@@ -65,6 +66,7 @@ namespace Script_Browser
 
             try
             {
+                //Information über Script aus Script-Datei lesen
                 string[] lines = File.ReadAllLines(path);
                 foreach (string line in lines)
                 {
@@ -80,36 +82,41 @@ namespace Script_Browser
             }
             catch { }
 
+            //Pfad globalisieren und in Elemente einfügen
             this.path = path;
             label3.Text = Path.GetDirectoryName(path) + "\\";
             fileSystemWatcher1.Path = Path.GetDirectoryName(path) + "\\";
-            UpdateDgvFiles(null, null);
+            UpdateDgvFiles(null, null); //Dateien im Scriptordner erfassen
 
+            //Bestimmen des Script Typs
             if (path.Split('\\')[path.Split('\\').Length - 1].Contains("_StreamlabsParameter.py") || path.Split('\\')[path.Split('\\').Length - 1].Contains("_AnkhBotParameter.py"))
                 metroComboBox1.SelectedIndex = 1;
             else
                 metroComboBox1.SelectedIndex = 0;
 
+            //Überprüfen ob bereits Informationen zum Script mitgegeben wurden, wenn ja handelt es sich um ein Update
             uuInfo = _uuInfo;
             if (uuInfo != null)
             {
                 this.Text = "Upload Update";
                 label1.Text = "Script Browser - Upload Update";
 
-                richTextBox1.Text = uuInfo["LongDescription"].ToString();
+                richTextBox1.Text = uuInfo["LongDescription"].ToString(); //Lange Beschreibung setzen
 
+                //Tags hinzufügen
                 string tags = "";
                 foreach (JToken tag in uuInfo["Tags"] as JArray)
                     tags += tag + " ";
                 metroTextBox1.Text = tags;
                 AddTags(null, null);
 
+                //Zeige bestimmte Bereiche, die nur für das Updaten von Dateien gedacht sind
                 flowLayoutPanel1.Visible = true;
                 tableLayoutPanel11.Visible = true;
             }
-
         }
 
+        //Ein string zwischen zwei " zurückgeben
         public static string GetLineItem(string line)
         {
             try
@@ -148,12 +155,14 @@ namespace Script_Browser
 
         private void UploadScript_Load(object sender, EventArgs e)
         {
+            //Buttons wie Pfeile formen (für Navbar oben)
             ShapeArrow(noFocusBorderBtn1, 0);
             ShapeArrow(noFocusBorderBtn2, 1);
             ShapeArrow(noFocusBorderBtn3, 1);
             ShapeArrow(noFocusBorderBtn4, 1);
             ShapeArrow(noFocusBorderBtn5, 2);
 
+            //Alle Fenster laden und wieder zurück zum ersten gehen
             currentStep = 5;
             SetPage(1, true);
             SetPage(2, true);
@@ -196,10 +205,12 @@ namespace Script_Browser
 
         #endregion
 
+        //Neue Tabseite setzen
         private void SetPage(int page, bool updateTable)
         {
             if (page <= currentStep && page > 0)
             {
+                //Navbar Farben updaten
                 for (int i = 0; i < tableLayoutPanel4.Controls.Count; i++)
                 {
                     tableLayoutPanel4.Controls[i].BackColor = Color.FromArgb(25, 72, 70);
@@ -208,6 +219,7 @@ namespace Script_Browser
                         tableLayoutPanel4.Controls[i].BackColor = Color.FromArgb(51, 139, 118);
                 }
 
+                //Andere Tabseiten verstecken, nur derzeitige anzeigen
                 if (updateTable)
                 {
                     for (int i = 0; i < tableLayoutTabControl.ColumnStyles.Count; i++)
@@ -235,6 +247,7 @@ namespace Script_Browser
 
                 if (updateTable)
                 {
+                    //Button unten rechts aktualisieren
                     if (uploaded)
                         noFocusBorderBtn6.Text = "Finish";
                     else if (page != 5)
@@ -245,6 +258,7 @@ namespace Script_Browser
                     noFocusBorderBtn7.Enabled = page != 1;
                     currentPage = page;
 
+                    //Info Text zu jeweiliger Seite aktualisieren
                     if (uuInfo == null)
                     {
                         switch (page)
@@ -291,6 +305,7 @@ namespace Script_Browser
             }
         }
 
+        //Festlegen bis wohin der Nutzer maximal gehen kann
         private void EnableStep(int step)
         {
             for (int i = 0; i < tableLayoutPanel4.Controls.Count; i++)
@@ -301,11 +316,13 @@ namespace Script_Browser
             noFocusBorderBtn7.Enabled = currentPage != 1;
         }
 
+        //Tabseiten auf Knopfdruck von Navbar wechseln
         private void noFocusBorderBtn1_MouseClick(object sender, MouseEventArgs e)
         {
             try { SetPage(Int32.Parse((sender as Control).Tag.ToString()), true); } catch { }
         }
 
+        //Nächste Seite anzeigen bzw. Script-Upload starten
         private void nextPage_Click(object sender, EventArgs e)
         {
             if (noFocusBorderBtn6.Text == "Upload" && !uploaded)
@@ -316,6 +333,7 @@ namespace Script_Browser
                 SetPage(currentPage + 1, true);
         }
 
+        //Vorherige Seite anzeigen
         private void previousPage_Click(object sender, EventArgs e)
         {
             SetPage(currentPage - 1, true);
@@ -323,6 +341,7 @@ namespace Script_Browser
 
         #region Tab: Script Information
 
+        //Überprüfen ob Eingabefelder Text beinhalten
         private void CheckScriptInformation(object sender, EventArgs e)
         {
             List<MaterialSingleLineTextField> textfields = new List<MaterialSingleLineTextField> { materialSingleLineTextField1, materialSingleLineTextField2, materialSingleLineTextField3, materialSingleLineTextField4 };
@@ -340,6 +359,7 @@ namespace Script_Browser
                     label11.Visible = textfield.Text == uuInfo["Version"].ToString();
             }
 
+            //Festlegen ob die weiteren Einstellungen für den Nutzer freigegeben werden
             if (ok && currentStep == 1)
             {
                 EnableStep(2);
@@ -354,6 +374,7 @@ namespace Script_Browser
         #region Tab: Description
         //TODO: Add Markdown Info
 
+        //Farbe der Buttons ändern
         private void SwitchBtn(Button btn, bool enabled)
         {
             if (enabled)
@@ -362,6 +383,7 @@ namespace Script_Browser
                 btn.BackColor = Color.FromArgb(18, 25, 31);
         }
 
+        //Texteingabe anzeigen
         private void button1_Click(object sender, EventArgs e)
         {
             SwitchBtn(button1, true);
@@ -371,11 +393,12 @@ namespace Script_Browser
             panelMarkdown.Visible = false;
         }
 
+        //Vorschau des Textes anzeigen
         private void button2_Click(object sender, EventArgs e)
         {
             try
             {
-                webBrowser1.DocumentText = "<html><body>" + Markdown.ToHtml(richTextBox1.Text).Replace("\n", "<br>") + "</body></html>";
+                webBrowser1.DocumentText = "<html><body>" + Markdown.ToHtml(richTextBox1.Text).Replace("\n", "<br>") + "</body></html>"; //WebBrowser mit Text von Nutzer laden
                 SwitchBtn(button1, false);
                 SwitchBtn(button2, true);
                 SwitchBtn(button3, false);
@@ -385,6 +408,7 @@ namespace Script_Browser
             catch { }
         }
 
+        //Markdown Informationen anzeigen
         private void button3_Click(object sender, EventArgs e)
         {
             SwitchBtn(button1, false);
@@ -416,6 +440,7 @@ namespace Script_Browser
             }
         }
 
+        //Überprüfen ob Nutzer eine Beschreibung hinzugefügt hat
         private void CheckDescription(object sender, EventArgs e)
         {
             if (richTextBox1.Text.Trim(' ').Trim('\n').Length > 0)
@@ -432,6 +457,7 @@ namespace Script_Browser
 
         #region Tab: Tags
 
+        //Einen Tag hinzufügen und anzeigen
         private void AddTags(object sender, EventArgs e)
         {
             try
@@ -457,6 +483,7 @@ namespace Script_Browser
             catch { }
         }
 
+        //Tag hinzufügen, wenn Nutzer EINGABE drückt
         private void metroTextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
@@ -466,11 +493,13 @@ namespace Script_Browser
             }
         }
 
+        //Tag entfernen
         private void RemoveTag(object sender, EventArgs e)
         {
             try { searchTags.Remove((sender as Control).Tag.ToString()); } catch { }
         }
 
+        //Überprüfen ob Tags existieren
         private void CheckTags(object sender, ControlEventArgs e)
         {
             if (searchTags.Count > 0)
@@ -487,6 +516,7 @@ namespace Script_Browser
 
         #region Tab: Files
 
+        //Zeilen des DataGridViews mit unterschiedlichen Hintergrundfarben zeichnen 
         private void dataGridView1_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             try
@@ -506,6 +536,7 @@ namespace Script_Browser
             catch { }
         }
 
+        //Zeile aufheben, wenn Maus nicht mehr im DataGridView
         private void dataGridView1_MouseLeave(object sender, EventArgs e)
         {
             DataGridView dgv = sender as DataGridView;
@@ -527,6 +558,7 @@ namespace Script_Browser
             }
         }
 
+        //Überprüfen ob die Haupt-Scriptdatei existiert und ausgewählt ist
         private void CheckFiles(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -557,12 +589,14 @@ namespace Script_Browser
             SetPage(4, currentPage == 4);
         }
 
+        //Bei einmaligen klick auf eine Zelle diese bereits bearbeiten
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             dataGridView1.Rows[e.RowIndex].Selected = true;
             dataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit);
         }
 
+        //Datei Änderungen löschen, wenn Nutzer das Häkchen entfernt
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -613,6 +647,7 @@ namespace Script_Browser
             CheckFiles(null, null);
         }
 
+        //Es wurden Änderungen extern an den Dateien vorgenommen -> aktualisieren der Anzeige
         private void UpdateDgvFiles(object sender, FileSystemEventArgs e)
         {
             try
@@ -626,7 +661,7 @@ namespace Script_Browser
                         Icon ico = SystemIcons.Warning;
                         try
                         {
-                            ico = Icon.ExtractAssociatedIcon(file);
+                            ico = Icon.ExtractAssociatedIcon(file); //Datei bezogenes Icon extrahieren
                         }
                         catch { }
                         dataGridView1.Rows.Add(!file.Contains("settings.js") && !file.Contains("settings.json"), ico, file.Replace(fileSystemWatcher1.Path, ""));
@@ -644,6 +679,7 @@ namespace Script_Browser
             UpdateDgvFiles(null, null);
         }
 
+        //Nutzer fügt einen Lösch-Befehl hinzu (Nur bei Updaten)
         private void noFocusBorderBtn10_Click(object sender, EventArgs e)
         {
             JObject output = new JObject();
@@ -658,6 +694,7 @@ namespace Script_Browser
             }
         }
 
+        //Nutzer fügt einen Move-Befehl hinzu (Nur bei Updaten)
         private void noFocusBorderBtn11_Click(object sender, EventArgs e)
         {
             JObject output = new JObject();
@@ -672,6 +709,7 @@ namespace Script_Browser
             }
         }
 
+        //Nutzer fügt einen Copy-Befehl hinzu (Nur bei Updaten)
         private void noFocusBorderBtn12_Click(object sender, EventArgs e)
         {
             JObject output = new JObject();
@@ -690,20 +728,25 @@ namespace Script_Browser
 
         #region Tab: Upload
 
+        //Script hochladen
         private void Upload(object sender, EventArgs e)
         {
             try
             {
+                //Nutzer oberfläche aktualsieren
                 noFocusBorderBtn8.Visible = false;
                 label10.Text = "Uploading your script... This could take some seconds!";
                 label10.Refresh();
 
+                //Pfad des Zielverzeichnisses zur temporären Speicherung festlegen
                 string path = Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Script\";
                 PrepareFile();
 
+                //Verbleibende Tags hinzufügen, Script-Name und Alias
                 string[] add = new string[] { materialSingleLineTextField1.Text, materialSingleLineTextField4.Text };
                 AddToListNotExists(add);
 
+                //Alle Informationen über das Script in einem JObject Speichern
                 JObject info = new JObject();
                 info["Name"] = materialSingleLineTextField1.Text;
                 info["ShortDescription"] = materialSingleLineTextField2.Text;
@@ -716,22 +759,23 @@ namespace Script_Browser
                 info["LongDescription"] = richTextBox1.Text;
                 info["Tags"] = new JArray(searchTags.ToArray());
 
+                //Script versuchen hochzuladen
                 string result = Networking.UploadScript(this, info.ToString(), Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip");
 
-                if (result.Contains("verify"))
+                if (result.Contains("verify")) //Anmeldedaten waren falsch oder Benutzerkonto ist noch nicht verifiziert
                     MetroMessageBox.Show(this, "Your email address has not been verified yet.\nPlease check your inbox or contact us over ", "Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); //TODO: Add Email
-                else if (result.Contains("enough"))
+                else if (result.Contains("enough")) //Benutzer hat bereits die maximale Anzahl an Scripts erreicht und kann keine neuen mehr hochladen
                     MetroMessageBox.Show(this, "You have reached the maximum amount of scripts for a single user!\nDelete some to upload new ones.", "Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); //TODO: Add delete script from cloud
-                else if (result.Contains("true"))
+                else if (result.Contains("true")) //Script wurde erfolgreich Hochgeladen
                 {
                     label10.Text = "Your script has been successfully uploaded and published!";
                     uploaded = true;
-                    Networking.scripts.Add(result.Replace("true", ""));
+                    Networking.scripts.Add(result.Replace("true", "")); //Script zu eigenen Scripts hinzufügen
                     noFocusBorderBtn6.Text = "Finish";
                     noFocusBorderBtn8.Enabled = false; 
-                    File.Delete(Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip");
+                    File.Delete(Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip"); //Zip-Archiv löschen
 
-                    //Update local script file
+                    //Lokale Scriptdatei mit der neuen ScriptID speichern
                     string[] lines = File.ReadAllLines(this.path);
                     using (StreamWriter writer = new StreamWriter(this.path))
                     {
@@ -752,16 +796,18 @@ namespace Script_Browser
                             writer.WriteLine("ScriptBrowserID = \"" + result.Replace("true", "") + "\"");
                         }
                     }
-                    return;
+                    return; //Methode beenden
                 }
 
-                File.Delete(Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip");
+                File.Delete(Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip"); //Zip-Archiv löschen
             }
             catch (Exception ex) { Console.WriteLine(ex.StackTrace); }
+            //Unbekannter Fehler
             label10.Text = "There was an error while uploading your script :/";
             noFocusBorderBtn8.Visible = true;
         }
 
+        //Update zu einem Script hochladen
         private void UploadUpdate(object sender, EventArgs e)
         {
             try
@@ -769,13 +815,18 @@ namespace Script_Browser
                 noFocusBorderBtn9.Text = "Uploading...";
                 noFocusBorderBtn9.Refresh();
 
+                //Pfad des Zielverzeichnisses zur temporären Speicherung festlegen
                 string path = Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Script\";
+
+                //Datei nur bereitstellen, wenn die Versionsnummer geändert wurde
                 if (materialSingleLineTextField3.Text != uuInfo["Version"].ToString())
                     PrepareFile();
 
+                //Verbleibende Tags hinzufügen, Script-Name und Alias
                 string[] add = new string[] { materialSingleLineTextField1.Text, materialSingleLineTextField4.Text };
                 AddToListNotExists(add);
 
+                //Alle Informationen über das Script in einem JObject Speichern
                 JObject info = new JObject();
                 info["Name"] = materialSingleLineTextField1.Text;
                 info["ShortDescription"] = materialSingleLineTextField2.Text;
@@ -791,12 +842,14 @@ namespace Script_Browser
                 info["Message"] = richTextBox2.Text;
                 info["ID"] = uuInfo["ID"];
 
+                //Script versuchen hochzuladen
                 string result = "";
                 if (materialSingleLineTextField3.Text != uuInfo["Version"].ToString())
                     result = Networking.UploadUpdate(this, info.ToString(), Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip");
                 else
                     result = Networking.UploadUpdate(this, info.ToString());
 
+                //Ergebnis untersuchen
                 if (result.Contains("verify"))
                     MetroMessageBox.Show(this, "Your email address has not been verified yet.\nPlease check your inbox or contact us over ", "Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); //TODO: Add Email
                 else if (result.Contains("enough"))
@@ -819,13 +872,15 @@ namespace Script_Browser
             noFocusBorderBtn9.Text = "Update Script";
         }
 
-        //Copy files to temp dir and compress them
+        //Dateien für den Upload vorbereiten
         private void PrepareFile()
         {
+            //Verzeichnis im Installationsordner erstellen
             string path = Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Script\";
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
 
+            //Falls Datein oder Order in diesem Verzeichnis vorhanden sind sollen diese gelöscht werden
             foreach (string file in Directory.GetFiles(path))
                 File.Delete(file);
             foreach (string dir in Directory.GetDirectories(path))
@@ -833,6 +888,7 @@ namespace Script_Browser
             if (File.Exists(Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip"))
                 File.Delete(Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip");
 
+            //Haupt-Scriptdatei mit denen vom Nutzer eingebeneen Informationen ändern
             string[] lines = File.ReadAllLines(this.path);
             using (StreamWriter writer = new StreamWriter(this.path))
             {
@@ -864,6 +920,7 @@ namespace Script_Browser
                 }
             }
 
+            //Jede vom Benutzer ausgewählte Datei in das temporäre Verzeichnis im Installitionsordner kopieren
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
                 if ((bool)(row.Cells[0] as DataGridViewCheckBoxCell).Value && row.Cells[3].Value + "" == "")
@@ -873,13 +930,16 @@ namespace Script_Browser
                 }
             }
 
+            //Eine Zip-Datei aus allen Elementen im temporäre Verzeichnis erstellen
             ZipFile.CreateFromDirectory(path, Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip");
 
+            //Dateien wieder entfernen, sodass nur das Zip-Archiv übrig bleibt
             foreach (string file in Directory.GetFiles(path))
                 File.Delete(file);
             foreach (string dir in Directory.GetDirectories(path))
                 Directory.Delete(dir, true);
 
+            //Überprüfen der Größe des Zip-Archives (maximal 30MB)
             long size = new FileInfo(Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip").Length;
             if (size >= 31457280)
             {
@@ -888,6 +948,7 @@ namespace Script_Browser
             }
         }
 
+        //Werte richtig in eine Zeile aus einer Text-Datei einsetzen
         private string PutInValue(string line, string value)
         {
             List<char> charLine = line.ToList();
@@ -920,6 +981,7 @@ namespace Script_Browser
             return line;
         }
 
+        //Nicht existierende Tags zur Liste hinzufügen
         private void AddToListNotExists(string[] add)
         {
             foreach (string item in add)
