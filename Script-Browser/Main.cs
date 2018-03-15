@@ -58,19 +58,22 @@ namespace Script_Browser
         public Main()
         {
             InitializeComponent();
-            Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
+            Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); //Fensterecken abrunden
             
+            //Fenster Standardwerte setzen 
             selectedTabPage = tableLayoutPanel3;
             navbarTransitionIn.Add(tableLayoutPanel3);
             lastWinSize = Size;
             lastWinPos = Location;
 
+            //Tabseiten das Fenster übergeben
             topScripts1.form = this;
             search1.form = this;
             settings1.form = this;
             localScripts1.form = this;
         }
 
+        //Erste Tabseite aufrufen und Scripts laden
         private void Main_Load(object sender, EventArgs e)
         {
             panelTab1.Visible = false;
@@ -81,6 +84,7 @@ namespace Script_Browser
 
         #region Windows API, Window Settings
 
+        //Fenster minimierbar machen
         protected override CreateParams CreateParams
         {
             get
@@ -92,6 +96,7 @@ namespace Script_Browser
             }
         }
 
+        //Größe des Fensters verstellen
         protected override void WndProc(ref Message m)
         {
             switch (m.Msg)
@@ -108,6 +113,7 @@ namespace Script_Browser
             }
         }
 
+        //Fenster wieder herstellen nachdem es minimiert wurde
         protected override void OnActivated(EventArgs e)
         {
             base.OnActivated(e);
@@ -115,6 +121,7 @@ namespace Script_Browser
                 maximize.Enabled = true;
         }
 
+        //Nach Größenänderung Ecken und Bereiche anpassen
         protected override void OnSizeChanged(EventArgs e)
         {
             base.OnSizeChanged(e);
@@ -125,6 +132,7 @@ namespace Script_Browser
             Invalidate();
         }
 
+        //HTBOTTOMRIGHT zeichnen (unten rechts)
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
@@ -132,6 +140,7 @@ namespace Script_Browser
                 ControlPaint.DrawSizeGrip(e.Graphics, Color.Transparent, sizeGripRectangle);
         }
 
+        //Fenster über den Bildschirm bewegen
         private void MoveForm_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -160,6 +169,7 @@ namespace Script_Browser
             Environment.Exit(0);
         }
 
+        //Fenster langsam transparent machen um es dann zu minimieren
         private void minimized_Tick(object sender, EventArgs e)
         {
             Opacity = (Opacity - ((Double)7 / 100));
@@ -170,6 +180,7 @@ namespace Script_Browser
             }
         }
 
+        //Fenster langsam nicht transparent machen um es dann zu zeigen
         private void maximize_Tick(object sender, EventArgs e)
         {
             Opacity = (Opacity + ((Double)7 / 100));
@@ -177,12 +188,14 @@ namespace Script_Browser
                 maximize.Enabled = false;
         }
 
+        //Fenster auf Knopfdruck minimieren
         private void label4_Click(object sender, EventArgs e)
         {
             minimized.Enabled = true;
             maximize.Enabled = false;
         }
 
+        //Fenster maximieren oder wieder normale Größe herstellen
         private void label3_Click(object sender, EventArgs e)
         {
             Screen screen = Screen.FromControl(this);
@@ -202,6 +215,7 @@ namespace Script_Browser
             }
         }
 
+        //Fensterecken richtig anpasse, wenn im maximierten Modus
         private void Main_Resize(object sender, EventArgs e)
         {
             Screen screen = Screen.FromControl(this);
@@ -221,7 +235,8 @@ namespace Script_Browser
 
         #region  Animations
 
-        // Navbar
+        //Farbe der Elemente der unteren Navigationsleiste ändern
+        //Nutzer hovert über diesem Element
         private void NavTransitionIn_Tick(object sender, EventArgs e)
         {
             for (int i=0; i < navbarTransitionIn.Count; i++)
@@ -246,6 +261,7 @@ namespace Script_Browser
                 navbarTransitionIn.Add(selectedTabPage);
         }
 
+        //Nutzer ist nicht mehr auf dem Element -> stanard Hintergrundfarbe wiederherstellen
         private void NavTransitionOut_Tick(object sender, EventArgs e)
         {
             for (int i = 0; i < navbarTransitionOut.Count; i++)
@@ -269,6 +285,7 @@ namespace Script_Browser
             NavTransitionOut.Enabled = navbarTransitionOut.Count != 0;
         }
 
+        //Mauzeiger betritt ein Auswahl-Element
         private void tableLayoutPanel_MouseEnter(object sender, EventArgs e)
         {
             if (sender.GetType().ToString() != "System.Windows.Forms.TableLayoutPanel")
@@ -287,6 +304,7 @@ namespace Script_Browser
             NavTransitionIn.Enabled = true;
         }
 
+        //Mauszeiger verlässt ein Auswahl-Element
         private void tableLayoutPanel_MouseLeave(object sender, EventArgs e)
         {
             if (selectedTabPage != sender)
@@ -308,18 +326,19 @@ namespace Script_Browser
             }
         }
 
+        //Nutzer hat auf eine Auswahl in der Navigationsleiste geklickt
         private void tableLayoutPanel_MouseClick(object sender, MouseEventArgs e)
         {
-            int index = Int32.Parse(((Control)sender).Tag.ToString());
+            int index = Int32.Parse(((Control)sender).Tag.ToString()); //Herausfinden, welche Tabseite aufgerufen werden soll
 
             if (index > selectedTabPageIndex)
             {
                 Control newControl = ControlByTag(panel2, index + "");
 
                 newControl.Size = panel2.Size;
-                animatorTabPage.Show(newControl);
+                animatorTabPage.Show(newControl); //Neue Seite überdeck die Andere mit einer Animation
                 
-
+                //Navbar Item Hintergrundfarbe auf dauerhaft setzen
                 foreach (Control c in tableLayoutPanel2.Controls)
                 {
                     if (c.Tag.ToString() == index + "")
@@ -352,8 +371,9 @@ namespace Script_Browser
                 newControl.Visible = true;
 
                 oldControl.Size = panel2.Size;
-                animatorTabPage.Hide(oldControl);
+                animatorTabPage.Hide(oldControl); //Alte Seite verschwindet und neue Seite kommt zum vorschein
 
+                //Navbar Item Hintergrundfarbe auf dauerhaft setzen
                 foreach (Control c in tableLayoutPanel2.Controls)
                 {
                     if (c.Tag.ToString() == index + "")
@@ -372,6 +392,7 @@ namespace Script_Browser
             }
         }
 
+        //Ein Element nach seinem Tag erfassen, nur in einem bestimmten 
         private Control ControlByTag(Control parent, string tag)
         {
             foreach (Control c in parent.Controls)
