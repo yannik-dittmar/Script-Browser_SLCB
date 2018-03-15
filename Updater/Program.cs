@@ -33,6 +33,7 @@ namespace Updater
                 versionWeb = reader.ReadToEnd();
             }
 
+            //wenn Versionen nicht übereinstimmen
             if (!versionWeb.Equals(sf.version))
             {
                 String urlAddress = "http://www.digital-programming.de/ScriptBrowser/setup.zip";
@@ -52,12 +53,12 @@ namespace Updater
                     catch { }
                 }
 
-                //download completed
+                //download fertig
                 void Completed(object sender2, AsyncCompletedEventArgs e)
                 {
                     if (!e.Cancelled)
                     {
-                        //delete old files and folders
+                        //Löschen alter Daten
                         DirectoryInfo di = new DirectoryInfo("" + AppDomain.CurrentDomain.BaseDirectory);
 
                         foreach (FileInfo file in di.GetFiles())
@@ -83,9 +84,9 @@ namespace Updater
                             }
                         }
 
-                        //extract downloaded zip file
+                        //ZIP entpacken
                         ZipFile.ExtractToDirectory(location + "\\setup.zip", location);
-                        //delete zip file
+                        //ZIP löschen
                         File.Delete(location + "\\setup.zip");
                     }
                 }
