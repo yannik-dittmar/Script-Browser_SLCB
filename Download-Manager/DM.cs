@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -98,5 +99,9 @@ namespace Download_Manager
             x.Location = new Point(0,52);
         }
 
+        private void linkLabelDP_MouseClick(object sender, MouseEventArgs e)
+        {
+            Process.Start("http://www.digital-programming.de");
+        }
     }
 }

@@ -224,6 +224,7 @@
             this.linkLabelDP.Text = "© Digital-Programming";
             this.linkLabelDP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.linkLabelDP.VisitedLinkColor = System.Drawing.Color.White;
+            this.linkLabelDP.MouseClick += new System.Windows.Forms.MouseEventHandler(this.linkLabelDP_MouseClick);
             // 
             // DM
             // 
