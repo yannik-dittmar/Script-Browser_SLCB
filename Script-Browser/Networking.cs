@@ -69,7 +69,7 @@ namespace Script_Browser
                     return reply.Status == IPStatus.Success;
                 }
             }
-            catch (Exception ex) { Console.WriteLine(storageServer.Replace("http://", "")); }
+            catch { }
             return false;
         }
 

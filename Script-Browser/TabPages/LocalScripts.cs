@@ -22,6 +22,7 @@ namespace Script_Browser.TabPages
     {
         public Main form;
         string currentScriptID = "";
+        bool checkedForUpdates = false;
 
         public LocalScripts()
         {
@@ -97,9 +98,12 @@ namespace Script_Browser.TabPages
                         {
                             dataGridView2.Rows.Add(name, description, type, version, author, scriptFile, id);
                             Main.sf.currentInstalled.Add(new KeyValuePair<int, string>(id, Path.GetDirectoryName(scriptFile)));
+                            if (!checkedForUpdates)
+                                Networking.checkUpdate.Add(new KeyValuePair<string, string>(id.ToString(), scriptFile));
                         }
                     }
                 }
+                checkedForUpdates = true;
 
                 if (dataGridView1.RowCount == 0)
                 {
