@@ -167,13 +167,13 @@ namespace Script_Browser.Controls
 
                     if (Networking.DownloadScript(form, id))
                     {
-                        try { Directory.Delete(Main.sf.streamlabsPath + @"Services\Scripts\" + name + "\\", true); } catch { }
-                        Directory.CreateDirectory(Main.sf.streamlabsPath + @"Services\Scripts\" + name + "\\");
+                        try { Directory.Delete(Main.sf.streamlabsPath + @"Services\Scripts\" + id + "\\", true); } catch { }
+                        Directory.CreateDirectory(Main.sf.streamlabsPath + @"Services\Scripts\" + id + "\\");
 
-                        ZipFile.ExtractToDirectory(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Install.zip", Main.sf.streamlabsPath + @"Services\Scripts\" + name + "\\");
+                        ZipFile.ExtractToDirectory(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Install.zip", Main.sf.streamlabsPath + @"Services\Scripts\" + id + "\\");
                         File.Delete(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Install.zip");
 
-                        foreach (FileInfo file in new DirectoryInfo(Main.sf.streamlabsPath + @"Services\Scripts\" + name + "\\").GetFiles())
+                        foreach (FileInfo file in new DirectoryInfo(Main.sf.streamlabsPath + @"Services\Scripts\" + id + "\\").GetFiles())
                         {
                             if (file.Name.Contains("_StreamlabsSystem.py") || file.Name.Contains("_AnkhBotSystem.py") || file.Name.Contains("_StreamlabsParameter.py") || file.Name.Contains("_AnkhBotParameter.py"))
                             {
@@ -206,7 +206,7 @@ namespace Script_Browser.Controls
                 }
             }
             catch (Exception ex) { Console.WriteLine(ex.StackTrace); }
-            try { Directory.Delete(Main.sf.streamlabsPath + @"Services\Scripts\" + name + "\\", true); } catch { }
+            try { Directory.Delete(Main.sf.streamlabsPath + @"Services\Scripts\" + id + "\\", true); } catch { }
             button3.Text = "Download and Install";
         }
     }

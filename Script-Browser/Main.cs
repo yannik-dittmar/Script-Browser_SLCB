@@ -14,6 +14,9 @@ using MaterialSkin.Animations;
 using System.Runtime.InteropServices;
 using SaveManager;
 using System.IO;
+using System.Threading;
+using Newtonsoft.Json.Linq;
+using System.IO.Compression;
 
 namespace Script_Browser
 {
@@ -69,6 +72,129 @@ namespace Script_Browser
             search1.form = this;
             settings1.form = this;
             localScripts1.form = this;
+
+            //Update Scripts
+            new Thread(delegate() 
+            {
+                while (true)
+                {
+                    try
+                    {
+                        if (Networking.NetworkReady())
+                        {
+                            for (int i = 0; i < Networking.checkUpdate.Count; i++)
+                            {
+                                KeyValuePair<string, string> script = Networking.checkUpdate[i];
+                                try
+                                {
+                                    string version = "";
+                                    string[] lines = File.ReadAllLines(script.Value);
+                                    foreach (string line in lines)
+                                    {
+                                        if (line.ToLower().Contains("version"))
+                                            version = GetLineItem(line);
+                                    }
+
+                                    try
+                                    {
+                                        JObject updateInfo = JObject.Parse(Networking.CheckForUpdate(script.Key, version));
+
+                                        if (Networking.DownloadScript(null, Int32.Parse(script.Key)))
+                                        {
+                                            string path = Path.GetDirectoryName(script.Value) + "";
+
+                                            JObject fileChanges = JObject.Parse(updateInfo["FileChanges"].ToString());
+                                            //Delete
+                                            foreach (JToken delete in fileChanges["Delete"] as JArray)
+                                                try { File.Delete(path + delete); } catch { }
+
+                                            //Move
+                                            foreach (JObject move in fileChanges["Move"])
+                                                try { File.Move(path + move["From"], path + move["To"]); } catch { }
+
+                                            //Copy
+                                            foreach (JObject copy in fileChanges["Copy"])
+                                                try { File.Move(path + copy["From"], path + copy["To"]); } catch { }
+
+                                            try { Directory.Delete(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Update\", true); } catch { }
+                                            Directory.CreateDirectory(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Update\");
+
+                                            if (!Directory.Exists(sf.streamlabsPath + @"Services\Scripts\" + script.Key + "\\"))
+                                                Directory.CreateDirectory(sf.streamlabsPath + @"Services\Scripts\" + script.Key + "\\");
+
+                                            ZipFile.ExtractToDirectory(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Install.zip", Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Update\");
+
+                                            //Copy files
+                                            foreach (string dirPath in Directory.GetDirectories(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Update\", "*", SearchOption.AllDirectories))
+                                                Directory.CreateDirectory(dirPath.Replace(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Update\", sf.streamlabsPath + @"Services\Scripts\" + script.Key + "\\"));
+
+                                            foreach (string newPath in Directory.GetFiles(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Update\", "*.*", SearchOption.AllDirectories))
+                                                File.Copy(newPath, newPath.Replace(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Update\", sf.streamlabsPath + @"Services\Scripts\" + script.Key + "\\"), true);
+
+                                            //Delete temps
+                                            File.Delete(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Install.zip");
+                                            Directory.Delete(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Update\", true);
+
+                                            //Set ID
+                                            foreach (FileInfo file in new DirectoryInfo(sf.streamlabsPath + @"Services\Scripts\" + script.Key + "\\").GetFiles())
+                                            {
+                                                if (file.Name.Contains("_StreamlabsSystem.py") || file.Name.Contains("_AnkhBotSystem.py") || file.Name.Contains("_StreamlabsParameter.py") || file.Name.Contains("_AnkhBotParameter.py"))
+                                                {
+                                                    bool found = false;
+                                                    lines = File.ReadAllLines(file.FullName);
+
+                                                    foreach (string line in lines)
+                                                    {
+                                                        if (line.Contains("ScriptBrowserID = "))
+                                                        {
+                                                            found = true;
+                                                            break;
+                                                        }
+                                                    }
+
+                                                    if (!found)
+                                                    {
+                                                        using (StreamWriter writer = new StreamWriter(file.FullName))
+                                                        {
+                                                            for (int ii = 0; ii < lines.Length; ii++)
+                                                            {
+                                                                writer.WriteLine(lines[ii]);
+
+                                                                if (lines[ii].ToLower().Contains("version") && !found)
+                                                                {
+                                                                    writer.WriteLine("ScriptBrowserID = \"" + script.Key + "\"");
+                                                                    found = true;
+                                                                }
+                                                            }
+
+                                                            if (!found)
+                                                            {
+                                                                writer.WriteLine("");
+                                                                writer.WriteLine("ScriptBrowserID = \"" + script.Key + "\"");
+                                                            }
+                                                        }
+                                                    }
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    catch { }
+                                }
+                                catch { }
+
+                                IAsyncResult wait = BeginInvoke(new MethodInvoker(delegate() { Networking.checkUpdate.RemoveAt(i); }));
+                                while (!wait.IsCompleted)
+                                    Thread.Sleep(1000);
+                                i--;
+                            }
+                        }
+                    }
+                    catch { }
+
+                    Thread.Sleep(500);
+                }
+            }).Start();
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -77,6 +203,21 @@ namespace Script_Browser
             panelTab2.Visible = false;
             panelTab3.Visible = false;
             topScripts1.button3_Click(null, null);
+        }
+
+        public static string GetLineItem(string line)
+        {
+            try
+            {
+                if (line.IndexOf('"') != -1)
+                {
+                    string result = line.Substring(line.IndexOf('"') + 1);
+                    result = result.Substring(0, result.IndexOf('"'));
+                    return result;
+                }
+            }
+            catch { }
+            return "UNDEF";
         }
 
         #region Windows API, Window Settings

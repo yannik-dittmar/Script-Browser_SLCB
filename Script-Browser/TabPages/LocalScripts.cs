@@ -14,6 +14,7 @@ using System.Diagnostics;
 using MetroFramework;
 using Script_Browser.Design;
 using Newtonsoft.Json.Linq;
+using System.Collections.Specialized;
 
 namespace Script_Browser.TabPages
 {
@@ -26,6 +27,8 @@ namespace Script_Browser.TabPages
         {
             InitializeComponent();
             contextMenuStrip1.Renderer = new ArrowRenderer();
+
+            Networking.checkUpdate.CollectionChanged += new NotifyCollectionChangedEventHandler(listChanged);
         }
 
         private void LocalScripts_Load(object sender, EventArgs e)
@@ -236,6 +239,12 @@ namespace Script_Browser.TabPages
                     tableLayoutPanel2.Visible = true;
                     tableLayoutPanel2.Tag = dgv.Rows[e.RowIndex].Cells[5].Value.ToString();
 
+                    if (button4.Visible)
+                    {
+                        button4.Tag = dgv.Rows[e.RowIndex].Cells[6].Value.ToString();
+                        listChanged(null, null);
+                    }
+
                     if (dgv.ColumnCount == 7)
                         currentScriptID = dgv.Rows[e.RowIndex].Cells[6].Value.ToString();
                 }
@@ -326,6 +335,32 @@ namespace Script_Browser.TabPages
                     dataGridView1_CellClick(dgv, new DataGridViewCellEventArgs(0, dgv.SelectedRows[0].Index));
             }
             catch { e.Cancel = true; }
+        }
+
+        //Check for Update
+        private void button4_Click(object sender, EventArgs e)
+        {
+            listChanged(null, null);
+
+            if (button4.Text != "Checking for Updates...")
+                Networking.checkUpdate.Add(new KeyValuePair<string, string>(button4.Tag.ToString(), tableLayoutPanel2.Tag.ToString()));
+        }
+
+        private void listChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            try
+            {
+                foreach (KeyValuePair<string, string> item in Networking.checkUpdate)
+                {
+                    if (item.Key == button4.Tag.ToString())
+                    {
+                        button4.Text = "Checking for Updates...";
+                        return;
+                    }
+                }
+                button4.Text = "Check for Updates";
+            }
+            catch { }
         }
     }
 }

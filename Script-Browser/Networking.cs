@@ -2,12 +2,14 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.NetworkInformation;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +23,7 @@ namespace Script_Browser
         public static string username = "krypto";
         public static string password = "a94a8fe5ccb19ba61c4c0873d391e987982fbbd3";
         public static List<string> scripts = new List<string>();
+        public static ObservableCollection<KeyValuePair<string, string>> checkUpdate = new ObservableCollection<KeyValuePair<string, string>>(); 
 
         //Encrypt passwords
         static string Hash(string input)
@@ -43,7 +46,7 @@ namespace Script_Browser
         public static bool CheckIp(Form form)
         {
             tryagain:
-            if (storageServer == "")
+            if (storageServer == "" || !NetworkReady())
             {
                 if (!UpdateIp())
                 {
@@ -54,6 +57,20 @@ namespace Script_Browser
                 }
             }
             return true;
+        }
+
+        public static bool NetworkReady()
+        {
+            try
+            {
+                using (Ping ping = new Ping())
+                {
+                    PingReply reply = ping.Send(storageServer.Replace("http://", ""), 3000);
+                    return reply.Status == IPStatus.Success;
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(storageServer.Replace("http://", "")); }
+            return false;
         }
 
         public static void Login(string _username, string _password, Main form)
@@ -153,11 +170,11 @@ namespace Script_Browser
                 return web.DownloadString(storageServer + "/Script%20Browser/getScript.php?id=" + id);
         }
 
-        public static bool CheckForUpdate(string id, string ver)
+        public static string CheckForUpdate(string id, string ver)
         {
             CheckIp(null);
             using (WebClient web = new WebClient())
-                return web.DownloadString(storageServer + "/Script%20Browser/checkForUpdate.php?id=" + id + "&ver=" + ver).Contains("UPDATE");
+                return web.DownloadString(storageServer + "/Script%20Browser/checkForUpdate.php?id=" + id + "&ver=" + ver);
         }
 
         public static string UploadScript(UploadScript form, string info, string path)
