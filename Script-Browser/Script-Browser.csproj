@@ -156,6 +156,12 @@
     <Compile Include="Test.Designer.cs">
       <DependentUpon>Test.cs</DependentUpon>
     </Compile>
+    <Compile Include="UpdateMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateMessage.Designer.cs">
+      <DependentUpon>UpdateMessage.cs</DependentUpon>
+    </Compile>
     <Compile Include="UploadScript.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -207,6 +213,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Test.resx">
       <DependentUpon>Test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateMessage.resx">
+      <DependentUpon>UpdateMessage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UploadScript.resx">
       <DependentUpon>UploadScript.cs</DependentUpon>

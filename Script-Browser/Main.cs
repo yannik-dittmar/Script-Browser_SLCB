@@ -76,7 +76,7 @@ namespace Script_Browser
             //Update Scripts
             new Thread(delegate() 
             {
-                while (true)
+                while (!IsDisposed)
                 {
                     try
                     {
@@ -129,7 +129,13 @@ namespace Script_Browser
                                                 Directory.CreateDirectory(dirPath.Replace(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Update\", sf.streamlabsPath + @"Services\Scripts\" + script.Key + "\\"));
 
                                             foreach (string newPath in Directory.GetFiles(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Update\", "*.*", SearchOption.AllDirectories))
-                                                File.Copy(newPath, newPath.Replace(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Update\", sf.streamlabsPath + @"Services\Scripts\" + script.Key + "\\"), true);
+                                            {
+                                                try
+                                                {
+                                                    File.Copy(newPath, newPath.Replace(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Update\", sf.streamlabsPath + @"Services\Scripts\" + script.Key + "\\"), true);
+                                                }
+                                                catch (Exception e) { Console.WriteLine(e.StackTrace); Console.WriteLine(newPath); }
+                                            }
 
                                             //Delete temps
                                             File.Delete(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Install.zip");
@@ -177,14 +183,23 @@ namespace Script_Browser
                                                     break;
                                                 }
                                             }
+
+                                            IAsyncResult wait = BeginInvoke(new MethodInvoker(delegate () 
+                                            {
+                                                notifyIcon1.Tag = updateInfo["UpdateMessage"];
+                                                notifyIcon1.ShowBalloonTip(2000, "Updated Script", updateInfo["Name"].ToString(), ToolTipIcon.Info);
+                                                notifyIcon1.BalloonTipText = updateInfo["Name"].ToString();
+                                            }));
+                                            while (!wait.IsCompleted)
+                                                Thread.Sleep(1000);
                                         }
                                     }
-                                    catch { }
+                                    catch (Exception ex) { Console.WriteLine(ex.StackTrace); }
                                 }
                                 catch { }
 
-                                IAsyncResult wait = BeginInvoke(new MethodInvoker(delegate() { Networking.checkUpdate.RemoveAt(i); }));
-                                while (!wait.IsCompleted)
+                                IAsyncResult wait2 = BeginInvoke(new MethodInvoker(delegate() { Networking.checkUpdate.RemoveAt(i); }));
+                                while (!wait2.IsCompleted)
                                     Thread.Sleep(1000);
                                 i--;
                             }
@@ -528,5 +543,18 @@ namespace Script_Browser
         }
 
         #endregion
+
+        //Show Update Message
+        private void notifyIcon1_BalloonTipClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Opacity = 0.5;
+                new UpdateMessage(notifyIcon1.BalloonTipText, notifyIcon1.Tag.ToString()).ShowDialog();
+                this.BringToFront();
+            }
+            catch { }
+            this.Opacity = 1;
+        }
     }
 }
