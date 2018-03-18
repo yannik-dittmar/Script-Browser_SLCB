@@ -12,13 +12,15 @@ namespace SaveManager
     [Serializable]
     public class SaveFile
     {
-        private string path = "";
+        public String version = "1.0.0";
         public string username = "";
         public string password = "";
         public string streamlabsPath = @"D:\Streamlabs Chatbot\";
         //public string streamlabsPath = @"C:\Users\18diyann\Desktop\Test Ordner\";
         public ObservableCollection<KeyValuePair<int, string>> currentInstalled = new ObservableCollection<KeyValuePair<int, string>>();
-        public String version = "1.0.0";
+        public List<string> ratedScripts = new List<string>();
+
+        private string path = "";
 
         public SaveFile(string _path)
         {
@@ -28,7 +30,12 @@ namespace SaveManager
                 BinaryFormatter bf = new BinaryFormatter();
                 SaveFile sf = (SaveFile)bf.Deserialize(File.Open(path, FileMode.Open));
                 streamlabsPath = sf.streamlabsPath;
-                currentInstalled = sf.currentInstalled;
+
+                if (sf.currentInstalled != null)
+                    currentInstalled = sf.currentInstalled;
+
+                if (sf.ratedScripts != null)
+                    ratedScripts = sf.ratedScripts;
             }
             catch { Console.WriteLine("Could not load SaveFile!"); }
         }

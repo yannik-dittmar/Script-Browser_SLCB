@@ -249,5 +249,15 @@ namespace Script_Browser
             }
             return "false";
         }
+
+        public static string RateScript(Main form, string id, string rating)
+        {
+            if (CheckIp(form))
+            {
+                using (WebClient web = new WebClient())
+                    return web.DownloadString(storageServer + "/Script%20Browser/rateScript.php?id=" + id + "&rating=" + rating);
+            }
+            return "false";
+        }
     }
 }

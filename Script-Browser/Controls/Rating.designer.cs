@@ -83,6 +83,7 @@
             this.pictureBox4.TabIndex = 4;
             this.pictureBox4.TabStop = false;
             this.pictureBox4.Tag = "4";
+            this.pictureBox4.Click += new System.EventHandler(this.RateScript_Click);
             this.pictureBox4.MouseEnter += new System.EventHandler(this.pictureBox_MouseEnter);
             // 
             // pictureBox3
@@ -99,6 +100,7 @@
             this.pictureBox3.TabIndex = 3;
             this.pictureBox3.TabStop = false;
             this.pictureBox3.Tag = "3";
+            this.pictureBox3.Click += new System.EventHandler(this.RateScript_Click);
             this.pictureBox3.MouseEnter += new System.EventHandler(this.pictureBox_MouseEnter);
             // 
             // pictureBox2
@@ -115,6 +117,7 @@
             this.pictureBox2.TabIndex = 2;
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Tag = "2";
+            this.pictureBox2.Click += new System.EventHandler(this.RateScript_Click);
             this.pictureBox2.MouseEnter += new System.EventHandler(this.pictureBox_MouseEnter);
             // 
             // pictureBox1
@@ -131,6 +134,7 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Tag = "1";
+            this.pictureBox1.Click += new System.EventHandler(this.RateScript_Click);
             this.pictureBox1.MouseEnter += new System.EventHandler(this.pictureBox_MouseEnter);
             // 
             // pictureBox5
@@ -147,6 +151,7 @@
             this.pictureBox5.TabIndex = 1;
             this.pictureBox5.TabStop = false;
             this.pictureBox5.Tag = "5";
+            this.pictureBox5.Click += new System.EventHandler(this.RateScript_Click);
             this.pictureBox5.MouseEnter += new System.EventHandler(this.pictureBox_MouseEnter);
             // 
             // label1

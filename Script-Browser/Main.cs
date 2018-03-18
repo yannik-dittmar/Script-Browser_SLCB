@@ -184,7 +184,7 @@ namespace Script_Browser
                                                 }
                                             }
 
-                                            IAsyncResult wait = BeginInvoke(new MethodInvoker(delegate () 
+                                            IAsyncResult wait = BeginInvoke(new MethodInvoker(delegate ()
                                             {
                                                 notifyIcon1.Tag = updateInfo["UpdateMessage"];
                                                 notifyIcon1.ShowBalloonTip(2000, "Updated Script", updateInfo["Name"].ToString(), ToolTipIcon.Info);
@@ -194,7 +194,7 @@ namespace Script_Browser
                                                 Thread.Sleep(1000);
                                         }
                                     }
-                                    catch (Exception ex) { Console.WriteLine(ex.StackTrace); }
+                                    catch { }
                                 }
                                 catch { }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,57 +19,25 @@ namespace Script_Browser
         {
             InitializeComponent();
 
-            string[] lines = File.ReadAllLines(@"C:\Users\Yannik\Desktop\Neues Textdokument.txt");
-            using (StreamWriter writer = new StreamWriter(@"C:\Users\Yannik\Desktop\Neues Textdokument.txt"))
+            string registry_key = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
+            using (Microsoft.Win32.RegistryKey key = Registry.LocalMachine.OpenSubKey(registry_key))
             {
-                for (int i = 0; i < lines.Length; i++)
+                foreach (string subkey_name in key.GetSubKeyNames())
                 {
-                    if (lines[i].Contains("test="))
-                        writer.WriteLine(PutInValue(lines[i], "ultimaten"));
-                    else
-                        writer.WriteLine(lines[i]);
-                }
-            }
-        }
-
-        private string PutInValue(string line, string value)
-        {
-            List<char> charLine = line.ToList();
-
-            bool found = false;
-            for (int i = 0; i < charLine.Count; i++)
-            {
-                if (charLine[i] == '\"')
-                {
-                    if (!found)
-                        found = true;
-                    else
+                    using (RegistryKey subkey = key.OpenSubKey(subkey_name))
                     {
-                        foreach (char c in value.ToCharArray().Reverse())
-                            charLine.Insert(i, c);
-
-                        string result = "";
-                        foreach (char c in charLine)
-                            result += c;
-                        return result;
+                        try
+                        {
+                            if (subkey.GetValue("DisplayName") != null)
+                            { 
+                                if (subkey.GetValue("DisplayName").ToString().Contains("Streamlabs Chatbot"))
+                                    Console.WriteLine(subkey.GetValue("InstallLocation"));
+                            }
+                        }
+                        catch { }
                     }
                 }
-                else if (found)
-                {
-                    charLine.RemoveAt(i);
-                    i--;
-                }
             }
-
-            return line;
-        }
-
-        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
-        {
-            Console.WriteLine(openFileDialog1.FileName);
-            using (WebClient web = new WebClient())
-                Console.WriteLine("RESULT: " + Encoding.Default.GetString(web.UploadFile("http://slcbsb.duckdns.org/Script%20Browser/Scripts/fileUpload.php", "POST", openFileDialog1.FileName)));
-            Console.WriteLine("FINISHED");
         }
     }
 }
