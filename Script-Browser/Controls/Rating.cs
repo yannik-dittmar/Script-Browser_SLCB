@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
+using MetroFramework;
 
 namespace Script_Browser.Controls
 {
@@ -134,8 +135,10 @@ namespace Script_Browser.Controls
                         SetInformation(newRating["Ratings"].ToString(), downloads);
                     }
                 }
+                else
+                    MetroMessageBox.Show(form, "There was a problem with the server response!\nPlease try again later.", "Network error", MessageBoxButtons.OK, MessageBoxIcon.Hand, 150);
             }
-            catch { }
+            catch { MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.OK, MessageBoxIcon.Hand, 150); }
         }
     }
 }

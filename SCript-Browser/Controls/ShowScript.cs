@@ -46,9 +46,8 @@ namespace Script_Browser.Controls
 
             label1.Text = shortDesc;
             webBrowser1.DocumentText = "<html><body>" + Markdown.ToHtml(longDesc).Replace("\n", "<br>") + "</body></html>";
-            rating1.SetRating(Double.Parse(rating.Replace(".", ",")), id);
+            rating1.SetRating((int)Math.Round(Double.Parse(rating.Replace(".", ","))));
             rating1.SetInformation(ratings, downloads);
-            rating1.form = form;
 
             Main.sf.currentInstalled.CollectionChanged += listChanged;
             listChanged(null, null);
