@@ -60,6 +60,14 @@ namespace Script_Browser
 
         public Main()
         {
+            if (!Set_SCB_Path.CheckSLCBPath(sf.streamlabsPath))
+            {
+                if (!Set_SCB_Path.CheckSLCBPath(Set_SCB_Path.GetSLCBPath()))
+                    new Set_SCB_Path(sf.streamlabsPath).ShowDialog();
+            }
+            if (!Set_SCB_Path.CheckSLCBPath(sf.streamlabsPath))
+                Environment.Exit(0);
+
             InitializeComponent();
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
             
@@ -72,9 +80,17 @@ namespace Script_Browser
             search1.form = this;
             settings1.form = this;
             localScripts1.form = this;
+        }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+            panelTab1.Visible = false;
+            panelTab2.Visible = false;
+            panelTab3.Visible = false;
+            topScripts1.button3_Click(null, null);
 
             //Update Scripts
-            new Thread(delegate() 
+            new Thread(delegate ()
             {
                 while (!IsDisposed)
                 {
@@ -198,7 +214,7 @@ namespace Script_Browser
                                 }
                                 catch { }
 
-                                IAsyncResult wait2 = BeginInvoke(new MethodInvoker(delegate() { Networking.checkUpdate.RemoveAt(i); }));
+                                IAsyncResult wait2 = BeginInvoke(new MethodInvoker(delegate () { Networking.checkUpdate.RemoveAt(i); }));
                                 while (!wait2.IsCompleted)
                                     Thread.Sleep(1000);
                                 i--;
@@ -210,14 +226,6 @@ namespace Script_Browser
                     Thread.Sleep(500);
                 }
             }).Start();
-        }
-
-        private void Main_Load(object sender, EventArgs e)
-        {
-            panelTab1.Visible = false;
-            panelTab2.Visible = false;
-            panelTab3.Visible = false;
-            topScripts1.button3_Click(null, null);
         }
 
         public static string GetLineItem(string line)
