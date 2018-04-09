@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -40,6 +41,10 @@ namespace Script_Browser
         public Set_SCB_Path(string path)
         {
             InitializeComponent();
+            Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
+
+            noFocusBorderBtn2.NotEnabledBG = Color.FromArgb(25, 72, 70);
+            noFocusBorderBtn2.Refresh();
             textBox1.Text = path;
 
             if (GetSLCBPath() != "")
@@ -106,7 +111,7 @@ namespace Script_Browser
 
         public static bool CheckSLCBPath(string path)
         {
-            return true;
+            return Directory.Exists(path + @"Services\Scripts") && File.Exists(path + "Streamlabs Chatbot.exe");
         }
     }
 }

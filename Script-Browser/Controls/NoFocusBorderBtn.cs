@@ -10,6 +10,7 @@ namespace Script_Browser.Controls
 {
     class NoFocusBorderBtn : Button
     {
+        public Color NotEnabledBG = Color.FromArgb(22, 36, 45);
         protected override bool ShowFocusCues
         {
             get
@@ -24,7 +25,7 @@ namespace Script_Browser.Controls
 
             if (!Enabled)
             {
-                using (SolidBrush back = new SolidBrush(Color.FromArgb(22, 36, 45)))
+                using (SolidBrush back = new SolidBrush(NotEnabledBG))
                 using (SolidBrush fore = new SolidBrush(ForeColor))
                 using (StringFormat sf = new StringFormat
                 {

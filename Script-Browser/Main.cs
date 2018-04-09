@@ -64,6 +64,8 @@ namespace Script_Browser
             {
                 if (!Set_SCB_Path.CheckSLCBPath(Set_SCB_Path.GetSLCBPath()))
                     new Set_SCB_Path(sf.streamlabsPath).ShowDialog();
+                else
+                    sf.streamlabsPath = Set_SCB_Path.GetSLCBPath();
             }
             if (!Set_SCB_Path.CheckSLCBPath(sf.streamlabsPath))
                 Environment.Exit(0);
@@ -150,7 +152,7 @@ namespace Script_Browser
                                                 {
                                                     File.Copy(newPath, newPath.Replace(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Update\", sf.streamlabsPath + @"Services\Scripts\" + script.Key + "\\"), true);
                                                 }
-                                                catch (Exception e) { Console.WriteLine(e.StackTrace); Console.WriteLine(newPath); }
+                                                catch { }
                                             }
 
                                             //Delete temps

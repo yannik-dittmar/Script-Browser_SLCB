@@ -15,7 +15,7 @@ namespace SaveManager
         public String version = "1.0.0";
         public string username = "";
         public string password = "";
-        public string streamlabsPath = @"D:\Streamlabs Chatbot\";
+        public string streamlabsPath = @"D:\Streamlabs Chatbot\test\";
         //public string streamlabsPath = @"C:\Users\18diyann\Desktop\Test Ordner\";
         public ObservableCollection<KeyValuePair<int, string>> currentInstalled = new ObservableCollection<KeyValuePair<int, string>>();
         public List<string> ratedScripts = new List<string>();
