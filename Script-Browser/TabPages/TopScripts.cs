@@ -144,6 +144,7 @@ namespace Script_Browser.TabPages
 
                         animatorScript.DefaultAnimation.SlideCoeff = new PointF(slidecoeff, 0);
                         animatorScript.ShowSync(panelScript);
+                        panelBrowse.Visible = false;
                     }
                 }
             }
@@ -162,6 +163,7 @@ namespace Script_Browser.TabPages
                     slidecoeff = -1;
 
                 animatorScript.DefaultAnimation.SlideCoeff = new PointF(slidecoeff, 0);
+                panelBrowse.Visible = true;
                 animatorScript.HideSync(panelScript);
                 (sender as Control).Parent.Parent.Dispose();
             }

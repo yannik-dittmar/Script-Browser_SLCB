@@ -17,6 +17,7 @@ using System.IO;
 using System.Threading;
 using Newtonsoft.Json.Linq;
 using System.IO.Compression;
+using AnimatorNS;
 
 namespace Script_Browser
 {

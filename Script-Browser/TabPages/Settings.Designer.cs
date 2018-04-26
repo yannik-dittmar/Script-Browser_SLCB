@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            AnimatorNS.Animation animation1 = new AnimatorNS.Animation();
+            AnimatorNS.Animation animation5 = new AnimatorNS.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Settings));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
@@ -37,6 +37,8 @@
             this.signupPass = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.signupUsername = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.signupPassConfirm = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.roundedEdgesButton2 = new Script_Browser.Controls.RoundedEdgesButton();
+            this.roundedEdgesButton1 = new Script_Browser.Controls.RoundedEdgesButton();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.loginPass = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.loginUsername = new MaterialSkin.Controls.MaterialSingleLineTextField();
@@ -45,6 +47,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.roundedEdgesButton3 = new Script_Browser.Controls.RoundedEdgesButton();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.materialSingleLineTextField3 = new MaterialSkin.Controls.MaterialSingleLineTextField();
@@ -52,14 +55,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.materialSingleLineTextField1 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.label2 = new System.Windows.Forms.Label();
-            this.animator1 = new AnimatorNS.Animator(this.components);
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+            this.label5 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.roundedEdgesButton3 = new Script_Browser.Controls.RoundedEdgesButton();
-            this.roundedEdgesButton2 = new Script_Browser.Controls.RoundedEdgesButton();
-            this.roundedEdgesButton1 = new Script_Browser.Controls.RoundedEdgesButton();
+            this.animator1 = new AnimatorNS.Animator(this.components);
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -187,6 +188,44 @@
             this.signupPassConfirm.Size = new System.Drawing.Size(192, 23);
             this.signupPassConfirm.TabIndex = 5;
             this.signupPassConfirm.UseSystemPasswordChar = false;
+            // 
+            // roundedEdgesButton2
+            // 
+            this.roundedEdgesButton2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.roundedEdgesButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(72)))), ((int)(((byte)(70)))));
+            this.roundedEdgesButton2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.animator1.SetDecoration(this.roundedEdgesButton2, AnimatorNS.DecorationType.None);
+            this.roundedEdgesButton2.FlatAppearance.BorderSize = 0;
+            this.roundedEdgesButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.roundedEdgesButton2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
+            this.roundedEdgesButton2.ForeColor = System.Drawing.Color.White;
+            this.roundedEdgesButton2.Location = new System.Drawing.Point(397, 191);
+            this.roundedEdgesButton2.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.roundedEdgesButton2.Name = "roundedEdgesButton2";
+            this.roundedEdgesButton2.Size = new System.Drawing.Size(140, 41);
+            this.roundedEdgesButton2.TabIndex = 7;
+            this.roundedEdgesButton2.Text = "Sign up";
+            this.roundedEdgesButton2.UseVisualStyleBackColor = false;
+            this.roundedEdgesButton2.Click += new System.EventHandler(this.roundedEdgesButton2_Click);
+            // 
+            // roundedEdgesButton1
+            // 
+            this.roundedEdgesButton1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.roundedEdgesButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(72)))), ((int)(((byte)(70)))));
+            this.roundedEdgesButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.animator1.SetDecoration(this.roundedEdgesButton1, AnimatorNS.DecorationType.None);
+            this.roundedEdgesButton1.FlatAppearance.BorderSize = 0;
+            this.roundedEdgesButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.roundedEdgesButton1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
+            this.roundedEdgesButton1.ForeColor = System.Drawing.Color.White;
+            this.roundedEdgesButton1.Location = new System.Drawing.Point(186, 191);
+            this.roundedEdgesButton1.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.roundedEdgesButton1.Name = "roundedEdgesButton1";
+            this.roundedEdgesButton1.Size = new System.Drawing.Size(140, 41);
+            this.roundedEdgesButton1.TabIndex = 2;
+            this.roundedEdgesButton1.Text = "Login";
+            this.roundedEdgesButton1.UseVisualStyleBackColor = false;
+            this.roundedEdgesButton1.Click += new System.EventHandler(this.roundedEdgesButton1_Click);
             // 
             // tableLayoutPanel3
             // 
@@ -334,6 +373,24 @@
             this.tableLayoutPanel2.TabIndex = 1;
             this.tableLayoutPanel2.Visible = false;
             // 
+            // roundedEdgesButton3
+            // 
+            this.roundedEdgesButton3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.roundedEdgesButton3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(72)))), ((int)(((byte)(76)))));
+            this.roundedEdgesButton3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.animator1.SetDecoration(this.roundedEdgesButton3, AnimatorNS.DecorationType.None);
+            this.roundedEdgesButton3.FlatAppearance.BorderSize = 0;
+            this.roundedEdgesButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.roundedEdgesButton3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
+            this.roundedEdgesButton3.ForeColor = System.Drawing.Color.White;
+            this.roundedEdgesButton3.Location = new System.Drawing.Point(164, 10);
+            this.roundedEdgesButton3.Margin = new System.Windows.Forms.Padding(20, 10, 3, 3);
+            this.roundedEdgesButton3.Name = "roundedEdgesButton3";
+            this.roundedEdgesButton3.Size = new System.Drawing.Size(140, 41);
+            this.roundedEdgesButton3.TabIndex = 3;
+            this.roundedEdgesButton3.Text = "Logout";
+            this.roundedEdgesButton3.UseVisualStyleBackColor = false;
+            // 
             // label1
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -451,27 +508,6 @@
             this.label2.Text = "Account";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // animator1
-            // 
-            this.animator1.AnimationType = AnimatorNS.AnimationType.VertSlide;
-            this.animator1.Cursor = null;
-            animation1.AnimateOnlyDifferences = true;
-            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
-            animation1.LeafCoeff = 0F;
-            animation1.MaxTime = 1F;
-            animation1.MinTime = 0F;
-            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
-            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
-            animation1.MosaicSize = 0;
-            animation1.Padding = new System.Windows.Forms.Padding(0);
-            animation1.RotateCoeff = 0F;
-            animation1.RotateLimit = 0F;
-            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
-            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
-            animation1.TimeCoeff = 0F;
-            animation1.TransparencyCoeff = 0F;
-            this.animator1.DefaultAnimation = animation1;
-            // 
             // tableLayoutPanel8
             // 
             this.tableLayoutPanel8.AutoSize = true;
@@ -492,6 +528,20 @@
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel8.Size = new System.Drawing.Size(724, 35);
             this.tableLayoutPanel8.TabIndex = 4;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label5.AutoSize = true;
+            this.animator1.SetDecoration(this.label5, AnimatorNS.DecorationType.None);
+            this.label5.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(10, 6);
+            this.label5.Margin = new System.Windows.Forms.Padding(10, 0, 3, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(94, 22);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Location:";
             // 
             // textBox1
             // 
@@ -518,76 +568,33 @@
             this.button1.TabIndex = 10;
             this.button1.Text = "...";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // label5
+            // animator1
             // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label5.AutoSize = true;
-            this.animator1.SetDecoration(this.label5, AnimatorNS.DecorationType.None);
-            this.label5.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(10, 6);
-            this.label5.Margin = new System.Windows.Forms.Padding(10, 0, 3, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(94, 22);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Location:";
+            this.animator1.AnimationType = AnimatorNS.AnimationType.VertSlide;
+            this.animator1.Cursor = null;
+            animation5.AnimateOnlyDifferences = true;
+            animation5.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation5.BlindCoeff")));
+            animation5.LeafCoeff = 0F;
+            animation5.MaxTime = 1F;
+            animation5.MinTime = 0F;
+            animation5.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation5.MosaicCoeff")));
+            animation5.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation5.MosaicShift")));
+            animation5.MosaicSize = 0;
+            animation5.Padding = new System.Windows.Forms.Padding(0);
+            animation5.RotateCoeff = 0F;
+            animation5.RotateLimit = 0F;
+            animation5.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation5.ScaleCoeff")));
+            animation5.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation5.SlideCoeff")));
+            animation5.TimeCoeff = 0F;
+            animation5.TransparencyCoeff = 0F;
+            this.animator1.DefaultAnimation = animation5;
             // 
-            // roundedEdgesButton3
+            // folderBrowserDialog1
             // 
-            this.roundedEdgesButton3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.roundedEdgesButton3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(72)))), ((int)(((byte)(76)))));
-            this.roundedEdgesButton3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.animator1.SetDecoration(this.roundedEdgesButton3, AnimatorNS.DecorationType.None);
-            this.roundedEdgesButton3.FlatAppearance.BorderSize = 0;
-            this.roundedEdgesButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.roundedEdgesButton3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
-            this.roundedEdgesButton3.ForeColor = System.Drawing.Color.White;
-            this.roundedEdgesButton3.Location = new System.Drawing.Point(164, 10);
-            this.roundedEdgesButton3.Margin = new System.Windows.Forms.Padding(20, 10, 3, 3);
-            this.roundedEdgesButton3.Name = "roundedEdgesButton3";
-            this.roundedEdgesButton3.Size = new System.Drawing.Size(140, 41);
-            this.roundedEdgesButton3.TabIndex = 3;
-            this.roundedEdgesButton3.Text = "Logout";
-            this.roundedEdgesButton3.UseVisualStyleBackColor = false;
-            // 
-            // roundedEdgesButton2
-            // 
-            this.roundedEdgesButton2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.roundedEdgesButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(72)))), ((int)(((byte)(70)))));
-            this.roundedEdgesButton2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.animator1.SetDecoration(this.roundedEdgesButton2, AnimatorNS.DecorationType.None);
-            this.roundedEdgesButton2.FlatAppearance.BorderSize = 0;
-            this.roundedEdgesButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.roundedEdgesButton2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
-            this.roundedEdgesButton2.ForeColor = System.Drawing.Color.White;
-            this.roundedEdgesButton2.Location = new System.Drawing.Point(397, 191);
-            this.roundedEdgesButton2.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.roundedEdgesButton2.Name = "roundedEdgesButton2";
-            this.roundedEdgesButton2.Size = new System.Drawing.Size(140, 41);
-            this.roundedEdgesButton2.TabIndex = 7;
-            this.roundedEdgesButton2.Text = "Sign up";
-            this.roundedEdgesButton2.UseVisualStyleBackColor = false;
-            this.roundedEdgesButton2.Click += new System.EventHandler(this.roundedEdgesButton2_Click);
-            // 
-            // roundedEdgesButton1
-            // 
-            this.roundedEdgesButton1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.roundedEdgesButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(72)))), ((int)(((byte)(70)))));
-            this.roundedEdgesButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.animator1.SetDecoration(this.roundedEdgesButton1, AnimatorNS.DecorationType.None);
-            this.roundedEdgesButton1.FlatAppearance.BorderSize = 0;
-            this.roundedEdgesButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.roundedEdgesButton1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
-            this.roundedEdgesButton1.ForeColor = System.Drawing.Color.White;
-            this.roundedEdgesButton1.Location = new System.Drawing.Point(186, 191);
-            this.roundedEdgesButton1.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.roundedEdgesButton1.Name = "roundedEdgesButton1";
-            this.roundedEdgesButton1.Size = new System.Drawing.Size(140, 41);
-            this.roundedEdgesButton1.TabIndex = 2;
-            this.roundedEdgesButton1.Text = "Login";
-            this.roundedEdgesButton1.UseVisualStyleBackColor = false;
-            this.roundedEdgesButton1.Click += new System.EventHandler(this.roundedEdgesButton1_Click);
+            this.folderBrowserDialog1.Description = "Select Streamlabs Chatbot Folder";
+            this.folderBrowserDialog1.RootFolder = System.Environment.SpecialFolder.MyComputer;
             // 
             // Settings
             // 
@@ -645,8 +652,9 @@
         private MaterialSkin.Controls.MaterialSingleLineTextField materialSingleLineTextField2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button1;
         public System.Windows.Forms.Label label5;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

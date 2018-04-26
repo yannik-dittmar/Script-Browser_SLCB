@@ -24,7 +24,11 @@ namespace Script_Browser.TabPages
             signupPass.SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
             signupPassConfirm.SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
             signupEmail.SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
+
+            textBox1.Text = Main.sf.streamlabsPath;
         }
+
+        #region Account
 
         //Login
         private void roundedEdgesButton1_Click(object sender, EventArgs e)
@@ -67,5 +71,27 @@ namespace Script_Browser.TabPages
                 return false;
             }
         }
+
+        #endregion
+
+        #region Streamlabs Chatbot
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DialogResult result = folderBrowserDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                folderBrowserDialog1.SelectedPath += "\\";
+                if (Set_SCB_Path.CheckSLCBPath(folderBrowserDialog1.SelectedPath))
+                {
+                    textBox1.Text = folderBrowserDialog1.SelectedPath;
+                    Main.sf.streamlabsPath = folderBrowserDialog1.SelectedPath;
+                }
+                else
+                    MetroMessageBox.Show(form, "Could not find a valid Streamlabs Chatbot installation!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 100);
+            }
+        }
+
+        #endregion
     }
 }

@@ -34,10 +34,14 @@ namespace Script_Browser.TabPages
 
         private void LocalScripts_Load(object sender, EventArgs e)
         {
-            fileSystemWatcher1.Path = Main.sf.streamlabsPath; //TODO: check path
-            UpdateList(Main.sf.streamlabsPath);
-            //UpdateList(@"D:\Streamlabs Chatbot\");
-            //UpdateList(@"C:\Users\18diyann\Desktop\Test Ordner\");
+            try
+            {
+                fileSystemWatcher1.Path = Main.sf.streamlabsPath; //TODO: check path
+                UpdateList(Main.sf.streamlabsPath);
+                //UpdateList(@"D:\Streamlabs Chatbot\");
+                //UpdateList(@"C:\Users\18diyann\Desktop\Test Ordner\");
+            }
+            catch { }
         }
 
         public void UpdateList(string path)
@@ -183,8 +187,8 @@ namespace Script_Browser.TabPages
                 try
                 {
                     DataGridView dgv = sender as DataGridView;
-                    dgv.ClearSelection();
-                    dgv.Rows[e.RowIndex].Selected = true;
+                    foreach (DataGridViewCell cell in dgv.Rows[e.RowIndex].Cells)
+                        cell.Style.BackColor = Color.FromArgb(34, 55, 69);
 
                     nameToolStripMenuItem.Text = dgv.Rows[e.RowIndex].Cells[0].Value.ToString();
                     uploadUpdateToolStripMenuItem.Visible = false;
@@ -204,14 +208,20 @@ namespace Script_Browser.TabPages
                 }
                 catch { }
             }
-            else
-                (sender as DataGridView).ClearSelection();
         }
 
-        private void dataGridView1_MouseLeave(object sender, EventArgs e)
+        private void dataGridView1_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridView dgv = sender as DataGridView;
-            dgv.ClearSelection();
+            if (e.RowIndex >= 0)
+            {
+                try
+                {
+                    DataGridView dgv = sender as DataGridView;
+                    foreach (DataGridViewCell cell in dgv.Rows[e.RowIndex].Cells)
+                        cell.Style = null;
+                }
+                catch { }
+            }
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -230,12 +240,14 @@ namespace Script_Browser.TabPages
                         button3.Visible = !Networking.scripts.Contains(dgv.Rows[e.RowIndex].Cells[6].Value.ToString());
                         button4.Visible = !Networking.scripts.Contains(dgv.Rows[e.RowIndex].Cells[6].Value.ToString());
                         button5.Visible = Networking.scripts.Contains(dgv.Rows[e.RowIndex].Cells[6].Value.ToString());
+                        dataGridView1.ClearSelection();
                     }
                     else
                     {
                         button3.Visible = false;
                         button4.Visible = false;
                         button5.Visible = false;
+                        dataGridView2.ClearSelection();
                     }
 
                     label3.Text = dgv.Rows[e.RowIndex].Cells[0].Value.ToString();
@@ -255,18 +267,50 @@ namespace Script_Browser.TabPages
                 catch { }
             }
             else
+            {
                 tableLayoutPanel2.Visible = false;
+                dataGridView1.ClearSelection();
+                dataGridView2.ClearSelection();
+            }
         }
 
-        private void hideFooter_MouseClick(object sender, MouseEventArgs e)
+        private void hide_MouseClick(object sender, MouseEventArgs e)
         {
             try
             {
                 DataGridView dgv = sender as DataGridView;
                 if (dgv.HitTest(e.X, e.Y).Type == DataGridViewHitTestType.None)
+                {
                     tableLayoutPanel2.Visible = false;
+                    dataGridView1.ClearSelection();
+                    dataGridView2.ClearSelection();
+                }
             }
-            catch { tableLayoutPanel2.Visible = false; }
+            catch
+            {
+                tableLayoutPanel2.Visible = false;
+                dataGridView1.ClearSelection();
+                dataGridView2.ClearSelection();
+            }
+            try
+            {
+                RowStyle rowStyle = tableLayoutPanel1.RowStyles[(int)(sender as Control).Tag];
+                if (rowStyle.SizeType == SizeType.Absolute)
+                {
+                    rowStyle.SizeType = SizeType.Percent;
+                    rowStyle.Height = 50f;
+                    (sender as Control).BackColor = Color.FromArgb(25, 72, 70);
+                }
+                else
+                {
+                    rowStyle.SizeType = SizeType.Absolute;
+                    rowStyle.Height = 0;
+                    (sender as Control).BackColor = Color.FromArgb(18, 31, 39);
+                }
+                Control c = tableLayoutPanel1.Controls[(int)(sender as Control).Tag];
+                c.Visible = !c.Visible;
+            }
+            catch { }
         }
 
         //Upload script
@@ -325,6 +369,8 @@ namespace Script_Browser.TabPages
         private void button2_Click(object sender, EventArgs e)
         {
             UninstallScript(form, tableLayoutPanel2.Tag.ToString(), label3.Text);
+            dataGridView1.ClearSelection();
+            dataGridView2.ClearSelection();
             tableLayoutPanel2.Visible = false;
         }
 

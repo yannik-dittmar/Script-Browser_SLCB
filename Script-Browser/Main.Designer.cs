@@ -33,6 +33,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -40,18 +41,26 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.label8 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panelTab3 = new System.Windows.Forms.Panel();
+            this.settings1 = new Script_Browser.TabPages.Settings();
             this.panelTab2 = new System.Windows.Forms.Panel();
+            this.localScripts1 = new Script_Browser.TabPages.LocalScripts();
             this.panelTab1 = new System.Windows.Forms.Panel();
+            this.search1 = new Script_Browser.TabPages.Search();
             this.panelTab0 = new System.Windows.Forms.Panel();
+            this.topScripts1 = new Script_Browser.TabPages.TopScripts();
             this.NavTransitionIn = new System.Windows.Forms.Timer(this.components);
             this.NavTransitionOut = new System.Windows.Forms.Timer(this.components);
             this.minimized = new System.Windows.Forms.Timer(this.components);
@@ -59,34 +68,25 @@
             this.panelMain = new System.Windows.Forms.Panel();
             this.animatorTabPage = new AnimatorNS.Animator(this.components);
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.settings1 = new Script_Browser.TabPages.Settings();
-            this.localScripts1 = new Script_Browser.TabPages.LocalScripts();
-            this.search1 = new Script_Browser.TabPages.Search();
-            this.topScripts1 = new Script_Browser.TabPages.TopScripts();
             this.metroPanel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.tableLayoutPanel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.panel2.SuspendLayout();
             this.panelTab3.SuspendLayout();
             this.panelTab2.SuspendLayout();
             this.panelTab1.SuspendLayout();
             this.panelTab0.SuspendLayout();
             this.panelMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.SuspendLayout();
             // 
             // metroPanel1
@@ -132,6 +132,20 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(869, 35);
             this.tableLayoutPanel1.TabIndex = 2;
             this.tableLayoutPanel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveForm_MouseDown);
+            // 
+            // pictureBox5
+            // 
+            this.animatorTabPage.SetDecoration(this.pictureBox5, AnimatorNS.DecorationType.None);
+            this.pictureBox5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox5.Image = global::Script_Browser.Properties.Resources.Logo_white;
+            this.pictureBox5.Location = new System.Drawing.Point(10, 5);
+            this.pictureBox5.Margin = new System.Windows.Forms.Padding(10, 5, 0, 5);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Padding = new System.Windows.Forms.Padding(10, 5, 0, 5);
+            this.pictureBox5.Size = new System.Drawing.Size(30, 25);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox5.TabIndex = 0;
+            this.pictureBox5.TabStop = false;
             // 
             // label2
             // 
@@ -252,6 +266,22 @@
             this.tableLayoutPanel4.MouseEnter += new System.EventHandler(this.tableLayoutPanel_MouseEnter);
             this.tableLayoutPanel4.MouseLeave += new System.EventHandler(this.tableLayoutPanel_MouseLeave);
             // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.animatorTabPage.SetDecoration(this.pictureBox3, AnimatorNS.DecorationType.None);
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(11, 3);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(78, 48);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 4;
+            this.pictureBox3.TabStop = false;
+            this.pictureBox3.Tag = "1";
+            this.pictureBox3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel_MouseClick);
+            this.pictureBox3.MouseEnter += new System.EventHandler(this.tableLayoutPanel_MouseEnter);
+            this.pictureBox3.MouseLeave += new System.EventHandler(this.tableLayoutPanel_MouseLeave);
+            // 
             // label7
             // 
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -292,6 +322,23 @@
             this.tableLayoutPanel3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel_MouseClick);
             this.tableLayoutPanel3.MouseEnter += new System.EventHandler(this.tableLayoutPanel_MouseEnter);
             this.tableLayoutPanel3.MouseLeave += new System.EventHandler(this.tableLayoutPanel_MouseLeave);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.animatorTabPage.SetDecoration(this.pictureBox1, AnimatorNS.DecorationType.None);
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(11, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(78, 48);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Tag = "0";
+            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel_MouseClick);
+            this.pictureBox1.MouseEnter += new System.EventHandler(this.tableLayoutPanel_MouseEnter);
+            this.pictureBox1.MouseLeave += new System.EventHandler(this.tableLayoutPanel_MouseLeave);
             // 
             // label5
             // 
@@ -335,6 +382,22 @@
             this.tableLayoutPanel5.MouseEnter += new System.EventHandler(this.tableLayoutPanel_MouseEnter);
             this.tableLayoutPanel5.MouseLeave += new System.EventHandler(this.tableLayoutPanel_MouseLeave);
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.animatorTabPage.SetDecoration(this.pictureBox2, AnimatorNS.DecorationType.None);
+            this.pictureBox2.Image = global::Script_Browser.Properties.Resources.python;
+            this.pictureBox2.Location = new System.Drawing.Point(11, 3);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(78, 48);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 4;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Tag = "2";
+            this.pictureBox2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel_MouseClick);
+            this.pictureBox2.MouseEnter += new System.EventHandler(this.tableLayoutPanel_MouseEnter);
+            this.pictureBox2.MouseLeave += new System.EventHandler(this.tableLayoutPanel_MouseLeave);
+            // 
             // label6
             // 
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -375,6 +438,22 @@
             this.tableLayoutPanel6.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel_MouseClick);
             this.tableLayoutPanel6.MouseEnter += new System.EventHandler(this.tableLayoutPanel_MouseEnter);
             this.tableLayoutPanel6.MouseLeave += new System.EventHandler(this.tableLayoutPanel_MouseLeave);
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.animatorTabPage.SetDecoration(this.pictureBox4, AnimatorNS.DecorationType.None);
+            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
+            this.pictureBox4.Location = new System.Drawing.Point(11, 3);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(78, 48);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox4.TabIndex = 4;
+            this.pictureBox4.TabStop = false;
+            this.pictureBox4.Tag = "3";
+            this.pictureBox4.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel_MouseClick);
+            this.pictureBox4.MouseEnter += new System.EventHandler(this.tableLayoutPanel_MouseEnter);
+            this.pictureBox4.MouseLeave += new System.EventHandler(this.tableLayoutPanel_MouseLeave);
             // 
             // label8
             // 
@@ -422,6 +501,16 @@
             this.panelTab3.TabIndex = 3;
             this.panelTab3.Tag = "3";
             // 
+            // settings1
+            // 
+            this.settings1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
+            this.animatorTabPage.SetDecoration(this.settings1, AnimatorNS.DecorationType.None);
+            this.settings1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.settings1.Location = new System.Drawing.Point(0, 0);
+            this.settings1.Name = "settings1";
+            this.settings1.Size = new System.Drawing.Size(869, 487);
+            this.settings1.TabIndex = 0;
+            // 
             // panelTab2
             // 
             this.panelTab2.BackColor = System.Drawing.Color.Yellow;
@@ -433,6 +522,16 @@
             this.panelTab2.Size = new System.Drawing.Size(869, 487);
             this.panelTab2.TabIndex = 2;
             this.panelTab2.Tag = "2";
+            // 
+            // localScripts1
+            // 
+            this.localScripts1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
+            this.animatorTabPage.SetDecoration(this.localScripts1, AnimatorNS.DecorationType.None);
+            this.localScripts1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.localScripts1.Location = new System.Drawing.Point(0, 0);
+            this.localScripts1.Name = "localScripts1";
+            this.localScripts1.Size = new System.Drawing.Size(869, 487);
+            this.localScripts1.TabIndex = 0;
             // 
             // panelTab1
             // 
@@ -446,6 +545,16 @@
             this.panelTab1.TabIndex = 1;
             this.panelTab1.Tag = "1";
             // 
+            // search1
+            // 
+            this.search1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
+            this.animatorTabPage.SetDecoration(this.search1, AnimatorNS.DecorationType.None);
+            this.search1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.search1.Location = new System.Drawing.Point(0, 0);
+            this.search1.Name = "search1";
+            this.search1.Size = new System.Drawing.Size(869, 487);
+            this.search1.TabIndex = 0;
+            // 
             // panelTab0
             // 
             this.panelTab0.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
@@ -457,6 +566,16 @@
             this.panelTab0.Size = new System.Drawing.Size(869, 487);
             this.panelTab0.TabIndex = 0;
             this.panelTab0.Tag = "0";
+            // 
+            // topScripts1
+            // 
+            this.topScripts1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
+            this.animatorTabPage.SetDecoration(this.topScripts1, AnimatorNS.DecorationType.None);
+            this.topScripts1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.topScripts1.Location = new System.Drawing.Point(0, 0);
+            this.topScripts1.Name = "topScripts1";
+            this.topScripts1.Size = new System.Drawing.Size(869, 487);
+            this.topScripts1.TabIndex = 0;
             // 
             // NavTransitionIn
             // 
@@ -496,7 +615,7 @@
             // 
             this.animatorTabPage.AnimationType = AnimatorNS.AnimationType.HorizSlide;
             this.animatorTabPage.Cursor = null;
-            animation1.AnimateOnlyDifferences = true;
+            animation1.AnimateOnlyDifferences = false;
             animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
             animation1.LeafCoeff = 0F;
             animation1.MaxTime = 1F;
@@ -520,125 +639,6 @@
             this.notifyIcon1.Visible = true;
             this.notifyIcon1.BalloonTipClicked += new System.EventHandler(this.notifyIcon1_BalloonTipClicked);
             // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.animatorTabPage.SetDecoration(this.pictureBox3, AnimatorNS.DecorationType.None);
-            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(11, 3);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(78, 48);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 4;
-            this.pictureBox3.TabStop = false;
-            this.pictureBox3.Tag = "1";
-            this.pictureBox3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel_MouseClick);
-            this.pictureBox3.MouseEnter += new System.EventHandler(this.tableLayoutPanel_MouseEnter);
-            this.pictureBox3.MouseLeave += new System.EventHandler(this.tableLayoutPanel_MouseLeave);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.animatorTabPage.SetDecoration(this.pictureBox1, AnimatorNS.DecorationType.None);
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(11, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(78, 48);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Tag = "0";
-            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel_MouseClick);
-            this.pictureBox1.MouseEnter += new System.EventHandler(this.tableLayoutPanel_MouseEnter);
-            this.pictureBox1.MouseLeave += new System.EventHandler(this.tableLayoutPanel_MouseLeave);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.animatorTabPage.SetDecoration(this.pictureBox2, AnimatorNS.DecorationType.None);
-            this.pictureBox2.Image = global::Script_Browser.Properties.Resources.python;
-            this.pictureBox2.Location = new System.Drawing.Point(11, 3);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(78, 48);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 4;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Tag = "2";
-            this.pictureBox2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel_MouseClick);
-            this.pictureBox2.MouseEnter += new System.EventHandler(this.tableLayoutPanel_MouseEnter);
-            this.pictureBox2.MouseLeave += new System.EventHandler(this.tableLayoutPanel_MouseLeave);
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.animatorTabPage.SetDecoration(this.pictureBox4, AnimatorNS.DecorationType.None);
-            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(11, 3);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(78, 48);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox4.TabIndex = 4;
-            this.pictureBox4.TabStop = false;
-            this.pictureBox4.Tag = "3";
-            this.pictureBox4.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel_MouseClick);
-            this.pictureBox4.MouseEnter += new System.EventHandler(this.tableLayoutPanel_MouseEnter);
-            this.pictureBox4.MouseLeave += new System.EventHandler(this.tableLayoutPanel_MouseLeave);
-            // 
-            // pictureBox5
-            // 
-            this.animatorTabPage.SetDecoration(this.pictureBox5, AnimatorNS.DecorationType.None);
-            this.pictureBox5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox5.Image = global::Script_Browser.Properties.Resources.Logo_white;
-            this.pictureBox5.Location = new System.Drawing.Point(10, 5);
-            this.pictureBox5.Margin = new System.Windows.Forms.Padding(10, 5, 0, 5);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Padding = new System.Windows.Forms.Padding(10, 5, 0, 5);
-            this.pictureBox5.Size = new System.Drawing.Size(30, 25);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox5.TabIndex = 0;
-            this.pictureBox5.TabStop = false;
-            // 
-            // settings1
-            // 
-            this.settings1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
-            this.animatorTabPage.SetDecoration(this.settings1, AnimatorNS.DecorationType.None);
-            this.settings1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.settings1.Location = new System.Drawing.Point(0, 0);
-            this.settings1.Name = "settings1";
-            this.settings1.Size = new System.Drawing.Size(869, 487);
-            this.settings1.TabIndex = 0;
-            // 
-            // localScripts1
-            // 
-            this.localScripts1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
-            this.animatorTabPage.SetDecoration(this.localScripts1, AnimatorNS.DecorationType.None);
-            this.localScripts1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.localScripts1.Location = new System.Drawing.Point(0, 0);
-            this.localScripts1.Name = "localScripts1";
-            this.localScripts1.Size = new System.Drawing.Size(869, 487);
-            this.localScripts1.TabIndex = 0;
-            // 
-            // search1
-            // 
-            this.search1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
-            this.animatorTabPage.SetDecoration(this.search1, AnimatorNS.DecorationType.None);
-            this.search1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.search1.Location = new System.Drawing.Point(0, 0);
-            this.search1.Name = "search1";
-            this.search1.Size = new System.Drawing.Size(869, 487);
-            this.search1.TabIndex = 0;
-            // 
-            // topScripts1
-            // 
-            this.topScripts1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(36)))), ((int)(((byte)(45)))));
-            this.animatorTabPage.SetDecoration(this.topScripts1, AnimatorNS.DecorationType.None);
-            this.topScripts1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.topScripts1.Location = new System.Drawing.Point(0, 0);
-            this.topScripts1.Name = "topScripts1";
-            this.topScripts1.Size = new System.Drawing.Size(869, 487);
-            this.topScripts1.TabIndex = 0;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -660,27 +660,27 @@
             this.metroPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panelTab3.ResumeLayout(false);
             this.panelTab2.ResumeLayout(false);
             this.panelTab1.ResumeLayout(false);
             this.panelTab0.ResumeLayout(false);
             this.panelMain.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.ResumeLayout(false);
 
         }

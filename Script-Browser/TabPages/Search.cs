@@ -87,12 +87,14 @@ namespace Script_Browser.TabPages
                         if (plainResult.Contains("empty"))
                         {
                             label1.Visible = true;
+                            dataGridView1.Visible = false;
                             label1.Text = "No results found matching your tags.";
                         }
                         else
                         {
                             JObject result = JObject.Parse(plainResult);
                             label1.Visible = false;
+                            dataGridView1.Visible = true;
 
                             dataGridView1.Rows.Clear();
                             foreach (KeyValuePair<string, JToken> row in result)
@@ -138,6 +140,7 @@ namespace Script_Browser.TabPages
 
                     animatorScript.DefaultAnimation.SlideCoeff = new PointF(slidecoeff, 0);
                     animatorScript.ShowSync(panelScript);
+                    panel1.Visible = false;
                 }
             }
             catch (WebException) { MetroFramework.MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.OK, MessageBoxIcon.Error, 125); }
@@ -155,6 +158,7 @@ namespace Script_Browser.TabPages
                     slidecoeff = -1;
 
                 animatorScript.DefaultAnimation.SlideCoeff = new PointF(slidecoeff, 0);
+                panel1.Visible = true;
                 animatorScript.HideSync(panelScript);
                 (sender as Control).Parent.Parent.Dispose();
             }
