@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            AnimatorNS.Animation animation5 = new AnimatorNS.Animation();
+            AnimatorNS.Animation animation1 = new AnimatorNS.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Settings));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
@@ -37,8 +37,6 @@
             this.signupPass = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.signupUsername = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.signupPassConfirm = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.roundedEdgesButton2 = new Script_Browser.Controls.RoundedEdgesButton();
-            this.roundedEdgesButton1 = new Script_Browser.Controls.RoundedEdgesButton();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.loginPass = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.loginUsername = new MaterialSkin.Controls.MaterialSingleLineTextField();
@@ -47,7 +45,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.roundedEdgesButton3 = new Script_Browser.Controls.RoundedEdgesButton();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.materialSingleLineTextField3 = new MaterialSkin.Controls.MaterialSingleLineTextField();
@@ -61,6 +58,13 @@
             this.button1 = new System.Windows.Forms.Button();
             this.animator1 = new AnimatorNS.Animator(this.components);
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.noFocusBorderBtn4 = new Script_Browser.Controls.NoFocusBorderBtn();
+            this.noFocusBorderBtn1 = new Script_Browser.Controls.NoFocusBorderBtn();
+            this.noFocusBorderBtn2 = new Script_Browser.Controls.NoFocusBorderBtn();
+            this.noFocusBorderBtn3 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -70,29 +74,34 @@
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.AutoSize = true;
+            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanel1.ColumnCount = 4;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel4, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.roundedEdgesButton2, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.roundedEdgesButton1, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.noFocusBorderBtn2, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.noFocusBorderBtn3, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 2);
             this.animator1.SetDecoration(this.tableLayoutPanel1, AnimatorNS.DecorationType.None);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 36);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(724, 235);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(724, 284);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel4
@@ -189,44 +198,6 @@
             this.signupPassConfirm.TabIndex = 5;
             this.signupPassConfirm.UseSystemPasswordChar = false;
             // 
-            // roundedEdgesButton2
-            // 
-            this.roundedEdgesButton2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.roundedEdgesButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(72)))), ((int)(((byte)(70)))));
-            this.roundedEdgesButton2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.animator1.SetDecoration(this.roundedEdgesButton2, AnimatorNS.DecorationType.None);
-            this.roundedEdgesButton2.FlatAppearance.BorderSize = 0;
-            this.roundedEdgesButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.roundedEdgesButton2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
-            this.roundedEdgesButton2.ForeColor = System.Drawing.Color.White;
-            this.roundedEdgesButton2.Location = new System.Drawing.Point(397, 191);
-            this.roundedEdgesButton2.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.roundedEdgesButton2.Name = "roundedEdgesButton2";
-            this.roundedEdgesButton2.Size = new System.Drawing.Size(140, 41);
-            this.roundedEdgesButton2.TabIndex = 7;
-            this.roundedEdgesButton2.Text = "Sign up";
-            this.roundedEdgesButton2.UseVisualStyleBackColor = false;
-            this.roundedEdgesButton2.Click += new System.EventHandler(this.roundedEdgesButton2_Click);
-            // 
-            // roundedEdgesButton1
-            // 
-            this.roundedEdgesButton1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.roundedEdgesButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(72)))), ((int)(((byte)(70)))));
-            this.roundedEdgesButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.animator1.SetDecoration(this.roundedEdgesButton1, AnimatorNS.DecorationType.None);
-            this.roundedEdgesButton1.FlatAppearance.BorderSize = 0;
-            this.roundedEdgesButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.roundedEdgesButton1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
-            this.roundedEdgesButton1.ForeColor = System.Drawing.Color.White;
-            this.roundedEdgesButton1.Location = new System.Drawing.Point(186, 191);
-            this.roundedEdgesButton1.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.roundedEdgesButton1.Name = "roundedEdgesButton1";
-            this.roundedEdgesButton1.Size = new System.Drawing.Size(140, 41);
-            this.roundedEdgesButton1.TabIndex = 2;
-            this.roundedEdgesButton1.Text = "Login";
-            this.roundedEdgesButton1.UseVisualStyleBackColor = false;
-            this.roundedEdgesButton1.Click += new System.EventHandler(this.roundedEdgesButton1_Click);
-            // 
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -313,7 +284,7 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(730, 474);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(730, 553);
             this.tableLayoutPanel6.TabIndex = 3;
             // 
             // label4
@@ -323,8 +294,8 @@
             this.label4.Dock = System.Windows.Forms.DockStyle.Top;
             this.label4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(0, 393);
-            this.label4.Margin = new System.Windows.Forms.Padding(0, 20, 0, 0);
+            this.label4.Location = new System.Drawing.Point(0, 472);
+            this.label4.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(730, 33);
             this.label4.TabIndex = 3;
@@ -349,7 +320,7 @@
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(730, 373);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(730, 462);
             this.tableLayoutPanel5.TabIndex = 2;
             // 
             // tableLayoutPanel2
@@ -359,37 +330,20 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.roundedEdgesButton3, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel7, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.noFocusBorderBtn1, 1, 0);
             this.animator1.SetDecoration(this.tableLayoutPanel2, AnimatorNS.DecorationType.None);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 277);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 333);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(724, 93);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(724, 126);
             this.tableLayoutPanel2.TabIndex = 1;
             this.tableLayoutPanel2.Visible = false;
-            // 
-            // roundedEdgesButton3
-            // 
-            this.roundedEdgesButton3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.roundedEdgesButton3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(72)))), ((int)(((byte)(76)))));
-            this.roundedEdgesButton3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.animator1.SetDecoration(this.roundedEdgesButton3, AnimatorNS.DecorationType.None);
-            this.roundedEdgesButton3.FlatAppearance.BorderSize = 0;
-            this.roundedEdgesButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.roundedEdgesButton3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
-            this.roundedEdgesButton3.ForeColor = System.Drawing.Color.White;
-            this.roundedEdgesButton3.Location = new System.Drawing.Point(164, 10);
-            this.roundedEdgesButton3.Margin = new System.Windows.Forms.Padding(20, 10, 3, 3);
-            this.roundedEdgesButton3.Name = "roundedEdgesButton3";
-            this.roundedEdgesButton3.Size = new System.Drawing.Size(140, 41);
-            this.roundedEdgesButton3.TabIndex = 3;
-            this.roundedEdgesButton3.Text = "Logout";
-            this.roundedEdgesButton3.UseVisualStyleBackColor = false;
             // 
             // label1
             // 
@@ -398,8 +352,8 @@
             this.animator1.SetDecoration(this.label1, AnimatorNS.DecorationType.None);
             this.label1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(10, 21);
-            this.label1.Margin = new System.Windows.Forms.Padding(10, 10, 3, 0);
+            this.label1.Location = new System.Drawing.Point(10, 10);
+            this.label1.Margin = new System.Windows.Forms.Padding(10, 0, 3, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(131, 22);
             this.label1.TabIndex = 0;
@@ -418,14 +372,16 @@
             this.tableLayoutPanel7.Controls.Add(this.materialSingleLineTextField2, 0, 0);
             this.tableLayoutPanel7.Controls.Add(this.label3, 0, 0);
             this.tableLayoutPanel7.Controls.Add(this.materialSingleLineTextField1, 1, 0);
+            this.tableLayoutPanel7.Controls.Add(this.noFocusBorderBtn4, 1, 1);
             this.animator1.SetDecoration(this.tableLayoutPanel7, AnimatorNS.DecorationType.None);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(0, 64);
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(0, 52);
             this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
-            this.tableLayoutPanel7.RowCount = 1;
+            this.tableLayoutPanel7.RowCount = 2;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(724, 29);
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(724, 74);
             this.tableLayoutPanel7.TabIndex = 4;
             // 
             // materialSingleLineTextField3
@@ -521,7 +477,7 @@
             this.tableLayoutPanel8.Controls.Add(this.button1, 2, 0);
             this.animator1.SetDecoration(this.tableLayoutPanel8, AnimatorNS.DecorationType.None);
             this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 436);
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 515);
             this.tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 1;
@@ -550,6 +506,7 @@
             this.textBox1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
             this.textBox1.Location = new System.Drawing.Point(110, 3);
             this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(559, 29);
             this.textBox1.TabIndex = 9;
             // 
@@ -557,6 +514,7 @@
             // 
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.animator1.SetDecoration(this.button1, AnimatorNS.DecorationType.None);
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -574,27 +532,145 @@
             // 
             this.animator1.AnimationType = AnimatorNS.AnimationType.VertSlide;
             this.animator1.Cursor = null;
-            animation5.AnimateOnlyDifferences = true;
-            animation5.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation5.BlindCoeff")));
-            animation5.LeafCoeff = 0F;
-            animation5.MaxTime = 1F;
-            animation5.MinTime = 0F;
-            animation5.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation5.MosaicCoeff")));
-            animation5.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation5.MosaicShift")));
-            animation5.MosaicSize = 0;
-            animation5.Padding = new System.Windows.Forms.Padding(0);
-            animation5.RotateCoeff = 0F;
-            animation5.RotateLimit = 0F;
-            animation5.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation5.ScaleCoeff")));
-            animation5.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation5.SlideCoeff")));
-            animation5.TimeCoeff = 0F;
-            animation5.TransparencyCoeff = 0F;
-            this.animator1.DefaultAnimation = animation5;
+            animation1.AnimateOnlyDifferences = true;
+            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
+            animation1.LeafCoeff = 0F;
+            animation1.MaxTime = 1F;
+            animation1.MinTime = 0F;
+            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
+            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
+            animation1.MosaicSize = 0;
+            animation1.Padding = new System.Windows.Forms.Padding(0);
+            animation1.RotateCoeff = 0F;
+            animation1.RotateLimit = 0F;
+            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
+            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
+            animation1.TimeCoeff = 0F;
+            animation1.TransparencyCoeff = 0F;
+            this.animator1.DefaultAnimation = animation1;
             // 
             // folderBrowserDialog1
             // 
             this.folderBrowserDialog1.Description = "Select Streamlabs Chatbot Folder";
             this.folderBrowserDialog1.RootFolder = System.Environment.SpecialFolder.MyComputer;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.flowLayoutPanel1.AutoSize = true;
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(65)))), ((int)(((byte)(164)))));
+            this.tableLayoutPanel1.SetColumnSpan(this.flowLayoutPanel1, 2);
+            this.flowLayoutPanel1.Controls.Add(this.pictureBox1);
+            this.flowLayoutPanel1.Controls.Add(this.label6);
+            this.flowLayoutPanel1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.animator1.SetDecoration(this.flowLayoutPanel1, AnimatorNS.DecorationType.None);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(256, 244);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(3);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(211, 37);
+            this.flowLayoutPanel1.TabIndex = 15;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(65)))), ((int)(((byte)(164)))));
+            this.animator1.SetDecoration(this.pictureBox1, AnimatorNS.DecorationType.None);
+            this.pictureBox1.Image = global::Script_Browser.Properties.Resources.twtich;
+            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(30, 31);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label6
+            // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label6.AutoSize = true;
+            this.animator1.SetDecoration(this.label6, AnimatorNS.DecorationType.None);
+            this.label6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(36, 7);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(169, 22);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Login with Twitch";
+            // 
+            // noFocusBorderBtn4
+            // 
+            this.noFocusBorderBtn4.AutoSize = true;
+            this.noFocusBorderBtn4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.noFocusBorderBtn4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(72)))), ((int)(((byte)(70)))));
+            this.tableLayoutPanel7.SetColumnSpan(this.noFocusBorderBtn4, 2);
+            this.noFocusBorderBtn4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.animator1.SetDecoration(this.noFocusBorderBtn4, AnimatorNS.DecorationType.None);
+            this.noFocusBorderBtn4.FlatAppearance.BorderSize = 0;
+            this.noFocusBorderBtn4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.noFocusBorderBtn4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
+            this.noFocusBorderBtn4.ForeColor = System.Drawing.Color.White;
+            this.noFocusBorderBtn4.Location = new System.Drawing.Point(202, 39);
+            this.noFocusBorderBtn4.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.noFocusBorderBtn4.Name = "noFocusBorderBtn4";
+            this.noFocusBorderBtn4.Size = new System.Drawing.Size(185, 32);
+            this.noFocusBorderBtn4.TabIndex = 15;
+            this.noFocusBorderBtn4.Text = "Change Password";
+            this.noFocusBorderBtn4.UseVisualStyleBackColor = false;
+            // 
+            // noFocusBorderBtn1
+            // 
+            this.noFocusBorderBtn1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(72)))), ((int)(((byte)(76)))));
+            this.noFocusBorderBtn1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.animator1.SetDecoration(this.noFocusBorderBtn1, AnimatorNS.DecorationType.None);
+            this.noFocusBorderBtn1.FlatAppearance.BorderSize = 0;
+            this.noFocusBorderBtn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.noFocusBorderBtn1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
+            this.noFocusBorderBtn1.ForeColor = System.Drawing.Color.White;
+            this.noFocusBorderBtn1.Location = new System.Drawing.Point(154, 3);
+            this.noFocusBorderBtn1.Margin = new System.Windows.Forms.Padding(10, 3, 3, 3);
+            this.noFocusBorderBtn1.Name = "noFocusBorderBtn1";
+            this.noFocusBorderBtn1.Size = new System.Drawing.Size(108, 36);
+            this.noFocusBorderBtn1.TabIndex = 5;
+            this.noFocusBorderBtn1.Text = "Logout";
+            this.noFocusBorderBtn1.UseVisualStyleBackColor = false;
+            // 
+            // noFocusBorderBtn2
+            // 
+            this.noFocusBorderBtn2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.noFocusBorderBtn2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(72)))), ((int)(((byte)(70)))));
+            this.noFocusBorderBtn2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.animator1.SetDecoration(this.noFocusBorderBtn2, AnimatorNS.DecorationType.None);
+            this.noFocusBorderBtn2.FlatAppearance.BorderSize = 0;
+            this.noFocusBorderBtn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.noFocusBorderBtn2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
+            this.noFocusBorderBtn2.ForeColor = System.Drawing.Color.White;
+            this.noFocusBorderBtn2.Location = new System.Drawing.Point(400, 191);
+            this.noFocusBorderBtn2.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.noFocusBorderBtn2.Name = "noFocusBorderBtn2";
+            this.noFocusBorderBtn2.Size = new System.Drawing.Size(134, 40);
+            this.noFocusBorderBtn2.TabIndex = 13;
+            this.noFocusBorderBtn2.Text = "Sign up";
+            this.noFocusBorderBtn2.UseVisualStyleBackColor = false;
+            this.noFocusBorderBtn2.Click += new System.EventHandler(this.roundedEdgesButton2_Click);
+            // 
+            // noFocusBorderBtn3
+            // 
+            this.noFocusBorderBtn3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.noFocusBorderBtn3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(72)))), ((int)(((byte)(70)))));
+            this.noFocusBorderBtn3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.animator1.SetDecoration(this.noFocusBorderBtn3, AnimatorNS.DecorationType.None);
+            this.noFocusBorderBtn3.FlatAppearance.BorderSize = 0;
+            this.noFocusBorderBtn3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.noFocusBorderBtn3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
+            this.noFocusBorderBtn3.ForeColor = System.Drawing.Color.White;
+            this.noFocusBorderBtn3.Location = new System.Drawing.Point(189, 191);
+            this.noFocusBorderBtn3.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.noFocusBorderBtn3.Name = "noFocusBorderBtn3";
+            this.noFocusBorderBtn3.Size = new System.Drawing.Size(134, 40);
+            this.noFocusBorderBtn3.TabIndex = 14;
+            this.noFocusBorderBtn3.Text = "Login";
+            this.noFocusBorderBtn3.UseVisualStyleBackColor = false;
+            this.noFocusBorderBtn3.Click += new System.EventHandler(this.roundedEdgesButton1_Click);
             // 
             // Settings
             // 
@@ -621,6 +697,9 @@
             this.tableLayoutPanel7.PerformLayout();
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel8.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -634,11 +713,8 @@
         private MaterialSkin.Controls.MaterialSingleLineTextField signupPass;
         private MaterialSkin.Controls.MaterialSingleLineTextField signupUsername;
         private MaterialSkin.Controls.MaterialSingleLineTextField signupPassConfirm;
-        private Controls.RoundedEdgesButton roundedEdgesButton1;
-        private Controls.RoundedEdgesButton roundedEdgesButton2;
         private System.Windows.Forms.Panel panel1;
         public System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private Controls.RoundedEdgesButton roundedEdgesButton3;
         public System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         public AnimatorNS.Animator animator1;
         public System.Windows.Forms.Label label1;
@@ -656,5 +732,12 @@
         public System.Windows.Forms.Label label5;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.TextBox textBox1;
+        private Controls.NoFocusBorderBtn noFocusBorderBtn2;
+        private Controls.NoFocusBorderBtn noFocusBorderBtn3;
+        private Controls.NoFocusBorderBtn noFocusBorderBtn1;
+        private Controls.NoFocusBorderBtn noFocusBorderBtn4;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label6;
     }
 }

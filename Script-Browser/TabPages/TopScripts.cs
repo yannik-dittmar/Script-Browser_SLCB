@@ -114,8 +114,8 @@ namespace Script_Browser.TabPages
                     dataGridView1.Sort(dataGridView1.Columns[4], ListSortDirection.Descending);
                 dataGridView1.ClearSelection();
             }
-            catch (WebException) { MetroFramework.MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.OK, MessageBoxIcon.Error, 125); }
-            catch (Exception ex) { MetroFramework.MetroMessageBox.Show(form, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); Console.WriteLine(ex.StackTrace); }
+            catch (WebException ex) { Console.WriteLine(ex.StackTrace); MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.OK, MessageBoxIcon.Error, 125); }
+            catch (Exception ex) { MetroMessageBox.Show(form, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); Console.WriteLine(ex.StackTrace); }
         }
 
         //Load ScriptView
@@ -148,7 +148,7 @@ namespace Script_Browser.TabPages
                     }
                 }
             }
-            catch (WebException) { MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.OK, MessageBoxIcon.Error, 125); }
+            catch (WebException ex) { Console.WriteLine(ex.StackTrace); MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.OK, MessageBoxIcon.Error, 125); }
             catch (Exception ex) { MetroMessageBox.Show(form, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); Console.WriteLine(ex.StackTrace); }
             contextMenuOpen = false;
         }

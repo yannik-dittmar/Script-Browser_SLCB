@@ -65,7 +65,7 @@ namespace Script_Browser
             {
                 using (Ping ping = new Ping())
                 {
-                    PingReply reply = ping.Send(storageServer.Replace("http://", ""), 3000);
+                    PingReply reply = ping.Send(storageServer.Replace("https://", ""), 3000);
                     return reply.Status == IPStatus.Success;
                 }
             }
