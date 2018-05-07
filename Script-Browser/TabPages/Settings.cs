@@ -72,6 +72,24 @@ namespace Script_Browser.TabPages
             }
         }
 
+        //Twitch Login
+        private void flowLayoutPanel1_MouseEnter(object sender, EventArgs e)
+        {
+            flowLayoutPanel1.BackColor = Color.FromArgb(120, 78, 196);
+        }
+
+        private void flowLayoutPanel1_MouseLeave(object sender, EventArgs e)
+        {
+            flowLayoutPanel1.BackColor = Color.FromArgb(100, 65, 164);
+        }
+
+        private void TwitchLogin_MouseClick(object sender, MouseEventArgs e)
+        {
+            form.Opacity = 0.5;
+            new TwitchLogin(form).ShowDialog();
+            form.Opacity = 1;
+        }
+
         #endregion
 
         #region Streamlabs Chatbot

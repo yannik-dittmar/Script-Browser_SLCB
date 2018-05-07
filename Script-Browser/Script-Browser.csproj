@@ -164,6 +164,12 @@
     <Compile Include="Test.Designer.cs">
       <DependentUpon>Test.cs</DependentUpon>
     </Compile>
+    <Compile Include="TwitchLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TwitchLogin.Designer.cs">
+      <DependentUpon>TwitchLogin.cs</DependentUpon>
+    </Compile>
     <Compile Include="UpdateMessage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -222,6 +228,9 @@
     <EmbeddedResource Include="Test.resx">
       <DependentUpon>Test.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TwitchLogin.resx">
+      <DependentUpon>TwitchLogin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UpdateMessage.resx">
       <DependentUpon>UpdateMessage.cs</DependentUpon>
     </EmbeddedResource>
@@ -261,6 +270,18 @@
     <None Include="Resources\refresh.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="HTML\Error.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HTML\Images\TwitchLogoDead.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HTML\LoadingTwitch.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HTML\Images\TwitchLogo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Logo_ICON.ico" />
     <None Include="Resources\twtich.png" />
     <None Include="Resources\move_file.png" />

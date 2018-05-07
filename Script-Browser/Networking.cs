@@ -109,9 +109,11 @@ namespace Script_Browser
             }
         }
 
-        public static void SignUp(string _username, string _password, string email, Main form)
+        public static void SignUp(string _username, string _password, string email, Main form, bool twitch = false, TwitchLogin webForm = null)
         {
-            _password = Hash(_password);
+            if (!twitch)
+                _password = Hash(_password);
+
             tryagain:
             try
             {
@@ -119,7 +121,14 @@ namespace Script_Browser
 
                 using (WebClient web = new WebClient())
                 {
-                    string result = web.DownloadString(storageServer + "/Script%20Browser/signUp.php?username=" + _username + "&pass=" + _password + "&email=" + email);
+                    string result = "";
+                    if (twitch)
+                    {
+                        result = web.DownloadString(storageServer + "/Script%20Browser/signUpTwitch.php?token=" + _password);
+                        webForm.Dispose();
+                    }
+                    else
+                        result = web.DownloadString(storageServer + "/Script%20Browser/signUp.php?username=" + _username + "&pass=" + _password + "&email=" + email);
 
                     if (result.Contains("username"))
                         MetroMessageBox.Show(form, "The username \"" + _username + "\" is allready registered!\nPlease select another one.", "Sign up error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150);
@@ -129,12 +138,18 @@ namespace Script_Browser
                         MetroMessageBox.Show(form, "The email address \"" + email + "\" is blacklisted!\nContact us under \"sl.chatbot.script.browser@gmail.com\" for more information.", "Sign up error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150);
                     else if (result.Contains("false"))
                         MetroMessageBox.Show(form, "There was an unexected sign up error.\nPlease try again later.", "Sign up error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150);
+                    else if (result.Contains("verify"))
+                        MetroMessageBox.Show(form, "Your Twitch account wasn't verified yet!\nPlease verify your email address.", "Sign up error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150);
                     else
                     {
-                        MetroMessageBox.Show(form, "You signed up successfully!\nA verification email has been send to your email account. Please check your inbox.", "Sign up success", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, 150);
+                        if (!twitch)
+                            MetroMessageBox.Show(form, "You signed up successfully!\nA verification email has been send to your email account. Please check your inbox.", "Sign up success", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, 150);
 
                         username = _username;
-                        password = _password;
+                        if (twitch)
+                            password = Hash(_password);
+                        else
+                            password = _password;
                         form.settings1.label1.Text = "Logged in as " + username;
 
                         form.settings1.animator1.Hide(form.settings1.tableLayoutPanel1);
@@ -142,8 +157,10 @@ namespace Script_Browser
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.StackTrace);
+                try { webForm.Dispose(); } catch { }
                 if (DialogResult.Retry == MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150))
                     goto tryagain;
             }
