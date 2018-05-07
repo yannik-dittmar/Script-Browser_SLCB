@@ -22,6 +22,7 @@ namespace Script_Browser
         public static string storageServer = "";
         public static string username = "krypto";
         public static string password = "a94a8fe5ccb19ba61c4c0873d391e987982fbbd3";
+        public static bool twitch = false;
         public static List<string> scripts = new List<string>();
         public static ObservableCollection<KeyValuePair<string, string>> checkUpdate = new ObservableCollection<KeyValuePair<string, string>>(); 
 
@@ -31,6 +32,8 @@ namespace Script_Browser
             var hash = (new SHA1Managed()).ComputeHash(Encoding.UTF8.GetBytes(input));
             return string.Join("", hash.Select(b => b.ToString("x2")).ToArray());
         }
+
+        #region Network Settings
 
         public static bool UpdateIp()
         {
@@ -73,6 +76,10 @@ namespace Script_Browser
             return false;
         }
 
+        #endregion
+
+        #region Account
+
         public static void Login(string _username, string _password, Main form)
         {
             _password = Hash(_password);
@@ -84,13 +91,14 @@ namespace Script_Browser
                 using (WebClient web = new WebClient())
                 {
                     string result = web.DownloadString(storageServer + "/Script%20Browser/login.php?user=" + _username + "&pass=" + _password + "&getinfo=true");
-                    if (result.Contains("false"))
+                    if (!result.Contains("Twitch"))
                         MetroMessageBox.Show(form, "The username or password was incorrect.", "Login error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 100);
                     else
                     {
                         JObject info = JObject.Parse(result);
                         username = info["Username"].ToString();
                         password = _password;
+                        twitch = (bool)info["Twitch"];
                         form.settings1.label1.Text = "Logged in as " + username;
 
                         form.settings1.animator1.Hide(form.settings1.tableLayoutPanel1);
@@ -150,7 +158,10 @@ namespace Script_Browser
                             password = Hash(_password);
                         else
                             password = _password;
+                        Networking.twitch = twitch;
                         form.settings1.label1.Text = "Logged in as " + username;
+
+                        form.settings1.tableLayoutPanel7.Visible = !twitch;
 
                         form.settings1.animator1.Hide(form.settings1.tableLayoutPanel1);
                         form.settings1.animator1.Show(form.settings1.tableLayoutPanel2);
@@ -165,6 +176,41 @@ namespace Script_Browser
                     goto tryagain;
             }
         }
+
+        public static void ChangePass(string oldPass, string newPass, Main form)
+        {
+            oldPass = Hash(oldPass);
+            newPass = Hash(newPass);
+
+            tryagain:
+            try
+            {
+                CheckIp(form);
+
+                using (WebClient web = new WebClient())
+                {
+                    string result = web.DownloadString(storageServer + "/Script%20Browser/changePassword.php?user=" + username + "&pass=" + oldPass + "&newpass=" + newPass);
+                    if (result.Contains("false"))
+                        MetroMessageBox.Show(form, "Please check your old password or try again later.", "Could not change password", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150);
+                    else
+                    {
+                        MetroMessageBox.Show(form, "Your password has been successfully changed!", "Password changed", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, 125);
+                        form.settings1.materialSingleLineTextField1.Text = "";
+                        form.settings1.materialSingleLineTextField2.Text = "";
+                        form.settings1.materialSingleLineTextField3.Text = "";
+                    }
+                }
+            }
+            catch
+            {
+                if (DialogResult.Retry == MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150))
+                    goto tryagain;
+            }
+        }
+
+        #endregion
+
+        #region Browse Scripts
 
         public static string GetTopScripts(string type, string highest, int page, Main form)
         {
@@ -187,12 +233,16 @@ namespace Script_Browser
                 return web.DownloadString(storageServer + "/Script%20Browser/getScript.php?id=" + id);
         }
 
+        #endregion
+
         public static string CheckForUpdate(string id, string ver)
         {
             CheckIp(null);
             using (WebClient web = new WebClient())
                 return web.DownloadString(storageServer + "/Script%20Browser/checkForUpdate.php?id=" + id + "&ver=" + ver);
         }
+
+        #region Transfer Scripts
 
         public static string UploadScript(UploadScript form, string info, string path)
         {
@@ -266,6 +316,8 @@ namespace Script_Browser
             }
             return "false";
         }
+
+        #endregion
 
         public static string RateScript(Main form, string id, string rating)
         {

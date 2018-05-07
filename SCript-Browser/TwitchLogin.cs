@@ -142,5 +142,10 @@ namespace Script_Browser
         }
 
         #endregion
+
+        private void TwitchLogin_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            web.Dispose();
+        }
     }
 }

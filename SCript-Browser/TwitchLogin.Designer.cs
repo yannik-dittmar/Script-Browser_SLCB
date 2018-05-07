@@ -128,6 +128,7 @@ namespace Script_Browser
             this.Name = "TwitchLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Twitch Login";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TwitchLogin_FormClosing);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
