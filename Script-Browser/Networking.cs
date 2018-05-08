@@ -162,6 +162,7 @@ namespace Script_Browser
                         form.settings1.label1.Text = "Logged in as " + username;
 
                         form.settings1.tableLayoutPanel7.Visible = !twitch;
+                        form.settings1.tableLayoutPanel9.Visible = !twitch;
 
                         form.settings1.animator1.Hide(form.settings1.tableLayoutPanel1);
                         form.settings1.animator1.Show(form.settings1.tableLayoutPanel2);
@@ -191,13 +192,47 @@ namespace Script_Browser
                 {
                     string result = web.DownloadString(storageServer + "/Script%20Browser/changePassword.php?user=" + username + "&pass=" + oldPass + "&newpass=" + newPass);
                     if (result.Contains("false"))
-                        MetroMessageBox.Show(form, "Please check your old password or try again later.", "Could not change password", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150);
+                        MetroMessageBox.Show(form, "Please check your old password or try again later.", "Could not change password", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
                     else
                     {
                         MetroMessageBox.Show(form, "Your password has been successfully changed!", "Password changed", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, 125);
                         form.settings1.materialSingleLineTextField1.Text = "";
                         form.settings1.materialSingleLineTextField2.Text = "";
                         form.settings1.materialSingleLineTextField3.Text = "";
+                        password = newPass;
+                    }
+                }
+            }
+            catch
+            {
+                if (DialogResult.Retry == MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150))
+                    goto tryagain;
+            }
+        }
+
+        public static void ChangeUsername(string _username, string pass, Main form)
+        {
+            pass = Hash(pass);
+
+            tryagain:
+            try
+            {
+                CheckIp(form);
+
+                using (WebClient web = new WebClient())
+                {
+                    string result = web.DownloadString(storageServer + "/Script%20Browser/changeUsername.php?user=" + username + "&newuser=" + _username + "&pass=" + pass);
+                    if (result.Contains("false"))
+                        MetroMessageBox.Show(form, "Please check your password or try again later.", "Could not change username", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
+                    else if (result.Contains("username"))
+                        MetroMessageBox.Show(form, "Your new username has already been taken.", "Could not change username", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
+                    else
+                    {
+                        MetroMessageBox.Show(form, "Your username has been successfully changed!", "Username changed", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, 125);
+                        form.settings1.materialSingleLineTextField4.Text = "";
+                        form.settings1.materialSingleLineTextField5.Text = "";
+                        username = _username;
+                        form.settings1.label1.Text = "Logged in as " + username;
                     }
                 }
             }

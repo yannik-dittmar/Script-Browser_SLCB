@@ -120,6 +120,25 @@ namespace Script_Browser.TabPages
                 MetroMessageBox.Show(this, "Please make sure your entries are completely and correct!", "Could not change password", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
         }
 
+        //Change Username
+        private void noFocusBorderBtn5_Click(object sender, EventArgs e)
+        {
+            if (materialSingleLineTextField5.Text.Trim(' ').Length != 0 && materialSingleLineTextField4.Text.Trim(' ').Length != 0)
+            {
+                if (Regex.IsMatch(materialSingleLineTextField4.Text, @"^[a-zA-Z0-9]+$"))
+                {
+                    if (materialSingleLineTextField4.Text.ToLower() != Networking.username.ToLower())
+                        Networking.ChangeUsername(materialSingleLineTextField4.Text, materialSingleLineTextField5.Text, form);
+                    else
+                        MetroMessageBox.Show(this, "Please select another username than your current one.", "Could not change username", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
+                }
+                else
+                    MetroMessageBox.Show(this, "Please make sure your new username only contains letters and numbers.", "Could not change username", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
+            }
+            else
+                MetroMessageBox.Show(this, "Please make sure your entries are completely and correct!", "Could not change username", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
+        }
+
         #endregion
 
         #region Streamlabs Chatbot
