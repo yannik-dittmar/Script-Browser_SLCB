@@ -103,6 +103,12 @@ namespace Script_Browser.TabPages
             try { Process.Start("http://slcbsb.duckdns.org/Script%20Browser/forgotPassword.php"); } catch { }
         }
 
+        //Send verification E-Mail again
+        private void noFocusBorderBtn6_Click(object sender, EventArgs e)
+        {
+            Networking.SendVerificationAgain(form);
+        }
+
         //Change Password
         private void noFocusBorderBtn4_Click(object sender, EventArgs e)
         {

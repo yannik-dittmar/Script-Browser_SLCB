@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            AnimatorNS.Animation animation2 = new AnimatorNS.Animation();
+            AnimatorNS.Animation animation1 = new AnimatorNS.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Settings));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
@@ -38,6 +38,7 @@
             this.signupUsername = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.signupPassConfirm = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.label8 = new System.Windows.Forms.Label();
             this.loginPass = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.loginUsername = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -49,6 +50,10 @@
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
+            this.materialSingleLineTextField4 = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.materialSingleLineTextField5 = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.label7 = new System.Windows.Forms.Label();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.materialSingleLineTextField3 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.materialSingleLineTextField2 = new MaterialSkin.Controls.MaterialSingleLineTextField();
@@ -61,14 +66,10 @@
             this.button1 = new System.Windows.Forms.Button();
             this.animator1 = new AnimatorNS.Animator(this.components);
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-            this.materialSingleLineTextField4 = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.materialSingleLineTextField5 = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.noFocusBorderBtn1 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.noFocusBorderBtn5 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.noFocusBorderBtn4 = new Script_Browser.Controls.NoFocusBorderBtn();
-            this.noFocusBorderBtn1 = new Script_Browser.Controls.NoFocusBorderBtn();
+            this.noFocusBorderBtn6 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.noFocusBorderBtn2 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.noFocusBorderBtn3 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.tableLayoutPanel1.SuspendLayout();
@@ -80,9 +81,9 @@
             this.tableLayoutPanel6.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel9.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
-            this.tableLayoutPanel9.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -226,6 +227,22 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(198, 165);
             this.tableLayoutPanel3.TabIndex = 11;
             // 
+            // label8
+            // 
+            this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label8.AutoSize = true;
+            this.label8.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.animator1.SetDecoration(this.label8, AnimatorNS.DecorationType.None);
+            this.label8.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.Silver;
+            this.label8.Location = new System.Drawing.Point(44, 136);
+            this.label8.Margin = new System.Windows.Forms.Padding(10, 0, 3, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(117, 15);
+            this.label8.TabIndex = 100;
+            this.label8.Text = "Forgot Password";
+            this.label8.Click += new System.EventHandler(this.label8_Click);
+            // 
             // loginPass
             // 
             this.loginPass.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -346,7 +363,7 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(730, 641);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(730, 689);
             this.tableLayoutPanel6.TabIndex = 3;
             // 
             // label4
@@ -356,7 +373,7 @@
             this.label4.Dock = System.Windows.Forms.DockStyle.Top;
             this.label4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(0, 560);
+            this.label4.Location = new System.Drawing.Point(0, 608);
             this.label4.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(730, 33);
@@ -382,7 +399,7 @@
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(730, 550);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(730, 598);
             this.tableLayoutPanel5.TabIndex = 2;
             // 
             // tableLayoutPanel2
@@ -393,20 +410,22 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel9, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel7, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.noFocusBorderBtn1, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.label1, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel9, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel7, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.noFocusBorderBtn6, 0, 1);
             this.animator1.SetDecoration(this.tableLayoutPanel2, AnimatorNS.DecorationType.None);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 337);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 3;
+            this.tableLayoutPanel2.RowCount = 4;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(724, 210);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(724, 258);
             this.tableLayoutPanel2.TabIndex = 1;
             this.tableLayoutPanel2.Visible = false;
             // 
@@ -423,6 +442,79 @@
             this.label1.Size = new System.Drawing.Size(131, 22);
             this.label1.TabIndex = 0;
             this.label1.Text = "Logged in as ";
+            // 
+            // tableLayoutPanel9
+            // 
+            this.tableLayoutPanel9.AutoSize = true;
+            this.tableLayoutPanel9.ColumnCount = 4;
+            this.tableLayoutPanel2.SetColumnSpan(this.tableLayoutPanel9, 4);
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel9.Controls.Add(this.materialSingleLineTextField4, 0, 0);
+            this.tableLayoutPanel9.Controls.Add(this.materialSingleLineTextField5, 0, 0);
+            this.tableLayoutPanel9.Controls.Add(this.label7, 0, 0);
+            this.tableLayoutPanel9.Controls.Add(this.noFocusBorderBtn5, 1, 1);
+            this.animator1.SetDecoration(this.tableLayoutPanel9, AnimatorNS.DecorationType.None);
+            this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel9.Location = new System.Drawing.Point(0, 184);
+            this.tableLayoutPanel9.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
+            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
+            this.tableLayoutPanel9.RowCount = 2;
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(724, 74);
+            this.tableLayoutPanel9.TabIndex = 6;
+            // 
+            // materialSingleLineTextField4
+            // 
+            this.materialSingleLineTextField4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.animator1.SetDecoration(this.materialSingleLineTextField4, AnimatorNS.DecorationType.None);
+            this.materialSingleLineTextField4.Depth = 0;
+            this.materialSingleLineTextField4.Hint = "New Username";
+            this.materialSingleLineTextField4.Location = new System.Drawing.Point(380, 3);
+            this.materialSingleLineTextField4.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialSingleLineTextField4.Name = "materialSingleLineTextField4";
+            this.materialSingleLineTextField4.PasswordChar = '\0';
+            this.materialSingleLineTextField4.SelectedText = "";
+            this.materialSingleLineTextField4.SelectionLength = 0;
+            this.materialSingleLineTextField4.SelectionStart = 0;
+            this.materialSingleLineTextField4.Size = new System.Drawing.Size(169, 23);
+            this.materialSingleLineTextField4.TabIndex = 20;
+            this.materialSingleLineTextField4.UseSystemPasswordChar = false;
+            // 
+            // materialSingleLineTextField5
+            // 
+            this.materialSingleLineTextField5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.animator1.SetDecoration(this.materialSingleLineTextField5, AnimatorNS.DecorationType.None);
+            this.materialSingleLineTextField5.Depth = 0;
+            this.materialSingleLineTextField5.Hint = "Password";
+            this.materialSingleLineTextField5.Location = new System.Drawing.Point(205, 3);
+            this.materialSingleLineTextField5.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialSingleLineTextField5.Name = "materialSingleLineTextField5";
+            this.materialSingleLineTextField5.PasswordChar = '\0';
+            this.materialSingleLineTextField5.SelectedText = "";
+            this.materialSingleLineTextField5.SelectionLength = 0;
+            this.materialSingleLineTextField5.SelectionStart = 0;
+            this.materialSingleLineTextField5.Size = new System.Drawing.Size(169, 23);
+            this.materialSingleLineTextField5.TabIndex = 19;
+            this.materialSingleLineTextField5.UseSystemPasswordChar = true;
+            // 
+            // label7
+            // 
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label7.AutoSize = true;
+            this.animator1.SetDecoration(this.label7, AnimatorNS.DecorationType.None);
+            this.label7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(10, 3);
+            this.label7.Margin = new System.Windows.Forms.Padding(10, 0, 3, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(189, 22);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "Change Username: ";
             // 
             // tableLayoutPanel7
             // 
@@ -441,7 +533,7 @@
             this.tableLayoutPanel7.Controls.Add(this.noFocusBorderBtn4, 1, 1);
             this.animator1.SetDecoration(this.tableLayoutPanel7, AnimatorNS.DecorationType.None);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(0, 52);
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(0, 100);
             this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 2;
@@ -543,7 +635,7 @@
             this.tableLayoutPanel8.Controls.Add(this.button1, 2, 0);
             this.animator1.SetDecoration(this.tableLayoutPanel8, AnimatorNS.DecorationType.None);
             this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 603);
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 651);
             this.tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 1;
@@ -599,116 +691,44 @@
             // 
             this.animator1.AnimationType = AnimatorNS.AnimationType.VertSlide;
             this.animator1.Cursor = null;
-            animation2.AnimateOnlyDifferences = true;
-            animation2.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.BlindCoeff")));
-            animation2.LeafCoeff = 0F;
-            animation2.MaxTime = 1F;
-            animation2.MinTime = 0F;
-            animation2.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicCoeff")));
-            animation2.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicShift")));
-            animation2.MosaicSize = 0;
-            animation2.Padding = new System.Windows.Forms.Padding(0);
-            animation2.RotateCoeff = 0F;
-            animation2.RotateLimit = 0F;
-            animation2.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.ScaleCoeff")));
-            animation2.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.SlideCoeff")));
-            animation2.TimeCoeff = 0F;
-            animation2.TransparencyCoeff = 0F;
-            this.animator1.DefaultAnimation = animation2;
+            animation1.AnimateOnlyDifferences = true;
+            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
+            animation1.LeafCoeff = 0F;
+            animation1.MaxTime = 1F;
+            animation1.MinTime = 0F;
+            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
+            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
+            animation1.MosaicSize = 0;
+            animation1.Padding = new System.Windows.Forms.Padding(0);
+            animation1.RotateCoeff = 0F;
+            animation1.RotateLimit = 0F;
+            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
+            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
+            animation1.TimeCoeff = 0F;
+            animation1.TransparencyCoeff = 0F;
+            this.animator1.DefaultAnimation = animation1;
             // 
             // folderBrowserDialog1
             // 
             this.folderBrowserDialog1.Description = "Select Streamlabs Chatbot Folder";
             this.folderBrowserDialog1.RootFolder = System.Environment.SpecialFolder.MyComputer;
             // 
-            // tableLayoutPanel9
+            // noFocusBorderBtn1
             // 
-            this.tableLayoutPanel9.AutoSize = true;
-            this.tableLayoutPanel9.ColumnCount = 4;
-            this.tableLayoutPanel2.SetColumnSpan(this.tableLayoutPanel9, 4);
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel9.Controls.Add(this.materialSingleLineTextField4, 0, 0);
-            this.tableLayoutPanel9.Controls.Add(this.materialSingleLineTextField5, 0, 0);
-            this.tableLayoutPanel9.Controls.Add(this.label7, 0, 0);
-            this.tableLayoutPanel9.Controls.Add(this.noFocusBorderBtn5, 1, 1);
-            this.animator1.SetDecoration(this.tableLayoutPanel9, AnimatorNS.DecorationType.None);
-            this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel9.Location = new System.Drawing.Point(0, 136);
-            this.tableLayoutPanel9.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
-            this.tableLayoutPanel9.RowCount = 2;
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(724, 74);
-            this.tableLayoutPanel9.TabIndex = 6;
-            // 
-            // materialSingleLineTextField4
-            // 
-            this.materialSingleLineTextField4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.animator1.SetDecoration(this.materialSingleLineTextField4, AnimatorNS.DecorationType.None);
-            this.materialSingleLineTextField4.Depth = 0;
-            this.materialSingleLineTextField4.Hint = "New Username";
-            this.materialSingleLineTextField4.Location = new System.Drawing.Point(380, 3);
-            this.materialSingleLineTextField4.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialSingleLineTextField4.Name = "materialSingleLineTextField4";
-            this.materialSingleLineTextField4.PasswordChar = '\0';
-            this.materialSingleLineTextField4.SelectedText = "";
-            this.materialSingleLineTextField4.SelectionLength = 0;
-            this.materialSingleLineTextField4.SelectionStart = 0;
-            this.materialSingleLineTextField4.Size = new System.Drawing.Size(169, 23);
-            this.materialSingleLineTextField4.TabIndex = 20;
-            this.materialSingleLineTextField4.UseSystemPasswordChar = false;
-            // 
-            // materialSingleLineTextField5
-            // 
-            this.materialSingleLineTextField5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.animator1.SetDecoration(this.materialSingleLineTextField5, AnimatorNS.DecorationType.None);
-            this.materialSingleLineTextField5.Depth = 0;
-            this.materialSingleLineTextField5.Hint = "Password";
-            this.materialSingleLineTextField5.Location = new System.Drawing.Point(205, 3);
-            this.materialSingleLineTextField5.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialSingleLineTextField5.Name = "materialSingleLineTextField5";
-            this.materialSingleLineTextField5.PasswordChar = '\0';
-            this.materialSingleLineTextField5.SelectedText = "";
-            this.materialSingleLineTextField5.SelectionLength = 0;
-            this.materialSingleLineTextField5.SelectionStart = 0;
-            this.materialSingleLineTextField5.Size = new System.Drawing.Size(169, 23);
-            this.materialSingleLineTextField5.TabIndex = 19;
-            this.materialSingleLineTextField5.UseSystemPasswordChar = true;
-            // 
-            // label7
-            // 
-            this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label7.AutoSize = true;
-            this.animator1.SetDecoration(this.label7, AnimatorNS.DecorationType.None);
-            this.label7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(10, 3);
-            this.label7.Margin = new System.Windows.Forms.Padding(10, 0, 3, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(189, 22);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "Change Username: ";
-            // 
-            // label8
-            // 
-            this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label8.AutoSize = true;
-            this.label8.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.animator1.SetDecoration(this.label8, AnimatorNS.DecorationType.None);
-            this.label8.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.Silver;
-            this.label8.Location = new System.Drawing.Point(44, 136);
-            this.label8.Margin = new System.Windows.Forms.Padding(10, 0, 3, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(117, 15);
-            this.label8.TabIndex = 100;
-            this.label8.Text = "Forgot Password";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
+            this.noFocusBorderBtn1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(72)))), ((int)(((byte)(76)))));
+            this.noFocusBorderBtn1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.animator1.SetDecoration(this.noFocusBorderBtn1, AnimatorNS.DecorationType.None);
+            this.noFocusBorderBtn1.FlatAppearance.BorderSize = 0;
+            this.noFocusBorderBtn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.noFocusBorderBtn1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
+            this.noFocusBorderBtn1.ForeColor = System.Drawing.Color.White;
+            this.noFocusBorderBtn1.Location = new System.Drawing.Point(383, 3);
+            this.noFocusBorderBtn1.Margin = new System.Windows.Forms.Padding(10, 3, 3, 3);
+            this.noFocusBorderBtn1.Name = "noFocusBorderBtn1";
+            this.noFocusBorderBtn1.Size = new System.Drawing.Size(108, 36);
+            this.noFocusBorderBtn1.TabIndex = 5;
+            this.noFocusBorderBtn1.Text = "Logout";
+            this.noFocusBorderBtn1.UseVisualStyleBackColor = false;
             // 
             // noFocusBorderBtn5
             // 
@@ -752,22 +772,25 @@
             this.noFocusBorderBtn4.UseVisualStyleBackColor = false;
             this.noFocusBorderBtn4.Click += new System.EventHandler(this.noFocusBorderBtn4_Click);
             // 
-            // noFocusBorderBtn1
+            // noFocusBorderBtn6
             // 
-            this.noFocusBorderBtn1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(72)))), ((int)(((byte)(76)))));
-            this.noFocusBorderBtn1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.animator1.SetDecoration(this.noFocusBorderBtn1, AnimatorNS.DecorationType.None);
-            this.noFocusBorderBtn1.FlatAppearance.BorderSize = 0;
-            this.noFocusBorderBtn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.noFocusBorderBtn1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
-            this.noFocusBorderBtn1.ForeColor = System.Drawing.Color.White;
-            this.noFocusBorderBtn1.Location = new System.Drawing.Point(383, 3);
-            this.noFocusBorderBtn1.Margin = new System.Windows.Forms.Padding(10, 3, 3, 3);
-            this.noFocusBorderBtn1.Name = "noFocusBorderBtn1";
-            this.noFocusBorderBtn1.Size = new System.Drawing.Size(108, 36);
-            this.noFocusBorderBtn1.TabIndex = 5;
-            this.noFocusBorderBtn1.Text = "Logout";
-            this.noFocusBorderBtn1.UseVisualStyleBackColor = false;
+            this.noFocusBorderBtn6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.noFocusBorderBtn6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
+            this.tableLayoutPanel2.SetColumnSpan(this.noFocusBorderBtn6, 4);
+            this.noFocusBorderBtn6.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.animator1.SetDecoration(this.noFocusBorderBtn6, AnimatorNS.DecorationType.None);
+            this.noFocusBorderBtn6.FlatAppearance.BorderSize = 0;
+            this.noFocusBorderBtn6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.noFocusBorderBtn6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
+            this.noFocusBorderBtn6.ForeColor = System.Drawing.Color.White;
+            this.noFocusBorderBtn6.Location = new System.Drawing.Point(13, 52);
+            this.noFocusBorderBtn6.Margin = new System.Windows.Forms.Padding(13, 10, 13, 0);
+            this.noFocusBorderBtn6.Name = "noFocusBorderBtn6";
+            this.noFocusBorderBtn6.Size = new System.Drawing.Size(698, 38);
+            this.noFocusBorderBtn6.TabIndex = 7;
+            this.noFocusBorderBtn6.Text = "Send verification E-Mail again";
+            this.noFocusBorderBtn6.UseVisualStyleBackColor = false;
+            this.noFocusBorderBtn6.Click += new System.EventHandler(this.noFocusBorderBtn6_Click);
             // 
             // noFocusBorderBtn2
             // 
@@ -832,12 +855,12 @@
             this.tableLayoutPanel5.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel9.ResumeLayout(false);
+            this.tableLayoutPanel9.PerformLayout();
             this.tableLayoutPanel7.ResumeLayout(false);
             this.tableLayoutPanel7.PerformLayout();
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel8.PerformLayout();
-            this.tableLayoutPanel9.ResumeLayout(false);
-            this.tableLayoutPanel9.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -883,5 +906,6 @@
         public System.Windows.Forms.Label label7;
         private Controls.NoFocusBorderBtn noFocusBorderBtn5;
         public System.Windows.Forms.Label label8;
+        public Controls.NoFocusBorderBtn noFocusBorderBtn6;
     }
 }

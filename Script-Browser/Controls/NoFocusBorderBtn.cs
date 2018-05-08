@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Script_Browser.Controls
 {
-    class NoFocusBorderBtn : Button
+    public class NoFocusBorderBtn : Button
     {
         public Color NotEnabledBG = Color.FromArgb(22, 36, 45);
         protected override bool ShowFocusCues

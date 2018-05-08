@@ -103,6 +103,7 @@ namespace Script_Browser
 
                         form.settings1.animator1.Hide(form.settings1.tableLayoutPanel1);
                         form.settings1.animator1.Show(form.settings1.tableLayoutPanel2);
+                        form.settings1.noFocusBorderBtn6.Visible = !(bool)info["Verified"];
 
                         foreach (JToken i in info["Scripts"] as JArray)
                             scripts.Add(i.ToString());
@@ -163,6 +164,7 @@ namespace Script_Browser
 
                         form.settings1.tableLayoutPanel7.Visible = !twitch;
                         form.settings1.tableLayoutPanel9.Visible = !twitch;
+                        form.settings1.noFocusBorderBtn6.Visible = !twitch;
 
                         form.settings1.animator1.Hide(form.settings1.tableLayoutPanel1);
                         form.settings1.animator1.Show(form.settings1.tableLayoutPanel2);
@@ -173,6 +175,36 @@ namespace Script_Browser
             {
                 Console.WriteLine(ex.StackTrace);
                 try { webForm.Dispose(); } catch { }
+                if (DialogResult.Retry == MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150))
+                    goto tryagain;
+            }
+        }
+
+        public static void SendVerificationAgain(Main form)
+        {
+            tryagain:
+            try
+            {
+                CheckIp(form);
+
+                using (WebClient web = new WebClient())
+                {
+                    string result = web.DownloadString(storageServer + "/Script%20Browser/sendVerificationAgain.php?user=" + username + "&pass=" + password);
+                    if (result.Contains("verfied"))
+                    {
+                        MetroMessageBox.Show(form, "Your account has already been verified!", "Could not send verification E-Mail again", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
+                        form.settings1.noFocusBorderBtn6.Visible = false;
+                    }
+                    else if (result.Contains("time"))
+                        MetroMessageBox.Show(form, "You can only request a verification E-Mail once every 5 minuets.\nPlease wait...", "Could not send verification E-Mail again", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150);
+                    else if (result.Contains("false"))
+                        MetroMessageBox.Show(form, "Please try it later again.", "Could not send verification E-Mail again", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
+                    else
+                        MetroMessageBox.Show(form, "We send a new verification E-Mail to your address!\nPlease check your inbox.", "Send verification E - Mail again", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, 150);
+                }
+            }
+            catch
+            {
                 if (DialogResult.Retry == MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150))
                     goto tryagain;
             }
