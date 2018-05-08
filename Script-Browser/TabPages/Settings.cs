@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MetroFramework;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace Script_Browser.TabPages
 {
@@ -47,7 +48,7 @@ namespace Script_Browser.TabPages
             {
                 if (signupPass.Text.Trim(' ').Length >= 6)
                 {
-                    if (Regex.IsMatch(signupPass.Text, @"^[a-zA-Z0-9]+$") && Regex.IsMatch(signupUsername.Text, @"^[a-zA-Z0-9]+$"))
+                    if (Regex.IsMatch(signupUsername.Text, @"^[a-zA-Z0-9]+$"))
                     {
                         if (signupPass.Text == signupPassConfirm.Text)
                             Networking.SignUp(signupUsername.Text, signupPass.Text, signupEmail.Text, form);
@@ -55,7 +56,7 @@ namespace Script_Browser.TabPages
                             MetroMessageBox.Show(this, "The password does not match the confirmation.", "Sign up error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
                     }
                     else
-                        MetroMessageBox.Show(this, "Please make sure username and password only contain letters and numbers.", "Sign up error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
+                        MetroMessageBox.Show(this, "Please make sure your username only contains letters and numbers.", "Sign up error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
                 }
                 else
                     MetroMessageBox.Show(this, "Your password has to be at least 6 characters long!", "Sign up error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
@@ -96,6 +97,12 @@ namespace Script_Browser.TabPages
             form.Opacity = 1;
         }
 
+        //Forgot Password
+        private void label8_Click(object sender, EventArgs e)
+        {
+            try { Process.Start("http://slcbsb.duckdns.org/Script%20Browser/forgotPassword.php"); } catch { }
+        }
+
         //Change Password
         private void noFocusBorderBtn4_Click(object sender, EventArgs e)
         {
@@ -103,15 +110,10 @@ namespace Script_Browser.TabPages
             {
                 if (materialSingleLineTextField3.Text.Trim(' ').Length >= 6)
                 {
-                    if (Regex.IsMatch(materialSingleLineTextField3.Text, @"^[a-zA-Z0-9]+$"))
-                    {
-                        if (materialSingleLineTextField3.Text == materialSingleLineTextField1.Text)
-                            Networking.ChangePass(materialSingleLineTextField2.Text, materialSingleLineTextField3.Text, form);
-                        else
-                            MetroMessageBox.Show(this, "The password does not match the confirmation.", "Could not change password", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
-                    }
+                    if (materialSingleLineTextField3.Text == materialSingleLineTextField1.Text)
+                        Networking.ChangePass(materialSingleLineTextField2.Text, materialSingleLineTextField3.Text, form);
                     else
-                        MetroMessageBox.Show(this, "Please make sure your new password only contains letters and numbers.", "Could not change password", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
+                        MetroMessageBox.Show(this, "The password does not match the confirmation.", "Could not change password", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
                 }
                 else
                     MetroMessageBox.Show(this, "Your new password has to be at least 6 characters long!", "Could not change password", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
