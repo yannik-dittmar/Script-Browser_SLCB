@@ -147,6 +147,15 @@ namespace Script_Browser.TabPages
                 MetroMessageBox.Show(this, "Please make sure your entries are completely and correct!", "Could not change username", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
         }
 
+        //Change EMail
+        private void noFocusBorderBtn7_Click(object sender, EventArgs e)
+        {
+            if (materialSingleLineTextField6.Text.Trim(' ').Length != 0 && materialSingleLineTextField7.Text.Trim(' ').Length != 0 && IsValidEmail(materialSingleLineTextField6.Text))
+                Networking.ChangeEMail(materialSingleLineTextField6.Text, materialSingleLineTextField7.Text, form);
+            else
+                MetroMessageBox.Show(this, "Please make sure your entries are completely and correct!", "Could not change E-Mail address", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
+        }
+
         #endregion
 
         #region Streamlabs Chatbot

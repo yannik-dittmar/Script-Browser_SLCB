@@ -164,6 +164,7 @@ namespace Script_Browser
 
                         form.settings1.tableLayoutPanel7.Visible = !twitch;
                         form.settings1.tableLayoutPanel9.Visible = !twitch;
+                        form.settings1.tableLayoutPanel10.Visible = !twitch;
                         form.settings1.noFocusBorderBtn6.Visible = !twitch;
 
                         form.settings1.animator1.Hide(form.settings1.tableLayoutPanel1);
@@ -265,6 +266,41 @@ namespace Script_Browser
                         form.settings1.materialSingleLineTextField5.Text = "";
                         username = _username;
                         form.settings1.label1.Text = "Logged in as " + username;
+                    }
+                }
+            }
+            catch
+            {
+                if (DialogResult.Retry == MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150))
+                    goto tryagain;
+            }
+        }
+
+        public static void ChangeEMail(string email, string pass, Main form)
+        {
+            pass = Hash(pass);
+
+            tryagain:
+            try
+            {
+                CheckIp(form);
+
+                using (WebClient web = new WebClient())
+                {
+                    string result = web.DownloadString(storageServer + "/Script%20Browser/changeEmail.php?user=" + username + "&pass=" + pass + "&email=" + email);
+                    if (result.Contains("false"))
+                        MetroMessageBox.Show(form, "Please check your password or try again later.", "Could not change E-Mail address", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
+                    else if (result.Contains("blacklist"))
+                        MetroMessageBox.Show(form, "The email address \"" + email + "\" is blacklisted!\nContact us under \"sl.chatbot.script.browser@gmail.com\" for more information.", "Could not change E-Mail address", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150);
+                    else if (result.Contains("email"))
+                        MetroMessageBox.Show(form, "The email address \"" + email + "\" is allready registered!\nPlease select another one.", "Could not change E-Mail address", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150);
+                    else if (result.Contains("time"))
+                        MetroMessageBox.Show(form, "You can only request a verification E-Mail once every 5 minuets.\nPlease wait...", "Could not change E-Mail address", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150);
+                    else
+                    {
+                        MetroMessageBox.Show(form, "Your new E-Mail address will be activated, after you verified it.\nPlease check your inbox for more information.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, 125);
+                        form.settings1.materialSingleLineTextField6.Text = "";
+                        form.settings1.materialSingleLineTextField7.Text = "";
                     }
                 }
             }
