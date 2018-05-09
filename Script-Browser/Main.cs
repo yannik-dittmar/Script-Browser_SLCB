@@ -92,6 +92,9 @@ namespace Script_Browser
             panelTab3.Visible = false;
             topScripts1.button3_Click(null, null);
 
+            if (sf.username != "")
+                Networking.Login(sf.username, sf.password, this, true);
+
             //Update Scripts
             new Thread(delegate ()
             {

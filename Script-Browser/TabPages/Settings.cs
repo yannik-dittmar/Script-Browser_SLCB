@@ -135,7 +135,7 @@ namespace Script_Browser.TabPages
             {
                 if (Regex.IsMatch(materialSingleLineTextField4.Text, @"^[a-zA-Z0-9]+$"))
                 {
-                    if (materialSingleLineTextField4.Text.ToLower() != Networking.username.ToLower())
+                    if (materialSingleLineTextField4.Text.ToLower() != Main.sf.username.ToLower())
                         Networking.ChangeUsername(materialSingleLineTextField4.Text, materialSingleLineTextField5.Text, form);
                     else
                         MetroMessageBox.Show(this, "Please select another username than your current one.", "Could not change username", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
@@ -154,6 +154,16 @@ namespace Script_Browser.TabPages
                 Networking.ChangeEMail(materialSingleLineTextField6.Text, materialSingleLineTextField7.Text, form);
             else
                 MetroMessageBox.Show(this, "Please make sure your entries are completely and correct!", "Could not change E-Mail address", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
+        }
+
+        //Logout
+        private void noFocusBorderBtn1_Click(object sender, EventArgs e)
+        {
+            animator1.Hide(tableLayoutPanel2);
+            animator1.Show(tableLayoutPanel1);
+            Main.sf.username = "";
+            Main.sf.password = "";
+            Main.sf.Save();
         }
 
         #endregion

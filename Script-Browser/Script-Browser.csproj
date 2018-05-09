@@ -45,6 +45,12 @@
     <Reference Include="Animator, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Animator.1.0.3\lib\net20\Animator.dll</HintPath>
     </Reference>
+    <Reference Include="ElasticPropertyPath, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ElasticPropertyPath.1.0.0\lib\ElasticPropertyPath.dll</HintPath>
+    </Reference>
+    <Reference Include="ElasticReflection, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ElasticReflection.1.1.3\lib\ElasticReflection.dll</HintPath>
+    </Reference>
     <Reference Include="Markdig, Version=0.15.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Markdig.0.15.0\lib\net40\Markdig.dll</HintPath>
     </Reference>

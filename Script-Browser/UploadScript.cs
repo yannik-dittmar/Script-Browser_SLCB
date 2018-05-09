@@ -74,7 +74,7 @@ namespace Script_Browser
                         materialSingleLineTextField2.Text = GetLineItem(line);
                     else if (line.ToLower().Contains("version") && materialSingleLineTextField3.Text == "")
                         materialSingleLineTextField3.Text = GetLineItem(line);
-                    else if (line.ToLower().Contains("creator") && materialSingleLineTextField4.Text == "" && GetLineItem(line) != Networking.username)
+                    else if (line.ToLower().Contains("creator") && materialSingleLineTextField4.Text == "" && GetLineItem(line) != Main.sf.username)
                         materialSingleLineTextField4.Text = GetLineItem(line);
                 }
             }
@@ -726,7 +726,7 @@ namespace Script_Browser
                 {
                     label10.Text = "Your script has been successfully uploaded and published!";
                     uploaded = true;
-                    Networking.scripts.Add(result.Replace("true", ""));
+                    Main.sf.accountScripts.Add(result.Replace("true", ""));
                     noFocusBorderBtn6.Text = "Finish";
                     noFocusBorderBtn8.Enabled = false; 
                     File.Delete(Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip");

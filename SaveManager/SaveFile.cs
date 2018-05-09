@@ -19,6 +19,7 @@ namespace SaveManager
         //public string streamlabsPath = @"C:\Users\18diyann\Desktop\Test Ordner\";
         public ObservableCollection<KeyValuePair<int, string>> currentInstalled = new ObservableCollection<KeyValuePair<int, string>>();
         public List<string> ratedScripts = new List<string>();
+        public List<string> accountScripts = new List<string>();
 
         private string path = "";
 
@@ -30,6 +31,8 @@ namespace SaveManager
                 BinaryFormatter bf = new BinaryFormatter();
                 SaveFile sf = (SaveFile)bf.Deserialize(File.Open(path, FileMode.Open));
                 streamlabsPath = sf.streamlabsPath;
+                username = sf.username;
+                password = sf.password;
 
                 if (sf.currentInstalled != null)
                     currentInstalled = sf.currentInstalled;

@@ -20,10 +20,9 @@ namespace Script_Browser
     static class Networking
     {
         public static string storageServer = "";
-        public static string username = "krypto";
-        public static string password = "a94a8fe5ccb19ba61c4c0873d391e987982fbbd3";
+        //public static string username = "krypto";
+        //public static string password = "a94a8fe5ccb19ba61c4c0873d391e987982fbbd3";
         public static bool twitch = false;
-        public static List<string> scripts = new List<string>();
         public static ObservableCollection<KeyValuePair<string, string>> checkUpdate = new ObservableCollection<KeyValuePair<string, string>>(); 
 
         //Encrypt passwords
@@ -80,9 +79,11 @@ namespace Script_Browser
 
         #region Account
 
-        public static void Login(string _username, string _password, Main form)
+        public static void Login(string _username, string _password, Main form, bool hashed = false)
         {
-            _password = Hash(_password);
+            if (!hashed)
+                _password = Hash(_password);
+
             tryagain:
             try
             {
@@ -96,17 +97,28 @@ namespace Script_Browser
                     else
                     {
                         JObject info = JObject.Parse(result);
-                        username = info["Username"].ToString();
-                        password = _password;
+                        Main.sf.username = info["Username"].ToString();
+                        Main.sf.password = _password;
                         twitch = (bool)info["Twitch"];
-                        form.settings1.label1.Text = "Logged in as " + username;
+                        form.settings1.label1.Text = "Logged in as " + Main.sf.username;
 
-                        form.settings1.animator1.Hide(form.settings1.tableLayoutPanel1);
-                        form.settings1.animator1.Show(form.settings1.tableLayoutPanel2);
+                        if (hashed)
+                        {
+                            form.settings1.tableLayoutPanel1.Visible = false;
+                            form.settings1.tableLayoutPanel2.Visible = true;
+                        }
+                        else
+                        {
+                            form.settings1.animator1.HideSync(form.settings1.tableLayoutPanel1);
+                            form.settings1.animator1.ShowSync(form.settings1.tableLayoutPanel2);
+                        }
+
                         form.settings1.noFocusBorderBtn6.Visible = !(bool)info["Verified"];
 
                         foreach (JToken i in info["Scripts"] as JArray)
-                            scripts.Add(i.ToString());
+                            Main.sf.accountScripts.Add(i.ToString());
+
+                        Main.sf.Save();
                     }
                 }
             }
@@ -154,13 +166,13 @@ namespace Script_Browser
                         if (!twitch)
                             MetroMessageBox.Show(form, "You signed up successfully!\nA verification email has been send to your email account. Please check your inbox.", "Sign up success", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, 150);
 
-                        username = _username;
+                        Main.sf.username = _username;
                         if (twitch)
-                            password = Hash(_password);
+                            Main.sf.password = Hash(_password);
                         else
-                            password = _password;
+                            Main.sf.password = _password;
                         Networking.twitch = twitch;
-                        form.settings1.label1.Text = "Logged in as " + username;
+                        form.settings1.label1.Text = "Logged in as " + Main.sf.username;
 
                         form.settings1.tableLayoutPanel7.Visible = !twitch;
                         form.settings1.tableLayoutPanel9.Visible = !twitch;
@@ -169,6 +181,8 @@ namespace Script_Browser
 
                         form.settings1.animator1.Hide(form.settings1.tableLayoutPanel1);
                         form.settings1.animator1.Show(form.settings1.tableLayoutPanel2);
+
+                        Main.sf.Save();
                     }
                 }
             }
@@ -190,7 +204,7 @@ namespace Script_Browser
 
                 using (WebClient web = new WebClient())
                 {
-                    string result = web.DownloadString(storageServer + "/Script%20Browser/sendVerificationAgain.php?user=" + username + "&pass=" + password);
+                    string result = web.DownloadString(storageServer + "/Script%20Browser/sendVerificationAgain.php?user=" + Main.sf.username + "&pass=" + Main.sf.password);
                     if (result.Contains("verfied"))
                     {
                         MetroMessageBox.Show(form, "Your account has already been verified!", "Could not send verification E-Mail again", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
@@ -223,7 +237,7 @@ namespace Script_Browser
 
                 using (WebClient web = new WebClient())
                 {
-                    string result = web.DownloadString(storageServer + "/Script%20Browser/changePassword.php?user=" + username + "&pass=" + oldPass + "&newpass=" + newPass);
+                    string result = web.DownloadString(storageServer + "/Script%20Browser/changePassword.php?user=" + Main.sf.password + "&pass=" + oldPass + "&newpass=" + newPass);
                     if (result.Contains("false"))
                         MetroMessageBox.Show(form, "Please check your old password or try again later.", "Could not change password", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
                     else
@@ -232,7 +246,7 @@ namespace Script_Browser
                         form.settings1.materialSingleLineTextField1.Text = "";
                         form.settings1.materialSingleLineTextField2.Text = "";
                         form.settings1.materialSingleLineTextField3.Text = "";
-                        password = newPass;
+                        Main.sf.password = newPass;
                     }
                 }
             }
@@ -254,7 +268,7 @@ namespace Script_Browser
 
                 using (WebClient web = new WebClient())
                 {
-                    string result = web.DownloadString(storageServer + "/Script%20Browser/changeUsername.php?user=" + username + "&newuser=" + _username + "&pass=" + pass);
+                    string result = web.DownloadString(storageServer + "/Script%20Browser/changeUsername.php?user=" + Main.sf.username + "&newuser=" + _username + "&pass=" + pass);
                     if (result.Contains("false"))
                         MetroMessageBox.Show(form, "Please check your password or try again later.", "Could not change username", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
                     else if (result.Contains("username"))
@@ -264,8 +278,8 @@ namespace Script_Browser
                         MetroMessageBox.Show(form, "Your username has been successfully changed!", "Username changed", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, 125);
                         form.settings1.materialSingleLineTextField4.Text = "";
                         form.settings1.materialSingleLineTextField5.Text = "";
-                        username = _username;
-                        form.settings1.label1.Text = "Logged in as " + username;
+                        Main.sf.username = _username;
+                        form.settings1.label1.Text = "Logged in as " + Main.sf.username;
                     }
                 }
             }
@@ -287,7 +301,7 @@ namespace Script_Browser
 
                 using (WebClient web = new WebClient())
                 {
-                    string result = web.DownloadString(storageServer + "/Script%20Browser/changeEmail.php?user=" + username + "&pass=" + pass + "&email=" + email);
+                    string result = web.DownloadString(storageServer + "/Script%20Browser/changeEmail.php?user=" + Main.sf.username + "&pass=" + pass + "&email=" + email);
                     if (result.Contains("false"))
                         MetroMessageBox.Show(form, "Please check your password or try again later.", "Could not change E-Mail address", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
                     else if (result.Contains("blacklist"))
@@ -301,6 +315,7 @@ namespace Script_Browser
                         MetroMessageBox.Show(form, "Your new E-Mail address will be activated, after you verified it.\nPlease check your inbox for more information.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, 125);
                         form.settings1.materialSingleLineTextField6.Text = "";
                         form.settings1.materialSingleLineTextField7.Text = "";
+                        form.settings1.noFocusBorderBtn6.Visible = true;
                     }
                 }
             }
@@ -357,7 +372,7 @@ namespace Script_Browser
                     { new StreamContent(File.Open(path, FileMode.Open)), "file", "script.zip" }
                 })
                 using (HttpClient web = new HttpClient())
-                    return web.PostAsync(storageServer + "/Script%20Browser/uploadScript.php?user=" + username + "&pass=" + password, data).Result.Content.ReadAsStringAsync().Result;
+                    return web.PostAsync(storageServer + "/Script%20Browser/uploadScript.php?user=" + Main.sf.username + "&pass=" + Main.sf.password, data).Result.Content.ReadAsStringAsync().Result;
             }
             return "false";
         }
@@ -401,7 +416,7 @@ namespace Script_Browser
                     { new StreamContent(File.Open(path, FileMode.Open)), "file", "script.zip" }
                 })
                 using (HttpClient web = new HttpClient())
-                    return web.PostAsync(storageServer + "/Script%20Browser/uploadUpdate.php?user=" + username + "&pass=" + password, data).Result.Content.ReadAsStringAsync().Result;
+                    return web.PostAsync(storageServer + "/Script%20Browser/uploadUpdate.php?user=" + Main.sf.username + "&pass=" + Main.sf.password, data).Result.Content.ReadAsStringAsync().Result;
             }
             return "false";
         }
@@ -415,7 +430,7 @@ namespace Script_Browser
                     { new StringContent(info), "info" }
                 })
                 using (HttpClient web = new HttpClient())
-                    return web.PostAsync(storageServer + "/Script%20Browser/uploadUpdate.php?user=" + username + "&pass=" + password, data).Result.Content.ReadAsStringAsync().Result;
+                    return web.PostAsync(storageServer + "/Script%20Browser/uploadUpdate.php?user=" + Main.sf.username + "&pass=" + Main.sf.password, data).Result.Content.ReadAsStringAsync().Result;
             }
             return "false";
         }

@@ -195,9 +195,9 @@ namespace Script_Browser.TabPages
                     uploadToolStripMenuItem.Visible = dgv.Tag.ToString().Contains("upload");
                     if (dgv.Tag.ToString().Contains("update"))
                     {
-                        reportToolStripMenuItem.Visible = !Networking.scripts.Contains(dgv.Rows[e.RowIndex].Cells[6].Value.ToString());
-                        checkForUpdatesToolStripMenuItem.Visible = !Networking.scripts.Contains(dgv.Rows[e.RowIndex].Cells[6].Value.ToString());
-                        uploadUpdateToolStripMenuItem.Visible = Networking.scripts.Contains(dgv.Rows[e.RowIndex].Cells[6].Value.ToString());
+                        reportToolStripMenuItem.Visible = !Main.sf.accountScripts.Contains(dgv.Rows[e.RowIndex].Cells[6].Value.ToString());
+                        checkForUpdatesToolStripMenuItem.Visible = !Main.sf.accountScripts.Contains(dgv.Rows[e.RowIndex].Cells[6].Value.ToString());
+                        uploadUpdateToolStripMenuItem.Visible = Main.sf.accountScripts.Contains(dgv.Rows[e.RowIndex].Cells[6].Value.ToString());
                     }
                     else
                     {
@@ -237,9 +237,9 @@ namespace Script_Browser.TabPages
                     button1.Visible = dgv.Tag.ToString().Contains("upload");
                     if (dgv.Tag.ToString().Contains("update"))
                     {
-                        button3.Visible = !Networking.scripts.Contains(dgv.Rows[e.RowIndex].Cells[6].Value.ToString());
-                        button4.Visible = !Networking.scripts.Contains(dgv.Rows[e.RowIndex].Cells[6].Value.ToString());
-                        button5.Visible = Networking.scripts.Contains(dgv.Rows[e.RowIndex].Cells[6].Value.ToString());
+                        button3.Visible = !Main.sf.accountScripts.Contains(dgv.Rows[e.RowIndex].Cells[6].Value.ToString());
+                        button4.Visible = !Main.sf.accountScripts.Contains(dgv.Rows[e.RowIndex].Cells[6].Value.ToString());
+                        button5.Visible = Main.sf.accountScripts.Contains(dgv.Rows[e.RowIndex].Cells[6].Value.ToString());
                         dataGridView1.ClearSelection();
                     }
                     else
