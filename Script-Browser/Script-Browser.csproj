@@ -78,6 +78,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\Comments.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Comments.Designer.cs">
+      <DependentUpon>Comments.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\NoFocusBorderBtn.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -182,6 +188,9 @@
     <Compile Include="UploadScript.Designer.cs">
       <DependentUpon>UploadScript.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Controls\Comments.resx">
+      <DependentUpon>Comments.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Rating.resx">
       <DependentUpon>Rating.cs</DependentUpon>
     </EmbeddedResource>
@@ -270,14 +279,32 @@
     <None Include="Resources\refresh.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="HTML\CommentError.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HTML\Comments.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="HTML\Error.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HTML\Images\DPLogoWhite.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HTML\Images\Refresh.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="HTML\Images\TwitchLogoDead.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="HTML\jquery.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HTML\LoadingComments.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="HTML\LoadingTwitch.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="HTML\Images\TwitchLogo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

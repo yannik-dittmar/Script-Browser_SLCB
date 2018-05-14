@@ -209,5 +209,11 @@ namespace Script_Browser.Controls
             try { Directory.Delete(Main.sf.streamlabsPath + @"Services\Scripts\" + id + "\\", true); } catch { }
             button3.Text = "Download and Install";
         }
+
+        //Comments
+        private void ShowScript_Load(object sender, EventArgs e)
+        {
+            comments1.LoadComments(id, form);
+        }
     }
 }

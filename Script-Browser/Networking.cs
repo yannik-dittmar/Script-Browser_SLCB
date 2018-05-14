@@ -446,5 +446,19 @@ namespace Script_Browser
             }
             return "false";
         }
+
+        #region Comments
+
+        public static JObject GetComments(int id, Form form)
+        {
+            if (CheckIp(form))
+            {
+                using (WebClient web = new WebClient())
+                    return JObject.Parse(web.DownloadString(storageServer + "/Script%20Browser/getComments.php?id=" + id + "&user=" + Main.sf.username + "&pass=" + Main.sf.password));
+            }
+            return null;
+        }
+
+        #endregion
     }
 }

@@ -28,17 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.comments1 = new Script_Browser.Controls.Comments();
             this.SuspendLayout();
             // 
-            // openFileDialog1
+            // comments1
             // 
+            this.comments1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
+            this.comments1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comments1.Location = new System.Drawing.Point(0, 0);
+            this.comments1.Name = "comments1";
+            this.comments1.Size = new System.Drawing.Size(720, 526);
+            this.comments1.TabIndex = 0;
+            this.comments1.Load += new System.EventHandler(this.comments1_Load);
             // 
             // Test
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(720, 526);
+            this.Controls.Add(this.comments1);
             this.Name = "Test";
             this.Text = "Test";
             this.ResumeLayout(false);
@@ -47,6 +55,6 @@
 
         #endregion
 
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private Controls.Comments comments1;
     }
 }

@@ -50,6 +50,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.panelTabControl = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.comments1 = new Script_Browser.Controls.Comments();
             this.panelTabPage1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -64,6 +65,7 @@
             this.tableLayoutPanel4.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panelTabControl.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -395,11 +397,21 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
+            this.panel2.Controls.Add(this.comments1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(794, 294);
             this.panel2.TabIndex = 1;
+            // 
+            // comments1
+            // 
+            this.comments1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
+            this.comments1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comments1.Location = new System.Drawing.Point(0, 0);
+            this.comments1.Name = "comments1";
+            this.comments1.Size = new System.Drawing.Size(794, 294);
+            this.comments1.TabIndex = 0;
             // 
             // panelTabPage1
             // 
@@ -458,6 +470,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "ShowScript";
             this.Size = new System.Drawing.Size(860, 861);
+            this.Load += new System.EventHandler(this.ShowScript_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -472,6 +485,7 @@
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.panelTabControl.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
@@ -508,5 +522,6 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem installForTwitchOnlyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem installForYouTubeOnlyToolStripMenuItem;
+        private Comments comments1;
     }
 }

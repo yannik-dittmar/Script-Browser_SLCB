@@ -45,6 +45,8 @@ namespace Script_Browser
             LoadApp();
         }
 
+        #region CefSharp
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static void LoadApp()
         {
@@ -79,5 +81,7 @@ namespace Script_Browser
 
             return null;
         }
+
+        #endregion
     }
 }

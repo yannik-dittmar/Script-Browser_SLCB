@@ -1,0 +1,249 @@
+﻿<html>
+	<head>
+		<meta charset="utf-8">
+		<style>
+			body {
+				margin: 0;
+				margin-bottom: 47px;
+				background: #12191F;
+				text-align:center;
+				transition: margin 0.25s ease-in-out;
+                overflow-x: hidden;
+			}
+
+            img {
+                position: fixed;
+                top: 5px;
+                right: 5px;
+                transition: transform .8s ease-in-out;
+                cursor: hand;
+            }
+
+            img:hover {
+                transform: rotate(360deg);
+            }
+			
+			div {
+				width: 95%;
+				heigth: auto;
+				text-align: left;
+				margin-left: auto;
+				margin-right: auto;
+				margin-top: 5px;
+				padding : 5px;
+				cursor: hand;
+			}
+			
+			span {
+				color: white;
+				font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+			}
+			
+			p {
+				margin:0;
+				margin-left: 2.5%;
+				margin-top: 5px;
+				padding-right: 2%;
+				word-wrap: break-word;
+				color: white;
+				font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+				cursor: inherit;
+			}
+			
+			textarea {
+				resize: none;
+				max-height: 200px;
+				overflow: hidden;
+				margin: 0;
+				height: 32px;
+				width: 100%;
+				font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+			}
+			
+			form {
+				height:auto;
+				width:100%;
+				margin:0;
+				padding:0;
+				background: #338B76;
+			}
+			
+			input[type="submit"] {
+				margin:auto;
+				border: 0;
+				background: #12191F;
+				color:white;
+				box-shadow: none;
+				border-radius: 0px;
+				padding: 5px;
+				font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+				font-size: 16px;
+				font-weight: bold;
+				cursor: hand;
+			}
+			
+			table {
+				width: 100%;
+				background: #338B76;
+			}
+			
+			.comment {
+				background: #194846;
+			}
+			
+			.subComment {
+				background: #12191F;
+			}
+			
+			.user {
+				font-size: 20px;
+				font-weight: bold;
+				transition: opacity 0.25s ease-in-out;
+			}
+			
+			.time {
+				margin-left: 7px;
+				font-size: 12px;
+				color: #A9A9A9;
+				transition: opacity 0.25s ease-in-out;
+			}
+			
+			.footer {
+				position: fixed;
+				width: 100%;
+				background: #338B76;
+				margin: 0;
+				padding: 0;
+				padding-bottom: 3px;
+				padding-top: 3px;
+				bottom:0;
+				cursor: default;
+			}
+			
+			.entry {
+				width:95%;
+				margin:0;
+				padding:0;
+				padding-left: 2.5%;
+				padding-rigth: 2.5%;
+				cursor: inherit;
+				background: #338B76;
+				position: relative;
+			}
+			
+			.reply 
+			{
+				width:95%;
+				padding:0;
+				padding-left: 3px;
+				margin:0;
+				margin-left: auto;
+				margin-right: auto;
+				cursor: inherit; 
+				max-height:0px;
+				transition: max-height 0.25s ease-in-out;
+				background: rgba(0, 0, 0, 0);
+				position: relative;
+				font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+			}
+			
+			.cancel {
+				rigth: 0px;
+				cursor: hand;
+				font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+				font-weight: bold;
+			}
+		</style>
+		<script src="jquery.js"></script>
+		<script>
+			$(document).ready(function() {
+				if ($('#comment').prop('disabled')) {
+					$("div").css("cursor", "default");
+				}
+				else {
+                    $("div").click(function (e) {
+                        if (e.target.id != '' && e.target.id != "comment") {
+							var maxHeight = Math.max.apply(null, $(".reply").map(function () { return $(this).height(); }).get());
+							if (maxHeight == 0) {
+								$("#replyToID").val(e.target.id);
+								$("#reply.user").text($("#" + e.target.id + ".user").text());
+								$("#reply.time").text($("#" + e.target.id + ".time").text());
+								$(".reply").css("max-height", "25px");
+								$("body").css("margin-bottom", "72px");
+							}
+							else {
+								if ($("#reply.user").text() != $("#" + e.target.id + ".user").text() || $("#reply.time").text() != $("#" + e.target.id + ".time").text()) {
+									$("#replyToID").val(e.target.id);
+									$("#reply.user").css("opacity", "0");
+									$("#reply.time").css("opacity", "0");
+									setTimeout(function(){
+										$("#reply.user").text($("#" + e.target.id + ".user").text());
+										$("#reply.time").text($("#" + e.target.id + ".time").text());
+										$("#reply.user").css("opacity", "1");
+										$("#reply.time").css("opacity", "1");
+									}, 250);
+								}
+								else {
+									$(".reply").css("max-height", "0px");
+									$("body").css("margin-bottom", "47px");
+									$("#replyToID").val("");
+								}
+							}
+							e.stopPropagation();
+						}
+					});
+				}
+				
+				$("#reply.cancel").click(function(e) {
+					$(".reply").css("max-height", "0px");
+					$("body").css("margin-bottom", "47px");
+					$("#replyToID").val("");
+					e.stopPropagation();
+				});
+				
+				$(".cancel").click(function(e) {
+					if (e.target.id != "reply") {
+                        window.location.replace("Comments.html?delete=" + e.target.id);
+						e.stopPropagation();
+					}
+                });
+
+                $("img").click(function (e) {
+                    window.location.replace("Comments.html?refresh=true");
+                    e.stopPropagation();
+                });
+			});
+			
+			function textAreaAdjust(o) {
+				o.style.height = "auto";
+				o.style.height = (o.scrollHeight)+"px";
+			}
+		</script>
+	</head>
+	<body>
+        <img src="Images/Refresh.png">
+        <comment INPUT>
+        <div class="footer">
+			<div class="reply">
+				<table>
+					<tr>
+						<td style="width:99%;"><span style="margin-right:7px;">Reply to</span>
+						<span class="user" id="reply"></span>
+						<span class="time" id="reply"></span></td>
+						<td style="width:auto"><span class="cancel" id="reply">X</span></td>
+					</tr>
+				</table>
+			</div>
+			<div class="entry">
+				<form method="get">
+					<table>
+						<tr>
+							<td style="width:100%; padding:0; padding-right: 10px;"><textarea name='comment' id='comment' placeholder='Your comment...' oninput='textAreaAdjust(this)' maxlength='1000'></textarea></td>
+							<td style="width:auto"><input type="submit" value="SEND"><input type="text" style="display:none;" id="replyToID" name="reply"></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>
