@@ -397,12 +397,12 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
-            this.panel2.Controls.Add(this.comments1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(794, 294);
             this.panel2.TabIndex = 1;
+            this.panel2.Controls.Add(comments1);
             // 
             // comments1
             // 

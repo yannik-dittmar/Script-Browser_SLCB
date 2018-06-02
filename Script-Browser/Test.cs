@@ -42,7 +42,7 @@ namespace Script_Browser
 
         private void comments1_Load(object sender, EventArgs e)
         {
-            comments1.LoadComments(1, this);
+            //comments1.LoadComments(1, this);
         }
     }
 }

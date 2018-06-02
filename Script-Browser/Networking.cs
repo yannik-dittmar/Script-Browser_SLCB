@@ -449,7 +449,7 @@ namespace Script_Browser
 
         #region Comments
 
-        public static JObject GetComments(int id, Form form)
+        public static JObject GetComments(Main form, int id)
         {
             if (CheckIp(form))
             {
@@ -457,6 +457,44 @@ namespace Script_Browser
                     return JObject.Parse(web.DownloadString(storageServer + "/Script%20Browser/getComments.php?id=" + id + "&user=" + Main.sf.username + "&pass=" + Main.sf.password));
             }
             return null;
+        }
+
+        public static bool SendComment(Main form, int id, string comment, string reply)
+        {
+            if (CheckIp(form))
+            {
+                using (MultipartFormDataContent data = new MultipartFormDataContent
+                {
+                    { new StringContent(comment), "comment" },
+                    { new StringContent(id + ""), "id" },
+                    { new StringContent(reply), "reply" }
+                })
+                using (HttpClient web = new HttpClient())
+                {
+                    string result = web.PostAsync(storageServer + "/Script%20Browser/addComment.php?user=" + Main.sf.username + "&pass=" + Main.sf.password, data).Result.Content.ReadAsStringAsync().Result;
+                    if (result.Contains("time"))
+                        MetroMessageBox.Show(form, "Please wait a while befor posting a new comment.", "Don't Spam!", MessageBoxButtons.OK, MessageBoxIcon.Warning, 100);
+                    else if (result.Contains("false"))
+                        MetroMessageBox.Show(form, "Could't send your comment. Please try again later.", "Could not send comment", MessageBoxButtons.OK, MessageBoxIcon.Error, 100);
+                    else
+                        return true;
+                }
+            }
+            return false;
+        }
+
+        public static bool DeleteComment(Main form, string id)
+        {
+            if (CheckIp(form))
+            {
+                using (WebClient web = new WebClient())
+                {
+                    string result = web.DownloadString(storageServer + "/Script%20Browser/deleteComment.php?id=" + id + "&user=" + Main.sf.username + "&pass=" + Main.sf.password);
+                    if (result.Contains("true"))
+                        return true;
+                }
+            }
+            return false;
         }
 
         #endregion
