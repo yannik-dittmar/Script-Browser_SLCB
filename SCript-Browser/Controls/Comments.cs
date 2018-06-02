@@ -140,15 +140,22 @@ namespace Script_Browser.Controls
 
                     if (vars.AllKeys.Contains("comment"))
                     {
-                        if (Networking.SendComment(form, id, vars.Get("comment"), vars.Get("reply")))
-                            LoadComments(id, form);
+                        if (!String.IsNullOrWhiteSpace(vars.Get("comment")))
+                        {
+                            if (Networking.SendComment(form, id, vars.Get("comment"), vars.Get("reply")))
+                                LoadComments(id, form);
+                        }
                     }
                     else if (vars.AllKeys.Contains("delete"))
                     {
-                        if (Networking.DeleteComment(form, vars.Get("delete")))
-                            LoadComments(id, form);
-                        else
-                            MetroFramework.MetroMessageBox.Show(form, "Could't delete your comment. Please try again later.", "Could not delete comment", MessageBoxButtons.OK, MessageBoxIcon.Error, 100);
+                        DialogResult result = MetroFramework.MetroMessageBox.Show(form, "Do you really want to delete the comment and all the replys to it?", "Delete Comment", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, 100);
+                        if (result == DialogResult.Yes)
+                        {
+                            if (Networking.DeleteComment(form, vars.Get("delete")))
+                                LoadComments(id, form);
+                            else
+                                MetroFramework.MetroMessageBox.Show(form, "Could't delete your comment. Please try again later.", "Could not delete comment", MessageBoxButtons.OK, MessageBoxIcon.Error, 100);
+                        }
                     }
                     else if (vars.AllKeys.Contains("refresh"))
                         LoadComments(id, form);
