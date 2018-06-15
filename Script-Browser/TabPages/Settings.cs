@@ -28,6 +28,7 @@ namespace Script_Browser.TabPages
             signupEmail.SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
 
             textBox1.Text = Main.sf.streamlabsPath;
+            noFocusBorderBtn8.NotEnabledBG = Color.FromArgb(25, 72, 70);
         }
 
         #region Account
@@ -160,10 +161,28 @@ namespace Script_Browser.TabPages
         private void noFocusBorderBtn1_Click(object sender, EventArgs e)
         {
             animator1.Hide(tableLayoutPanel2);
+            animator1.Hide(tableLayoutPanel11);
             animator1.Show(tableLayoutPanel1);
             Main.sf.username = "";
             Main.sf.password = "";
             Main.sf.Save();
+        }
+
+        //Notify Settings
+        private void noFocusBorderBtn8_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Networking.NotifySettings(form, checkBox1.Checked ? 1 : 0, checkBox2.Checked ? 1 : 0, checkBox3.Checked ? 1 : 0);
+                noFocusBorderBtn8.Enabled = false;
+            }
+            catch { MetroMessageBox.Show(form, "Could't update your notification settings. Please try again later.", "Could update settings", MessageBoxButtons.OK, MessageBoxIcon.Error, 100); }
+        }
+
+        //Notify enable button
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            noFocusBorderBtn8.Enabled = true;
         }
 
         #endregion

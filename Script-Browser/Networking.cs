@@ -23,7 +23,7 @@ namespace Script_Browser
         //public static string username = "krypto";
         //public static string password = "a94a8fe5ccb19ba61c4c0873d391e987982fbbd3";
         public static bool twitch = false;
-        public static ObservableCollection<KeyValuePair<string, string>> checkUpdate = new ObservableCollection<KeyValuePair<string, string>>(); 
+        public static ObservableCollection<KeyValuePair<string, string>> checkUpdate = new ObservableCollection<KeyValuePair<string, string>>();
 
         //Encrypt passwords
         static string Hash(string input)
@@ -102,15 +102,22 @@ namespace Script_Browser
                         twitch = (bool)info["Twitch"];
                         form.settings1.label1.Text = "Logged in as " + Main.sf.username;
 
+                        form.settings1.checkBox1.Checked = (int)info["Notifys"]["NewCom"] == 1;
+                        form.settings1.checkBox2.Checked = (int)info["Notifys"]["NewReply"] == 1;
+                        form.settings1.checkBox3.Checked = (int)info["Notifys"]["NewBug"] == 1;
+                        form.settings1.noFocusBorderBtn8.Enabled = false;
+
                         if (hashed)
                         {
                             form.settings1.tableLayoutPanel1.Visible = false;
                             form.settings1.tableLayoutPanel2.Visible = true;
+                            form.settings1.tableLayoutPanel11.Visible = true;
                         }
                         else
                         {
                             form.settings1.animator1.HideSync(form.settings1.tableLayoutPanel1);
-                            form.settings1.animator1.ShowSync(form.settings1.tableLayoutPanel2);
+                            form.settings1.animator1.Show(form.settings1.tableLayoutPanel2);
+                            form.settings1.animator1.Show(form.settings1.tableLayoutPanel11);
                         }
 
                         form.settings1.noFocusBorderBtn6.Visible = !(bool)info["Verified"];
@@ -181,6 +188,8 @@ namespace Script_Browser
 
                         form.settings1.animator1.Hide(form.settings1.tableLayoutPanel1);
                         form.settings1.animator1.Show(form.settings1.tableLayoutPanel2);
+                        form.settings1.animator1.Show(form.settings1.tableLayoutPanel11);
+                        form.settings1.noFocusBorderBtn8.Enabled = false;
 
                         Main.sf.Save();
                     }
@@ -323,6 +332,22 @@ namespace Script_Browser
             {
                 if (DialogResult.Retry == MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150))
                     goto tryagain;
+            }
+        }
+
+        public static void NotifySettings(Main form, int newcom, int newreply, int newbug)
+        {
+            if (CheckIp(form))
+            {
+                using (WebClient web = new WebClient())
+                {
+                    string result = web.DownloadString(storageServer + "/Script%20Browser/notifySettings.php?user=" + Main.sf.username + "&pass=" + Main.sf.password + "&newcom=" + newcom + "&newreply=" + newreply + "&newbug=" + newbug);
+
+                    if (result.Contains("false"))
+                        MetroMessageBox.Show(form, "Could't update your notification settings. Please try again later.", "Could update settings", MessageBoxButtons.OK, MessageBoxIcon.Error, 100);
+                    else if (result.Contains("true"))
+                        MetroMessageBox.Show(form, "Your notification settings have been updated!", "Settings updated", MessageBoxButtons.OK, MessageBoxIcon.Information, 100);
+                }
             }
         }
 
