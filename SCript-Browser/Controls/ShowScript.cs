@@ -210,6 +210,23 @@ namespace Script_Browser.Controls
             button3.Text = "Download and Install";
         }
 
+        //Comment & Bug Report Tab Pages
+        private void comment_Click(object sender, EventArgs e)
+        {
+            button1.BackColor = Color.FromArgb(51, 139, 118);
+            button2.BackColor = Color.FromArgb(18, 25, 31);
+            panelTabPage1.Visible = true;
+            panelTabPage2.Visible = false;
+        }
+
+        private void bugreport_Click(object sender, EventArgs e)
+        {
+            button1.BackColor = Color.FromArgb(18, 25, 31);
+            button2.BackColor = Color.FromArgb(51, 139, 118);
+            panelTabPage1.Visible = false;
+            panelTabPage2.Visible = true;
+        }
+
         //Comments
         private void ShowScript_Load(object sender, EventArgs e)
         {
