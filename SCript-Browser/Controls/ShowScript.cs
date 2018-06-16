@@ -25,6 +25,7 @@ namespace Script_Browser.Controls
 
         int id;
         string name;
+        string author;
         Main form;
 
         public ShowScript(Main _form, string id, string name, string ver, string author, string alias, string shortDesc, string longDesc, string rating, string ratings, string downloads)
@@ -34,6 +35,7 @@ namespace Script_Browser.Controls
             form = _form;
 
             this.name = name;
+            this.author = author;
             this.id = Int32.Parse(id);
 
             label4.Text = name;
@@ -230,7 +232,7 @@ namespace Script_Browser.Controls
         //Comments
         private void ShowScript_Load(object sender, EventArgs e)
         {
-            comments1.LoadComments(id, form);
+            comments1.LoadComments(id, form, author.ToLower() == Main.sf.username.ToLower());
         }
     }
 }

@@ -27,6 +27,7 @@ namespace Script_Browser.Controls
 
         private Main form;
         private int id;
+        private bool admin;
 
         public Comments()
         {
@@ -38,11 +39,12 @@ namespace Script_Browser.Controls
             web.LoadError += new EventHandler<LoadErrorEventArgs>(LoadError);
         }
 
-        public void LoadComments(int id, Main form)
+        public void LoadComments(int id, Main form, bool admin = false)
         {
             web.Load(Environment.CurrentDirectory + @"\HTML\LoadingComments.html");
             this.form = form;
             this.id = id;
+            this.admin = admin;
 
             try
             {
@@ -56,7 +58,7 @@ namespace Script_Browser.Controls
                 {
                     JToken com = openComments[0];
                     string delete = "";
-                    if (com["Username"].ToString() == Main.sf.username)
+                    if (com["Username"].ToString() == Main.sf.username || admin)
                         delete = "<span class='cancel' id='" + com["ID"] + "' style='float:right;'>X</span>";
 
                     string usedHtmlComment = htmlSubComment;
@@ -122,7 +124,8 @@ namespace Script_Browser.Controls
 
         private void LoadError(object sender, LoadErrorEventArgs e)
         {
-            web.Load(Environment.CurrentDirectory + @"\HTML\CommentError.html");
+            if (!e.FailedUrl.Contains("CommentError.html"))
+                web.Load(Environment.CurrentDirectory + @"\HTML\CommentError.html");
         }
 
         private void AddressChanged(object sender, AddressChangedEventArgs e)
@@ -143,7 +146,7 @@ namespace Script_Browser.Controls
                         if (!String.IsNullOrWhiteSpace(vars.Get("comment")))
                         {
                             if (Networking.SendComment(form, id, vars.Get("comment"), vars.Get("reply")))
-                                LoadComments(id, form);
+                                LoadComments(id, form, admin);
                         }
                     }
                     else if (vars.AllKeys.Contains("delete"))
@@ -152,17 +155,17 @@ namespace Script_Browser.Controls
                         if (result == DialogResult.Yes)
                         {
                             if (Networking.DeleteComment(form, vars.Get("delete")))
-                                LoadComments(id, form);
+                                LoadComments(id, form, admin);
                             else
                                 MetroFramework.MetroMessageBox.Show(form, "Could't delete your comment. Please try again later.", "Could not delete comment", MessageBoxButtons.OK, MessageBoxIcon.Error, 100);
                         }
                     }
                     else if (vars.AllKeys.Contains("refresh"))
-                        LoadComments(id, form);
+                        LoadComments(id, form, admin);
                     else if (vars.AllKeys.Contains("discord"))
                         Process.Start("http://discord.gg/KDe7Vyu");
                 }
-                catch { }
+                catch { web.Load(Environment.CurrentDirectory + @"\HTML\CommentError.html"); }
             }));
         }
     }
