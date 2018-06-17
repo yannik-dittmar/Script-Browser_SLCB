@@ -14,12 +14,13 @@ using Newtonsoft.Json.Linq;
 using System.IO;
 using System.Collections.Specialized;
 using System.Diagnostics;
+using System.Threading;
 
 namespace Script_Browser.Controls
 {
     public partial class Comments : UserControl
     {
-        private ChromiumWebBrowser web = new ChromiumWebBrowser();
+        public ChromiumWebBrowser web = new ChromiumWebBrowser();
         private string htmlComment = "<div class='comment' id='{0}'><span class='user' id='{0}'>{1}</span><span class='time' id='{0}'>{2}</span>{3}</div>";
         private string htmlSubComment = "<div class='subComment' id='{0}'><span class='user' id='{0}'>{1}</span><span class='time' id='{0}'>{2}</span>{3}</div>";
         private string htmlReload = "";
@@ -27,7 +28,7 @@ namespace Script_Browser.Controls
 
         private Main form;
         private int id;
-        private bool admin;
+        private string author;
 
         public Comments()
         {
@@ -39,64 +40,68 @@ namespace Script_Browser.Controls
             web.LoadError += new EventHandler<LoadErrorEventArgs>(LoadError);
         }
 
-        public void LoadComments(int id, Main form, bool admin = false)
+        public void LoadComments(int id, Main form, string author)
         {
             web.Load(Environment.CurrentDirectory + @"\HTML\LoadingComments.html");
             this.form = form;
             this.id = id;
-            this.admin = admin;
+            this.author = author;
 
-            try
+            new Thread(delegate ()
             {
-                JObject result = Networking.GetComments(form, id);
-                JArray comments = (JArray)result["comments"];
-                List<JToken> openComments = new List<JToken>(GetComToReplyId(comments, "0"));
-                List<string> placeholders = new List<string>(new string[]{ placeholder + "0>" });
-                string htmlcomments = placeholder + "0>";
-
-                while (openComments.Count != 0)
+                try
                 {
-                    JToken com = openComments[0];
-                    string delete = "";
-                    if (com["Username"].ToString() == Main.sf.username || admin)
-                        delete = "<span class='cancel' id='" + com["ID"] + "' style='float:right;'>X</span>";
+                    JObject result = Networking.GetComments(form, id);
+                    JArray comments = (JArray)result["comments"];
+                    List<JToken> openComments = new List<JToken>(GetComToReplyId(comments, "0"));
+                    List<string> placeholders = new List<string>(new string[] { placeholder + "0>" });
+                    string htmlcomments = placeholder + "0>";
 
-                    string usedHtmlComment = htmlSubComment;
-                    if (GetAmountOfParents(comments, com) % 2 == 0)
-                        usedHtmlComment = htmlComment;
-
-                    htmlcomments = htmlcomments.Replace(placeholder + com["ReplyID"] + ">", placeholder + com["ReplyID"] + ">" + String.Format(usedHtmlComment, com["ID"], com["Username"], com["Time"], delete + placeholder + com["ID"] + ">"));
-                    placeholders.Add(placeholder + com["ID"] + ">");
-
-                    openComments.AddRange(GetComToReplyId(comments, com["ID"].ToString()));
-                    openComments.RemoveAt(0);
-                }
-
-                foreach (string p in placeholders)
-                {
-                    try
+                    while (openComments.Count != 0)
                     {
-                        JToken com = comments.FirstOrDefault(x => placeholder + x["ID"] + ">" == p);
-                        htmlcomments = htmlcomments.Replace(p, "<p id='" + com["ID"] + "'>" + com["Comment"] + "</p>");
+                        JToken com = openComments[0];
+                        string delete = "";
+                        if (com["Username"].ToString() == Main.sf.username || author == Main.sf.username.ToLower())
+                            delete = "<span class='cancel' id='" + com["ID"] + "' style='float:right;'>X</span>";
+
+                        string usedHtmlComment = htmlSubComment;
+                        if (GetAmountOfParents(comments, com) % 2 == 0)
+                            usedHtmlComment = htmlComment;
+
+                        htmlcomments = htmlcomments.Replace(placeholder + com["ReplyID"] + ">", placeholder + com["ReplyID"] + ">" + String.Format(usedHtmlComment, com["ID"], com["Username"], com["Time"], delete + placeholder + com["ID"] + ">"));
+                        placeholders.Add(placeholder + com["ID"] + ">");
+
+                        openComments.AddRange(GetComToReplyId(comments, com["ID"].ToString()));
+                        openComments.RemoveAt(0);
                     }
-                    catch { htmlcomments = htmlcomments.Replace(p, ""); }
+
+                    foreach (string p in placeholders)
+                    {
+                        try
+                        {
+                            JToken com = comments.FirstOrDefault(x => placeholder + x["ID"] + ">" == p);
+                            htmlcomments = htmlcomments.Replace(p, "<p id='" + com["ID"] + "'>" + com["Comment"] + "</p>");
+                        }
+                        catch { htmlcomments = htmlcomments.Replace(p, ""); }
+                    }
+
+                    string htmlLoad = File.ReadAllText(Environment.CurrentDirectory + @"\HTML\Comments.html").Replace("<comment INPUT>", htmlcomments);
+
+                    if (!(bool)result["Verified"])
+                        htmlLoad = htmlLoad.Replace("<textarea name='comment' id='comment' placeholder='Your comment...'", "<textarea name='comment' id='comment' placeholder='Login with a verified account to write comments.' disabled");
+
+                    form.BeginInvoke(new MethodInvoker(delegate ()
+                    {
+                        web.LoadHtml(htmlLoad, Environment.CurrentDirectory + @"\HTML\Comments.html");
+                        htmlReload = htmlLoad;
+                    }));
                 }
-
-                string htmlLoad = File.ReadAllText(Environment.CurrentDirectory + @"\HTML\Comments.html").Replace("<comment INPUT>", htmlcomments);
-
-                if (!(bool)result["Verified"])
+                catch (Exception e)
                 {
-                    htmlLoad = htmlLoad.Replace("<textarea name='comment' id='comment' placeholder='Your comment...'", "<textarea name='comment' id='comment' placeholder='Login with a verified account to write comments.' disabled");
+                    Console.WriteLine(e.StackTrace);
+                    form.BeginInvoke(new MethodInvoker(delegate () { web.Load(Environment.CurrentDirectory + @"\HTML\CommentError.html"); }));
                 }
-
-                web.LoadHtml(htmlLoad, Environment.CurrentDirectory + @"\HTML\Comments.html");
-                htmlReload = htmlLoad;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.StackTrace);
-                web.Load(Environment.CurrentDirectory + @"\HTML\CommentError.html");
-            }
+            }).Start();
         }
 
         private int GetAmountOfParents(JArray comments, JToken com)
@@ -124,7 +129,8 @@ namespace Script_Browser.Controls
 
         private void LoadError(object sender, LoadErrorEventArgs e)
         {
-            if (!e.FailedUrl.Contains("CommentError.html"))
+            Console.WriteLine("FAILED: " + e.FailedUrl + " | " + e.ErrorCode + " | " + e.ErrorText);
+            if (!e.FailedUrl.Contains("CommentError.html") && e.ErrorCode != CefErrorCode.Aborted)
                 web.Load(Environment.CurrentDirectory + @"\HTML\CommentError.html");
         }
 
@@ -146,7 +152,7 @@ namespace Script_Browser.Controls
                         if (!String.IsNullOrWhiteSpace(vars.Get("comment")))
                         {
                             if (Networking.SendComment(form, id, vars.Get("comment"), vars.Get("reply")))
-                                LoadComments(id, form, admin);
+                                LoadComments(id, form, author);
                         }
                     }
                     else if (vars.AllKeys.Contains("delete"))
@@ -155,13 +161,13 @@ namespace Script_Browser.Controls
                         if (result == DialogResult.Yes)
                         {
                             if (Networking.DeleteComment(form, vars.Get("delete")))
-                                LoadComments(id, form, admin);
+                                LoadComments(id, form, author);
                             else
                                 MetroFramework.MetroMessageBox.Show(form, "Could't delete your comment. Please try again later.", "Could not delete comment", MessageBoxButtons.OK, MessageBoxIcon.Error, 100);
                         }
                     }
                     else if (vars.AllKeys.Contains("refresh"))
-                        LoadComments(id, form, admin);
+                        LoadComments(id, form, author);
                     else if (vars.AllKeys.Contains("discord"))
                         Process.Start("http://discord.gg/KDe7Vyu");
                 }

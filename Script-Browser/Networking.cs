@@ -191,6 +191,10 @@ namespace Script_Browser
                         form.settings1.animator1.Show(form.settings1.tableLayoutPanel11);
                         form.settings1.noFocusBorderBtn8.Enabled = false;
 
+                        form.settings1.checkBox1.Checked = true;
+                        form.settings1.checkBox2.Checked = true;
+                        form.settings1.checkBox3.Checked = true;
+
                         Main.sf.Save();
                     }
                 }

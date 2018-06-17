@@ -484,7 +484,6 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "ShowScript";
             this.Size = new System.Drawing.Size(860, 861);
-            this.Load += new System.EventHandler(this.ShowScript_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
