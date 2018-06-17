@@ -117,9 +117,10 @@ namespace Script_Browser
                                             version = GetLineItem(line);
                                     }
 
-                                    try
+                                    string result = Networking.CheckForUpdate(script.Key, version);
+                                    if (result != "no")
                                     {
-                                        JObject updateInfo = JObject.Parse(Networking.CheckForUpdate(script.Key, version));
+                                        JObject updateInfo = JObject.Parse(result);
 
                                         if (Networking.DownloadScript(null, Int32.Parse(script.Key)))
                                         {
@@ -216,9 +217,8 @@ namespace Script_Browser
                                                 Thread.Sleep(1000);
                                         }
                                     }
-                                    catch { }
                                 }
-                                catch { }
+                                catch (Exception ex) { Console.WriteLine(ex.StackTrace); }
 
                                 IAsyncResult wait2 = BeginInvoke(new MethodInvoker(delegate () { Networking.checkUpdate.RemoveAt(i); }));
                                 while (!wait2.IsCompleted)
@@ -227,7 +227,7 @@ namespace Script_Browser
                             }
                         }
                     }
-                    catch { }
+                    catch (Exception ex) { Console.WriteLine(ex.StackTrace); }
 
                     Thread.Sleep(500);
                 }

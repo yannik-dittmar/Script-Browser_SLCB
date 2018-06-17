@@ -71,7 +71,7 @@ namespace Script_Browser
                     return reply.Status == IPStatus.Success;
                 }
             }
-            catch { }
+            catch (Exception ex) { Console.WriteLine(ex.StackTrace); }
             return false;
         }
 

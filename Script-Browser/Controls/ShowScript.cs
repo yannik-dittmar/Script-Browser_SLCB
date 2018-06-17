@@ -14,6 +14,9 @@ using System.IO;
 using SaveManager;
 using System.Collections.Specialized;
 using Script_Browser.TabPages;
+using System.Threading;
+using CefSharp.WinForms;
+using CefSharp;
 
 namespace Script_Browser.Controls
 {
@@ -25,15 +28,18 @@ namespace Script_Browser.Controls
 
         int id;
         string name;
+        string author;
         Main form;
 
         public ShowScript(Main _form, string id, string name, string ver, string author, string alias, string shortDesc, string longDesc, string rating, string ratings, string downloads)
         {
             InitializeComponent();
+            comments1.web.IsBrowserInitializedChanged += new EventHandler<IsBrowserInitializedChangedEventArgs>(BrowserReady);
 
             form = _form;
 
             this.name = name;
+            this.author = author;
             this.id = Int32.Parse(id);
 
             label4.Text = name;
@@ -228,9 +234,10 @@ namespace Script_Browser.Controls
         }
 
         //Comments
-        private void ShowScript_Load(object sender, EventArgs e)
+        private void BrowserReady(object sender, IsBrowserInitializedChangedEventArgs e)
         {
-            comments1.LoadComments(id, form);
+            if (e.IsBrowserInitialized)
+                comments1.LoadComments(id, form, author.ToLower());
         }
     }
 }
