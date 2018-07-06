@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Updater", "Updater\Updater.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SplashScreen", "SplashScreen\SplashScreen.csproj", "{916603EC-003A-4004-97C6-C3AE4190A690}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateLogger", "UpdateLogger\UpdateLogger.csproj", "{CE5F09B1-591B-4A22-90B0-795ADD21F791}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{916603EC-003A-4004-97C6-C3AE4190A690}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{916603EC-003A-4004-97C6-C3AE4190A690}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{916603EC-003A-4004-97C6-C3AE4190A690}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE5F09B1-591B-4A22-90B0-795ADD21F791}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE5F09B1-591B-4A22-90B0-795ADD21F791}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE5F09B1-591B-4A22-90B0-795ADD21F791}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE5F09B1-591B-4A22-90B0-795ADD21F791}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
