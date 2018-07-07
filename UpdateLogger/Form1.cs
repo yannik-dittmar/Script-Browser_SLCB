@@ -14,29 +14,47 @@ namespace UpdateLogger
 {
     public partial class Form1 : Form
     {
-        private string settingsFile = @"";
+        private string settingsFile = Directory.GetParent(Application.ExecutablePath) + "\\settings.json";
         private string scanLocation = @"D:\MegaSync\Visual-Studio\Script-Browser_SLCB\Script-Browser\bin\Debug";
-        private JArray Changelog; 
+        private JArray changelog; 
 
         public Form1()
         {
             InitializeComponent();
+            fileSystemWatcher1.Path = scanLocation;
 
             try
             {
                 if (File.Exists(settingsFile))
-                    Changelog = JArray.Parse(File.ReadAllText(settingsFile));
+                    changelog = JArray.Parse(File.ReadAllText(settingsFile));
                 else
-                    Changelog = new JArray();
+                    changelog = new JArray();
             }
-            catch { Changelog = new JArray(); }
+            catch { changelog = new JArray(); }
+        }
 
-            JObject lastScan = new JObject();
-            lastScan["files"] = new JArray();
-            lastScan["folders"] = new JArray();
+        private void Form1_Activated(object sender, EventArgs e)
+        {
+            PrintLog();
+        }
 
-            textBox1.Text = ScanChanges(lastScan).ToString().Replace("\\\\", "\\");
-            textBox1.Select(0, 0);
+        private void PrintLog()
+        {
+            textBox1.Text = changelog.ToString().Replace("\\\\", "\\") 
+                + Environment.NewLine 
+                + Environment.NewLine 
+                + "===UNSTATED CHANGES===" 
+                + Environment.NewLine 
+                + Environment.NewLine 
+                + ScanChanges(GetLastScan()).ToString().Replace("\\\\", "\\");
+
+            textBox1.SelectionStart = textBox1.Text.Length;
+            textBox1.ScrollToCaret();
+        }
+
+        private string FileTime(string file)
+        {
+            return " | " + new FileInfo(file).LastWriteTime;
         }
 
         private JObject ScanChanges(JObject lastScan)
@@ -51,30 +69,30 @@ namespace UpdateLogger
                         ["changed"] = 0,
                         ["removed"] = 0
                     },
-                    ["changed"] = new JArray(),
+                    ["changed"] = new JObject(),
                     ["removed"] = new JArray()
                 },
                 ["folders"] = new JObject
                 {
                     ["stats"] = new JObject
                     {
-                        ["changed"] = 0,
+                        ["added"] = 0,
                         ["removed"] = 0
                     },
-                    ["changed"] = new JArray(),
+                    ["added"] = new JArray(),
                     ["removed"] = new JArray()
                 }
             };
 
-            string[][] subData = GetSubData(scanLocation);
-            string[] currentFiles = subData[0];
-            string[] currentFolders = subData[1];
+            Tuple<Dictionary<string, string>, string[]> subData = GetSubData(scanLocation);
+            string[] currentFiles = subData.Item1.Keys.ToArray();
+            string[] currentFolders = subData.Item2;
 
             //Removed Files
-            foreach (JToken lastfile in lastScan["files"])
+            foreach (KeyValuePair<string, JToken> lastfile in (JObject)lastScan["files"])
             {
-                if (!currentFiles.Contains(lastfile.ToString()))
-                    ((JArray)result["files"]["removed"]).Add(lastfile);
+                if (!currentFiles.Contains(lastfile.Key.ToString()))
+                    ((JArray)result["files"]["removed"]).Add(lastfile.Key);
             }
 
             //Removed Folders
@@ -87,35 +105,37 @@ namespace UpdateLogger
             //Added Files
             foreach (string currentFile in currentFiles)
             {
-                if (!((JArray)lastScan["files"]).Contains(currentFile))
-                    ((JArray)result["files"]["changed"]).Add(currentFile);
+                if (!((JObject)lastScan["files"]).ContainsKey(currentFile))
+                    result["files"]["changed"][currentFile] = subData.Item1[currentFile];
+                else if (lastScan["files"][currentFile].ToString() != subData.Item1[currentFile])
+                    result["files"]["changed"][currentFile] = subData.Item1[currentFile];
             }
 
             //Added Folders
             foreach (string currentFolder in currentFolders)
             {
-                if (!((JArray)lastScan["folders"]).Contains(currentFolder))
-                    ((JArray)result["folders"]["changed"]).Add(currentFolder);
+                if (((JArray)lastScan["folders"]).FirstOrDefault(f => f.ToString() == currentFolder) == null)
+                    ((JArray)result["folders"]["added"]).Add(currentFolder);
             }
 
             //Counters
             result["files"]["stats"]["changed"] = result["files"]["changed"].Count();
             result["files"]["stats"]["removed"] = result["files"]["removed"].Count();
-            result["folders"]["stats"]["changed"] = result["folders"]["changed"].Count();
+            result["folders"]["stats"]["added"] = result["folders"]["added"].Count();
             result["folders"]["stats"]["removed"] = result["folders"]["removed"].Count();
 
             return result;
         }
 
-        private string[][] GetSubData(string p)
+        private Tuple<Dictionary<string, string>, string[]> GetSubData(string p)
         {
-            HashSet<string> files = new HashSet<string>();
+            Dictionary<string, string> files = new Dictionary<string, string>();
             HashSet<string> subfolders = new HashSet<string>(Directory.GetDirectories(p));
             HashSet<string> storedSubfolders = new HashSet<string>();
 
             string[] topFiles = Directory.GetFiles(p);
             foreach (string file in topFiles)
-                files.Add(file.Replace(p, ""));
+                files[file.Replace(p, "")] = new FileInfo(file).LastWriteTime.ToString();
 
             while (subfolders.Count != 0)
             {
@@ -123,7 +143,7 @@ namespace UpdateLogger
                 string[] subfiles = Directory.GetFiles(subfolder);
 
                 foreach (string file in subfiles)
-                    files.Add(file.Replace(p, ""));
+                    files[file.Replace(p, "")] = new FileInfo(file).LastWriteTime.ToString();
 
                 subfolders.Remove(subfolder);
                 storedSubfolders.Add(subfolder.Replace(p, ""));
@@ -133,7 +153,62 @@ namespace UpdateLogger
                     subfolders.Add(subsubfolder);
             }
 
-            return new string[][] { files.ToArray(), storedSubfolders.ToArray()};
+            return Tuple.Create(files, storedSubfolders.ToArray());
+        }
+
+        private JObject GetLastScan()
+        {
+            JObject lastScan = new JObject
+            {
+                ["files"] = new JObject(),
+                ["folders"] = new JArray()
+            };
+
+            foreach (JToken change in changelog)
+            {
+                foreach (KeyValuePair<string, JToken> fileChange in (JObject)change["files"]["changed"])
+                    lastScan["files"][fileChange.Key] = fileChange.Value;
+
+                foreach (JToken fileRemoved in change["files"]["removed"])
+                    ((JObject)lastScan["files"]).Remove(fileRemoved.ToString());
+
+                foreach (JToken folderAdded in change["folders"]["added"])
+                    ((JArray)lastScan["folders"]).Add(folderAdded);
+
+                foreach (JToken folderRemoved in change["folders"]["removed"])
+                    ((JArray)lastScan["folders"]).Remove(folderRemoved);
+            }
+
+            return lastScan;
+        }
+
+        //log Changes
+        private void button1_Click(object sender, EventArgs e)
+        {
+            changelog.Add(ScanChanges(GetLastScan()));
+            PrintLog();
+            File.WriteAllText(settingsFile, changelog.ToString());
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(changelog.ToString());
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            File.WriteAllText(@"C:\Users\Yannik\Desktop\Changelog.txt", changelog.ToString());
+        }
+
+        //File Watcher
+        private void fileSystemWatcher1_Changed(object sender, FileSystemEventArgs e)
+        {
+            PrintLog();
+        }
+
+        private void fileSystemWatcher1_Renamed(object sender, RenamedEventArgs e)
+        {
+            PrintLog();
         }
     }
 }
