@@ -34,6 +34,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
@@ -41,18 +42,20 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tableLayoutPanel1.Controls.Add(this.button3, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.button2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.textBox1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.button1, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.textBox2, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.Size = new System.Drawing.Size(678, 590);
             this.tableLayoutPanel1.TabIndex = 0;
@@ -65,7 +68,7 @@
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(454, 554);
+            this.button3.Location = new System.Drawing.Point(454, 528);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(221, 33);
             this.button3.TabIndex = 4;
@@ -81,7 +84,7 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(3, 554);
+            this.button2.Location = new System.Drawing.Point(3, 528);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(219, 33);
             this.button2.TabIndex = 2;
@@ -98,7 +101,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(672, 545);
+            this.textBox1.Size = new System.Drawing.Size(672, 519);
             this.textBox1.TabIndex = 0;
             this.textBox1.WordWrap = false;
             // 
@@ -110,7 +113,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(228, 554);
+            this.button1.Location = new System.Drawing.Point(228, 528);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(220, 33);
             this.button1.TabIndex = 1;
@@ -128,6 +131,15 @@
             this.fileSystemWatcher1.Created += new System.IO.FileSystemEventHandler(this.fileSystemWatcher1_Changed);
             this.fileSystemWatcher1.Deleted += new System.IO.FileSystemEventHandler(this.fileSystemWatcher1_Changed);
             this.fileSystemWatcher1.Renamed += new System.IO.RenamedEventHandler(this.fileSystemWatcher1_Renamed);
+            // 
+            // textBox2
+            // 
+            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.textBox2, 3);
+            this.textBox2.Location = new System.Drawing.Point(3, 567);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(672, 20);
+            this.textBox2.TabIndex = 5;
             // 
             // Form1
             // 
@@ -154,6 +166,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button1;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }
 

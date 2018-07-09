@@ -40,16 +40,28 @@ namespace UpdateLogger
 
         private void PrintLog()
         {
+            string version = "1.0";
+            foreach (JToken change in changelog)
+                version = change["version"].ToString();
+            textBox2.Text = version;
+
+            JObject unstatedChanges = ScanChanges(GetLastScan());
             textBox1.Text = changelog.ToString().Replace("\\\\", "\\") 
                 + Environment.NewLine 
                 + Environment.NewLine 
                 + "===UNSTATED CHANGES===" 
                 + Environment.NewLine 
                 + Environment.NewLine 
-                + ScanChanges(GetLastScan()).ToString().Replace("\\\\", "\\");
+                + unstatedChanges.ToString().Replace("\\\\", "\\");
 
             textBox1.SelectionStart = textBox1.Text.Length;
             textBox1.ScrollToCaret();
+
+            button1.Enabled = !(
+                (int)unstatedChanges["files"]["stats"]["changed"] == 0 
+                && (int)unstatedChanges["files"]["stats"]["removed"] == 0
+                && (int)unstatedChanges["folders"]["stats"]["added"] == 0
+                && (int)unstatedChanges["folders"]["stats"]["removed"] == 0);
         }
 
         private string FileTime(string file)
@@ -62,6 +74,7 @@ namespace UpdateLogger
             JObject result = new JObject
             {
                 ["date"] = DateTime.Now.ToString("dd.MM.yy"),
+                ["version"] = textBox2.Text,
                 ["files"] = new JObject
                 {
                     ["stats"] = new JObject
@@ -197,7 +210,16 @@ namespace UpdateLogger
 
         private void button2_Click(object sender, EventArgs e)
         {
-            File.WriteAllText(@"C:\Users\Yannik\Desktop\Changelog.txt", changelog.ToString());
+            JArray exportChangelog = new JArray(changelog);
+            foreach (JToken change in exportChangelog)
+            {
+                JObject fileChanges = (JObject)change["files"]["changed"].DeepClone();
+                change["files"]["changed"] = new JArray();
+                foreach (KeyValuePair<string, JToken> fileChange in fileChanges)
+                    ((JArray)change["files"]["changed"]).Add(fileChange.Key);
+            }
+
+            File.WriteAllText(@"C:\Users\Yannik\Desktop\changelog.txt", exportChangelog.ToString());
         }
 
         //File Watcher
