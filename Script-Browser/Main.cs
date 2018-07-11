@@ -18,6 +18,7 @@ using System.Threading;
 using Newtonsoft.Json.Linq;
 using System.IO.Compression;
 using AnimatorNS;
+using static Script_Browser.Program;
 
 namespace Script_Browser
 {
@@ -58,9 +59,12 @@ namespace Script_Browser
         Point lastWinPos;
 
         public static SaveFile sf = new SaveFile(Path.GetDirectoryName(Application.ExecutablePath) + @"\settings.save");
+        private bool hide;
 
-        public Main()
+        public Main(bool hide = false)
         {
+            this.hide = hide;
+
             if (!Set_SCB_Path.CheckSLCBPath(sf.streamlabsPath))
             {
                 if (!Set_SCB_Path.CheckSLCBPath(Set_SCB_Path.GetSLCBPath()))
@@ -264,18 +268,20 @@ namespace Script_Browser
 
         protected override void WndProc(ref Message m)
         {
-            switch (m.Msg)
+            if (m.Msg == WM_NCHITTEST)
             {
-                case WM_NCHITTEST:
-                    base.WndProc(ref m);
-                    var hitPoint = this.PointToClient(new Point(m.LParam.ToInt32() & 0xffff, m.LParam.ToInt32() >> 16));
-                    if (sizeGripRectangle.Contains(hitPoint) && Size != Screen.GetWorkingArea(new Point(Cursor.Position.X, Cursor.Position.Y)).Size)
-                        m.Result = new IntPtr(HTBOTTOMRIGHT);
-                    break;
-                default:
-                    base.WndProc(ref m);
-                    break;
+                base.WndProc(ref m);
+                var hitPoint = this.PointToClient(new Point(m.LParam.ToInt32() & 0xffff, m.LParam.ToInt32() >> 16));
+                if (sizeGripRectangle.Contains(hitPoint) && Size != Screen.GetWorkingArea(new Point(Cursor.Position.X, Cursor.Position.Y)).Size)
+                    m.Result = new IntPtr(HTBOTTOMRIGHT);
             }
+            else if (m.Msg == SingleInstance.WM_SHOWFIRSTINSTANCE)
+            {
+                Show();
+                base.WndProc(ref m);
+            }
+            else
+                base.WndProc(ref m);
         }
 
         protected override void OnActivated(EventArgs e)
@@ -569,6 +575,12 @@ namespace Script_Browser
             }
             catch { }
             this.Opacity = 1;
+        }
+
+        private void Main_Shown(object sender, EventArgs e)
+        {
+            if (hide)
+                Hide();
         }
     }
 }

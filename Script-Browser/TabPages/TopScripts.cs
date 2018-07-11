@@ -66,14 +66,19 @@ namespace Script_Browser.TabPages
         //Only row-selection when entering a cell
         private void dataGridView1_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
         {
-            try
+            if (e.RowIndex != -1)
             {
-                dataGridView1.ClearSelection();
-                dataGridView1.Rows[e.RowIndex].Selected = true;
+                try
+                {
+                    dataGridView1.ClearSelection();
+                    dataGridView1.Rows[e.RowIndex].Selected = true;
 
-                nAMEToolStripMenuItem.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+                    nAMEToolStripMenuItem.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+                }
+                catch { dataGridView1.ClearSelection(); }
             }
-            catch { dataGridView1.ClearSelection(); }
+            else
+                dataGridView1.ClearSelection();
         }
 
         //Refresh & Download data from server

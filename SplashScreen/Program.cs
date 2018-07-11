@@ -36,6 +36,8 @@ namespace SplashScreen
         }
     }
 
+    #region SingleInstance
+
     static public class SingleInstance
     {
         public static readonly int WM_SHOWFIRSTINSTANCE =
@@ -124,4 +126,6 @@ namespace SplashScreen
             }
         }
     }
+
+    #endregion
 }

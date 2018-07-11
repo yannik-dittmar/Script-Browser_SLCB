@@ -64,9 +64,7 @@ namespace SplashScreen
         protected override void WndProc(ref Message message)
         {
             if (message.Msg == SingleInstance.WM_SHOWFIRSTINSTANCE)
-            {
                 Show();
-            }
             base.WndProc(ref message);
         }
 
@@ -124,7 +122,12 @@ namespace SplashScreen
                         sf.Save();
                     }
                     this.BeginInvoke(new MethodInvoker(delegate () { label1.Text = "Starting Script-Browser"; }));
-                    //Process.Start(directory + "\\Script-Browser.exe");
+
+                    if (this.Visible)
+                        Process.Start(directory + "\\Script-Browser.exe");
+                    else
+                        Process.Start(directory + "\\Script-Browser.exe", "-hide");
+
                     Thread.Sleep(2000);
                     Environment.Exit(0);
                 }

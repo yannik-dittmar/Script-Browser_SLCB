@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -148,7 +149,7 @@ namespace UpdateLogger
 
             string[] topFiles = Directory.GetFiles(p);
             foreach (string file in topFiles)
-                files[file.Replace(p, "")] = new FileInfo(file).LastWriteTime.ToString();
+                files[file.Replace(p, "")] = HashSum(file);
 
             while (subfolders.Count != 0)
             {
@@ -156,7 +157,7 @@ namespace UpdateLogger
                 string[] subfiles = Directory.GetFiles(subfolder);
 
                 foreach (string file in subfiles)
-                    files[file.Replace(p, "")] = new FileInfo(file).LastWriteTime.ToString();
+                    files[file.Replace(p, "")] = HashSum(file);
 
                 subfolders.Remove(subfolder);
                 storedSubfolders.Add(subfolder.Replace(p, ""));
@@ -193,6 +194,13 @@ namespace UpdateLogger
             }
 
             return lastScan;
+        }
+
+        private string HashSum(string path)
+        {
+            using (var md5 = MD5.Create())
+            using (var stream = File.OpenRead(path))
+                return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", "").ToLowerInvariant();
         }
 
         //log Changes
