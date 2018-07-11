@@ -33,6 +33,7 @@ namespace SaveManager
                 streamlabsPath = sf.streamlabsPath;
                 username = sf.username;
                 password = sf.password;
+                version = sf.version;
 
                 if (sf.currentInstalled != null)
                     currentInstalled = sf.currentInstalled;

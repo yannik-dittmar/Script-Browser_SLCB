@@ -39,16 +39,35 @@ namespace SplashScreen
 
         #endregion
 
+        private string directory = Path.GetDirectoryName(Application.ExecutablePath) + "\\test";
         private Stopwatch sw = new Stopwatch();
         private SaveFile sf = new SaveFile(Path.GetDirectoryName(Application.ExecutablePath) + @"\settings.save");
         private bool downloadingFile = false;
+        private bool hide = false;
+        private int retryCounter = 10;
 
-        public Main()
+        public Main(bool hide = false)
         {
+            this.hide = hide;
             InitializeComponent();
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
 
             Start();
+        }
+
+        private void Main_Shown(object sender, EventArgs e)
+        {
+            if (hide)
+                Hide();
+        }
+
+        protected override void WndProc(ref Message message)
+        {
+            if (message.Msg == SingleInstance.WM_SHOWFIRSTINSTANCE)
+            {
+                Show();
+            }
+            base.WndProc(ref message);
         }
 
         private void Start()
@@ -69,7 +88,6 @@ namespace SplashScreen
                         changelog.RemoveAt(0);
 
                         JObject changes = GetChanges(changelog);
-                        string directory = Path.GetDirectoryName(Application.ExecutablePath) + "\\test";
 
                         foreach (JToken addFolder in changes["folders"]["added"])
                         {
@@ -106,8 +124,11 @@ namespace SplashScreen
                         sf.Save();
                     }
                     this.BeginInvoke(new MethodInvoker(delegate () { label1.Text = "Starting Script-Browser"; }));
+                    //Process.Start(directory + "\\Script-Browser.exe");
+                    Thread.Sleep(2000);
+                    Environment.Exit(0);
                 }
-                catch (Exception ex) { this.BeginInvoke(new MethodInvoker(delegate () { label1.Text = "Retry"; })); Console.WriteLine(ex.StackTrace); }
+                catch (Exception ex) { this.BeginInvoke(new MethodInvoker(delegate () { label1.Text = "Retry - 10s"; })); Console.WriteLine(ex.StackTrace); }
                 SetProgress(0);
             }).Start();
         }
@@ -125,15 +146,20 @@ namespace SplashScreen
         private void label1_Click(object sender, EventArgs e)
         {
             if (label1.Cursor == Cursors.Hand)
+            {
                 Start();
+                timerRetry.Enabled = false;
+                retryCounter = 10;
+            }
         }
 
         private void label1_TextChanged(object sender, EventArgs e)
         {
-            if (label1.Text == "Retry")
+            if (label1.Text.Contains("Retry"))
             {
                 label1.BackColor = Color.FromArgb(51, 139, 118);
                 label1.Cursor = Cursors.Hand;
+                timerRetry.Enabled = true;
             }
             else
             {
@@ -292,5 +318,22 @@ namespace SplashScreen
         }
 
         #endregion
+
+        private void timerRetry_Tick(object sender, EventArgs e)
+        {
+            retryCounter--;
+            label1.Text = "Retry - " + retryCounter + "s";
+
+            if (retryCounter == 0)
+            {
+                retryCounter = 10;
+                Start();
+            }
+        }
+
+        private void Main_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
     }
 }
