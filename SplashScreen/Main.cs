@@ -116,7 +116,13 @@ namespace SplashScreen
 
                         this.BeginInvoke(new MethodInvoker(delegate () { label1.Text = "Cleaning Up..."; }));
                         foreach (JToken removeFile in changes["files"]["removed"])
-                            try { File.Delete(directory + removeFile); } catch { }
+                        {
+                            try
+                            {
+                                File.Delete(directory + removeFile);
+                            }
+                            catch (Exception ex) { Console.WriteLine(ex.StackTrace); }
+                        }
 
                         sf.version = changelog.Last["version"].ToString();
                         sf.Save();
@@ -198,7 +204,7 @@ namespace SplashScreen
 
                 foreach (JToken fileRemoved in change["files"]["removed"])
                 {
-                    ((JObject)changes["files"]).Remove(fileRemoved.ToString());
+                    ((JArray)changes["files"]["removed"]).Add(fileRemoved.ToString());
                     if (((JArray)changes["files"]["changed"]).Contains(fileRemoved.ToString()))
                         ((JArray)changes["files"]["changed"]).Remove(fileRemoved.ToString());
                 }

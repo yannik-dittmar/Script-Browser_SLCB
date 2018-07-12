@@ -39,6 +39,7 @@ namespace Script_Browser
             AppDomain.CurrentDomain.AssemblyResolve += Resolver;
             LoadApp(args);
 
+            Console.WriteLine("TEST");
             SingleInstance.Stop();
         }
 

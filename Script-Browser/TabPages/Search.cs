@@ -119,33 +119,36 @@ namespace Script_Browser.TabPages
         //Load ScriptView
         private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            try
+            if (e.RowIndex != -1)
             {
-                dataGridView1.Rows[e.RowIndex].Selected = true;
-                if (e.Button == MouseButtons.Left && !contextMenuOpen)
+                try
                 {
-                    string result = Networking.GetScriptById(form, dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
-                    JObject script = JObject.Parse(result);
+                    dataGridView1.Rows[e.RowIndex].Selected = true;
+                    if (e.Button == MouseButtons.Left && !contextMenuOpen)
+                    {
+                        string result = Networking.GetScriptById(form, dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+                        JObject script = JObject.Parse(result);
 
-                    ShowScript ss = new ShowScript(form, script["ID"].ToString(), script["Name"].ToString(), script["Version"].ToString(), script["Username"].ToString(), script["Alias"].ToString(), script["ShortDescription"].ToString(), script["LongDescription"].ToString(), script["Rating"].ToString(), script["Ratings"].ToString(), script["Downloads"].ToString());
-                    ss.pictureBox1.MouseClick += new MouseEventHandler(unloadScript);
-                    ss.Dock = DockStyle.Fill;
-                    panelScript.Size = this.Size;
-                    panelScript.Controls.Add(ss);
-                    ss.Size = panelScript.Size;
+                        ShowScript ss = new ShowScript(form, script["ID"].ToString(), script["Name"].ToString(), script["Version"].ToString(), script["Username"].ToString(), script["Alias"].ToString(), script["ShortDescription"].ToString(), script["LongDescription"].ToString(), script["Rating"].ToString(), script["Ratings"].ToString(), script["Downloads"].ToString());
+                        ss.pictureBox1.MouseClick += new MouseEventHandler(unloadScript);
+                        ss.Dock = DockStyle.Fill;
+                        panelScript.Size = this.Size;
+                        panelScript.Controls.Add(ss);
+                        ss.Size = panelScript.Size;
 
-                    int slidecoeff = -1 * (int)(this.Width * 0.002);
-                    if (slidecoeff >= 0)
-                        slidecoeff = -1;
+                        int slidecoeff = -1 * (int)(this.Width * 0.002);
+                        if (slidecoeff >= 0)
+                            slidecoeff = -1;
 
-                    animatorScript.DefaultAnimation.SlideCoeff = new PointF(slidecoeff, 0);
-                    animatorScript.ShowSync(panelScript);
-                    panel1.Visible = false;
+                        animatorScript.DefaultAnimation.SlideCoeff = new PointF(slidecoeff, 0);
+                        animatorScript.ShowSync(panelScript);
+                        panel1.Visible = false;
+                    }
                 }
+                catch (WebException) { MetroFramework.MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.OK, MessageBoxIcon.Error, 125); }
+                catch (Exception ex) { MetroFramework.MetroMessageBox.Show(form, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); Console.WriteLine(ex.StackTrace); }
+                contextMenuOpen = false;
             }
-            catch (WebException) { MetroFramework.MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.OK, MessageBoxIcon.Error, 125); }
-            catch (Exception ex) { MetroFramework.MetroMessageBox.Show(form, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); Console.WriteLine(ex.StackTrace); }
-            contextMenuOpen = false;
         }
 
         //Unload ScriptView
