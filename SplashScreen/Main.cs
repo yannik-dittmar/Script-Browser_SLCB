@@ -87,15 +87,18 @@ namespace SplashScreen
 
                         JObject changes = GetChanges(changelog);
 
+                        //Add folders
                         foreach (JToken addFolder in changes["folders"]["added"])
                         {
                             if (!Directory.Exists(directory + addFolder.ToString()))
                                 Directory.CreateDirectory(directory + addFolder.ToString());
                         }
 
+                        //Remove Folders
                         foreach (JToken removeFolder in changes["folders"]["removed"])
                             try { Directory.Delete(directory + removeFolder.ToString(), true); } catch { }
 
+                        //Download files
                         SetProgress(0);
                         using (WebClient web = new WebClient())
                         {
@@ -114,6 +117,7 @@ namespace SplashScreen
                         }
                         SetProgress(0);
 
+                        //Delete files
                         this.BeginInvoke(new MethodInvoker(delegate () { label1.Text = "Cleaning Up..."; }));
                         foreach (JToken removeFile in changes["files"]["removed"])
                         {
@@ -129,12 +133,22 @@ namespace SplashScreen
                     }
                     this.BeginInvoke(new MethodInvoker(delegate () { label1.Text = "Starting Script-Browser"; }));
 
+                    //Start Script-Browser
                     if (this.Visible)
                         Process.Start(directory + "\\Script-Browser.exe");
                     else
                         Process.Start(directory + "\\Script-Browser.exe", "-hide");
 
-                    Thread.Sleep(2000);
+                    //Close Splash Screen
+                    try
+                    {
+                        while (Process.GetProcessesByName("Script-Browser").Length == 0)
+                            Thread.Sleep(50);
+                        while ((int)Process.GetProcessesByName("Script-Browser")[0].MainWindowHandle == 0)
+                            Thread.Sleep(50);
+                        Thread.Sleep(500);
+                    }
+                    catch { }
                     Environment.Exit(0);
                 }
                 catch (Exception ex) { this.BeginInvoke(new MethodInvoker(delegate () { label1.Text = "Retry - 10s"; })); Console.WriteLine(ex.StackTrace); }

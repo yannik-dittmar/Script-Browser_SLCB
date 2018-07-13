@@ -28,18 +28,21 @@ namespace SaveManager
             path = _path;
             try
             {
-                BinaryFormatter bf = new BinaryFormatter();
-                SaveFile sf = (SaveFile)bf.Deserialize(File.Open(path, FileMode.Open));
-                streamlabsPath = sf.streamlabsPath;
-                username = sf.username;
-                password = sf.password;
-                version = sf.version;
+                using (FileStream file = File.Open(path, FileMode.Open))
+                {
+                    BinaryFormatter bf = new BinaryFormatter();
+                    SaveFile sf = (SaveFile)bf.Deserialize(file);
+                    streamlabsPath = sf.streamlabsPath;
+                    username = sf.username;
+                    password = sf.password;
+                    version = sf.version;
 
-                if (sf.currentInstalled != null)
-                    currentInstalled = sf.currentInstalled;
+                    if (sf.currentInstalled != null)
+                        currentInstalled = sf.currentInstalled;
 
-                if (sf.ratedScripts != null)
-                    ratedScripts = sf.ratedScripts;
+                    if (sf.ratedScripts != null)
+                        ratedScripts = sf.ratedScripts;
+                }
             }
             catch { Console.WriteLine("Could not load SaveFile!"); }
         }
@@ -48,10 +51,13 @@ namespace SaveManager
         {
             try
             {
-                BinaryFormatter bf = new BinaryFormatter();
-                bf.Serialize(File.Open(path, FileMode.Create), this);
+                using (FileStream file = File.Open(path, FileMode.Create))
+                {
+                    BinaryFormatter bf = new BinaryFormatter();
+                    bf.Serialize(file, this);
+                }
             }
-            catch { Console.WriteLine("Could not save SaveFile!"); }
+            catch (Exception ex) { Console.WriteLine("Could not save SaveFile!: " + ex.StackTrace); }
         }
     }
 }
