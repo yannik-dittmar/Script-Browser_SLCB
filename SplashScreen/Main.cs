@@ -43,8 +43,10 @@ namespace SplashScreen
         private Stopwatch sw = new Stopwatch();
         private SaveFile sf = new SaveFile(Path.GetDirectoryName(Application.ExecutablePath) + @"\settings.save");
         private bool downloadingFile = false;
+        private Exception downloadError = null;
         private bool hide = false;
         private int retryCounter = 10;
+        private Thread downloadThread;
 
         public Main(bool hide = false)
         {
@@ -71,13 +73,16 @@ namespace SplashScreen
         private void Start()
         {
             label1.Text = "Checking for Updates";
-            new Thread(delegate ()
+            downloadThread = new Thread(delegate ()
             {
                 try
                 {
+                    Console.WriteLine(sf.version);
                     if (!CheckUpdate())
                     {
                         this.BeginInvoke(new MethodInvoker(delegate () { label1.Text = "Updating - Downloading Files..."; }));
+                        List<string> failedChanges = new List<string>();
+                        List<string> failedRemoves = new List<string>();
 
                         JArray changelog = GetChangelog();
                         while (changelog.First["version"].ToString() != sf.version)
@@ -96,7 +101,13 @@ namespace SplashScreen
 
                         //Remove Folders
                         foreach (JToken removeFolder in changes["folders"]["removed"])
-                            try { Directory.Delete(directory + removeFolder.ToString(), true); } catch { }
+                        {
+                            try
+                            {
+                                Directory.Delete(directory + removeFolder.ToString(), true);
+                            }
+                            catch { failedRemoves.Add(directory + removeFolder.ToString()); }
+                        }
 
                         //Download files
                         SetProgress(0);
@@ -107,11 +118,42 @@ namespace SplashScreen
                             int counter = 1;
                             foreach (JToken addedFile in changes["files"]["changed"])
                             {
-                                this.BeginInvoke(new MethodInvoker(delegate () { label1.Text = "Updating - Downloading Files (" + counter + "/" + ((JArray)changes["files"]["changed"]).Count + ")"; }));
-                                downloadingFile = true;
-                                web.DownloadFileAsync(new Uri("http://digital-programming.de/ScriptBrowser/bin" + addedFile), directory + addedFile);
-                                while (downloadingFile)
-                                    Thread.Sleep(50);
+                                try
+                                {
+                                    this.BeginInvoke(new MethodInvoker(delegate () { label1.Text = "Updating - Downloading Files (" + counter + "/" + ((JArray)changes["files"]["changed"]).Count + ")"; }));
+                                    downloadingFile = true;
+                                    web.DownloadFileAsync(new Uri("http://digital-programming.de/ScriptBrowser/bin" + addedFile), directory + addedFile);
+                                    while (downloadingFile)
+                                        Thread.Sleep(50);
+
+                                    if (downloadError != null)
+                                    {
+                                        Console.WriteLine(downloadError);
+                                        if (downloadError.InnerException.GetType().ToString() == "System.IO.IOException")
+                                        {
+                                            try
+                                            {
+                                                web.DownloadFile("http://digital-programming.de/ScriptBrowser/bin" + addedFile, directory + "\\Updater\\" + failedChanges.Count);
+                                                failedChanges.Add(addedFile.ToString());
+                                            }
+                                            catch
+                                            {
+                                                this.BeginInvoke(new MethodInvoker(delegate () { label1.Text = "Retry - 10s"; }));
+                                                downloadThread.Abort();
+                                                return;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            this.BeginInvoke(new MethodInvoker(delegate () { label1.Text = "Retry - 10s"; }));
+                                            downloadThread.Abort();
+                                            return;
+                                        }
+
+                                        downloadError = null;
+                                    }
+                                }
+                                catch (Exception ex) { Console.WriteLine(ex.StackTrace); }
                                 counter++;
                             }
                         }
@@ -125,11 +167,18 @@ namespace SplashScreen
                             {
                                 File.Delete(directory + removeFile);
                             }
-                            catch (Exception ex) { Console.WriteLine(ex.StackTrace); }
+                            catch (Exception ex) { Console.WriteLine(ex.StackTrace); failedRemoves.Add(removeFile.ToString()); }
                         }
 
                         sf.version = changelog.Last["version"].ToString();
                         sf.Save();
+
+                        if (failedChanges.Count != 0)
+                            File.WriteAllLines(directory + "\\Updater\\changeFiles.txt", failedChanges);
+                        if (failedRemoves.Count != 0)
+                            File.WriteAllLines(directory + "\\Updater\\remove.txt", failedRemoves);
+                        if (failedChanges.Count != 0 || failedRemoves.Count != 0)
+                            Process.Start(directory + "\\Updater\\Updater.exe");
                     }
                     this.BeginInvoke(new MethodInvoker(delegate () { label1.Text = "Starting Script-Browser"; }));
 
@@ -153,11 +202,13 @@ namespace SplashScreen
                 }
                 catch (Exception ex) { this.BeginInvoke(new MethodInvoker(delegate () { label1.Text = "Retry - 10s"; })); Console.WriteLine(ex.StackTrace); }
                 SetProgress(0);
-            }).Start();
+            });
+            downloadThread.Start();
         }
 
         private void DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
+            downloadError = e.Error;
             downloadingFile = false;
         }
 
@@ -180,6 +231,7 @@ namespace SplashScreen
         {
             if (label1.Text.Contains("Retry"))
             {
+                try { downloadThread.Abort(); } catch { }
                 label1.BackColor = Color.FromArgb(51, 139, 118);
                 label1.Cursor = Cursors.Hand;
                 timerRetry.Enabled = true;
@@ -189,6 +241,8 @@ namespace SplashScreen
                 label1.BackColor = Color.FromArgb(22, 36, 45);
                 label1.Cursor = Cursors.Default;
             }
+            panel2.BackColor = label1.BackColor;
+            tableLayoutPanel1.BackColor = label1.BackColor;
         }
 
         private JObject GetChanges(JArray changelog)
@@ -328,7 +382,7 @@ namespace SplashScreen
             if (e.Column == 0)
                 e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(51, 139, 118)), e.CellBounds);
             else
-                e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(22, 36, 45)), e.CellBounds);
+                e.Graphics.FillRectangle(new SolidBrush(label1.BackColor), e.CellBounds);
         }
 
         private void SetProgress(int prog)

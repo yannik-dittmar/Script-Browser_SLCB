@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SplashScreen", "SplashScree
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateLogger", "UpdateLogger\UpdateLogger.csproj", "{CE5F09B1-591B-4A22-90B0-795ADD21F791}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Updater", "Updater\Updater.csproj", "{6EFA4C9C-8BBB-43A8-A6F8-ACE72CC76589}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{CE5F09B1-591B-4A22-90B0-795ADD21F791}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE5F09B1-591B-4A22-90B0-795ADD21F791}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE5F09B1-591B-4A22-90B0-795ADD21F791}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EFA4C9C-8BBB-43A8-A6F8-ACE72CC76589}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EFA4C9C-8BBB-43A8-A6F8-ACE72CC76589}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EFA4C9C-8BBB-43A8-A6F8-ACE72CC76589}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EFA4C9C-8BBB-43A8-A6F8-ACE72CC76589}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

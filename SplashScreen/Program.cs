@@ -20,18 +20,6 @@ namespace SplashScreen
         [STAThread]
         static void Main(string[] args)
         {
-            //string directory = Path.GetDirectoryName(Application.ExecutablePath) + "\\Update";
-            //if (!Directory.Exists(directory))
-            //    Directory.CreateDirectory(directory);
-
-            //if (File.Exists(directory + "\\changeFiles.txt"))
-            //{
-            //    string[] files = File.ReadAllLines(directory + "\\changeFiles.txt");
-            //    for (int i = 0; i < files.Length; i++)
-            //        try { File.Move(directory + "\\" + i, Path.GetDirectoryName(Application.ExecutablePath) + "\\test" + files[i]); } catch (Exception ex) { Console.WriteLine(ex.StackTrace); }
-            //    File.Delete(directory + "\\changeFiles.txt");
-            //}
-
             if (!SingleInstance.Start())
             {
                 SingleInstance.ShowFirstInstance();
