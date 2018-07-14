@@ -19,8 +19,25 @@ namespace Updater
             Console.Title = "Script-Browser Updater";
             Console.WriteLine("Waiting for Applications to close...");
 
+            int counter = 5;
             while (Process.GetProcessesByName("Script-Browser").Length != 0 || Process.GetProcessesByName("SLCBSB-SplashScreen").Length != 0)
-                Thread.Sleep(100);
+            {
+                Console.WriteLine("Closing Applications in: " + counter);
+                if (counter == 0)
+                {
+                    try
+                    {
+                        foreach (Process p in Process.GetProcessesByName("Script-Browser"))
+                            p.Kill();
+                        foreach (Process p in Process.GetProcessesByName("SLCBSB-SplashScreen"))
+                            p.Kill();
+                    }
+                    catch { }
+                    counter = 6;
+                }
+                counter--;
+                Thread.Sleep(1000);
+            }
 
             Console.WriteLine("Moving files...");
 
@@ -71,6 +88,7 @@ namespace Updater
                 }
             }
             Console.WriteLine("Finished!");
+            try { Process.Start(Path.GetDirectoryName(directory) + "\\SLCBSB-SplashScreen.exe"); } catch { }
         }
     }
 }

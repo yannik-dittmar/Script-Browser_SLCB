@@ -122,9 +122,20 @@ namespace SplashScreen
                                 {
                                     this.BeginInvoke(new MethodInvoker(delegate () { label1.Text = "Updating - Downloading Files (" + counter + "/" + ((JArray)changes["files"]["changed"]).Count + ")"; }));
                                     downloadingFile = true;
-                                    web.DownloadFileAsync(new Uri("http://digital-programming.de/ScriptBrowser/bin" + addedFile), directory + addedFile);
+                                    bool fileDeleted = false;
+                                    try
+                                    {
+                                        File.Delete(directory + addedFile);
+                                        fileDeleted = true;
+                                        web.DownloadFileAsync(new Uri("http://digital-programming.de/ScriptBrowser/bin" + addedFile), directory + addedFile);
+                                    }
+                                    catch { web.DownloadFileAsync(new Uri("http://digital-programming.de/ScriptBrowser/bin" + addedFile), directory + "\\Updater\\" + failedChanges.Count); }
+                                    
                                     while (downloadingFile)
                                         Thread.Sleep(50);
+
+                                    if (!fileDeleted && !failedChanges.Contains(addedFile.ToString()) && downloadError == null)
+                                        failedChanges.Add(addedFile.ToString());
 
                                     if (downloadError != null)
                                     {
@@ -133,8 +144,11 @@ namespace SplashScreen
                                         {
                                             try
                                             {
-                                                web.DownloadFile("http://digital-programming.de/ScriptBrowser/bin" + addedFile, directory + "\\Updater\\" + failedChanges.Count);
-                                                failedChanges.Add(addedFile.ToString());
+                                                if (!failedChanges.Contains(addedFile.ToString()))
+                                                {
+                                                    web.DownloadFile("http://digital-programming.de/ScriptBrowser/bin" + addedFile, directory + "\\Updater\\" + failedChanges.Count);
+                                                    failedChanges.Add(addedFile.ToString());
+                                                }
                                             }
                                             catch
                                             {
