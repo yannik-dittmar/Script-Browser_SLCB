@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Updater", "Updater\Updater.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "InstallerCheck", "InstallerCheck\InstallerCheck.vcxproj", "{C0AB7F90-1176-4170-8F63-CA1F7C844B1B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Installer", "Installer\Installer.csproj", "{C34E4831-3F02-4B75-97C8-FC89A4B01421}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -123,6 +125,18 @@ Global
 		{C0AB7F90-1176-4170-8F63-CA1F7C844B1B}.Release|x64.Build.0 = Release|x64
 		{C0AB7F90-1176-4170-8F63-CA1F7C844B1B}.Release|x86.ActiveCfg = Release|Win32
 		{C0AB7F90-1176-4170-8F63-CA1F7C844B1B}.Release|x86.Build.0 = Release|Win32
+		{C34E4831-3F02-4B75-97C8-FC89A4B01421}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C34E4831-3F02-4B75-97C8-FC89A4B01421}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C34E4831-3F02-4B75-97C8-FC89A4B01421}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C34E4831-3F02-4B75-97C8-FC89A4B01421}.Debug|x64.Build.0 = Debug|Any CPU
+		{C34E4831-3F02-4B75-97C8-FC89A4B01421}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C34E4831-3F02-4B75-97C8-FC89A4B01421}.Debug|x86.Build.0 = Debug|Any CPU
+		{C34E4831-3F02-4B75-97C8-FC89A4B01421}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C34E4831-3F02-4B75-97C8-FC89A4B01421}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C34E4831-3F02-4B75-97C8-FC89A4B01421}.Release|x64.ActiveCfg = Release|Any CPU
+		{C34E4831-3F02-4B75-97C8-FC89A4B01421}.Release|x64.Build.0 = Release|Any CPU
+		{C34E4831-3F02-4B75-97C8-FC89A4B01421}.Release|x86.ActiveCfg = Release|Any CPU
+		{C34E4831-3F02-4B75-97C8-FC89A4B01421}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
