@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Script_Browser.Controls;
 
 namespace Installer
 {
@@ -44,6 +45,11 @@ namespace Installer
 
         #region Windows API, Window Settings
 
+        private void label2_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
         private void MoveForm_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -60,6 +66,8 @@ namespace Installer
             ShapeArrow(noFocusBorderBtn3, 1);
             ShapeArrow(noFocusBorderBtn4, 1);
             ShapeArrow(noFocusBorderBtn5, 2);
+
+            textBox1.Text = Environment.GetFolderPath(Environment.SpecialFolder.CommonProgramFilesX86) + "\\SLCB Script-Browser\\";
         }
 
         private void ShapeArrow(Control btn, int pos)
@@ -94,9 +102,80 @@ namespace Installer
 
         #endregion
 
-        private void label2_Click(object sender, EventArgs e)
+        #region TabControls
+
+        private void noFocusBorderBtnNext_Click(object sender, EventArgs e)
         {
-            Environment.Exit(0);
+            tcTlp2.NextTab(noFocusBorderBtnBack, noFocusBorderBtnNext);
+            UpdateNavbar();
+        }
+
+        private void noFocusBorderBtnBack_Click(object sender, EventArgs e)
+        {
+            tcTlp2.PrevTab(noFocusBorderBtnBack, noFocusBorderBtnNext);
+            UpdateNavbar();
+        }
+
+        private void Navbar_Click(object sender, EventArgs e)
+        {
+            tcTlp2.Tab(Int32.Parse((sender as Control).Tag.ToString()), noFocusBorderBtnBack, noFocusBorderBtnNext);
+            UpdateNavbar();
+        }
+
+        private void UpdateNavbar()
+        {
+            List<NoFocusBorderBtn> navButtons = new List<NoFocusBorderBtn>
+            {
+                noFocusBorderBtn1,
+                noFocusBorderBtn2,
+                noFocusBorderBtn3,
+                noFocusBorderBtn4,
+                noFocusBorderBtn5
+            };
+
+            foreach (NoFocusBorderBtn btn in navButtons)
+            {
+                if (Int32.Parse(btn.Tag.ToString()) == tcTlp2.currentTab)
+                    btn.BackColor = Color.FromArgb(51, 139, 118);
+                else
+                    btn.BackColor = Color.FromArgb(25, 72, 70);
+            }
+        }
+
+        private void Check(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                tcTlp2.allowed = 2;
+                noFocusBorderBtn3.Enabled = true;
+                noFocusBorderBtn4.Enabled = checkBox2.Checked;
+                noFocusBorderBtn5.Enabled = checkBox2.Checked;
+                if (checkBox2.Checked)
+                    tcTlp2.allowed = 4;
+            }
+            else
+            {
+                tcTlp2.allowed = 1;
+                noFocusBorderBtn3.Enabled = false;
+                noFocusBorderBtn4.Enabled = false;
+                noFocusBorderBtn5.Enabled = false;
+            }
+
+            tcTlp2.Tab(tcTlp2.currentTab, noFocusBorderBtnBack, noFocusBorderBtnNext);
+            UpdateNavbar();
+        }
+
+        #endregion
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                if (folderBrowserDialog1.SelectedPath.ToCharArray()[folderBrowserDialog1.SelectedPath.ToCharArray().Length - 1] == '\\')
+                    textBox1.Text = folderBrowserDialog1.SelectedPath + "SLCB Script-Browser\\";
+                else
+                    textBox1.Text = folderBrowserDialog1.SelectedPath + "\\SLCB Script-Browser\\";
+            }
         }
     }
 }
