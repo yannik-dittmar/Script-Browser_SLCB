@@ -2,11 +2,17 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
+using System.IO.Compression;
 using System.Linq;
+using System.Net;
+using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Script_Browser.Controls;
@@ -36,6 +42,12 @@ namespace Installer
         const int HT_CAPTION = 0x2;
 
         #endregion
+
+        private WebClient web;
+        private long receivedBytes = 0;
+        private Stopwatch sw = new Stopwatch();
+        private double averageSpeed = 0;
+        private bool downloadSuccess = false;
 
         public InstallerForm()
         {
@@ -67,7 +79,10 @@ namespace Installer
             ShapeArrow(noFocusBorderBtn4, 1);
             ShapeArrow(noFocusBorderBtn5, 2);
 
-            textBox1.Text = Environment.GetFolderPath(Environment.SpecialFolder.CommonProgramFilesX86) + "\\SLCB Script-Browser\\";
+            textBox1.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\SLCB Script-Browser\\";
+            textBox1.Text = @"C:\Users\KryptoPC\Desktop\Test\SLCBSB\";
+            textBox1.Text = @"C:\Users\Yannik\Desktop\test\SLCBSB";
+            PrepareDownload();
         }
 
         private void ShapeArrow(Control btn, int pos)
@@ -106,8 +121,16 @@ namespace Installer
 
         private void noFocusBorderBtnNext_Click(object sender, EventArgs e)
         {
-            tcTlp2.NextTab(noFocusBorderBtnBack, noFocusBorderBtnNext);
-            UpdateNavbar();
+            if (tcTlp2.currentTab == 4)
+            {
+                tcTlp1.Tab(1);
+                PrepareDownload();
+            }
+            else
+            {
+                tcTlp2.NextTab(noFocusBorderBtnBack, noFocusBorderBtnNext);
+                UpdateNavbar();
+            }
         }
 
         private void noFocusBorderBtnBack_Click(object sender, EventArgs e)
@@ -177,5 +200,259 @@ namespace Installer
                     textBox1.Text = folderBrowserDialog1.SelectedPath + "\\SLCB Script-Browser\\";
             }
         }
+
+        #region Progress
+
+        private void tableLayoutPanel9_CellPaint(object sender, TableLayoutCellPaintEventArgs e)
+        {
+            if (e.Column == 0)
+                e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(25, 72, 70)), e.CellBounds);
+        }
+
+        private void SetProg(int per)
+        {
+            IAsyncResult wait = this.BeginInvoke(new MethodInvoker(delegate () 
+            { 
+                if (per >= 0)
+                {
+                    tableLayoutPanel9.ColumnStyles[0].Width = per;
+                    tableLayoutPanel9.ColumnStyles[1].Width = 100 - per;
+                    tableLayoutPanel9.ColumnStyles[2].Width = 0;
+                    noFocusBorderBtn6.Visible = false;
+                }
+                else
+                {
+                    tableLayoutPanel9.ColumnStyles[0].Width = 0;
+                    tableLayoutPanel9.ColumnStyles[1].Width = 0;
+                    tableLayoutPanel9.ColumnStyles[2].Width = 100;
+                    noFocusBorderBtn6.Visible = true;
+                    labelSpeed.Visible = false;
+                }
+
+                labelSpeed.Visible = per != 0 && per != -1;
+            }));
+        }
+
+        #endregion
+
+        #region Prepare and Download
+
+        public void PrepareDownload()
+        {
+            richTextBoxLog.Text = "=== Start Installation ===\n";
+            richTextBoxLog.AppendText("\n=== Start Preperation ===\n\n");
+            labelStatus.Text = "Preparing installation";
+            SetProg(0);
+            new Thread(delegate ()
+            {
+                //File Permission Check
+                Log("Testing file permissions...");
+                try
+                {
+                    if (!Directory.Exists(textBox1.Text))
+                        Directory.CreateDirectory(textBox1.Text);
+
+                    string[] files = Directory.GetFiles(textBox1.Text);
+                    foreach (string file in files)
+                        File.Delete(file);
+
+                    File.WriteAllText(textBox1.Text + "test.txt", "test file");
+                    File.Delete(textBox1.Text + "test.txt");
+                }
+                catch (Exception ex)
+                {
+                    this.BeginInvoke(new MethodInvoker(delegate () { labelStatus.Text = "Installation Failed"; }));
+                    Log("Installation Failed: Could not write to or create directory!\nPlease check permissions and run as administrator if necessary.\n\nException:"
+                        + ex.Message + "\n" + ex.StackTrace);
+                    return;
+                }
+                Log("Tested file permissions");
+
+                //Connection check
+                Log("Testing internet connection...");
+                if (!PingHost("www.digital-programming.de"))
+                {
+                    this.BeginInvoke(new MethodInvoker(delegate () { labelStatus.Text = "Installation Failed"; }));
+                    Log("Installation Failed: Could not connect to server!\nPlease check your internet connection.");
+                    SetProg(-1);
+                    return;
+                }
+                Log("Tested internet connection");
+
+                Log("Receiving file size...");
+                string fileSize = FileSize("http://digital-programming.de/ScriptBrowser/setup.zip");
+                if (fileSize == "ERROR")
+                {
+                    this.BeginInvoke(new MethodInvoker(delegate () { labelStatus.Text = "Installation Failed"; }));
+                    Log("Installation Failed: Could not receive file size!\nPlease check your internet connection.");
+                    SetProg(-1);
+                    return;
+                }
+                Log("Received file size");
+
+                Log("\n=== End Preperation ===");
+                this.BeginInvoke(new MethodInvoker(delegate () { labelStatus.Text = "Downloading Script-Browser"; }));
+                Log("\n=== Start Download ===\n");
+
+                //Download
+
+                web = new WebClient();
+                web.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadCompleted);
+                web.DownloadProgressChanged += new DownloadProgressChangedEventHandler(DownloadProgress);
+                receivedBytes = 0;
+                sw.Restart();
+                downloadSuccess = false;
+                Log("Downloading Script-Browser (" + fileSize + ")...");
+                web.DownloadFileAsync(new Uri("http://digital-programming.de/ScriptBrowser/setup.zip"), textBox1.Text + "SB.zip");
+
+                while (web.IsBusy)
+                    Thread.Sleep(50);
+                web.Dispose();
+
+                if (downloadSuccess)
+                {
+                    this.BeginInvoke(new MethodInvoker(delegate () { labelSpeed.Text = "Download Finished"; }));
+                    Log("Download complete!");
+                    Log("\n=== End Download ===");
+                    this.BeginInvoke(new MethodInvoker(delegate () { labelStatus.Text = "Extracting Script-Browser"; }));
+                    Log("\n=== Start Extraction ===\n");
+
+                    try
+                    {
+                        Log("Extracting zip-archive...");
+                        ZipFile.ExtractToDirectory(textBox1.Text + "SB.zip", textBox1.Text);
+                        Log("Extracted zip-archive");
+                    }
+                    catch (Exception ex)
+                    {
+                        this.BeginInvoke(new MethodInvoker(delegate () { labelStatus.Text = "Installation Failed"; }));
+                        Log("Installation Failed: Could not receive file size!\nPlease check your internet connection.");
+                        SetProg(-1);
+                        return;
+                    }
+
+                    Log("\n=== End Extraction ===");
+                    this.BeginInvoke(new MethodInvoker(delegate () { labelStatus.Text = "Finalising"; }));
+                    Log("\n=== Start Finalisation ===\n");
+
+
+                }
+            }).Start();
+        }
+
+        private void DownloadProgress(object sender, DownloadProgressChangedEventArgs e)
+        {
+            IAsyncResult wait = this.BeginInvoke(new MethodInvoker(delegate () { 
+                if (sw.ElapsedMilliseconds != 0 && sw.ElapsedMilliseconds > 500)
+                {
+                    long bytes = e.BytesReceived - receivedBytes;
+                    double speed = Math.Round((double)bytes / ((double)sw.ElapsedMilliseconds / 1000.0));
+
+                    speed = (averageSpeed * 0.7) + (speed * 0.3);
+                    averageSpeed = speed;
+
+                    string show = "";
+
+                    //MBs
+                    if (speed > 1000000)
+                        show = Math.Round(speed / 1000000.0, 1) + " MB/s";
+                    //KBs
+                    else if (speed > 1000)
+                        show = Math.Round(speed / 1000.0, 1) + " KB/s";
+                    //Bs
+                    else
+                        show = speed + " B/s";
+                    sw.Restart();
+                    receivedBytes = e.BytesReceived;
+
+                    if (TextRenderer.MeasureText(show, labelSpeed.Font).Width + 20 < labelSpeed.Width)
+                        labelSpeed.Text = show;
+                    else
+                        labelSpeed.Text = "";
+                }
+
+                SetProg(e.ProgressPercentage);
+            }));
+            while (!wait.IsCompleted)
+                Thread.Sleep(50);
+        }
+
+        private void DownloadCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            Console.WriteLine(e.Error);
+            this.BeginInvoke(new MethodInvoker(delegate () 
+            { 
+                if (e.Error != null)
+                {
+                    richTextBoxLog.AppendText("Installation Failed: Script Browser couldn't be downloaded!\nPlease check your internet connection and try again.\n\nException:" + e.Error.Message);
+                    labelStatus.Text = "Installation Failed";
+
+                    noFocusBorderBtn6.Visible = true;
+                    SetProg(-1);
+                }
+                else if (!e.Cancelled)
+                    downloadSuccess = true;
+                sw.Stop();
+            }));
+        }
+
+        public static bool PingHost(string nameOrAddress)
+        {
+            try
+            {
+                using (Ping pinger = new Ping())
+                {
+                    PingReply reply = pinger.Send(nameOrAddress, 5000);
+                    return reply.Status == IPStatus.Success;
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+
+            return false;
+        }
+
+        private string FileSize(string file)
+        {
+            WebRequest req = HttpWebRequest.Create(file);
+            req.Method = "HEAD";
+            WebResponse resp = req.GetResponse();
+
+            long ContentLength = 0;
+            string result;
+            if (long.TryParse(resp.Headers.Get("Content-Length"), out ContentLength))
+            {
+                if (ContentLength >= 1073741824)
+                    result = (ContentLength / 1073741824) + " GB";
+                else if (ContentLength >= 1048576)
+                    result = (ContentLength / 1048576) + " MB";
+                else
+                    result = (ContentLength / 1024) + " KB";
+
+                return result;
+            }
+            return "ERROR";
+        }
+
+        private void Log(string text)
+        {
+            IAsyncResult wait = this.BeginInvoke(new MethodInvoker(delegate()
+            {
+                richTextBoxLog.AppendText(text + "\n");
+                richTextBoxLog.SelectionStart = richTextBoxLog.Text.Length;
+                richTextBoxLog.ScrollToCaret();
+            }));
+            while (!wait.IsCompleted)
+                Thread.Sleep(50);
+        }
+
+        private void noFocusBorderBtn6_Click(object sender, EventArgs e)
+        {
+            if (noFocusBorderBtn6.Visible)
+            {
+                PrepareDownload();
+            }
+        }
+
+        #endregion
     }
 }
