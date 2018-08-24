@@ -10,11 +10,13 @@ using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Win32;
 using Script_Browser.Controls;
 
 namespace Installer
@@ -43,6 +45,8 @@ namespace Installer
 
         #endregion
 
+        private string version = "1.0.0";
+
         private WebClient web;
         private long receivedBytes = 0;
         private Stopwatch sw = new Stopwatch();
@@ -53,6 +57,7 @@ namespace Installer
         {
             InitializeComponent();
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
+            tcTlp1.Tab(0);
         }
 
         #region Windows API, Window Settings
@@ -80,9 +85,9 @@ namespace Installer
             ShapeArrow(noFocusBorderBtn5, 2);
 
             textBox1.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\SLCB Script-Browser\\";
-            textBox1.Text = @"C:\Users\KryptoPC\Desktop\Test\SLCBSB\";
-            textBox1.Text = @"C:\Users\Yannik\Desktop\test\SLCBSB";
-            PrepareDownload();
+            //textBox1.Text = @"C:\Users\KryptoPC\Desktop\Test\SLCBSB\";
+            //textBox1.Text = @"C:\Users\Yannik\Desktop\test\SLCBSB";
+            //PrepareDownload();
         }
 
         private void ShapeArrow(Control btn, int pos)
@@ -235,7 +240,7 @@ namespace Installer
 
         #endregion
 
-        #region Prepare and Download
+        #region Prepare, Download and Install
 
         public void PrepareDownload()
         {
@@ -261,8 +266,7 @@ namespace Installer
                 }
                 catch (Exception ex)
                 {
-                    this.BeginInvoke(new MethodInvoker(delegate () { labelStatus.Text = "Installation Failed"; }));
-                    Log("Installation Failed: Could not write to or create directory!\nPlease check permissions and run as administrator if necessary.\n\nException:"
+                    ShowError("Installation Failed: Could not write to or create directory!\nPlease check permissions and run as administrator if necessary.\n\nException:"
                         + ex.Message + "\n" + ex.StackTrace);
                     return;
                 }
@@ -272,9 +276,7 @@ namespace Installer
                 Log("Testing internet connection...");
                 if (!PingHost("www.digital-programming.de"))
                 {
-                    this.BeginInvoke(new MethodInvoker(delegate () { labelStatus.Text = "Installation Failed"; }));
-                    Log("Installation Failed: Could not connect to server!\nPlease check your internet connection.");
-                    SetProg(-1);
+                    ShowError("Installation Failed: Could not connect to server!\nPlease check your internet connection.", true);
                     return;
                 }
                 Log("Tested internet connection");
@@ -283,9 +285,7 @@ namespace Installer
                 string fileSize = FileSize("http://digital-programming.de/ScriptBrowser/setup.zip");
                 if (fileSize == "ERROR")
                 {
-                    this.BeginInvoke(new MethodInvoker(delegate () { labelStatus.Text = "Installation Failed"; }));
-                    Log("Installation Failed: Could not receive file size!\nPlease check your internet connection.");
-                    SetProg(-1);
+                    ShowError("Installation Failed: Could not receive file size!\nPlease check your internet connection.", true);
                     return;
                 }
                 Log("Received file size");
@@ -309,6 +309,7 @@ namespace Installer
                     Thread.Sleep(50);
                 web.Dispose();
 
+                downloadSuccess = true;
                 if (downloadSuccess)
                 {
                     this.BeginInvoke(new MethodInvoker(delegate () { labelSpeed.Text = "Download Finished"; }));
@@ -325,9 +326,7 @@ namespace Installer
                     }
                     catch (Exception ex)
                     {
-                        this.BeginInvoke(new MethodInvoker(delegate () { labelStatus.Text = "Installation Failed"; }));
-                        Log("Installation Failed: Could not receive file size!\nPlease check your internet connection.");
-                        SetProg(-1);
+                        ShowError("Installation Failed: Could not extract zip-archive!\n\nException: " + ex.Message + "\n" + ex.StackTrace);
                         return;
                     }
 
@@ -335,7 +334,98 @@ namespace Installer
                     this.BeginInvoke(new MethodInvoker(delegate () { labelStatus.Text = "Finalising"; }));
                     Log("\n=== Start Finalisation ===\n");
 
+                    Log("Register application...");
 
+                    //Registration
+                    try
+                    {
+                        using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion", true))
+                        {
+                            using (RegistryKey checkKey = key.OpenSubKey(@"App Paths", true))
+                            {
+                                if (checkKey == null)
+                                    key.CreateSubKey("App Paths");
+
+                                using (RegistryKey appKey = checkKey.OpenSubKey("Script-Browser.exe", true) ?? checkKey.CreateSubKey("Script-Browser.exe"))
+                                {
+                                    appKey.SetValue("", textBox1.Text + "\\Script-Browser.exe");
+                                    appKey.SetValue("Path", textBox1.Text + "\\Script-Browser.exe");
+                                }
+                            }
+                        }
+                        Log("Registed application");
+                    }
+                    catch { Log("Could not register application!"); }
+
+                    Log("Register uninstaller...");
+                    //Uninstall
+                    using (RegistryKey parent = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall", true))
+                    {
+                        try
+                        {
+                            RegistryKey key = null;
+
+                            try
+                            {
+                                string guidText = "Script Browser";
+                                key = parent.OpenSubKey(guidText, true) ??
+                                      parent.CreateSubKey(guidText);
+
+                                key.SetValue("DisplayName", "Script Browser");
+                                key.SetValue("ApplicationVersion", "1.0.0");
+                                key.SetValue("Publisher", "Digital-Programming");
+                                key.SetValue("DisplayIcon", textBox1.Text + "\\Script-Browser.exe,0");
+                                key.SetValue("DisplayVersion", "1.0.0");
+                                key.SetValue("URLInfoAbout", "http://www.digital-programming.com");
+                                key.SetValue("Contact", "sl.chatbot.script.browser@gmail.com");
+                                key.SetValue("InstallDate", DateTime.Now.ToString("yyyyMMdd"));
+                                key.SetValue("InstallLocation", textBox1.Text);
+                                key.SetValue("UninstallString", "uninstallprompt");
+                                Log("Registed uninstaller");
+                            }
+                            finally
+                            {
+                                if (key != null)
+                                    key.Close();
+                            }
+                        }
+                        catch { Log("Could not create uninstaller"); }
+                    }
+
+                    //Startup
+                    try
+                    { 
+                        if (checkBox3.Checked)
+                        {
+                            Log("Register application to startup...");
+                            using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true))
+                                key.SetValue("Script Browser", textBox1.Text + "\\Script-Browser.exe");
+                            Log("Registed application to startup");
+                        }
+                    }
+                    catch { Log("Could not register application to startup"); }
+
+                    //Shortcut
+                    try
+                    {
+                        if (checkBox4.Checked)
+                        {
+                            Log("Creating shortcut...");
+                            IWshRuntimeLibrary.WshShell wsh = new IWshRuntimeLibrary.WshShell();
+                            IWshRuntimeLibrary.IWshShortcut shortcut = wsh.CreateShortcut(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\Script-Browser.lnk") as IWshRuntimeLibrary.IWshShortcut;
+                            shortcut.Arguments = "";
+                            shortcut.TargetPath = textBox1.Text + "\\Script-Browser.exe";
+                            shortcut.WindowStyle = 1;
+                            shortcut.Description = "Streamlabs Chatbot Script-Browser";
+                            shortcut.WorkingDirectory = textBox1.Text;
+                            shortcut.IconLocation = textBox1.Text + "\\Script-Browser.exe,0";
+                            shortcut.Save();
+                            Log("Created shortcut");
+                        }
+                    }
+                    catch { Log("Could not create shortcut"); }
+                    Log("\n=== End Finalisation ===");
+                    Log("\n=== End Installation ===");
                 }
             }).Start();
         }
@@ -445,6 +535,18 @@ namespace Installer
                 Thread.Sleep(50);
         }
 
+        private void ShowError(string text, bool retry = false)
+        {
+            this.BeginInvoke(new MethodInvoker(delegate () { labelStatus.Text = "Installation Failed"; }));
+            Log(text + "\n\n\nPlease contact us if this error remains.\n" 
+                + "Discord: http://discord.gg/KDe7Vyu (ENG)     http://discord.gg/zMmbYeh (GER)\n"
+                + "Website: http://digital-programming.com \n"
+                + "E-Mail: sl.chatbot.script.browser@gmail.com");
+
+            if (retry)
+                SetProg(-1);
+        }
+
         private void noFocusBorderBtn6_Click(object sender, EventArgs e)
         {
             if (noFocusBorderBtn6.Visible)
@@ -453,6 +555,46 @@ namespace Installer
             }
         }
 
+        private void richTextBoxLog_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            try { Process.Start(e.LinkText); } catch { }
+        }
+
+        private void noFocusBorderBtn7_Click(object sender, EventArgs e)
+        {
+            tcTlp1.Tab(2);
+        }
+
+
         #endregion
+
+        private void linkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try { Process.Start((sender as Control).Tag.ToString()); } catch { }
+        }
+
+        private void noFocusBorderBtn8_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (checkBox5.Checked)
+                    Process.Start(textBox1.Text + "Script-Browser.exe");
+            }
+            catch { }
+            try
+            {
+                ProcessStartInfo Info = new ProcessStartInfo
+                {
+                    Arguments = "/C choice /C Y /N /D Y /T 3 & Del " +
+                               Application.ExecutablePath,
+                    WindowStyle = ProcessWindowStyle.Hidden,
+                    CreateNoWindow = true,
+                    FileName = "cmd.exe"
+                };
+                Process.Start(Info);
+                Environment.Exit(1);
+            }
+            catch { }
+        }
     }
 }

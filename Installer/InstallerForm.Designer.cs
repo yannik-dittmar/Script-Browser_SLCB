@@ -64,6 +64,7 @@
             this.noFocusBorderBtnNext = new Script_Browser.Controls.NoFocusBorderBtn();
             this.noFocusBorderBtnBack = new Script_Browser.Controls.NoFocusBorderBtn();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+            this.noFocusBorderBtn7 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.panel5 = new System.Windows.Forms.Panel();
             this.richTextBoxLog = new System.Windows.Forms.RichTextBox();
             this.labelStatus = new System.Windows.Forms.Label();
@@ -71,6 +72,13 @@
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.labelSpeed = new System.Windows.Forms.Label();
             this.noFocusBorderBtn6 = new Script_Browser.Controls.NoFocusBorderBtn();
+            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
+            this.noFocusBorderBtn8 = new Script_Browser.Controls.NoFocusBorderBtn();
+            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -90,6 +98,7 @@
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
+            this.tableLayoutPanel10.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -187,6 +196,7 @@
             this.tcTlp1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 0F));
             this.tcTlp1.Controls.Add(this.tableLayoutPanel2, 0, 0);
             this.tcTlp1.Controls.Add(this.tableLayoutPanel8, 1, 0);
+            this.tcTlp1.Controls.Add(this.tableLayoutPanel10, 2, 0);
             this.tcTlp1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tcTlp1.Location = new System.Drawing.Point(0, 0);
             this.tcTlp1.Name = "tcTlp1";
@@ -636,18 +646,40 @@
             // 
             this.tableLayoutPanel8.ColumnCount = 1;
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel8.Controls.Add(this.noFocusBorderBtn7, 0, 3);
             this.tableLayoutPanel8.Controls.Add(this.panel5, 0, 2);
             this.tableLayoutPanel8.Controls.Add(this.labelStatus, 0, 0);
             this.tableLayoutPanel8.Controls.Add(this.panel4, 0, 1);
             this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
-            this.tableLayoutPanel8.RowCount = 3;
+            this.tableLayoutPanel8.RowCount = 4;
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel8.Size = new System.Drawing.Size(611, 362);
             this.tableLayoutPanel8.TabIndex = 1;
+            // 
+            // noFocusBorderBtn7
+            // 
+            this.noFocusBorderBtn7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.noFocusBorderBtn7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
+            this.noFocusBorderBtn7.FlatAppearance.BorderSize = 0;
+            this.noFocusBorderBtn7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.noFocusBorderBtn7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.noFocusBorderBtn7.ForeColor = System.Drawing.Color.White;
+            this.noFocusBorderBtn7.Location = new System.Drawing.Point(529, 332);
+            this.noFocusBorderBtn7.Margin = new System.Windows.Forms.Padding(0, 0, 5, 2);
+            this.noFocusBorderBtn7.MinimumSize = new System.Drawing.Size(77, 28);
+            this.noFocusBorderBtn7.Name = "noFocusBorderBtn7";
+            this.noFocusBorderBtn7.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.noFocusBorderBtn7.Size = new System.Drawing.Size(77, 28);
+            this.noFocusBorderBtn7.TabIndex = 3;
+            this.noFocusBorderBtn7.TabStop = false;
+            this.noFocusBorderBtn7.Text = "Finish";
+            this.noFocusBorderBtn7.UseVisualStyleBackColor = false;
+            this.noFocusBorderBtn7.Click += new System.EventHandler(this.noFocusBorderBtn7_Click);
             // 
             // panel5
             // 
@@ -658,7 +690,7 @@
             this.panel5.Margin = new System.Windows.Forms.Padding(5);
             this.panel5.Name = "panel5";
             this.panel5.Padding = new System.Windows.Forms.Padding(3);
-            this.panel5.Size = new System.Drawing.Size(601, 268);
+            this.panel5.Size = new System.Drawing.Size(601, 238);
             this.panel5.TabIndex = 2;
             // 
             // richTextBoxLog
@@ -670,9 +702,10 @@
             this.richTextBoxLog.Location = new System.Drawing.Point(3, 3);
             this.richTextBoxLog.Name = "richTextBoxLog";
             this.richTextBoxLog.ReadOnly = true;
-            this.richTextBoxLog.Size = new System.Drawing.Size(595, 262);
+            this.richTextBoxLog.Size = new System.Drawing.Size(595, 232);
             this.richTextBoxLog.TabIndex = 2;
             this.richTextBoxLog.Text = "";
+            this.richTextBoxLog.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBoxLog_LinkClicked);
             // 
             // labelStatus
             // 
@@ -738,6 +771,7 @@
             this.noFocusBorderBtn6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.noFocusBorderBtn6.FlatAppearance.BorderSize = 0;
             this.noFocusBorderBtn6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.noFocusBorderBtn6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.noFocusBorderBtn6.ForeColor = System.Drawing.Color.White;
             this.noFocusBorderBtn6.Location = new System.Drawing.Point(396, 0);
             this.noFocusBorderBtn6.Margin = new System.Windows.Forms.Padding(0);
@@ -749,6 +783,139 @@
             this.noFocusBorderBtn6.UseVisualStyleBackColor = false;
             this.noFocusBorderBtn6.Visible = false;
             this.noFocusBorderBtn6.Click += new System.EventHandler(this.noFocusBorderBtn6_Click);
+            // 
+            // tableLayoutPanel10
+            // 
+            this.tableLayoutPanel10.ColumnCount = 1;
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel10.Controls.Add(this.noFocusBorderBtn8, 0, 7);
+            this.tableLayoutPanel10.Controls.Add(this.linkLabel3, 0, 4);
+            this.tableLayoutPanel10.Controls.Add(this.linkLabel2, 0, 3);
+            this.tableLayoutPanel10.Controls.Add(this.linkLabel1, 0, 2);
+            this.tableLayoutPanel10.Controls.Add(this.label6, 0, 1);
+            this.tableLayoutPanel10.Controls.Add(this.checkBox5, 0, 5);
+            this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel10.Location = new System.Drawing.Point(620, 3);
+            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
+            this.tableLayoutPanel10.RowCount = 8;
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.99999F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.00001F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(1, 362);
+            this.tableLayoutPanel10.TabIndex = 2;
+            // 
+            // noFocusBorderBtn8
+            // 
+            this.noFocusBorderBtn8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.noFocusBorderBtn8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
+            this.noFocusBorderBtn8.FlatAppearance.BorderSize = 0;
+            this.noFocusBorderBtn8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.noFocusBorderBtn8.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.noFocusBorderBtn8.ForeColor = System.Drawing.Color.White;
+            this.noFocusBorderBtn8.Location = new System.Drawing.Point(0, 329);
+            this.noFocusBorderBtn8.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
+            this.noFocusBorderBtn8.MinimumSize = new System.Drawing.Size(89, 28);
+            this.noFocusBorderBtn8.Name = "noFocusBorderBtn8";
+            this.noFocusBorderBtn8.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.noFocusBorderBtn8.Size = new System.Drawing.Size(89, 28);
+            this.noFocusBorderBtn8.TabIndex = 8;
+            this.noFocusBorderBtn8.TabStop = false;
+            this.noFocusBorderBtn8.Text = "Close";
+            this.noFocusBorderBtn8.UseVisualStyleBackColor = false;
+            this.noFocusBorderBtn8.Click += new System.EventHandler(this.noFocusBorderBtn8_Click);
+            // 
+            // linkLabel3
+            // 
+            this.linkLabel3.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.linkLabel3.AutoSize = true;
+            this.linkLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.linkLabel3.ForeColor = System.Drawing.Color.White;
+            this.linkLabel3.LinkArea = new System.Windows.Forms.LinkArea(9, 35);
+            this.linkLabel3.LinkBehavior = System.Windows.Forms.LinkBehavior.AlwaysUnderline;
+            this.linkLabel3.LinkColor = System.Drawing.Color.White;
+            this.linkLabel3.Location = new System.Drawing.Point(3, 159);
+            this.linkLabel3.Name = "linkLabel3";
+            this.linkLabel3.Size = new System.Drawing.Size(1, 24);
+            this.linkLabel3.TabIndex = 4;
+            this.linkLabel3.TabStop = true;
+            this.linkLabel3.Tag = "http://digital-programming.com";
+            this.linkLabel3.Text = "Website: http://digital-programming.com";
+            this.linkLabel3.UseCompatibleTextRendering = true;
+            this.linkLabel3.VisitedLinkColor = System.Drawing.Color.White;
+            this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
+            // 
+            // linkLabel2
+            // 
+            this.linkLabel2.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.linkLabel2.AutoSize = true;
+            this.linkLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.linkLabel2.ForeColor = System.Drawing.Color.White;
+            this.linkLabel2.LinkArea = new System.Windows.Forms.LinkArea(10, 35);
+            this.linkLabel2.LinkBehavior = System.Windows.Forms.LinkBehavior.AlwaysUnderline;
+            this.linkLabel2.LinkColor = System.Drawing.Color.White;
+            this.linkLabel2.Location = new System.Drawing.Point(3, 135);
+            this.linkLabel2.Name = "linkLabel2";
+            this.linkLabel2.Size = new System.Drawing.Size(1, 24);
+            this.linkLabel2.TabIndex = 3;
+            this.linkLabel2.TabStop = true;
+            this.linkLabel2.Tag = "http://discord.gg/zMmbYeh";
+            this.linkLabel2.Text = "   [GER]: http://discord.gg/zMmbYeh";
+            this.linkLabel2.UseCompatibleTextRendering = true;
+            this.linkLabel2.VisitedLinkColor = System.Drawing.Color.White;
+            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.linkLabel1.ForeColor = System.Drawing.Color.White;
+            this.linkLabel1.LinkArea = new System.Windows.Forms.LinkArea(10, 35);
+            this.linkLabel1.LinkBehavior = System.Windows.Forms.LinkBehavior.AlwaysUnderline;
+            this.linkLabel1.LinkColor = System.Drawing.Color.White;
+            this.linkLabel1.Location = new System.Drawing.Point(3, 111);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(1, 24);
+            this.linkLabel1.TabIndex = 2;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Tag = "http://discord.gg/KDe7Vyu";
+            this.linkLabel1.Text = "   [ENG]: http://discord.gg/KDe7Vyu";
+            this.linkLabel1.UseCompatibleTextRendering = true;
+            this.linkLabel1.VisitedLinkColor = System.Drawing.Color.White;
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
+            // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(3, 111);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(1, 1);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Streamlabs Chatbot - Script Browser was successfully installed on your computer!\r" +
+    "\n\r\nYou can now close the installer OR checkout our community :D\r\n\r\nDiscord: ";
+            // 
+            // checkBox5
+            // 
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.Checked = true;
+            this.checkBox5.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.checkBox5.ForeColor = System.Drawing.Color.White;
+            this.checkBox5.Location = new System.Drawing.Point(10, 193);
+            this.checkBox5.Margin = new System.Windows.Forms.Padding(10, 10, 10, 0);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(1, 24);
+            this.checkBox5.TabIndex = 9;
+            this.checkBox5.Text = "Start Script-Browser";
+            this.checkBox5.UseVisualStyleBackColor = true;
             // 
             // InstallerForm
             // 
@@ -790,6 +957,8 @@
             this.panel5.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.tableLayoutPanel9.ResumeLayout(false);
+            this.tableLayoutPanel10.ResumeLayout(false);
+            this.tableLayoutPanel10.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -839,6 +1008,14 @@
         private System.Windows.Forms.RichTextBox richTextBoxLog;
         private System.Windows.Forms.Label labelSpeed;
         private Script_Browser.Controls.NoFocusBorderBtn noFocusBorderBtn6;
+        private Script_Browser.Controls.NoFocusBorderBtn noFocusBorderBtn7;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel linkLabel2;
+        private System.Windows.Forms.LinkLabel linkLabel3;
+        private Script_Browser.Controls.NoFocusBorderBtn noFocusBorderBtn8;
+        private System.Windows.Forms.CheckBox checkBox5;
     }
 }
 
