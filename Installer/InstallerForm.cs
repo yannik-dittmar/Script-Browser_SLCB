@@ -58,13 +58,28 @@ namespace Installer
             InitializeComponent();
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
             tcTlp1.Tab(0);
+            label3.Text = "SLCB Script-Browser v" + version + " © 2018 Digital-Programming";
         }
 
         #region Windows API, Window Settings
 
         private void label2_Click(object sender, EventArgs e)
         {
-            Environment.Exit(0);
+            try
+            {
+                if (web.IsBusy)
+                {
+                    if (MessageBox.Show("Do you really want to abort the installation?", "Abort Installation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                    {
+                        web.CancelAsync();
+                        try { Directory.Delete(textBox1.Text, true); } catch { }
+                        Environment.Exit(0);
+                    }
+                }
+                else
+                    Environment.Exit(0);
+            }
+            catch { Environment.Exit(0); }
         }
 
         private void MoveForm_MouseDown(object sender, MouseEventArgs e)
@@ -85,9 +100,6 @@ namespace Installer
             ShapeArrow(noFocusBorderBtn5, 2);
 
             textBox1.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\SLCB Script-Browser\\";
-            //textBox1.Text = @"C:\Users\KryptoPC\Desktop\Test\SLCBSB\";
-            //textBox1.Text = @"C:\Users\Yannik\Desktop\test\SLCBSB";
-            //PrepareDownload();
         }
 
         private void ShapeArrow(Control btn, int pos)
@@ -247,7 +259,9 @@ namespace Installer
             richTextBoxLog.Text = "=== Start Installation ===\n";
             richTextBoxLog.AppendText("\n=== Start Preperation ===\n\n");
             labelStatus.Text = "Preparing installation";
+            noFocusBorderBtn7.Visible = false;
             SetProg(0);
+
             new Thread(delegate ()
             {
                 //File Permission Check
@@ -260,6 +274,10 @@ namespace Installer
                     string[] files = Directory.GetFiles(textBox1.Text);
                     foreach (string file in files)
                         File.Delete(file);
+
+                    string[] directorys = Directory.GetDirectories(textBox1.Text);
+                    foreach (string dir in directorys)
+                        Directory.Delete(dir, true);
 
                     File.WriteAllText(textBox1.Text + "test.txt", "test file");
                     File.Delete(textBox1.Text + "test.txt");
@@ -309,7 +327,6 @@ namespace Installer
                     Thread.Sleep(50);
                 web.Dispose();
 
-                downloadSuccess = true;
                 if (downloadSuccess)
                 {
                     this.BeginInvoke(new MethodInvoker(delegate () { labelSpeed.Text = "Download Finished"; }));
@@ -322,6 +339,7 @@ namespace Installer
                     {
                         Log("Extracting zip-archive...");
                         ZipFile.ExtractToDirectory(textBox1.Text + "SB.zip", textBox1.Text);
+                        try { File.Delete(textBox1.Text + "SB.zip"); } catch { }
                         Log("Extracted zip-archive");
                     }
                     catch (Exception ex)
@@ -346,10 +364,10 @@ namespace Installer
                                 if (checkKey == null)
                                     key.CreateSubKey("App Paths");
 
-                                using (RegistryKey appKey = checkKey.OpenSubKey("Script-Browser.exe", true) ?? checkKey.CreateSubKey("Script-Browser.exe"))
+                                using (RegistryKey appKey = checkKey.OpenSubKey("Script Browser", true) ?? checkKey.CreateSubKey("Script Browser"))
                                 {
-                                    appKey.SetValue("", textBox1.Text + "\\Script-Browser.exe");
-                                    appKey.SetValue("Path", textBox1.Text + "\\Script-Browser.exe");
+                                    appKey.SetValue("", textBox1.Text + "SLCBSB-SplashScreen.exe");
+                                    appKey.SetValue("Path", textBox1.Text + "SLCBSB-SplashScreen.exe");
                                 }
                             }
                         }
@@ -357,8 +375,8 @@ namespace Installer
                     }
                     catch { Log("Could not register application!"); }
 
-                    Log("Register uninstaller...");
                     //Uninstall
+                    Log("Register uninstaller...");
                     using (RegistryKey parent = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall", true))
                     {
                         try
@@ -372,10 +390,10 @@ namespace Installer
                                       parent.CreateSubKey(guidText);
 
                                 key.SetValue("DisplayName", "Script Browser");
-                                key.SetValue("ApplicationVersion", "1.0.0");
+                                key.SetValue("ApplicationVersion", version);
                                 key.SetValue("Publisher", "Digital-Programming");
-                                key.SetValue("DisplayIcon", textBox1.Text + "\\Script-Browser.exe,0");
-                                key.SetValue("DisplayVersion", "1.0.0");
+                                key.SetValue("DisplayIcon", textBox1.Text + "SLCBSB-SplashScreen.exe,0");
+                                key.SetValue("DisplayVersion", version);
                                 key.SetValue("URLInfoAbout", "http://www.digital-programming.com");
                                 key.SetValue("Contact", "sl.chatbot.script.browser@gmail.com");
                                 key.SetValue("InstallDate", DateTime.Now.ToString("yyyyMMdd"));
@@ -399,7 +417,7 @@ namespace Installer
                         {
                             Log("Register application to startup...");
                             using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true))
-                                key.SetValue("Script Browser", textBox1.Text + "\\Script-Browser.exe");
+                                key.SetValue("Script Browser", textBox1.Text + "SLCBSB-SplashScreen.exe /hide");
                             Log("Registed application to startup");
                         }
                     }
@@ -412,18 +430,40 @@ namespace Installer
                         {
                             Log("Creating shortcut...");
                             IWshRuntimeLibrary.WshShell wsh = new IWshRuntimeLibrary.WshShell();
-                            IWshRuntimeLibrary.IWshShortcut shortcut = wsh.CreateShortcut(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\Script-Browser.lnk") as IWshRuntimeLibrary.IWshShortcut;
+                            IWshRuntimeLibrary.IWshShortcut shortcut = wsh.CreateShortcut(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\Script Browser.lnk") as IWshRuntimeLibrary.IWshShortcut;
                             shortcut.Arguments = "";
-                            shortcut.TargetPath = textBox1.Text + "\\Script-Browser.exe";
+                            shortcut.TargetPath = textBox1.Text + "SLCBSB-SplashScreen.exe";
                             shortcut.WindowStyle = 1;
                             shortcut.Description = "Streamlabs Chatbot Script-Browser";
                             shortcut.WorkingDirectory = textBox1.Text;
-                            shortcut.IconLocation = textBox1.Text + "\\Script-Browser.exe,0";
+                            shortcut.IconLocation = textBox1.Text + "SLCBSB-SplashScreen.exe,0";
                             shortcut.Save();
                             Log("Created shortcut");
                         }
                     }
                     catch { Log("Could not create shortcut"); }
+
+                    //Start Menu
+                    try
+                    {
+                        if (checkBox7.Checked)
+                        {
+                            Log("Adding application to start menu...");
+                            IWshRuntimeLibrary.WshShell wsh = new IWshRuntimeLibrary.WshShell();
+                            IWshRuntimeLibrary.IWshShortcut shortcut = wsh.CreateShortcut(Environment.GetFolderPath(Environment.SpecialFolder.StartMenu) + "\\Programs\\Script Browser.lnk") as IWshRuntimeLibrary.IWshShortcut;
+                            shortcut.Arguments = "";
+                            shortcut.TargetPath = textBox1.Text + "SLCBSB-SplashScreen.exe";
+                            shortcut.WindowStyle = 1;
+                            shortcut.Description = "Streamlabs Chatbot Script-Browser";
+                            shortcut.WorkingDirectory = textBox1.Text;
+                            shortcut.IconLocation = textBox1.Text + "SLCBSB-SplashScreen.exe,0";
+                            shortcut.Save();
+                            Log("Added application to start menu");
+                        }
+                    }
+                    catch { Log("Could not add application to start menu"); }
+
+                    this.BeginInvoke(new MethodInvoker(delegate () { noFocusBorderBtn7.Visible = true; }));
                     Log("\n=== End Finalisation ===");
                     Log("\n=== End Installation ===");
                 }
@@ -469,9 +509,9 @@ namespace Installer
 
         private void DownloadCompleted(object sender, AsyncCompletedEventArgs e)
         {
-            Console.WriteLine(e.Error);
             this.BeginInvoke(new MethodInvoker(delegate () 
-            { 
+            {
+                downloadSuccess = false;
                 if (e.Error != null)
                 {
                     richTextBoxLog.AppendText("Installation Failed: Script Browser couldn't be downloaded!\nPlease check your internet connection and try again.\n\nException:" + e.Error.Message);
@@ -578,23 +618,26 @@ namespace Installer
             try
             {
                 if (checkBox5.Checked)
-                    Process.Start(textBox1.Text + "Script-Browser.exe");
+                    Process.Start(textBox1.Text + "SLCBSB-SplashScreen.exe");
             }
             catch { }
             try
             {
-                ProcessStartInfo Info = new ProcessStartInfo
+                if (checkBox6.Checked)
                 {
-                    Arguments = "/C choice /C Y /N /D Y /T 3 & Del " +
-                               Application.ExecutablePath,
-                    WindowStyle = ProcessWindowStyle.Hidden,
-                    CreateNoWindow = true,
-                    FileName = "cmd.exe"
-                };
-                Process.Start(Info);
-                Environment.Exit(1);
+                    ProcessStartInfo Info = new ProcessStartInfo
+                    {
+                        Arguments = "/C choice /C Y /N /D Y /T 3 & Del " +
+                                   Application.ExecutablePath,
+                        WindowStyle = ProcessWindowStyle.Hidden,
+                        CreateNoWindow = true,
+                        FileName = "cmd.exe"
+                    };
+                    Process.Start(Info);
+                }
             }
             catch { }
+            Environment.Exit(1);
         }
     }
 }

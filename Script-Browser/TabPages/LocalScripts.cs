@@ -36,10 +36,8 @@ namespace Script_Browser.TabPages
         {
             try
             {
-                fileSystemWatcher1.Path = Main.sf.streamlabsPath; //TODO: check path
+                fileSystemWatcher1.Path = Main.sf.streamlabsPath;
                 UpdateList(Main.sf.streamlabsPath);
-                //UpdateList(@"D:\Streamlabs Chatbot\");
-                //UpdateList(@"C:\Users\18diyann\Desktop\Test Ordner\");
             }
             catch { }
         }

@@ -39,7 +39,7 @@ namespace SplashScreen
 
         #endregion
 
-        private string directory = Path.GetDirectoryName(Application.ExecutablePath) + "\\test";
+        private string directory = Path.GetDirectoryName(Application.ExecutablePath);
         private Stopwatch sw = new Stopwatch();
         private SaveFile sf = new SaveFile(Path.GetDirectoryName(Application.ExecutablePath) + @"\settings.save");
         private bool downloadingFile = false;
@@ -77,7 +77,6 @@ namespace SplashScreen
             {
                 try
                 {
-                    Console.WriteLine(sf.version);
                     if (!CheckUpdate())
                     {
                         this.BeginInvoke(new MethodInvoker(delegate () { label1.Text = "Updating - Downloading Files..."; }));
