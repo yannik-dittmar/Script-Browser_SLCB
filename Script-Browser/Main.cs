@@ -19,6 +19,8 @@ using Newtonsoft.Json.Linq;
 using System.IO.Compression;
 using AnimatorNS;
 using static Script_Browser.Program;
+using System.Reflection;
+using Script_Browser.Design;
 
 namespace Script_Browser
 {
@@ -98,6 +100,8 @@ namespace Script_Browser
 
             if (sf.username != "")
                 Networking.Login(sf.username, sf.password, this, true);
+
+            contextMenuStrip1.Renderer = new ArrowRenderer();
 
             //Update Scripts
             new Thread(delegate ()
@@ -328,12 +332,10 @@ namespace Script_Browser
             }
         }
 
-        //Close App
+        //Minimize App
         private void label2_Click(object sender, EventArgs e)
         {
-            sf.Save();
-            try { notifyIcon1.Dispose(); } catch { }
-            Environment.Exit(0);
+            Hide();
         }
 
         private void minimized_Tick(object sender, EventArgs e)
@@ -582,5 +584,50 @@ namespace Script_Browser
             if (hide)
                 Hide();
         }
+
+        #region Notificon
+
+        private void notifyIcon1_Click(object sender, EventArgs e)
+        {
+            contextMenuStrip1.Show();
+        }
+
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+                WindowState = FormWindowState.Normal;
+            Show();
+            this.Focus();
+            this.Activate();
+            this.BringToFront();
+        }
+
+        private void notifyIcon1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                MethodInfo mi = typeof(NotifyIcon).GetMethod("ShowContextMenu", BindingFlags.Instance | BindingFlags.NonPublic);
+                mi.Invoke(notifyIcon1, null);
+            }
+        }
+
+        private void tESTToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+                WindowState = FormWindowState.Normal;
+            Show();
+            this.Focus();
+            this.Activate();
+            this.BringToFront();
+        }
+
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            sf.Save();
+            try { notifyIcon1.Dispose(); } catch { }
+            Environment.Exit(0);
+        }
+
+        #endregion
     }
 }

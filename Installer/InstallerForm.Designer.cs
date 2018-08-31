@@ -60,6 +60,7 @@
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.checkBox7 = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.noFocusBorderBtnNext = new Script_Browser.Controls.NoFocusBorderBtn();
             this.noFocusBorderBtnBack = new Script_Browser.Controls.NoFocusBorderBtn();
@@ -81,7 +82,6 @@
             this.checkBox6 = new System.Windows.Forms.CheckBox();
             this.noFocusBorderBtn8 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -597,6 +597,22 @@
             this.checkBox4.Text = "Create a Desktop-Shortcut";
             this.checkBox4.UseVisualStyleBackColor = true;
             // 
+            // checkBox7
+            // 
+            this.checkBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox7.AutoSize = true;
+            this.checkBox7.Checked = true;
+            this.checkBox7.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox7.ForeColor = System.Drawing.Color.White;
+            this.checkBox7.Location = new System.Drawing.Point(3, 161);
+            this.checkBox7.Margin = new System.Windows.Forms.Padding(3, 10, 3, 10);
+            this.checkBox7.Name = "checkBox7";
+            this.checkBox7.Size = new System.Drawing.Size(585, 20);
+            this.checkBox7.TabIndex = 3;
+            this.checkBox7.Text = "Add Application to Start Menu";
+            this.checkBox7.UseVisualStyleBackColor = true;
+            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoSize = true;
@@ -939,22 +955,6 @@
             this.noFocusBorderBtn8.Text = "Close";
             this.noFocusBorderBtn8.UseVisualStyleBackColor = false;
             this.noFocusBorderBtn8.Click += new System.EventHandler(this.noFocusBorderBtn8_Click);
-            // 
-            // checkBox7
-            // 
-            this.checkBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBox7.AutoSize = true;
-            this.checkBox7.Checked = true;
-            this.checkBox7.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox7.ForeColor = System.Drawing.Color.White;
-            this.checkBox7.Location = new System.Drawing.Point(3, 161);
-            this.checkBox7.Margin = new System.Windows.Forms.Padding(3, 10, 3, 10);
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(585, 20);
-            this.checkBox7.TabIndex = 3;
-            this.checkBox7.Text = "Add Application to Start Menu";
-            this.checkBox7.UseVisualStyleBackColor = true;
             // 
             // InstallerForm
             // 
