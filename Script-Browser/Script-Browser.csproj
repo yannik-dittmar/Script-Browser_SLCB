@@ -12,7 +12,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>Script_Browser</RootNamespace>
     <AssemblyName>Script-Browser</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <NuGetPackageImportStamp>
@@ -59,7 +59,7 @@
     <ApplicationIcon>Logo_ICON.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>0BF82F3CF5FD53ED26A2FECD5F56E80630ED2448</ManifestCertificateThumbprint>
@@ -169,6 +169,12 @@
     <Compile Include="Set_SCB_Path.Designer.cs">
       <DependentUpon>Set_SCB_Path.cs</DependentUpon>
     </Compile>
+    <Compile Include="SplashScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SplashScreen.Designer.cs">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="TabPages\LocalScripts.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -251,6 +257,9 @@
     <EmbeddedResource Include="Set_SCB_Path.resx">
       <DependentUpon>Set_SCB_Path.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SplashScreen.resx">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TabPages\LocalScripts.resx">
       <DependentUpon>LocalScripts.cs</DependentUpon>
     </EmbeddedResource>
@@ -275,6 +284,7 @@
     <EmbeddedResource Include="UploadScript.resx">
       <DependentUpon>UploadScript.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -336,6 +346,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Logo_ICON.ico" />
+    <None Include="Resources\Logo_white_small.png" />
     <None Include="Resources\twtich.png" />
     <None Include="Resources\move_file.png" />
     <None Include="Resources\copy_file.png" />

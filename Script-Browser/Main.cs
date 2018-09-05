@@ -7,10 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MetroFramework;
-using MaterialSkin;
-using MaterialSkin.Controls;
-using MaterialSkin.Animations;
 using System.Runtime.InteropServices;
 using SaveManager;
 using System.IO;
@@ -63,7 +59,7 @@ namespace Script_Browser
         public static SaveFile sf = new SaveFile(Path.GetDirectoryName(Application.ExecutablePath) + @"\settings.save");
         private bool hide;
 
-        public Main(bool hide = false)
+        public Main(JArray topScriptsData, bool hide = false, JObject login = null)
         {
             this.hide = hide;
 
@@ -89,6 +85,11 @@ namespace Script_Browser
             search1.form = this;
             settings1.form = this;
             localScripts1.form = this;
+
+            topScripts1.LoadList(topScriptsData);
+
+            if (login != null)
+                Networking.Login(sf.username, sf.password, this, true, login);
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -96,10 +97,6 @@ namespace Script_Browser
             panelTab1.Visible = false;
             panelTab2.Visible = false;
             panelTab3.Visible = false;
-            topScripts1.button3_Click(null, null);
-
-            if (sf.username != "")
-                Networking.Login(sf.username, sf.password, this, true);
 
             contextMenuStrip1.Renderer = new ArrowRenderer();
 

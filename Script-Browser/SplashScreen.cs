@@ -10,10 +10,11 @@ using System.Net;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
+using static Script_Browser.Program;
 
-namespace SplashScreen
+namespace Script_Browser
 {
-    public partial class Main : Form
+    public partial class SplashScreen : Form
     {
         #region DLL-Methodes & Variables
 
@@ -48,8 +49,9 @@ namespace SplashScreen
         private int retryCounter = 10;
         private Thread downloadThread;
 
-        public Main(bool hide = false)
+        public SplashScreen(bool hide = false)
         {
+            this.DialogResult = DialogResult.No;
             this.hide = hide;
             InitializeComponent();
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
@@ -191,27 +193,40 @@ namespace SplashScreen
                         if (failedRemoves.Count != 0)
                             File.WriteAllLines(directory + "\\Updater\\remove.txt", failedRemoves);
                         if (failedChanges.Count != 0 || failedRemoves.Count != 0)
+                        {
                             Process.Start(directory + "\\Updater\\Updater.exe");
+                            this.BeginInvoke(new MethodInvoker(delegate ()
+                            {
+                                this.DialogResult = DialogResult.OK;
+                                this.Dispose();
+                            }));
+                            return;
+                        }
                     }
-                    this.BeginInvoke(new MethodInvoker(delegate () { label1.Text = "Starting Script-Browser"; }));
+                    
+                    //Receiving Data
+                    this.BeginInvoke(new MethodInvoker(delegate () { label1.Text = "Receiving Data"; }));
+                    JArray topScriptsData = JArray.Parse(Networking.GetTopScripts("Command", "Rating", 1, null));
 
-                    //Start Script-Browser
-                    if (this.Visible)
-                        Process.Start(directory + "\\Script-Browser.exe");
-                    else
-                        Process.Start(directory + "\\Script-Browser.exe", "-hide");
-
-                    //Close Splash Screen
-                    try
+                    //Login
+                    JObject login = null;
+                    if (sf.username != "")
                     {
-                        while (Process.GetProcessesByName("Script-Browser").Length == 0)
-                            Thread.Sleep(50);
-                        while ((int)Process.GetProcessesByName("Script-Browser")[0].MainWindowHandle == 0)
-                            Thread.Sleep(50);
-                        Thread.Sleep(500);
+                        this.BeginInvoke(new MethodInvoker(delegate () { label1.Text = "Login"; }));
+                        try { login = Networking.Login(sf.username, sf.password, null, true); } catch { }
                     }
-                    catch { }
-                    Environment.Exit(0);
+
+                    //Close & Start
+                    this.BeginInvoke(new MethodInvoker(delegate () { label1.Text = "Starting Script-Browser"; }));
+                    Main main = new Main(topScriptsData, hide, login);
+                    this.BeginInvoke(new MethodInvoker(delegate ()
+                    {
+                        this.DialogResult = DialogResult.OK;
+                        minimized.Enabled = true;
+                    }));
+
+                    Application.Run(main);
+                    return;
                 }
                 catch (Exception ex) { this.BeginInvoke(new MethodInvoker(delegate () { label1.Text = "Retry - 10s"; })); Console.WriteLine(ex.StackTrace); }
                 SetProgress(0);
@@ -415,15 +430,24 @@ namespace SplashScreen
             label1.Text = "Retry - " + retryCounter + "s";
 
             if (retryCounter == 0)
-            {
-                retryCounter = 10;
-                Start();
-            }
+                label1_Click(null, null);
         }
 
-        private void Main_FormClosed(object sender, FormClosedEventArgs e)
+        private void SplashScreen_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Environment.Exit(0);
+            if (this.DialogResult != DialogResult.OK)
+                Environment.Exit(0);
+        }
+
+        private void minimized_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                Opacity = (Opacity - ((Double)7 / 100));
+                if (Opacity == 0)
+                    this.Dispose();
+            }
+            catch { }
         }
     }
 }

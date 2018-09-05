@@ -58,9 +58,9 @@ namespace Script_Browser
             Cef.Initialize(settings, performDependencyCheck: false, browserProcessHandler: null);
 
             if (args.Length == 0)
-                Application.Run(new Main());
+                Application.Run(new SplashScreen());
             else
-                Application.Run(new Main(true));
+                Application.Run(new SplashScreen(true));
             //Application.Run(new Test());
         }
 

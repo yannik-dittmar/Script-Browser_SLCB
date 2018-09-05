@@ -52,7 +52,7 @@ namespace Script_Browser
             {
                 if (!UpdateIp())
                 {
-                    if (DialogResult.Retry == MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.\n\nCould not connect to mediation server!", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1, 175))
+                    if (DialogResult.Retry == SMB(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.\n\nCould not connect to mediation server!", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1, 4, DialogResult.Retry))
                         goto tryagain;
                     else
                         return false;
@@ -67,7 +67,7 @@ namespace Script_Browser
             {
                 using (Ping ping = new Ping())
                 {
-                    PingReply reply = ping.Send(storageServer.Replace("https://", ""), 3000);
+                    PingReply reply = ping.Send(storageServer.Replace("https://", "").Replace(":443", ""), 3000);
                     return reply.Status == IPStatus.Success;
                 }
             }
@@ -79,7 +79,7 @@ namespace Script_Browser
 
         #region Account
 
-        public static void Login(string _username, string _password, Main form, bool hashed = false)
+        public static JObject Login(string _username, string _password, Main form, bool hashed = false, JObject info = null)
         {
             if (!hashed)
                 _password = Hash(_password);
@@ -87,54 +87,63 @@ namespace Script_Browser
             tryagain:
             try
             {
-                CheckIp(form);
+                if (info == null)
+                    CheckIp(form);
 
                 using (WebClient web = new WebClient())
                 {
-                    string result = web.DownloadString(storageServer + "/Script%20Browser/login.php?user=" + _username + "&pass=" + _password + "&getinfo=true");
-                    if (!result.Contains("Twitch"))
+                    string result = "";
+                    if (info == null)
+                        result = web.DownloadString(storageServer + "/Script%20Browser/login.php?user=" + _username + "&pass=" + _password + "&getinfo=true");
+                    if (!result.Contains("Twitch") && info == null)
                         MetroMessageBox.Show(form, "The username or password was incorrect.", "Login error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 100);
                     else
                     {
-                        JObject info = JObject.Parse(result);
-                        Main.sf.username = info["Username"].ToString();
-                        Main.sf.password = _password;
-                        twitch = (bool)info["Twitch"];
-                        form.settings1.label1.Text = "Logged in as " + Main.sf.username;
-
-                        form.settings1.checkBox1.Checked = (int)info["Notifys"]["NewCom"] == 1;
-                        form.settings1.checkBox2.Checked = (int)info["Notifys"]["NewReply"] == 1;
-                        form.settings1.checkBox3.Checked = (int)info["Notifys"]["NewBug"] == 1;
-                        form.settings1.noFocusBorderBtn8.Enabled = false;
-
-                        if (hashed)
+                        try
                         {
-                            form.settings1.tableLayoutPanel1.Visible = false;
-                            form.settings1.tableLayoutPanel2.Visible = true;
-                            form.settings1.tableLayoutPanel11.Visible = true;
+                            if (info == null)
+                                info = JObject.Parse(result);
+                            twitch = (bool)info["Twitch"];
+                            form.settings1.label1.Text = "Logged in as " + Main.sf.username;
+
+                            form.settings1.checkBox1.Checked = (int)info["Notifys"]["NewCom"] == 1;
+                            form.settings1.checkBox2.Checked = (int)info["Notifys"]["NewReply"] == 1;
+                            form.settings1.checkBox3.Checked = (int)info["Notifys"]["NewBug"] == 1;
+                            form.settings1.noFocusBorderBtn8.Enabled = false;
+
+                            if (hashed)
+                            {
+                                form.settings1.tableLayoutPanel1.Visible = false;
+                                form.settings1.tableLayoutPanel2.Visible = true;
+                                form.settings1.tableLayoutPanel11.Visible = true;
+                            }
+                            else
+                            {
+                                form.settings1.animator1.HideSync(form.settings1.tableLayoutPanel1);
+                                form.settings1.animator1.Show(form.settings1.tableLayoutPanel2);
+                                form.settings1.animator1.Show(form.settings1.tableLayoutPanel11);
+                            }
+
+                            form.settings1.noFocusBorderBtn6.Visible = !(bool)info["Verified"];
+
+                            foreach (JToken i in info["Scripts"] as JArray)
+                                Main.sf.accountScripts.Add(i.ToString());
+
+                            Main.sf.username = info["Username"].ToString();
+                            Main.sf.password = _password;
+                            Main.sf.Save();
                         }
-                        else
-                        {
-                            form.settings1.animator1.HideSync(form.settings1.tableLayoutPanel1);
-                            form.settings1.animator1.Show(form.settings1.tableLayoutPanel2);
-                            form.settings1.animator1.Show(form.settings1.tableLayoutPanel11);
-                        }
-
-                        form.settings1.noFocusBorderBtn6.Visible = !(bool)info["Verified"];
-
-                        foreach (JToken i in info["Scripts"] as JArray)
-                            Main.sf.accountScripts.Add(i.ToString());
-
-                        Main.sf.Save();
+                        catch { return JObject.Parse(result); }
                     }
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.StackTrace);
-                if (DialogResult.Retry == MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150))
+                if (DialogResult.Retry == SMB(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 2, DialogResult.Retry))
                     goto tryagain;
             }
+            return null;
         }
 
         public static void SignUp(string _username, string _password, string email, Main form, bool twitch = false, TwitchLogin webForm = null)
@@ -203,7 +212,7 @@ namespace Script_Browser
             {
                 Console.WriteLine(ex.StackTrace);
                 try { webForm.Dispose(); } catch { }
-                if (DialogResult.Retry == MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150))
+                if (DialogResult.Retry == SMB(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 2, DialogResult.Retry))
                     goto tryagain;
             }
         }
@@ -265,7 +274,7 @@ namespace Script_Browser
             }
             catch
             {
-                if (DialogResult.Retry == MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150))
+                if (DialogResult.Retry == SMB(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 2, DialogResult.Retry))
                     goto tryagain;
             }
         }
@@ -298,7 +307,7 @@ namespace Script_Browser
             }
             catch
             {
-                if (DialogResult.Retry == MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150))
+                if (DialogResult.Retry == SMB(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 2, DialogResult.Retry))
                     goto tryagain;
             }
         }
@@ -334,23 +343,32 @@ namespace Script_Browser
             }
             catch
             {
-                if (DialogResult.Retry == MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150))
+                if (DialogResult.Retry == SMB(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 2, DialogResult.Retry))
                     goto tryagain;
             }
         }
 
         public static void NotifySettings(Main form, int newcom, int newreply, int newbug)
         {
+            tryagain:
             if (CheckIp(form))
             {
-                using (WebClient web = new WebClient())
+                try
                 {
-                    string result = web.DownloadString(storageServer + "/Script%20Browser/notifySettings.php?user=" + Main.sf.username + "&pass=" + Main.sf.password + "&newcom=" + newcom + "&newreply=" + newreply + "&newbug=" + newbug);
+                    using (WebClient web = new WebClient())
+                    {
+                        string result = web.DownloadString(storageServer + "/Script%20Browser/notifySettings.php?user=" + Main.sf.username + "&pass=" + Main.sf.password + "&newcom=" + newcom + "&newreply=" + newreply + "&newbug=" + newbug);
 
-                    if (result.Contains("false"))
-                        MetroMessageBox.Show(form, "Could't update your notification settings. Please try again later.", "Could update settings", MessageBoxButtons.OK, MessageBoxIcon.Error, 100);
-                    else if (result.Contains("true"))
-                        MetroMessageBox.Show(form, "Your notification settings have been updated!", "Settings updated", MessageBoxButtons.OK, MessageBoxIcon.Information, 100);
+                        if (result.Contains("false"))
+                            MetroMessageBox.Show(form, "Could't update your notification settings. Please try again later.", "Could update settings", MessageBoxButtons.OK, MessageBoxIcon.Error, 100);
+                        else if (result.Contains("true"))
+                            MetroMessageBox.Show(form, "Your notification settings have been updated!", "Settings updated", MessageBoxButtons.OK, MessageBoxIcon.Information, 100);
+                    }
+                }
+                catch
+                {
+                    if (DialogResult.Retry == SMB(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 2, DialogResult.Retry))
+                        goto tryagain;
                 }
             }
         }
@@ -527,5 +545,13 @@ namespace Script_Browser
         }
 
         #endregion
+
+        public static DialogResult SMB(Form form, string msg = "", string title = "", MessageBoxButtons btns = MessageBoxButtons.OK, MessageBoxIcon icon = MessageBoxIcon.Information, MessageBoxDefaultButton defBtn = MessageBoxDefaultButton.Button1, int heigth = 1, DialogResult def = DialogResult.Yes)
+        {
+            if (form.Visible)
+                return MetroMessageBox.Show(form, msg, title, btns, icon, defBtn, 80 + (heigth * 22));
+            else
+                return def;
+        }
     }
 }

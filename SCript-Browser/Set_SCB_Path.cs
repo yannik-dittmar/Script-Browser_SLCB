@@ -120,6 +120,7 @@ namespace Script_Browser
             DialogResult result = folderBrowserDialog1.ShowDialog();
             if (result == DialogResult.OK)
             {
+                folderBrowserDialog1.SelectedPath += "\\";
                 if (CheckSLCBPath(folderBrowserDialog1.SelectedPath))
                     textBox1.Text = folderBrowserDialog1.SelectedPath;
                 else

@@ -46,9 +46,9 @@ namespace SplashScreen
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             if (args.Length == 0)
-                Application.Run(new Main());
+                Application.Run(new SplashScreen());
             else
-                Application.Run(new Main(true));
+                Application.Run(new SplashScreen(true));
 
             SingleInstance.Stop();
         }

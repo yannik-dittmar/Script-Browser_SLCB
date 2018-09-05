@@ -82,11 +82,17 @@ namespace Script_Browser.TabPages
         }
 
         //Refresh & Download data from server
-        public void button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
+        {
+            LoadList();
+        }
+
+        public void LoadList(JArray result = null)
         {
             try
             {
-                JArray result = JArray.Parse(Networking.GetTopScripts(metroComboBox2.Text, metroComboBox1.Text, page, form));
+                if (result == null)
+                    result = JArray.Parse(Networking.GetTopScripts(metroComboBox2.Text, metroComboBox1.Text, page, form));
 
                 if (result.Count == 0 && page > 1)
                     page--;
@@ -119,8 +125,7 @@ namespace Script_Browser.TabPages
                     dataGridView1.Sort(dataGridView1.Columns[4], ListSortDirection.Descending);
                 dataGridView1.ClearSelection();
             }
-            catch (WebException ex) { Console.WriteLine(ex.StackTrace); MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.OK, MessageBoxIcon.Error, 125); }
-            catch (Exception ex) { MetroMessageBox.Show(form, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); Console.WriteLine(ex.StackTrace); }
+            catch { Networking.SMB(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 2); }
         }
 
         //Load ScriptView
@@ -153,8 +158,7 @@ namespace Script_Browser.TabPages
                     }
                 }
             }
-            catch (WebException ex) { Console.WriteLine(ex.StackTrace); MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.OK, MessageBoxIcon.Error, 125); }
-            catch (Exception ex) { MetroMessageBox.Show(form, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); Console.WriteLine(ex.StackTrace); }
+            catch { Networking.SMB(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 2); }
             contextMenuOpen = false;
         }
 
