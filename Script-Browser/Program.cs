@@ -20,6 +20,7 @@ namespace Script_Browser
         /// <summary>
         /// Der Haupteinstiegspunkt für die Anwendung.
         /// </summary>
+
         [STAThread]
         static void Main(string[] args)
         {

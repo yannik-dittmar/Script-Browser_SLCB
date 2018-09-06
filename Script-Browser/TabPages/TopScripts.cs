@@ -158,7 +158,7 @@ namespace Script_Browser.TabPages
                     }
                 }
             }
-            catch { Networking.SMB(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 2); }
+            catch (Exception ex) { Console.WriteLine(ex.StackTrace); Networking.SMB(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 2); }
             contextMenuOpen = false;
         }
 

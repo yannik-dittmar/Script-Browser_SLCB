@@ -163,9 +163,9 @@
             this.label1.Location = new System.Drawing.Point(50, 9);
             this.label1.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(282, 16);
+            this.label1.Size = new System.Drawing.Size(289, 16);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Script Browser for Streamlabs Chatbot SETUP";
+            this.label1.Text = "Script Browser for Streamlabs Chatbot - SETUP";
             this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveForm_MouseDown);
             // 
             // label3
@@ -350,11 +350,11 @@
             // tcTlp2
             // 
             this.tcTlp2.ColumnCount = 5;
-            this.tcTlp2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 0F));
-            this.tcTlp2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 0F));
-            this.tcTlp2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 0F));
-            this.tcTlp2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 0F));
             this.tcTlp2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tcTlp2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 0F));
+            this.tcTlp2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 0F));
+            this.tcTlp2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 0F));
+            this.tcTlp2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 0F));
             this.tcTlp2.Controls.Add(this.label4, 0, 0);
             this.tcTlp2.Controls.Add(this.tableLayoutPanel5, 1, 0);
             this.tcTlp2.Controls.Add(this.tableLayoutPanel4, 2, 0);
@@ -375,7 +375,7 @@
             this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(3, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(1, 282);
+            this.label4.Size = new System.Drawing.Size(605, 282);
             this.label4.TabIndex = 0;
             this.label4.Text = "Welcome!\r\n\r\nThis setup will install the Streamlabs Chatbot - Script Browser on yo" +
     "ur pc.";
@@ -387,7 +387,7 @@
             this.tableLayoutPanel5.Controls.Add(this.checkBox1, 0, 1);
             this.tableLayoutPanel5.Controls.Add(this.panel3, 0, 0);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(611, 0);
             this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 2;
@@ -439,7 +439,7 @@
             this.tableLayoutPanel4.Controls.Add(this.checkBox2, 0, 1);
             this.tableLayoutPanel4.Controls.Add(this.panel2, 0, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(611, 0);
             this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 2;
@@ -493,7 +493,7 @@
             this.tableLayoutPanel6.Controls.Add(this.button1, 1, 1);
             this.tableLayoutPanel6.Controls.Add(this.label5, 0, 0);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(10, 0);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(621, 0);
             this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 3;
@@ -553,7 +553,7 @@
             this.tableLayoutPanel7.Controls.Add(this.checkBox4, 0, 2);
             this.tableLayoutPanel7.Controls.Add(this.checkBox7, 0, 3);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(10, 10);
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(621, 10);
             this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(10);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 5;
@@ -562,7 +562,7 @@
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(591, 262);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(1, 262);
             this.tableLayoutPanel7.TabIndex = 4;
             // 
             // checkBox3
@@ -576,7 +576,7 @@
             this.checkBox3.Location = new System.Drawing.Point(3, 81);
             this.checkBox3.Margin = new System.Windows.Forms.Padding(3, 10, 3, 10);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(585, 20);
+            this.checkBox3.Size = new System.Drawing.Size(1, 20);
             this.checkBox3.TabIndex = 1;
             this.checkBox3.Text = "Start Script-Browser when Windows starts (recommended)";
             this.checkBox3.UseVisualStyleBackColor = true;
@@ -592,7 +592,7 @@
             this.checkBox4.Location = new System.Drawing.Point(3, 121);
             this.checkBox4.Margin = new System.Windows.Forms.Padding(3, 10, 3, 10);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(585, 20);
+            this.checkBox4.Size = new System.Drawing.Size(1, 20);
             this.checkBox4.TabIndex = 2;
             this.checkBox4.Text = "Create a Desktop-Shortcut";
             this.checkBox4.UseVisualStyleBackColor = true;
@@ -608,7 +608,7 @@
             this.checkBox7.Location = new System.Drawing.Point(3, 161);
             this.checkBox7.Margin = new System.Windows.Forms.Padding(3, 10, 3, 10);
             this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(585, 20);
+            this.checkBox7.Size = new System.Drawing.Size(1, 20);
             this.checkBox7.TabIndex = 3;
             this.checkBox7.Text = "Add Application to Start Menu";
             this.checkBox7.UseVisualStyleBackColor = true;

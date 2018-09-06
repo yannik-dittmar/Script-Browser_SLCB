@@ -398,7 +398,7 @@ namespace Installer
                                 key.SetValue("Contact", "sl.chatbot.script.browser@gmail.com");
                                 key.SetValue("InstallDate", DateTime.Now.ToString("yyyyMMdd"));
                                 key.SetValue("InstallLocation", textBox1.Text);
-                                key.SetValue("UninstallString", "uninstallprompt");
+                                key.SetValue("UninstallString", textBox1.Text + "Uninstaller.exe");
                                 Log("Registed uninstaller");
                             }
                             finally
@@ -473,7 +473,7 @@ namespace Installer
         private void DownloadProgress(object sender, DownloadProgressChangedEventArgs e)
         {
             IAsyncResult wait = this.BeginInvoke(new MethodInvoker(delegate () { 
-                if (sw.ElapsedMilliseconds != 0 && sw.ElapsedMilliseconds > 500)
+                if (sw.ElapsedMilliseconds != 0 && sw.ElapsedMilliseconds > 1000)
                 {
                     long bytes = e.BytesReceived - receivedBytes;
                     double speed = Math.Round((double)bytes / ((double)sw.ElapsedMilliseconds / 1000.0));

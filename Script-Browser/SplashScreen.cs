@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Microsoft.Win32;
+using Newtonsoft.Json.Linq;
 using SaveManager;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.IO;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Script_Browser.Program;
 
@@ -48,6 +50,7 @@ namespace Script_Browser
         private bool hide = false;
         private int retryCounter = 10;
         private Thread downloadThread;
+        private Main main;
 
         public SplashScreen(bool hide = false)
         {
@@ -203,7 +206,14 @@ namespace Script_Browser
                             return;
                         }
                     }
-                    
+
+                    try
+                    {
+                        using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Script Browser", true))
+                            key.SetValue("DisplayVersion", sf.version);
+                    }
+                    catch { }
+
                     //Receiving Data
                     this.BeginInvoke(new MethodInvoker(delegate () { label1.Text = "Receiving Data"; }));
                     JArray topScriptsData = JArray.Parse(Networking.GetTopScripts("Command", "Rating", 1, null));
@@ -217,15 +227,15 @@ namespace Script_Browser
                     }
 
                     //Close & Start
-                    this.BeginInvoke(new MethodInvoker(delegate () { label1.Text = "Starting Script-Browser"; }));
-                    Main main = new Main(topScriptsData, hide, login);
                     this.BeginInvoke(new MethodInvoker(delegate ()
                     {
+                        label1.Text = "Starting Script-Browser";
+                        label1.Update();
+                        main = new Main(topScriptsData, hide, login);
                         this.DialogResult = DialogResult.OK;
                         minimized.Enabled = true;
                     }));
 
-                    Application.Run(main);
                     return;
                 }
                 catch (Exception ex) { this.BeginInvoke(new MethodInvoker(delegate () { label1.Text = "Retry - 10s"; })); Console.WriteLine(ex.StackTrace); }
@@ -445,7 +455,11 @@ namespace Script_Browser
             {
                 Opacity = (Opacity - ((Double)7 / 100));
                 if (Opacity == 0)
-                    this.Dispose();
+                {
+                    this.Hide();
+                    main.Show();
+                    minimized.Enabled = false;
+                }
             }
             catch { }
         }
