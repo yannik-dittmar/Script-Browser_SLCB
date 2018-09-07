@@ -430,7 +430,7 @@
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.Size = new System.Drawing.Size(0, 253);
             this.richTextBox2.TabIndex = 2;
-            this.richTextBox2.Text = "TEST";
+            this.richTextBox2.Text = "TEST VERSION";
             // 
             // tableLayoutPanel4
             // 
@@ -482,7 +482,7 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(0, 253);
             this.richTextBox1.TabIndex = 2;
-            this.richTextBox1.Text = "TEST";
+            this.richTextBox1.Text = "TEST VERSION";
             // 
             // tableLayoutPanel6
             // 

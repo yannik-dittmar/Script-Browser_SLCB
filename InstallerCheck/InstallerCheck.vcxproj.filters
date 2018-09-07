@@ -21,6 +21,9 @@
     <ClInclude Include="targetver.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -34,5 +37,14 @@
     <None Include="Installer.exe">
       <Filter>Ressourcendateien</Filter>
     </None>
+    <None Include="..\Installer\bin\Debug\Installer.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="InstallerCheck.rc">
+      <Filter>Ressourcendateien</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="test.txt" />
   </ItemGroup>
 </Project>

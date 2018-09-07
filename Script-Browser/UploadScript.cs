@@ -719,7 +719,7 @@ namespace Script_Browser
                 string result = Networking.UploadScript(this, info.ToString(), Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip");
 
                 if (result.Contains("verify"))
-                    MetroMessageBox.Show(this, "Your email address has not been verified yet.\nPlease check your inbox or contact us over ", "Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); //TODO: Add Email
+                    MetroMessageBox.Show(this, "Your email address has not been verified yet.\nPlease check your inbox or contact us over sl.chatbot.script.browser@gmail.com", "Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150);
                 else if (result.Contains("enough"))
                     MetroMessageBox.Show(this, "You have reached the maximum amount of scripts for a single user!\nDelete some to upload new ones.", "Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); //TODO: Add delete script from cloud
                 else if (result.Contains("true"))
@@ -798,7 +798,7 @@ namespace Script_Browser
                     result = Networking.UploadUpdate(this, info.ToString());
 
                 if (result.Contains("verify"))
-                    MetroMessageBox.Show(this, "Your email address has not been verified yet.\nPlease check your inbox or contact us over ", "Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); //TODO: Add Email
+                    MetroMessageBox.Show(this, "Your email address has not been verified yet.\nPlease check your inbox or contact us over sl.chatbot.script.browser@gmail.com", "Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150);
                 else if (result.Contains("enough"))
                     MetroMessageBox.Show(this, "You have reached the maximum amount of scripts for a single user!\nDelete some to upload new ones.", "Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); //TODO: Add delete script from cloud
                 else if (result.Contains("true"))

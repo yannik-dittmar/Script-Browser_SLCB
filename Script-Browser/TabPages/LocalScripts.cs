@@ -232,7 +232,7 @@ namespace Script_Browser.TabPages
                     dgv.Rows[e.RowIndex].Selected = true;
 
                     button5.Visible = false;
-                    button1.Visible = dgv.Tag.ToString().Contains("upload");
+                    button1.Visible = dgv.Tag.ToString().Contains("upload") && Main.sf.username != "";
                     if (dgv.Tag.ToString().Contains("update"))
                     {
                         button3.Visible = !Main.sf.accountScripts.Contains(dgv.Rows[e.RowIndex].Cells[6].Value.ToString());

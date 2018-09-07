@@ -160,7 +160,7 @@ namespace Script_Browser.Controls
             {
                 if (button3.Text == "Uninstall")
                 {
-                    LocalScripts.UninstallScript(form, button3.Tag.ToString(), name);
+                    LocalScripts.UninstallScript(form, button3.Tag.ToString() + "\\test", name);
                     return;
                 }
                 else
@@ -173,6 +173,7 @@ namespace Script_Browser.Controls
 
                     if (Networking.DownloadScript(form, id))
                     {
+                        Networking.IncreaseDownloads(null, id);
                         try { Directory.Delete(Main.sf.streamlabsPath + @"Services\Scripts\" + id + "\\", true); } catch { }
                         Directory.CreateDirectory(Main.sf.streamlabsPath + @"Services\Scripts\" + id + "\\");
 
@@ -211,7 +212,7 @@ namespace Script_Browser.Controls
                     }
                 }
             }
-            catch (Exception ex) { Console.WriteLine(ex.StackTrace); }
+            catch (Exception ex) { Console.WriteLine(ex.StackTrace); Networking.SMB(form, "There was an unexpected error!\nPlease make sure you have an internet connection.", "Installation error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 2); }
             try { Directory.Delete(Main.sf.streamlabsPath + @"Services\Scripts\" + id + "\\", true); } catch { }
             button3.Text = "Download and Install";
         }

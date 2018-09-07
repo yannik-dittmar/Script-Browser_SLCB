@@ -16,7 +16,7 @@ namespace UpdateLogger
     public partial class Form1 : Form
     {
         private string settingsFile = Directory.GetParent(Application.ExecutablePath) + "\\settings.json";
-        private string scanLocation = @"D:\MegaSync\Visual-Studio\Script-Browser_SLCB\Script-Browser\bin\Debug";
+        private string scanLocation = @"C:\Users\Yannik\Desktop\SLCBSB";
         private JArray changelog; 
 
         public Form1()
@@ -41,7 +41,7 @@ namespace UpdateLogger
 
         private void PrintLog()
         {
-            string version = "1.0";
+            string version = "1.0.0";
             foreach (JToken change in changelog)
                 version = change["version"].ToString();
             textBox2.Text = version;

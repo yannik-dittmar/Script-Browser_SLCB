@@ -96,7 +96,12 @@ namespace Script_Browser
                     if (info == null)
                         result = web.DownloadString(storageServer + "/Script%20Browser/login.php?user=" + _username + "&pass=" + _password + "&getinfo=true");
                     if (!result.Contains("Twitch") && info == null)
+                    {
                         MetroMessageBox.Show(form, "The username or password was incorrect.", "Login error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 100);
+                        Main.sf.username = "";
+                        Main.sf.password = "";
+                        Main.sf.Save();
+                    }
                     else
                     {
                         try
@@ -432,6 +437,21 @@ namespace Script_Browser
                 {
                     using (WebClient web = new WebClient())
                         web.DownloadFile(storageServer + "/Script%20Browser/Uploads/" + id, Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Install.zip");
+                    return true;
+                }
+            }
+            catch { }
+            return false;
+        }
+
+        public static bool IncreaseDownloads(Main form, int id)
+        {
+            try
+            {
+                if (CheckIp(form))
+                {
+                    using (WebClient web = new WebClient())
+                        web.DownloadString(storageServer + "/Script%20Browser/increaseDownloads.php?id=" + id);
                     return true;
                 }
             }
