@@ -19,6 +19,7 @@ namespace SaveManager
         public ObservableCollection<KeyValuePair<int, string>> currentInstalled = new ObservableCollection<KeyValuePair<int, string>>();
         public List<string> ratedScripts = new List<string>();
         public List<string> accountScripts = new List<string>();
+        public bool useUnverifiedScripts = false;
 
         private string path = "";
 
@@ -35,6 +36,7 @@ namespace SaveManager
                     username = sf.username;
                     password = sf.password;
                     version = sf.version;
+                    useUnverifiedScripts = sf.useUnverifiedScripts;
 
                     if (sf.currentInstalled != null)
                         currentInstalled = sf.currentInstalled;

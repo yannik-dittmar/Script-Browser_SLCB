@@ -29,6 +29,7 @@ namespace Script_Browser.TabPages
 
             textBox1.Text = Main.sf.streamlabsPath;
             noFocusBorderBtn8.NotEnabledBG = Color.FromArgb(25, 72, 70);
+            checkBox4.Checked = Main.sf.useUnverifiedScripts;
         }
 
         #region Account
@@ -203,6 +204,15 @@ namespace Script_Browser.TabPages
                 else
                     MetroMessageBox.Show(form, "Could not find a valid Streamlabs Chatbot installation!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 100);
             }
+        }
+
+        #endregion
+
+        #region Scripts
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            Main.sf.useUnverifiedScripts = checkBox4.Checked;
         }
 
         #endregion

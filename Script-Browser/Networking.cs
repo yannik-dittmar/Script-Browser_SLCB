@@ -386,7 +386,7 @@ namespace Script_Browser
         {
             CheckIp(form);
             using (WebClient web = new WebClient())
-                return web.DownloadString(storageServer + "/Script%20Browser/getTopScripts.php?type=" + type + "&highest=" + highest + "&page=" + page);
+                return web.DownloadString(storageServer + "/Script%20Browser/getTopScripts.php?type=" + type + "&highest=" + highest + "&page=" + page + "&verified=" + (Main.sf.useUnverifiedScripts ? 0 : 1));
         }
 
         public static string SearchScripts(string[] tags, Main form)
