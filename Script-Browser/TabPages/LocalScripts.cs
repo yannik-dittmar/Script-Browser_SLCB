@@ -410,5 +410,17 @@ namespace Script_Browser.TabPages
             }
             catch { }
         }
+
+        private void tableLayoutPanel2_VisibleChanged(object sender, EventArgs e)
+        {
+            label5.Visible = !tableLayoutPanel2.Visible;
+        }
+
+        public void ClearSelection()
+        {
+            tableLayoutPanel2.Visible = false;
+            dataGridView1.ClearSelection();
+            dataGridView2.ClearSelection();
+        }
     }
 }

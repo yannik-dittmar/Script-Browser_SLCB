@@ -167,6 +167,7 @@ namespace Script_Browser.TabPages
             Main.sf.username = "";
             Main.sf.password = "";
             Main.sf.Save();
+            form.localScripts1.ClearSelection();
         }
 
         //Notify Settings

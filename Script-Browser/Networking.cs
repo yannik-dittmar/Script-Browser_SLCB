@@ -137,6 +137,7 @@ namespace Script_Browser
                             Main.sf.username = info["Username"].ToString();
                             Main.sf.password = _password;
                             Main.sf.Save();
+                            form.localScripts1.ClearSelection();
                         }
                         catch { return JObject.Parse(result); }
                     }
@@ -210,6 +211,7 @@ namespace Script_Browser
                         form.settings1.checkBox3.Checked = true;
 
                         Main.sf.Save();
+                        form.localScripts1.ClearSelection();
                     }
                 }
             }
@@ -409,7 +411,7 @@ namespace Script_Browser
         {
             CheckIp(null);
             using (WebClient web = new WebClient())
-                return web.DownloadString(storageServer + "/Script%20Browser/checkForUpdate.php?id=" + id + "&ver=" + ver);
+                return web.DownloadString(storageServer + "/Script%20Browser/checkForUpdate.php?id=" + id + "&ver=" + ver + "&verified=" + (Main.sf.useUnverifiedScripts ? 0: 1));
         }
 
         #region Transfer Scripts
@@ -568,10 +570,13 @@ namespace Script_Browser
 
         public static DialogResult SMB(Form form, string msg = "", string title = "", MessageBoxButtons btns = MessageBoxButtons.OK, MessageBoxIcon icon = MessageBoxIcon.Information, MessageBoxDefaultButton defBtn = MessageBoxDefaultButton.Button1, int heigth = 1, DialogResult def = DialogResult.Yes)
         {
-            if (form.Visible)
-                return MetroMessageBox.Show(form, msg, title, btns, icon, defBtn, 80 + (heigth * 22));
-            else
-                return def;
+            try
+            {
+                if (form.Visible)
+                    return MetroMessageBox.Show(form, msg, title, btns, icon, defBtn, 80 + (heigth * 22));
+            }
+            catch { }
+            return def;
         }
     }
 }

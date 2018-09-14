@@ -239,6 +239,8 @@ namespace Script_Browser
                         noFocusBorderBtn6.Text = "Finish";
                     else if (page != 5)
                         noFocusBorderBtn6.Text = "Next";
+                    else if (tableLayoutPanel11.Visible)
+                        noFocusBorderBtn6.Text = "Update";
                     else
                         noFocusBorderBtn6.Text = "Upload";
                     noFocusBorderBtn6.Enabled = page != currentStep || (page == 5 && !uploaded);
@@ -310,6 +312,8 @@ namespace Script_Browser
         {
             if (noFocusBorderBtn6.Text == "Upload" && !uploaded)
                 Upload(null, null);
+            else if (noFocusBorderBtn6.Text == "Update" && !uploaded)
+                UploadUpdate(null, null);
             else if (noFocusBorderBtn6.Text == "Finish")
                 this.Dispose();
             else
@@ -724,7 +728,7 @@ namespace Script_Browser
                     MetroMessageBox.Show(this, "You have reached the maximum amount of scripts for a single user!\nDelete some to upload new ones.", "Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); //TODO: Add delete script from cloud
                 else if (result.Contains("true"))
                 {
-                    label10.Text = "Your script has been successfully uploaded and published!";
+                    label10.Text = "Your script has been successfully uploaded and will be published after our inspection!";
                     uploaded = true;
                     Main.sf.accountScripts.Add(result.Replace("true", ""));
                     noFocusBorderBtn6.Text = "Finish";
@@ -803,6 +807,7 @@ namespace Script_Browser
                     MetroMessageBox.Show(this, "You have reached the maximum amount of scripts for a single user!\nDelete some to upload new ones.", "Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); //TODO: Add delete script from cloud
                 else if (result.Contains("true"))
                 {
+                    MetroMessageBox.Show(this, "Your update has been uploaded!\nIt will be published after our inspection.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information, 150);
                     noFocusBorderBtn9.Text = "Success";
                     noFocusBorderBtn9.Enabled = false;
                     uploaded = true;
