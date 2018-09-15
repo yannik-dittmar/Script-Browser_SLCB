@@ -73,6 +73,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <TargetName>Script-Browser Setup</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -163,14 +164,18 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Installer\bin\Debug\Installer.exe" />
-    <None Include="Installer.exe" />
+    <None Include="..\Installer\bin\Debug\Installer.exe">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="executab.bin" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="InstallerCheck.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="test.txt" />
+    <Text Include="Test.txt">
+      <DeploymentContent>true</DeploymentContent>
+    </Text>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
