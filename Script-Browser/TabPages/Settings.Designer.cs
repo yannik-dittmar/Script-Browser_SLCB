@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            AnimatorNS.Animation animation2 = new AnimatorNS.Animation();
+            AnimatorNS.Animation animation1 = new AnimatorNS.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Settings));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
@@ -46,8 +46,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
@@ -65,20 +66,22 @@
             this.label3 = new System.Windows.Forms.Label();
             this.materialSingleLineTextField1 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.label2 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             this.animator1 = new AnimatorNS.Animator(this.components);
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.label12 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.noFocusBorderBtn7 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.noFocusBorderBtn1 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.noFocusBorderBtn5 = new Script_Browser.Controls.NoFocusBorderBtn();
@@ -94,14 +97,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
+            this.tableLayoutPanel13.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel10.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
-            this.tableLayoutPanel8.SuspendLayout();
-            this.tableLayoutPanel11.SuspendLayout();
             this.tableLayoutPanel12.SuspendLayout();
+            this.tableLayoutPanel11.SuspendLayout();
+            this.tableLayoutPanel8.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -367,18 +371,20 @@
             this.tableLayoutPanel6.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanel6.ColumnCount = 1;
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Controls.Add(this.label12, 0, 5);
-            this.tableLayoutPanel6.Controls.Add(this.label10, 0, 3);
-            this.tableLayoutPanel6.Controls.Add(this.label4, 0, 1);
+            this.tableLayoutPanel6.Controls.Add(this.tableLayoutPanel13, 0, 2);
+            this.tableLayoutPanel6.Controls.Add(this.label13, 0, 1);
             this.tableLayoutPanel6.Controls.Add(this.tableLayoutPanel5, 0, 0);
-            this.tableLayoutPanel6.Controls.Add(this.tableLayoutPanel8, 0, 2);
-            this.tableLayoutPanel6.Controls.Add(this.tableLayoutPanel11, 0, 4);
-            this.tableLayoutPanel6.Controls.Add(this.tableLayoutPanel12, 0, 6);
+            this.tableLayoutPanel6.Controls.Add(this.tableLayoutPanel12, 0, 8);
+            this.tableLayoutPanel6.Controls.Add(this.label12, 0, 7);
+            this.tableLayoutPanel6.Controls.Add(this.tableLayoutPanel11, 0, 6);
+            this.tableLayoutPanel6.Controls.Add(this.label10, 0, 5);
+            this.tableLayoutPanel6.Controls.Add(this.tableLayoutPanel8, 0, 4);
+            this.tableLayoutPanel6.Controls.Add(this.label4, 0, 3);
             this.animator1.SetDecoration(this.tableLayoutPanel6, AnimatorNS.DecorationType.None);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 7;
+            this.tableLayoutPanel6.RowCount = 9;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -386,38 +392,55 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(730, 1061);
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(730, 1142);
             this.tableLayoutPanel6.TabIndex = 3;
             // 
-            // label10
+            // tableLayoutPanel13
             // 
-            this.label10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(72)))), ((int)(((byte)(70)))));
-            this.animator1.SetDecoration(this.label10, AnimatorNS.DecorationType.None);
-            this.label10.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label10.Font = new System.Drawing.Font("Arial Rounded MT Bold", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(0, 783);
-            this.label10.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(730, 33);
-            this.label10.TabIndex = 5;
-            this.label10.Text = "Notifications";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.tableLayoutPanel13.AutoSize = true;
+            this.tableLayoutPanel13.ColumnCount = 1;
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel13.Controls.Add(this.checkBox5, 0, 0);
+            this.animator1.SetDecoration(this.tableLayoutPanel13, AnimatorNS.DecorationType.None);
+            this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel13.Location = new System.Drawing.Point(3, 728);
+            this.tableLayoutPanel13.Name = "tableLayoutPanel13";
+            this.tableLayoutPanel13.RowCount = 1;
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel13.Size = new System.Drawing.Size(724, 32);
+            this.tableLayoutPanel13.TabIndex = 10;
             // 
-            // label4
+            // checkBox5
             // 
-            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(72)))), ((int)(((byte)(70)))));
-            this.animator1.SetDecoration(this.label4, AnimatorNS.DecorationType.None);
-            this.label4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(0, 692);
-            this.label4.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(730, 33);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Streamlabs Chatbot";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkBox5.AutoSize = true;
+            this.animator1.SetDecoration(this.checkBox5, AnimatorNS.DecorationType.None);
+            this.checkBox5.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox5.ForeColor = System.Drawing.Color.White;
+            this.checkBox5.Location = new System.Drawing.Point(10, 10);
+            this.checkBox5.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(353, 22);
+            this.checkBox5.TabIndex = 18;
+            this.checkBox5.Text = "Start SLCB Script-Browser with Windows";
+            this.checkBox5.UseVisualStyleBackColor = true;
+            this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox5_CheckedChanged);
+            // 
+            // label13
+            // 
+            this.label13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(72)))), ((int)(((byte)(70)))));
+            this.animator1.SetDecoration(this.label13, AnimatorNS.DecorationType.None);
+            this.label13.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label13.Font = new System.Drawing.Font("Arial Rounded MT Bold", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.White;
+            this.label13.Location = new System.Drawing.Point(0, 692);
+            this.label13.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(730, 33);
+            this.label13.TabIndex = 9;
+            this.label13.Text = "Generel";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel5
             // 
@@ -735,70 +758,50 @@
             this.label2.Text = "Account";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // tableLayoutPanel8
+            // tableLayoutPanel12
             // 
-            this.tableLayoutPanel8.AutoSize = true;
-            this.tableLayoutPanel8.ColumnCount = 4;
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tableLayoutPanel8.Controls.Add(this.label5, 0, 0);
-            this.tableLayoutPanel8.Controls.Add(this.textBox1, 1, 0);
-            this.tableLayoutPanel8.Controls.Add(this.button1, 2, 0);
-            this.animator1.SetDecoration(this.tableLayoutPanel8, AnimatorNS.DecorationType.None);
-            this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 735);
-            this.tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
-            this.tableLayoutPanel8.RowCount = 1;
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(724, 35);
-            this.tableLayoutPanel8.TabIndex = 4;
+            this.tableLayoutPanel12.AutoSize = true;
+            this.tableLayoutPanel12.ColumnCount = 1;
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel12.Controls.Add(this.checkBox4, 0, 0);
+            this.animator1.SetDecoration(this.tableLayoutPanel12, AnimatorNS.DecorationType.None);
+            this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel12.Location = new System.Drawing.Point(3, 1107);
+            this.tableLayoutPanel12.Name = "tableLayoutPanel12";
+            this.tableLayoutPanel12.RowCount = 1;
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel12.Size = new System.Drawing.Size(724, 32);
+            this.tableLayoutPanel12.TabIndex = 8;
             // 
-            // label5
+            // checkBox4
             // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label5.AutoSize = true;
-            this.animator1.SetDecoration(this.label5, AnimatorNS.DecorationType.None);
-            this.label5.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(10, 6);
-            this.label5.Margin = new System.Windows.Forms.Padding(10, 0, 3, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(94, 22);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Location:";
+            this.checkBox4.AutoSize = true;
+            this.animator1.SetDecoration(this.checkBox4, AnimatorNS.DecorationType.None);
+            this.checkBox4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox4.ForeColor = System.Drawing.Color.White;
+            this.checkBox4.Location = new System.Drawing.Point(10, 10);
+            this.checkBox4.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(511, 22);
+            this.checkBox4.TabIndex = 18;
+            this.checkBox4.Text = "Show unverified scripts (-Warning- They may contain viruses)";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
             // 
-            // textBox1
+            // label12
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.animator1.SetDecoration(this.textBox1, AnimatorNS.DecorationType.None);
-            this.textBox1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
-            this.textBox1.Location = new System.Drawing.Point(110, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(559, 29);
-            this.textBox1.TabIndex = 9;
-            this.textBox1.TabStop = false;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.animator1.SetDecoration(this.button1, AnimatorNS.DecorationType.None);
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(675, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(36, 29);
-            this.button1.TabIndex = 100;
-            this.button1.Text = "...";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.label12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(72)))), ((int)(((byte)(70)))));
+            this.animator1.SetDecoration(this.label12, AnimatorNS.DecorationType.None);
+            this.label12.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label12.Font = new System.Drawing.Font("Arial Rounded MT Bold", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.White;
+            this.label12.Location = new System.Drawing.Point(0, 1071);
+            this.label12.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(730, 33);
+            this.label12.TabIndex = 7;
+            this.label12.Text = "Scripts";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel11
             // 
@@ -812,7 +815,7 @@
             this.tableLayoutPanel11.Controls.Add(this.checkBox1, 0, 1);
             this.animator1.SetDecoration(this.tableLayoutPanel11, AnimatorNS.DecorationType.None);
             this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel11.Location = new System.Drawing.Point(3, 819);
+            this.tableLayoutPanel11.Location = new System.Drawing.Point(3, 900);
             this.tableLayoutPanel11.Name = "tableLayoutPanel11";
             this.tableLayoutPanel11.RowCount = 5;
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -888,76 +891,126 @@
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
+            // label10
+            // 
+            this.label10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(72)))), ((int)(((byte)(70)))));
+            this.animator1.SetDecoration(this.label10, AnimatorNS.DecorationType.None);
+            this.label10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label10.Font = new System.Drawing.Font("Arial Rounded MT Bold", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.White;
+            this.label10.Location = new System.Drawing.Point(0, 864);
+            this.label10.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(730, 33);
+            this.label10.TabIndex = 5;
+            this.label10.Text = "Notifications";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tableLayoutPanel8
+            // 
+            this.tableLayoutPanel8.AutoSize = true;
+            this.tableLayoutPanel8.ColumnCount = 4;
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.tableLayoutPanel8.Controls.Add(this.label5, 0, 0);
+            this.tableLayoutPanel8.Controls.Add(this.textBox1, 1, 0);
+            this.tableLayoutPanel8.Controls.Add(this.button1, 2, 0);
+            this.animator1.SetDecoration(this.tableLayoutPanel8, AnimatorNS.DecorationType.None);
+            this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 816);
+            this.tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
+            this.tableLayoutPanel8.RowCount = 1;
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(724, 35);
+            this.tableLayoutPanel8.TabIndex = 4;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label5.AutoSize = true;
+            this.animator1.SetDecoration(this.label5, AnimatorNS.DecorationType.None);
+            this.label5.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(10, 6);
+            this.label5.Margin = new System.Windows.Forms.Padding(10, 0, 3, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(94, 22);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Location:";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.animator1.SetDecoration(this.textBox1, AnimatorNS.DecorationType.None);
+            this.textBox1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
+            this.textBox1.Location = new System.Drawing.Point(110, 3);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(559, 29);
+            this.textBox1.TabIndex = 9;
+            this.textBox1.TabStop = false;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.animator1.SetDecoration(this.button1, AnimatorNS.DecorationType.None);
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(675, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(36, 29);
+            this.button1.TabIndex = 100;
+            this.button1.Text = "...";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label4
+            // 
+            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(72)))), ((int)(((byte)(70)))));
+            this.animator1.SetDecoration(this.label4, AnimatorNS.DecorationType.None);
+            this.label4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(0, 773);
+            this.label4.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(730, 33);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Streamlabs Chatbot";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // animator1
             // 
             this.animator1.AnimationType = AnimatorNS.AnimationType.VertSlide;
             this.animator1.Cursor = null;
-            animation2.AnimateOnlyDifferences = true;
-            animation2.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.BlindCoeff")));
-            animation2.LeafCoeff = 0F;
-            animation2.MaxTime = 1F;
-            animation2.MinTime = 0F;
-            animation2.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicCoeff")));
-            animation2.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicShift")));
-            animation2.MosaicSize = 0;
-            animation2.Padding = new System.Windows.Forms.Padding(0);
-            animation2.RotateCoeff = 0F;
-            animation2.RotateLimit = 0F;
-            animation2.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.ScaleCoeff")));
-            animation2.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.SlideCoeff")));
-            animation2.TimeCoeff = 0F;
-            animation2.TransparencyCoeff = 0F;
-            this.animator1.DefaultAnimation = animation2;
+            animation1.AnimateOnlyDifferences = true;
+            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
+            animation1.LeafCoeff = 0F;
+            animation1.MaxTime = 1F;
+            animation1.MinTime = 0F;
+            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
+            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
+            animation1.MosaicSize = 0;
+            animation1.Padding = new System.Windows.Forms.Padding(0);
+            animation1.RotateCoeff = 0F;
+            animation1.RotateLimit = 0F;
+            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
+            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
+            animation1.TimeCoeff = 0F;
+            animation1.TransparencyCoeff = 0F;
+            this.animator1.DefaultAnimation = animation1;
             // 
             // folderBrowserDialog1
             // 
             this.folderBrowserDialog1.Description = "Select Streamlabs Chatbot Folder";
             this.folderBrowserDialog1.RootFolder = System.Environment.SpecialFolder.MyComputer;
-            // 
-            // label12
-            // 
-            this.label12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(72)))), ((int)(((byte)(70)))));
-            this.animator1.SetDecoration(this.label12, AnimatorNS.DecorationType.None);
-            this.label12.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label12.Font = new System.Drawing.Font("Arial Rounded MT Bold", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.Color.White;
-            this.label12.Location = new System.Drawing.Point(0, 990);
-            this.label12.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(730, 33);
-            this.label12.TabIndex = 7;
-            this.label12.Text = "Scripts";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tableLayoutPanel12
-            // 
-            this.tableLayoutPanel12.AutoSize = true;
-            this.tableLayoutPanel12.ColumnCount = 1;
-            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel12.Controls.Add(this.checkBox4, 0, 0);
-            this.animator1.SetDecoration(this.tableLayoutPanel12, AnimatorNS.DecorationType.None);
-            this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel12.Location = new System.Drawing.Point(3, 1026);
-            this.tableLayoutPanel12.Name = "tableLayoutPanel12";
-            this.tableLayoutPanel12.RowCount = 1;
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel12.Size = new System.Drawing.Size(724, 32);
-            this.tableLayoutPanel12.TabIndex = 8;
-            // 
-            // checkBox4
-            // 
-            this.checkBox4.AutoSize = true;
-            this.animator1.SetDecoration(this.checkBox4, AnimatorNS.DecorationType.None);
-            this.checkBox4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox4.ForeColor = System.Drawing.Color.White;
-            this.checkBox4.Location = new System.Drawing.Point(10, 10);
-            this.checkBox4.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(511, 22);
-            this.checkBox4.TabIndex = 18;
-            this.checkBox4.Text = "Show unverified scripts (-Warning- They may contain viruses)";
-            this.checkBox4.UseVisualStyleBackColor = true;
-            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
             // 
             // noFocusBorderBtn7
             // 
@@ -1142,6 +1195,8 @@
             this.panel1.PerformLayout();
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
+            this.tableLayoutPanel13.ResumeLayout(false);
+            this.tableLayoutPanel13.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -1152,12 +1207,12 @@
             this.tableLayoutPanel9.PerformLayout();
             this.tableLayoutPanel7.ResumeLayout(false);
             this.tableLayoutPanel7.PerformLayout();
-            this.tableLayoutPanel8.ResumeLayout(false);
-            this.tableLayoutPanel8.PerformLayout();
-            this.tableLayoutPanel11.ResumeLayout(false);
-            this.tableLayoutPanel11.PerformLayout();
             this.tableLayoutPanel12.ResumeLayout(false);
             this.tableLayoutPanel12.PerformLayout();
+            this.tableLayoutPanel11.ResumeLayout(false);
+            this.tableLayoutPanel11.PerformLayout();
+            this.tableLayoutPanel8.ResumeLayout(false);
+            this.tableLayoutPanel8.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1219,5 +1274,8 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
         public System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel13;
+        public System.Windows.Forms.CheckBox checkBox5;
     }
 }

@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using MetroFramework;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
+using Microsoft.Win32;
+using System.IO;
 
 namespace Script_Browser.TabPages
 {
@@ -30,6 +32,9 @@ namespace Script_Browser.TabPages
             textBox1.Text = Main.sf.streamlabsPath;
             noFocusBorderBtn8.NotEnabledBG = Color.FromArgb(25, 72, 70);
             checkBox4.Checked = Main.sf.useUnverifiedScripts;
+
+            using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true))
+                checkBox5.Checked = key.GetValue("Script Browser") != null && key.GetValue("Script Browser").ToString() == Path.GetDirectoryName(Application.ExecutablePath) + "\\Script-Browser.exe /hide";
         }
 
         #region Account
@@ -155,7 +160,7 @@ namespace Script_Browser.TabPages
             if (materialSingleLineTextField6.Text.Trim(' ').Length != 0 && materialSingleLineTextField7.Text.Trim(' ').Length != 0 && IsValidEmail(materialSingleLineTextField6.Text))
                 Networking.ChangeEMail(materialSingleLineTextField6.Text, materialSingleLineTextField7.Text, form);
             else
-                MetroMessageBox.Show(this, "Please make sure your entries are completely and correct!", "Could not change E-Mail address", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
+                MetroMessageBox.Show(this, "Please make sure your entries are complete and correct!", "Could not change E-Mail address", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
         }
 
         //Logout
@@ -185,6 +190,21 @@ namespace Script_Browser.TabPages
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             noFocusBorderBtn8.Enabled = true;
+        }
+
+        #endregion
+
+        #region General
+
+        private void checkBox5_CheckedChanged(object sender, EventArgs e)
+        {
+            using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true))
+            {
+                if (checkBox5.Checked)
+                    key.SetValue("Script Browser", Path.GetDirectoryName(Application.ExecutablePath) + "\\Script-Browser.exe /hide");
+                else
+                    key.DeleteValue("Script Browser");
+            }
         }
 
         #endregion

@@ -189,19 +189,21 @@ namespace Script_Browser.TabPages
                         cell.Style.BackColor = Color.FromArgb(34, 55, 69);
 
                     nameToolStripMenuItem.Text = dgv.Rows[e.RowIndex].Cells[0].Value.ToString();
-                    uploadUpdateToolStripMenuItem.Visible = false;
                     uploadToolStripMenuItem.Visible = dgv.Tag.ToString().Contains("upload");
+                    
                     if (dgv.Tag.ToString().Contains("update"))
                     {
                         reportToolStripMenuItem.Visible = !Main.sf.accountScripts.Contains(dgv.Rows[e.RowIndex].Cells[6].Value.ToString());
                         checkForUpdatesToolStripMenuItem.Visible = !Main.sf.accountScripts.Contains(dgv.Rows[e.RowIndex].Cells[6].Value.ToString());
                         uploadUpdateToolStripMenuItem.Visible = Main.sf.accountScripts.Contains(dgv.Rows[e.RowIndex].Cells[6].Value.ToString());
+                        deleteFromServerToolStripMenuItem.Visible = Main.sf.accountScripts.Contains(dgv.Rows[e.RowIndex].Cells[6].Value.ToString());
                     }
                     else
                     {
                         reportToolStripMenuItem.Visible = false;
                         checkForUpdatesToolStripMenuItem.Visible = false;
                         uploadUpdateToolStripMenuItem.Visible = false;
+                        deleteFromServerToolStripMenuItem.Visible = false;
                     }
                 }
                 catch { }
@@ -229,15 +231,18 @@ namespace Script_Browser.TabPages
                 try
                 {
                     DataGridView dgv = sender as DataGridView;
+                    dgv.Focus();
                     dgv.Rows[e.RowIndex].Selected = true;
 
                     button5.Visible = false;
+                    button7.Visible = false;
                     button1.Visible = dgv.Tag.ToString().Contains("upload") && Main.sf.username != "";
                     if (dgv.Tag.ToString().Contains("update"))
                     {
                         button3.Visible = !Main.sf.accountScripts.Contains(dgv.Rows[e.RowIndex].Cells[6].Value.ToString());
                         button4.Visible = !Main.sf.accountScripts.Contains(dgv.Rows[e.RowIndex].Cells[6].Value.ToString());
                         button5.Visible = Main.sf.accountScripts.Contains(dgv.Rows[e.RowIndex].Cells[6].Value.ToString());
+                        button7.Visible = Main.sf.accountScripts.Contains(dgv.Rows[e.RowIndex].Cells[6].Value.ToString());
                         dataGridView1.ClearSelection();
                     }
                     else
@@ -245,6 +250,7 @@ namespace Script_Browser.TabPages
                         button3.Visible = false;
                         button4.Visible = false;
                         button5.Visible = false;
+                        button7.Visible = false;
                         dataGridView2.ClearSelection();
                     }
 
@@ -253,16 +259,12 @@ namespace Script_Browser.TabPages
                     tableLayoutPanel2.Visible = true;
                     tableLayoutPanel2.Tag = dgv.Rows[e.RowIndex].Cells[5].Value.ToString();
 
-                    if (button4.Visible)
-                    {
-                        button4.Tag = dgv.Rows[e.RowIndex].Cells[6].Value.ToString();
-                        listChanged(null, null);
-                    }
+                    listChanged(null, null);
 
                     if (dgv.ColumnCount == 7)
                         currentScriptID = dgv.Rows[e.RowIndex].Cells[6].Value.ToString();
                 }
-                catch { }
+                catch (Exception ex) { Console.WriteLine(ex.StackTrace); }
             }
             else
             {
@@ -292,23 +294,26 @@ namespace Script_Browser.TabPages
             }
             try
             {
-                RowStyle rowStyle = tableLayoutPanel1.RowStyles[(int)(sender as Control).Tag];
-                if (rowStyle.SizeType == SizeType.Absolute)
+                if (int.TryParse((sender as Control).Tag.ToString(), out int n))
                 {
-                    rowStyle.SizeType = SizeType.Percent;
-                    rowStyle.Height = 50f;
-                    (sender as Control).BackColor = Color.FromArgb(25, 72, 70);
+                    RowStyle rowStyle = tableLayoutPanel1.RowStyles[(int)(sender as Control).Tag];
+                    if (rowStyle.SizeType == SizeType.Absolute)
+                    {
+                        rowStyle.SizeType = SizeType.Percent;
+                        rowStyle.Height = 50f;
+                        (sender as Control).BackColor = Color.FromArgb(25, 72, 70);
+                    }
+                    else
+                    {
+                        rowStyle.SizeType = SizeType.Absolute;
+                        rowStyle.Height = 0;
+                        (sender as Control).BackColor = Color.FromArgb(18, 31, 39);
+                    }
+                    Control c = tableLayoutPanel1.Controls[(int)(sender as Control).Tag];
+                    c.Visible = !c.Visible;
                 }
-                else
-                {
-                    rowStyle.SizeType = SizeType.Absolute;
-                    rowStyle.Height = 0;
-                    (sender as Control).BackColor = Color.FromArgb(18, 31, 39);
-                }
-                Control c = tableLayoutPanel1.Controls[(int)(sender as Control).Tag];
-                c.Visible = !c.Visible;
             }
-            catch { }
+            catch (Exception ex) { Console.WriteLine(ex.StackTrace); }
         }
 
         //Upload script
@@ -331,7 +336,7 @@ namespace Script_Browser.TabPages
                 form.Opacity = 1;
                 UpdateList(Main.sf.streamlabsPath);
             }
-            catch { }
+            catch (Exception ex) { Protocol.AddToProtocol("Could not upload update: " + ex.StackTrace, Types.Error); }
         }
 
         //Open Script Path
@@ -380,9 +385,55 @@ namespace Script_Browser.TabPages
                 if (dgv.SelectedRows.Count < 1)
                     e.Cancel = true;
                 else
-                    dataGridView1_CellClick(dgv, new DataGridViewCellEventArgs(0, dgv.SelectedRows[0].Index));
+                    dataGridView1_CellClick(dgv, new DataGridViewCellEventArgs(0, dgv.SelectedRows[dgv.SelectedRows.Count - 1].Index));
             }
             catch { e.Cancel = true; }
+        }
+
+        //Delete script from server
+        private void button7_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (MetroMessageBox.Show(form, "Warning! You are about to delete your script '" + label3.Text + "' from the server!\nThe script will still be available for the user that have downloaded it.\nDo you want to continue?", "Delete script from server", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button3, 146) == DialogResult.Yes)
+                {
+                    string result = Networking.DeleteScript(form, currentScriptID);
+                    if (result.Contains("true"))
+                    {
+                        MetroMessageBox.Show(form, "Your script has been successfully deleted!", "Delete script from server", MessageBoxButtons.OK, MessageBoxIcon.Information, 102);
+                        Main.sf.accountScripts.RemoveAt(Main.sf.accountScripts.IndexOf(currentScriptID));
+                        Main.sf.Save();
+
+                        string[] lines = File.ReadAllLines(tableLayoutPanel2.Tag.ToString());
+                        using (StreamWriter writer = new StreamWriter(tableLayoutPanel2.Tag.ToString()))
+                        {
+                            bool f = false;
+                            for (int i = 0; i < lines.Length; i++)
+                            {
+                                if (lines[i].ToLower().Contains("scriptbrowserid") && !f)
+                                    f = true;
+                                else
+                                    writer.WriteLine(lines[i]);
+                            }
+                        }
+
+                        UpdateList(Main.sf.streamlabsPath);
+                    }
+                    else
+                    {
+                        MetroMessageBox.Show(form, "There was an unexpected error!\nCould not delete your script!", "Delete script from server", MessageBoxButtons.OK, MessageBoxIcon.Error, 124);
+                        Protocol.AddToProtocol("Could not delete script from Server (ID:" + button7.Tag.ToString() + ") - Webresult: " + result, Types.Error);
+                    }
+                }
+            }
+            catch (Exception ex) { Protocol.AddToProtocol("Could not delete script from Server! " + ex.StackTrace, Types.Error); }
+        }
+
+        private void deleteFromServerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DataGridView dgv = (DataGridView)contextMenuStrip1.SourceControl;
+            dataGridView1_CellClick(dgv, new DataGridViewCellEventArgs(0, dgv.SelectedRows[dgv.SelectedRows.Count - 1].Index));
+            button7_Click(null, null);
         }
 
         //Check for Update
@@ -391,7 +442,7 @@ namespace Script_Browser.TabPages
             listChanged(null, null);
 
             if (button4.Text != "Checking for Updates...")
-                Networking.checkUpdate.Add(new KeyValuePair<string, string>(button4.Tag.ToString(), tableLayoutPanel2.Tag.ToString()));
+                Networking.checkUpdate.Add(new KeyValuePair<string, string>(currentScriptID, tableLayoutPanel2.Tag.ToString()));
         }
 
         private void listChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -400,7 +451,7 @@ namespace Script_Browser.TabPages
             {
                 foreach (KeyValuePair<string, string> item in Networking.checkUpdate)
                 {
-                    if (item.Key == button4.Tag.ToString())
+                    if (item.Key == currentScriptID)
                     {
                         button4.Text = "Checking for Updates...";
                         return;

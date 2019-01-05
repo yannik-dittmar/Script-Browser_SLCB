@@ -65,6 +65,7 @@ namespace Script_Browser
 
             if (!Set_SCB_Path.CheckSLCBPath(sf.streamlabsPath))
             {
+                Protocol.AddToProtocol("Could not find valid Streamlabs Chatbot path!", Types.Warning);
                 if (!Set_SCB_Path.CheckSLCBPath(Set_SCB_Path.GetSLCBPath()))
                     new Set_SCB_Path(sf.streamlabsPath).ShowDialog();
                 else
@@ -72,6 +73,7 @@ namespace Script_Browser
             }
             if (!Set_SCB_Path.CheckSLCBPath(sf.streamlabsPath))
                 Environment.Exit(0);
+            sf.Save();
 
             InitializeComponent();
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
@@ -103,6 +105,7 @@ namespace Script_Browser
             //Update Scripts
             new Thread(delegate ()
             {
+                this.BeginInvoke(new MethodInvoker(delegate () { Protocol.AddToProtocol("Started script update service", Types.Info); }));
                 while (!IsDisposed)
                 {
                     try
@@ -114,6 +117,7 @@ namespace Script_Browser
                                 KeyValuePair<string, string> script = Networking.checkUpdate[i];
                                 try
                                 {
+                                    this.BeginInvoke(new MethodInvoker(delegate () { Protocol.AddToProtocol("Checking for update: " + script.Value, Types.Info); }));
                                     string version = "";
                                     string[] lines = File.ReadAllLines(script.Value);
                                     foreach (string line in lines)
@@ -123,9 +127,10 @@ namespace Script_Browser
                                     }
 
                                     string result = Networking.CheckForUpdate(script.Key, version);
-                                    if (result != "no")
+                                    if (result != "no" && result != "")
                                     {
                                         JObject updateInfo = JObject.Parse(result);
+                                        this.BeginInvoke(new MethodInvoker(delegate () { Protocol.AddToProtocol("Updating: " + script.Value, Types.Info); }));
 
                                         if (Networking.DownloadScript(null, Int32.Parse(script.Key)))
                                         {
@@ -214,16 +219,21 @@ namespace Script_Browser
 
                                             IAsyncResult wait = BeginInvoke(new MethodInvoker(delegate ()
                                             {
+                                                Protocol.AddToProtocol("Successfully updated: " + script.Value, Types.Info);
                                                 notifyIcon1.Tag = updateInfo["UpdateMessage"];
                                                 notifyIcon1.ShowBalloonTip(2000, "Updated Script", updateInfo["Name"].ToString(), ToolTipIcon.Info);
                                                 notifyIcon1.BalloonTipText = updateInfo["Name"].ToString();
                                             }));
                                             while (!wait.IsCompleted)
-                                                Thread.Sleep(1000);
+                                                Thread.Sleep(500);
                                         }
                                     }
                                 }
-                                catch (Exception ex) { Console.WriteLine(ex.StackTrace); }
+                                catch (Exception ex)
+                                {
+                                    this.BeginInvoke(new MethodInvoker(delegate () { Protocol.AddToProtocol("Could not update: " + script.Value + "\n" + ex.StackTrace, Types.Error); }));
+                                    Console.WriteLine(ex.StackTrace);
+                                }
 
                                 IAsyncResult wait2 = BeginInvoke(new MethodInvoker(delegate () { Networking.checkUpdate.RemoveAt(i); }));
                                 while (!wait2.IsCompleted)
@@ -232,9 +242,12 @@ namespace Script_Browser
                             }
                         }
                     }
-                    catch (Exception ex) { Console.WriteLine(ex.StackTrace); }
+                    catch (Exception ex)
+                    {
+                        this.BeginInvoke(new MethodInvoker(delegate () { Protocol.AddToProtocol("The update service has run into an error: " + ex.StackTrace, Types.Error); }));
+                    }
 
-                    Thread.Sleep(500);
+                    Thread.Sleep(300000);
                 }
             }).Start();
         }

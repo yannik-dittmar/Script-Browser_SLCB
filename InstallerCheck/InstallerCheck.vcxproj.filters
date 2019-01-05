@@ -47,4 +47,9 @@
   <ItemGroup>
     <Text Include="Test.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="C:\Users\Yannik\Dropbox\Programmierung\Digital-Programming\Logos\Logo_ICON.ico">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

@@ -135,6 +135,7 @@ namespace Script_Browser.TabPages
             {
                 if (e.RowIndex >= 0)
                 {
+                    form.UseWaitCursor = true;
                     dataGridView1.Rows[e.RowIndex].Selected = true;
                     if (e.Button == MouseButtons.Left && !contextMenuOpen)
                     {
@@ -160,6 +161,7 @@ namespace Script_Browser.TabPages
             }
             catch (Exception ex) { Console.WriteLine(ex.StackTrace); Networking.SMB(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 2); }
             contextMenuOpen = false;
+            form.UseWaitCursor = false;
         }
 
         //Unload ScriptView

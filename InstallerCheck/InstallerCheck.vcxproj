@@ -177,6 +177,9 @@
       <DeploymentContent>true</DeploymentContent>
     </Text>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="C:\Users\Yannik\Dropbox\Programmierung\Digital-Programming\Logos\Logo_ICON.ico" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

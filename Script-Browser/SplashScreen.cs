@@ -1,4 +1,6 @@
-﻿using Microsoft.Win32;
+﻿using CefSharp;
+using CefSharp.WinForms;
+using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
 using SaveManager;
 using System;
@@ -54,12 +56,23 @@ namespace Script_Browser
 
         public SplashScreen(bool hide = false)
         {
+            Protocol.AddToProtocol("Starting protocol - SLCBSB Version: " + sf.version, Types.Info);
             this.DialogResult = DialogResult.No;
             this.hide = hide;
             InitializeComponent();
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
 
+            ChromiumWebBrowser web = new ChromiumWebBrowser(Environment.CurrentDirectory + @"\HTML\SplashScreen.html");
+            web.LoadError += new EventHandler<LoadErrorEventArgs>(Error);
+            web.Dock = DockStyle.Fill;
+            panel1.Controls.Add(web);
+
             Start();
+        }
+
+        private void Error(object sender, LoadErrorEventArgs e)
+        {
+            Console.WriteLine(e.ErrorText);
         }
 
         private void Main_Shown(object sender, EventArgs e)
@@ -82,6 +95,7 @@ namespace Script_Browser
             {
                 try
                 {
+                    Console.WriteLine("Current version: " + sf.version);
                     if (!CheckUpdate())
                     {
                         this.BeginInvoke(new MethodInvoker(delegate () { label1.Text = "Updating - Downloading Files..."; }));
@@ -344,6 +358,11 @@ namespace Script_Browser
             }
         }
 
+        private void label2_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
         #endregion
 
         #region Networking
@@ -458,6 +477,8 @@ namespace Script_Browser
                 {
                     this.Hide();
                     main.Show();
+                    main.Focus();
+                    main.BringToFront();
                     minimized.Enabled = false;
                 }
             }

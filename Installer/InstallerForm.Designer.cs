@@ -177,7 +177,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(617, 36);
             this.label3.TabIndex = 4;
-            this.label3.Text = "SLCB Script-Browser v1.0.0 © 2018 Digital-Programming";
+            this.label3.Text = "SLCB Script-Browser v1.0.0 © 2019 Digital-Programming";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel1
@@ -425,12 +425,14 @@
             this.richTextBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
             this.richTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox2.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox2.ForeColor = System.Drawing.Color.White;
             this.richTextBox2.Location = new System.Drawing.Point(3, 3);
             this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.ReadOnly = true;
             this.richTextBox2.Size = new System.Drawing.Size(0, 253);
             this.richTextBox2.TabIndex = 2;
-            this.richTextBox2.Text = "TEST VERSION";
+            this.richTextBox2.Text = resources.GetString("richTextBox2.Text");
             // 
             // tableLayoutPanel4
             // 
@@ -456,7 +458,7 @@
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(1, 17);
             this.checkBox2.TabIndex = 0;
-            this.checkBox2.Text = "I aggree to the rules";
+            this.checkBox2.Text = "I aggree to the rules and will follow them";
             this.checkBox2.UseVisualStyleBackColor = true;
             this.checkBox2.CheckedChanged += new System.EventHandler(this.Check);
             // 
@@ -477,12 +479,13 @@
             this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold);
             this.richTextBox1.ForeColor = System.Drawing.Color.White;
             this.richTextBox1.Location = new System.Drawing.Point(3, 3);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(0, 253);
             this.richTextBox1.TabIndex = 2;
-            this.richTextBox1.Text = "TEST VERSION";
+            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
             // 
             // tableLayoutPanel6
             // 

@@ -39,10 +39,15 @@ namespace Script_Browser
             try
             {
                 using (WebClient web = new WebClient())
-                    storageServer = web.DownloadString("http://www.digital-programming.com/School-Assist/getIP.php");
+                    storageServer = web.DownloadString("http://www.digital-programming.com/StorageServer/getIP.php");
+                Protocol.AddToProtocol("Updated StorgeServers IP: " + storageServer, Types.Info);
                 return true;
             }
-            catch { return false; }
+            catch (Exception ex)
+            {
+                Protocol.AddToProtocol("Update StorageServers IP: " + ex.Message + "\n" + ex.StackTrace, Types.Error);
+                return false;
+            }
         }
 
         public static bool CheckIp(Form form)
@@ -94,7 +99,10 @@ namespace Script_Browser
                 {
                     string result = "";
                     if (info == null)
+                    {
                         result = web.DownloadString(storageServer + "/Script%20Browser/login.php?user=" + _username + "&pass=" + _password + "&getinfo=true");
+                        Protocol.AddToProtocol("Login: Web-Result\n" + result, Types.Info);
+                    }
                     if (!result.Contains("Twitch") && info == null)
                     {
                         MetroMessageBox.Show(form, "The username or password was incorrect.", "Login error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 100);
@@ -109,7 +117,8 @@ namespace Script_Browser
                             if (info == null)
                                 info = JObject.Parse(result);
                             twitch = (bool)info["Twitch"];
-                            form.settings1.label1.Text = "Logged in as " + Main.sf.username;
+                            form.settings1.label1.Text = "Logged in as " + info["Username"].ToString();
+                            Protocol.AddToProtocol("Login: \"" + info["Username"].ToString() + "\"", Types.Info);
 
                             form.settings1.checkBox1.Checked = (int)info["Notifys"]["NewCom"] == 1;
                             form.settings1.checkBox2.Checked = (int)info["Notifys"]["NewReply"] == 1;
@@ -145,6 +154,7 @@ namespace Script_Browser
             }
             catch (Exception ex)
             {
+                Protocol.AddToProtocol("Login: " + ex.Message + "!\n" + ex.StackTrace, Types.Error);
                 Console.WriteLine(ex.StackTrace);
                 if (DialogResult.Retry == SMB(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 2, DialogResult.Retry))
                     goto tryagain;
@@ -172,7 +182,7 @@ namespace Script_Browser
                     }
                     else
                         result = web.DownloadString(storageServer + "/Script%20Browser/signUp.php?username=" + _username + "&pass=" + _password + "&email=" + email);
-
+                    Protocol.AddToProtocol("Signup: Web-Result (Twitch=" + twitch + ")\n" + result, Types.Info);
                     if (result.Contains("username"))
                         MetroMessageBox.Show(form, "The username \"" + _username + "\" is allready registered!\nPlease select another one.", "Sign up error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150);
                     else if (result.Contains("email"))
@@ -188,6 +198,7 @@ namespace Script_Browser
                         if (!twitch)
                             MetroMessageBox.Show(form, "You signed up successfully!\nA verification email has been send to your email account. Please check your inbox.", "Sign up success", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, 150);
 
+                        Protocol.AddToProtocol("Signup: \"" + _username + "\"", Types.Info);
                         Main.sf.username = _username;
                         if (twitch)
                             Main.sf.password = Hash(_password);
@@ -219,6 +230,7 @@ namespace Script_Browser
             {
                 Console.WriteLine(ex.StackTrace);
                 try { webForm.Dispose(); } catch { }
+                Protocol.AddToProtocol("Signup: " + ex.Message + "!\n" + ex.StackTrace, Types.Error);
                 if (DialogResult.Retry == SMB(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 2, DialogResult.Retry))
                     goto tryagain;
             }
@@ -234,6 +246,7 @@ namespace Script_Browser
                 using (WebClient web = new WebClient())
                 {
                     string result = web.DownloadString(storageServer + "/Script%20Browser/sendVerificationAgain.php?user=" + Main.sf.username + "&pass=" + Main.sf.password);
+                    Protocol.AddToProtocol("Send Verification E-Mail: Web-Result\n" + result, Types.Info);
                     if (result.Contains("verfied"))
                     {
                         MetroMessageBox.Show(form, "Your account has already been verified!", "Could not send verification E-Mail again", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
@@ -244,11 +257,15 @@ namespace Script_Browser
                     else if (result.Contains("false"))
                         MetroMessageBox.Show(form, "Please try it later again.", "Could not send verification E-Mail again", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
                     else
+                    {
+                        Protocol.AddToProtocol("New verification E-Mail send", Types.Info);
                         MetroMessageBox.Show(form, "We send a new verification E-Mail to your address!\nPlease check your inbox.", "Send verification E - Mail again", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, 150);
+                    }
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                Protocol.AddToProtocol("Send Verification E-Mail: " + ex.Message + "!\n" + ex.StackTrace, Types.Error);
                 if (DialogResult.Retry == MetroMessageBox.Show(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150))
                     goto tryagain;
             }
@@ -267,10 +284,12 @@ namespace Script_Browser
                 using (WebClient web = new WebClient())
                 {
                     string result = web.DownloadString(storageServer + "/Script%20Browser/changePassword.php?user=" + Main.sf.password + "&pass=" + oldPass + "&newpass=" + newPass);
+                    Protocol.AddToProtocol("Change Passwword: Web-Result\n" + result, Types.Info);
                     if (result.Contains("false"))
                         MetroMessageBox.Show(form, "Please check your old password or try again later.", "Could not change password", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
                     else
                     {
+                        Protocol.AddToProtocol("Changed Password", Types.Info);
                         MetroMessageBox.Show(form, "Your password has been successfully changed!", "Password changed", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, 125);
                         form.settings1.materialSingleLineTextField1.Text = "";
                         form.settings1.materialSingleLineTextField2.Text = "";
@@ -279,8 +298,9 @@ namespace Script_Browser
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                Protocol.AddToProtocol("Change Password: " + ex.Message + "!\n" + ex.StackTrace, Types.Error);
                 if (DialogResult.Retry == SMB(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 2, DialogResult.Retry))
                     goto tryagain;
             }
@@ -298,12 +318,14 @@ namespace Script_Browser
                 using (WebClient web = new WebClient())
                 {
                     string result = web.DownloadString(storageServer + "/Script%20Browser/changeUsername.php?user=" + Main.sf.username + "&newuser=" + _username + "&pass=" + pass);
+                    Protocol.AddToProtocol("Change Username: Web-Result\n" + result, Types.Info);
                     if (result.Contains("false"))
                         MetroMessageBox.Show(form, "Please check your password or try again later.", "Could not change username", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
                     else if (result.Contains("username"))
                         MetroMessageBox.Show(form, "Your new username has already been taken.", "Could not change username", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
                     else
                     {
+                        Protocol.AddToProtocol("Changed Username", Types.Info);
                         MetroMessageBox.Show(form, "Your username has been successfully changed!", "Username changed", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, 125);
                         form.settings1.materialSingleLineTextField4.Text = "";
                         form.settings1.materialSingleLineTextField5.Text = "";
@@ -312,8 +334,9 @@ namespace Script_Browser
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                Protocol.AddToProtocol("Change Username: " + ex.Message + "!\n" + ex.StackTrace, Types.Error);
                 if (DialogResult.Retry == SMB(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 2, DialogResult.Retry))
                     goto tryagain;
             }
@@ -331,6 +354,7 @@ namespace Script_Browser
                 using (WebClient web = new WebClient())
                 {
                     string result = web.DownloadString(storageServer + "/Script%20Browser/changeEmail.php?user=" + Main.sf.username + "&pass=" + pass + "&email=" + email);
+                    Protocol.AddToProtocol("Change E-Mail: Web-Result\n" + result, Types.Info);
                     if (result.Contains("false"))
                         MetroMessageBox.Show(form, "Please check your password or try again later.", "Could not change E-Mail address", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 125);
                     else if (result.Contains("blacklist"))
@@ -341,6 +365,7 @@ namespace Script_Browser
                         MetroMessageBox.Show(form, "You can only request a verification E-Mail once every 5 minuets.\nPlease wait...", "Could not change E-Mail address", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 150);
                     else
                     {
+                        Protocol.AddToProtocol("Changed E-Mail", Types.Info);
                         MetroMessageBox.Show(form, "Your new E-Mail address will be activated, after you verified it.\nPlease check your inbox for more information.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, 125);
                         form.settings1.materialSingleLineTextField6.Text = "";
                         form.settings1.materialSingleLineTextField7.Text = "";
@@ -348,8 +373,9 @@ namespace Script_Browser
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                Protocol.AddToProtocol("Change E-Mail: " + ex.Message + "!\n" + ex.StackTrace, Types.Error);
                 if (DialogResult.Retry == SMB(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 2, DialogResult.Retry))
                     goto tryagain;
             }
@@ -365,15 +391,20 @@ namespace Script_Browser
                     using (WebClient web = new WebClient())
                     {
                         string result = web.DownloadString(storageServer + "/Script%20Browser/notifySettings.php?user=" + Main.sf.username + "&pass=" + Main.sf.password + "&newcom=" + newcom + "&newreply=" + newreply + "&newbug=" + newbug);
+                        Protocol.AddToProtocol("Updated notification settings: Web-Result\n" + result, Types.Info);
 
                         if (result.Contains("false"))
                             MetroMessageBox.Show(form, "Could't update your notification settings. Please try again later.", "Could update settings", MessageBoxButtons.OK, MessageBoxIcon.Error, 100);
                         else if (result.Contains("true"))
+                        {
+                            Protocol.AddToProtocol("Updated notification settings", Types.Info);
                             MetroMessageBox.Show(form, "Your notification settings have been updated!", "Settings updated", MessageBoxButtons.OK, MessageBoxIcon.Information, 100);
+                        }
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
+                    Protocol.AddToProtocol("Update Notification Settings: " + ex.Message + "!\n" + ex.StackTrace, Types.Error);
                     if (DialogResult.Retry == SMB(form, "There was an unexpected network error!\nPlease make sure you have an internet connection.", "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 2, DialogResult.Retry))
                         goto tryagain;
                 }
@@ -442,7 +473,7 @@ namespace Script_Browser
                     return true;
                 }
             }
-            catch { }
+            catch (Exception ex) { Protocol.AddToProtocol("Download Script: " + ex.Message + "\n" + ex.StackTrace, Types.Error); }
             return false;
         }
 
@@ -457,7 +488,7 @@ namespace Script_Browser
                     return true;
                 }
             }
-            catch { }
+            catch (Exception ex) { Protocol.AddToProtocol("Increase Download: " + ex.Message + "\n" + ex.StackTrace, Types.Error); }
             return false;
         }
 
@@ -471,7 +502,7 @@ namespace Script_Browser
                         return web.DownloadString(storageServer + "/Script%20Browser/getUUInfo.php?id=" + id);
                 }
             }
-            catch { }
+            catch (Exception ex) { Protocol.AddToProtocol("Get Upload Update Info: " + ex.Message + "\n" + ex.StackTrace, Types.Error); }
             return "";
         }
 
@@ -516,6 +547,16 @@ namespace Script_Browser
             return "false";
         }
 
+        public static string DeleteScript(Main form, string id)
+        {
+            if (CheckIp(form))
+            {
+                using (WebClient web = new WebClient())
+                    return web.DownloadString(storageServer + "/Script%20Browser/deleteScript.php?user=" + Main.sf.username + "&pass=" + Main.sf.password + "&id=" + id);
+            }
+            return "false";
+        }
+
         #region Comments
 
         public static JObject GetComments(Main form, int id)
@@ -541,12 +582,16 @@ namespace Script_Browser
                 using (HttpClient web = new HttpClient())
                 {
                     string result = web.PostAsync(storageServer + "/Script%20Browser/addComment.php?user=" + Main.sf.username + "&pass=" + Main.sf.password, data).Result.Content.ReadAsStringAsync().Result;
+                    Protocol.AddToProtocol("Send Comment: Web-Result\n" + result, Types.Info);
                     if (result.Contains("time"))
                         MetroMessageBox.Show(form, "Please wait a while befor posting a new comment.", "Don't Spam!", MessageBoxButtons.OK, MessageBoxIcon.Warning, 100);
                     else if (result.Contains("false"))
                         MetroMessageBox.Show(form, "Could't send your comment. Please try again later.", "Could not send comment", MessageBoxButtons.OK, MessageBoxIcon.Error, 100);
                     else
+                    {
+                        Protocol.AddToProtocol("Comment Send: " + comment, Types.Info);
                         return true;
+                    }
                 }
             }
             return false;
@@ -559,6 +604,7 @@ namespace Script_Browser
                 using (WebClient web = new WebClient())
                 {
                     string result = web.DownloadString(storageServer + "/Script%20Browser/deleteComment.php?id=" + id + "&user=" + Main.sf.username + "&pass=" + Main.sf.password);
+                    Protocol.AddToProtocol("Delete Comment: Web-Result\n" + result, Types.Info);
                     if (result.Contains("true"))
                         return true;
                 }

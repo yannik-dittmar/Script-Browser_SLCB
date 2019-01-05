@@ -163,6 +163,12 @@
     <Compile Include="Networking.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Protocol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Protocol.Designer.cs">
+      <DependentUpon>Protocol.cs</DependentUpon>
+    </Compile>
     <Compile Include="Set_SCB_Path.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -225,12 +231,15 @@
     </Compile>
     <EmbeddedResource Include="Controls\Comments.resx">
       <DependentUpon>Comments.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Rating.resx">
       <DependentUpon>Rating.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\SearchTag.resx">
       <DependentUpon>SearchTag.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ShowScript.resx">
       <DependentUpon>ShowScript.cs</DependentUpon>
@@ -344,6 +353,12 @@
     </Content>
     <Content Include="HTML\Images\TwitchLogo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HTML\Markdown.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HTML\SplashScreen.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Logo_ICON.ico" />
     <None Include="Resources\Logo_white_small.png" />

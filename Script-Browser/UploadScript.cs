@@ -80,6 +80,8 @@ namespace Script_Browser
             }
             catch { }
 
+            webBrowser2.Url = new Uri("file:///" + Environment.CurrentDirectory + "/HTML/Markdown.html");
+
             this.path = path;
             label3.Text = Path.GetDirectoryName(path) + "\\";
             fileSystemWatcher1.Path = Path.GetDirectoryName(path) + "\\";
@@ -106,8 +108,8 @@ namespace Script_Browser
 
                 flowLayoutPanel1.Visible = true;
                 tableLayoutPanel11.Visible = true;
+                label10.Visible = true;
             }
-
         }
 
         public static string GetLineItem(string line)
@@ -721,6 +723,7 @@ namespace Script_Browser
                 info["Tags"] = new JArray(searchTags.ToArray());
 
                 string result = Networking.UploadScript(this, info.ToString(), Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip");
+                Protocol.AddToProtocol("Upload Script: Web-Result\n" + result, Types.Info);
 
                 if (result.Contains("verify"))
                     MetroMessageBox.Show(this, "Your email address has not been verified yet.\nPlease check your inbox or contact us over sl.chatbot.script.browser@gmail.com", "Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150);
@@ -761,7 +764,11 @@ namespace Script_Browser
 
                 File.Delete(Path.GetDirectoryName(Path.GetDirectoryName(path)) + "\\script.zip");
             }
-            catch (Exception ex) { Console.WriteLine(ex.StackTrace); }
+            catch (Exception ex)
+            {
+                Protocol.AddToProtocol("Upload Script: " + ex.Message + "\n" + ex.StackTrace, Types.Error);
+                Console.WriteLine(ex.StackTrace);
+            }
             label10.Text = "There was an error while uploading your script :/";
             noFocusBorderBtn8.Visible = true;
         }
@@ -939,5 +946,14 @@ namespace Script_Browser
         }
 
         #endregion
+
+        private void webBrowser2_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+        {
+            if (e.Url != new Uri("file:///" + Environment.CurrentDirectory + "/HTML/Markdown.html"))
+            {
+                Process.Start(e.Url.ToString());
+                e.Cancel = true;
+            }
+        }
     }
 }
