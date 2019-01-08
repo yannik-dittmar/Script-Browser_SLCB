@@ -17,6 +17,7 @@ using AnimatorNS;
 using static Script_Browser.Program;
 using System.Reflection;
 using Script_Browser.Design;
+using System.Diagnostics;
 
 namespace Script_Browser
 {
@@ -63,6 +64,7 @@ namespace Script_Browser
         {
             this.hide = hide;
 
+            //Check SLCB
             if (!Set_SCB_Path.CheckSLCBPath(sf.streamlabsPath))
             {
                 Protocol.AddToProtocol("Could not find valid Streamlabs Chatbot path!", Types.Warning);
@@ -73,6 +75,17 @@ namespace Script_Browser
             }
             if (!Set_SCB_Path.CheckSLCBPath(sf.streamlabsPath))
                 Environment.Exit(0);
+            
+
+            //Check Python
+            Console.WriteLine(sf.checkPythonVersion);
+            try
+            {
+                CheckPython.PythonResult python = CheckPython.CheckPythonInstallation();
+                if ((python == CheckPython.PythonResult.Nothing || python == CheckPython.PythonResult.Wrong) && sf.checkPythonVersion)
+                    new CheckPython().ShowDialog();
+            }
+            catch (Exception ex) { Console.WriteLine(ex.StackTrace); }
             sf.Save();
 
             InitializeComponent();

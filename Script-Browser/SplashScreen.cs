@@ -62,10 +62,11 @@ namespace Script_Browser
             InitializeComponent();
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
 
-            ChromiumWebBrowser web = new ChromiumWebBrowser(Environment.CurrentDirectory + @"\HTML\SplashScreen.html");
+            ChromiumWebBrowser web = new ChromiumWebBrowser();
             web.LoadError += new EventHandler<LoadErrorEventArgs>(Error);
             web.Dock = DockStyle.Fill;
             panel1.Controls.Add(web);
+            web.Load(Environment.CurrentDirectory + @"\HTML\SplashScreen.html");
 
             Start();
         }

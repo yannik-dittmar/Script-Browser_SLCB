@@ -79,30 +79,30 @@
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.noFocusBorderBtn10 = new Script_Browser.Controls.NoFocusBorderBtn();
+            this.noFocusBorderBtn11 = new Script_Browser.Controls.NoFocusBorderBtn();
+            this.noFocusBorderBtn12 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
+            this.noFocusBorderBtn7 = new Script_Browser.Controls.NoFocusBorderBtn();
+            this.noFocusBorderBtn6 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.labelHelp = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
+            this.noFocusBorderBtn9 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.label12 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
+            this.noFocusBorderBtn8 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.label10 = new System.Windows.Forms.Label();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
-            this.noFocusBorderBtn10 = new Script_Browser.Controls.NoFocusBorderBtn();
-            this.noFocusBorderBtn11 = new Script_Browser.Controls.NoFocusBorderBtn();
-            this.noFocusBorderBtn12 = new Script_Browser.Controls.NoFocusBorderBtn();
-            this.noFocusBorderBtn7 = new Script_Browser.Controls.NoFocusBorderBtn();
-            this.noFocusBorderBtn6 = new Script_Browser.Controls.NoFocusBorderBtn();
-            this.noFocusBorderBtn9 = new Script_Browser.Controls.NoFocusBorderBtn();
-            this.noFocusBorderBtn8 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.noFocusBorderBtn1 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.noFocusBorderBtn2 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.noFocusBorderBtn3 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.noFocusBorderBtn4 = new Script_Browser.Controls.NoFocusBorderBtn();
             this.noFocusBorderBtn5 = new Script_Browser.Controls.NoFocusBorderBtn();
+            this.label3 = new System.Windows.Forms.Label();
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.panelMain.SuspendLayout();
@@ -899,7 +899,6 @@
             this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.Column4.Visible = false;
-            this.Column4.Width = 5;
             // 
             // flowLayoutPanel1
             // 
@@ -914,6 +913,60 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(1, 120);
             this.flowLayoutPanel1.TabIndex = 14;
             this.flowLayoutPanel1.Visible = false;
+            // 
+            // noFocusBorderBtn10
+            // 
+            this.noFocusBorderBtn10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.noFocusBorderBtn10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
+            this.noFocusBorderBtn10.FlatAppearance.BorderSize = 0;
+            this.noFocusBorderBtn10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.noFocusBorderBtn10.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.noFocusBorderBtn10.ForeColor = System.Drawing.Color.White;
+            this.noFocusBorderBtn10.Location = new System.Drawing.Point(5, 5);
+            this.noFocusBorderBtn10.Margin = new System.Windows.Forms.Padding(5);
+            this.noFocusBorderBtn10.Name = "noFocusBorderBtn10";
+            this.noFocusBorderBtn10.Size = new System.Drawing.Size(100, 30);
+            this.noFocusBorderBtn10.TabIndex = 2;
+            this.noFocusBorderBtn10.TabStop = false;
+            this.noFocusBorderBtn10.Text = "Delete File";
+            this.noFocusBorderBtn10.UseVisualStyleBackColor = false;
+            this.noFocusBorderBtn10.Click += new System.EventHandler(this.noFocusBorderBtn10_Click);
+            // 
+            // noFocusBorderBtn11
+            // 
+            this.noFocusBorderBtn11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.noFocusBorderBtn11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
+            this.noFocusBorderBtn11.FlatAppearance.BorderSize = 0;
+            this.noFocusBorderBtn11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.noFocusBorderBtn11.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.noFocusBorderBtn11.ForeColor = System.Drawing.Color.White;
+            this.noFocusBorderBtn11.Location = new System.Drawing.Point(5, 45);
+            this.noFocusBorderBtn11.Margin = new System.Windows.Forms.Padding(5);
+            this.noFocusBorderBtn11.Name = "noFocusBorderBtn11";
+            this.noFocusBorderBtn11.Size = new System.Drawing.Size(100, 30);
+            this.noFocusBorderBtn11.TabIndex = 3;
+            this.noFocusBorderBtn11.TabStop = false;
+            this.noFocusBorderBtn11.Text = "Move File";
+            this.noFocusBorderBtn11.UseVisualStyleBackColor = false;
+            this.noFocusBorderBtn11.Click += new System.EventHandler(this.noFocusBorderBtn11_Click);
+            // 
+            // noFocusBorderBtn12
+            // 
+            this.noFocusBorderBtn12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.noFocusBorderBtn12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
+            this.noFocusBorderBtn12.FlatAppearance.BorderSize = 0;
+            this.noFocusBorderBtn12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.noFocusBorderBtn12.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.noFocusBorderBtn12.ForeColor = System.Drawing.Color.White;
+            this.noFocusBorderBtn12.Location = new System.Drawing.Point(5, 85);
+            this.noFocusBorderBtn12.Margin = new System.Windows.Forms.Padding(5);
+            this.noFocusBorderBtn12.Name = "noFocusBorderBtn12";
+            this.noFocusBorderBtn12.Size = new System.Drawing.Size(100, 30);
+            this.noFocusBorderBtn12.TabIndex = 4;
+            this.noFocusBorderBtn12.TabStop = false;
+            this.noFocusBorderBtn12.Text = "Copy File";
+            this.noFocusBorderBtn12.UseVisualStyleBackColor = false;
+            this.noFocusBorderBtn12.Click += new System.EventHandler(this.noFocusBorderBtn12_Click);
             // 
             // tableLayoutPanel9
             // 
@@ -935,6 +988,42 @@
             this.tableLayoutPanel9.Size = new System.Drawing.Size(755, 40);
             this.tableLayoutPanel9.TabIndex = 12;
             this.tableLayoutPanel9.Tag = "footer";
+            // 
+            // noFocusBorderBtn7
+            // 
+            this.noFocusBorderBtn7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.noFocusBorderBtn7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
+            this.noFocusBorderBtn7.FlatAppearance.BorderSize = 0;
+            this.noFocusBorderBtn7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.noFocusBorderBtn7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.noFocusBorderBtn7.ForeColor = System.Drawing.Color.White;
+            this.noFocusBorderBtn7.Location = new System.Drawing.Point(585, 5);
+            this.noFocusBorderBtn7.Margin = new System.Windows.Forms.Padding(5);
+            this.noFocusBorderBtn7.Name = "noFocusBorderBtn7";
+            this.noFocusBorderBtn7.Size = new System.Drawing.Size(80, 30);
+            this.noFocusBorderBtn7.TabIndex = 2;
+            this.noFocusBorderBtn7.TabStop = false;
+            this.noFocusBorderBtn7.Text = "Back";
+            this.noFocusBorderBtn7.UseVisualStyleBackColor = false;
+            this.noFocusBorderBtn7.Click += new System.EventHandler(this.previousPage_Click);
+            // 
+            // noFocusBorderBtn6
+            // 
+            this.noFocusBorderBtn6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.noFocusBorderBtn6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
+            this.noFocusBorderBtn6.FlatAppearance.BorderSize = 0;
+            this.noFocusBorderBtn6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.noFocusBorderBtn6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.noFocusBorderBtn6.ForeColor = System.Drawing.Color.White;
+            this.noFocusBorderBtn6.Location = new System.Drawing.Point(670, 5);
+            this.noFocusBorderBtn6.Margin = new System.Windows.Forms.Padding(0, 5, 5, 5);
+            this.noFocusBorderBtn6.Name = "noFocusBorderBtn6";
+            this.noFocusBorderBtn6.Size = new System.Drawing.Size(80, 30);
+            this.noFocusBorderBtn6.TabIndex = 1;
+            this.noFocusBorderBtn6.TabStop = false;
+            this.noFocusBorderBtn6.Text = "Next";
+            this.noFocusBorderBtn6.UseVisualStyleBackColor = false;
+            this.noFocusBorderBtn6.Click += new System.EventHandler(this.nextPage_Click);
             // 
             // labelHelp
             // 
@@ -980,6 +1069,25 @@
             this.tableLayoutPanel11.Size = new System.Drawing.Size(1, 316);
             this.tableLayoutPanel11.TabIndex = 7;
             this.tableLayoutPanel11.Visible = false;
+            // 
+            // noFocusBorderBtn9
+            // 
+            this.noFocusBorderBtn9.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.noFocusBorderBtn9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
+            this.noFocusBorderBtn9.FlatAppearance.BorderSize = 0;
+            this.noFocusBorderBtn9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.noFocusBorderBtn9.Font = new System.Drawing.Font("Arial Rounded MT Bold", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.noFocusBorderBtn9.ForeColor = System.Drawing.Color.White;
+            this.noFocusBorderBtn9.Location = new System.Drawing.Point(-108, 232);
+            this.noFocusBorderBtn9.Margin = new System.Windows.Forms.Padding(10);
+            this.noFocusBorderBtn9.Name = "noFocusBorderBtn9";
+            this.noFocusBorderBtn9.Size = new System.Drawing.Size(218, 40);
+            this.noFocusBorderBtn9.TabIndex = 7;
+            this.noFocusBorderBtn9.TabStop = false;
+            this.noFocusBorderBtn9.Tag = "1";
+            this.noFocusBorderBtn9.Text = "Update Script";
+            this.noFocusBorderBtn9.UseVisualStyleBackColor = false;
+            this.noFocusBorderBtn9.Click += new System.EventHandler(this.UploadUpdate);
             // 
             // label12
             // 
@@ -1041,6 +1149,26 @@
             this.tableLayoutPanel10.Size = new System.Drawing.Size(1, 316);
             this.tableLayoutPanel10.TabIndex = 14;
             // 
+            // noFocusBorderBtn8
+            // 
+            this.noFocusBorderBtn8.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.noFocusBorderBtn8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
+            this.noFocusBorderBtn8.FlatAppearance.BorderSize = 0;
+            this.noFocusBorderBtn8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.noFocusBorderBtn8.Font = new System.Drawing.Font("Arial Rounded MT Bold", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.noFocusBorderBtn8.ForeColor = System.Drawing.Color.White;
+            this.noFocusBorderBtn8.Location = new System.Drawing.Point(0, 158);
+            this.noFocusBorderBtn8.Margin = new System.Windows.Forms.Padding(0);
+            this.noFocusBorderBtn8.MinimumSize = new System.Drawing.Size(288, 40);
+            this.noFocusBorderBtn8.Name = "noFocusBorderBtn8";
+            this.noFocusBorderBtn8.Size = new System.Drawing.Size(288, 40);
+            this.noFocusBorderBtn8.TabIndex = 6;
+            this.noFocusBorderBtn8.TabStop = false;
+            this.noFocusBorderBtn8.Tag = "1";
+            this.noFocusBorderBtn8.Text = "Upload && Publish Script";
+            this.noFocusBorderBtn8.UseVisualStyleBackColor = false;
+            this.noFocusBorderBtn8.Click += new System.EventHandler(this.Upload);
+            // 
             // label10
             // 
             this.label10.Cursor = System.Windows.Forms.Cursors.Default;
@@ -1078,160 +1206,6 @@
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(755, 40);
             this.tableLayoutPanel4.TabIndex = 0;
-            // 
-            // label3
-            // 
-            this.label3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(0, 441);
-            this.label3.Margin = new System.Windows.Forms.Padding(0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(755, 35);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Script Location";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label3.Click += new System.EventHandler(this.label3_Click);
-            // 
-            // fileSystemWatcher1
-            // 
-            this.fileSystemWatcher1.EnableRaisingEvents = true;
-            this.fileSystemWatcher1.IncludeSubdirectories = true;
-            this.fileSystemWatcher1.NotifyFilter = ((System.IO.NotifyFilters)((System.IO.NotifyFilters.FileName | System.IO.NotifyFilters.DirectoryName)));
-            this.fileSystemWatcher1.SynchronizingObject = this;
-            this.fileSystemWatcher1.Created += new System.IO.FileSystemEventHandler(this.UpdateDgvFiles);
-            this.fileSystemWatcher1.Deleted += new System.IO.FileSystemEventHandler(this.UpdateDgvFiles);
-            this.fileSystemWatcher1.Renamed += new System.IO.RenamedEventHandler(this.fileSystemWatcher1_Renamed);
-            // 
-            // noFocusBorderBtn10
-            // 
-            this.noFocusBorderBtn10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.noFocusBorderBtn10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
-            this.noFocusBorderBtn10.FlatAppearance.BorderSize = 0;
-            this.noFocusBorderBtn10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.noFocusBorderBtn10.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.noFocusBorderBtn10.ForeColor = System.Drawing.Color.White;
-            this.noFocusBorderBtn10.Location = new System.Drawing.Point(5, 5);
-            this.noFocusBorderBtn10.Margin = new System.Windows.Forms.Padding(5);
-            this.noFocusBorderBtn10.Name = "noFocusBorderBtn10";
-            this.noFocusBorderBtn10.Size = new System.Drawing.Size(100, 30);
-            this.noFocusBorderBtn10.TabIndex = 2;
-            this.noFocusBorderBtn10.TabStop = false;
-            this.noFocusBorderBtn10.Text = "Delete File";
-            this.noFocusBorderBtn10.UseVisualStyleBackColor = false;
-            this.noFocusBorderBtn10.Click += new System.EventHandler(this.noFocusBorderBtn10_Click);
-            // 
-            // noFocusBorderBtn11
-            // 
-            this.noFocusBorderBtn11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.noFocusBorderBtn11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
-            this.noFocusBorderBtn11.FlatAppearance.BorderSize = 0;
-            this.noFocusBorderBtn11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.noFocusBorderBtn11.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.noFocusBorderBtn11.ForeColor = System.Drawing.Color.White;
-            this.noFocusBorderBtn11.Location = new System.Drawing.Point(5, 45);
-            this.noFocusBorderBtn11.Margin = new System.Windows.Forms.Padding(5);
-            this.noFocusBorderBtn11.Name = "noFocusBorderBtn11";
-            this.noFocusBorderBtn11.Size = new System.Drawing.Size(100, 30);
-            this.noFocusBorderBtn11.TabIndex = 3;
-            this.noFocusBorderBtn11.TabStop = false;
-            this.noFocusBorderBtn11.Text = "Move File";
-            this.noFocusBorderBtn11.UseVisualStyleBackColor = false;
-            this.noFocusBorderBtn11.Click += new System.EventHandler(this.noFocusBorderBtn11_Click);
-            // 
-            // noFocusBorderBtn12
-            // 
-            this.noFocusBorderBtn12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.noFocusBorderBtn12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
-            this.noFocusBorderBtn12.FlatAppearance.BorderSize = 0;
-            this.noFocusBorderBtn12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.noFocusBorderBtn12.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.noFocusBorderBtn12.ForeColor = System.Drawing.Color.White;
-            this.noFocusBorderBtn12.Location = new System.Drawing.Point(5, 85);
-            this.noFocusBorderBtn12.Margin = new System.Windows.Forms.Padding(5);
-            this.noFocusBorderBtn12.Name = "noFocusBorderBtn12";
-            this.noFocusBorderBtn12.Size = new System.Drawing.Size(100, 30);
-            this.noFocusBorderBtn12.TabIndex = 4;
-            this.noFocusBorderBtn12.TabStop = false;
-            this.noFocusBorderBtn12.Text = "Copy File";
-            this.noFocusBorderBtn12.UseVisualStyleBackColor = false;
-            this.noFocusBorderBtn12.Click += new System.EventHandler(this.noFocusBorderBtn12_Click);
-            // 
-            // noFocusBorderBtn7
-            // 
-            this.noFocusBorderBtn7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.noFocusBorderBtn7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
-            this.noFocusBorderBtn7.FlatAppearance.BorderSize = 0;
-            this.noFocusBorderBtn7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.noFocusBorderBtn7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.noFocusBorderBtn7.ForeColor = System.Drawing.Color.White;
-            this.noFocusBorderBtn7.Location = new System.Drawing.Point(585, 5);
-            this.noFocusBorderBtn7.Margin = new System.Windows.Forms.Padding(5);
-            this.noFocusBorderBtn7.Name = "noFocusBorderBtn7";
-            this.noFocusBorderBtn7.Size = new System.Drawing.Size(80, 30);
-            this.noFocusBorderBtn7.TabIndex = 2;
-            this.noFocusBorderBtn7.TabStop = false;
-            this.noFocusBorderBtn7.Text = "Back";
-            this.noFocusBorderBtn7.UseVisualStyleBackColor = false;
-            this.noFocusBorderBtn7.Click += new System.EventHandler(this.previousPage_Click);
-            // 
-            // noFocusBorderBtn6
-            // 
-            this.noFocusBorderBtn6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.noFocusBorderBtn6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
-            this.noFocusBorderBtn6.FlatAppearance.BorderSize = 0;
-            this.noFocusBorderBtn6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.noFocusBorderBtn6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.noFocusBorderBtn6.ForeColor = System.Drawing.Color.White;
-            this.noFocusBorderBtn6.Location = new System.Drawing.Point(670, 5);
-            this.noFocusBorderBtn6.Margin = new System.Windows.Forms.Padding(0, 5, 5, 5);
-            this.noFocusBorderBtn6.Name = "noFocusBorderBtn6";
-            this.noFocusBorderBtn6.Size = new System.Drawing.Size(80, 30);
-            this.noFocusBorderBtn6.TabIndex = 1;
-            this.noFocusBorderBtn6.TabStop = false;
-            this.noFocusBorderBtn6.Text = "Next";
-            this.noFocusBorderBtn6.UseVisualStyleBackColor = false;
-            this.noFocusBorderBtn6.Click += new System.EventHandler(this.nextPage_Click);
-            // 
-            // noFocusBorderBtn9
-            // 
-            this.noFocusBorderBtn9.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.noFocusBorderBtn9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
-            this.noFocusBorderBtn9.FlatAppearance.BorderSize = 0;
-            this.noFocusBorderBtn9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.noFocusBorderBtn9.Font = new System.Drawing.Font("Arial Rounded MT Bold", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.noFocusBorderBtn9.ForeColor = System.Drawing.Color.White;
-            this.noFocusBorderBtn9.Location = new System.Drawing.Point(-108, 232);
-            this.noFocusBorderBtn9.Margin = new System.Windows.Forms.Padding(10);
-            this.noFocusBorderBtn9.Name = "noFocusBorderBtn9";
-            this.noFocusBorderBtn9.Size = new System.Drawing.Size(218, 40);
-            this.noFocusBorderBtn9.TabIndex = 7;
-            this.noFocusBorderBtn9.TabStop = false;
-            this.noFocusBorderBtn9.Tag = "1";
-            this.noFocusBorderBtn9.Text = "Update Script";
-            this.noFocusBorderBtn9.UseVisualStyleBackColor = false;
-            this.noFocusBorderBtn9.Click += new System.EventHandler(this.UploadUpdate);
-            // 
-            // noFocusBorderBtn8
-            // 
-            this.noFocusBorderBtn8.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.noFocusBorderBtn8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
-            this.noFocusBorderBtn8.FlatAppearance.BorderSize = 0;
-            this.noFocusBorderBtn8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.noFocusBorderBtn8.Font = new System.Drawing.Font("Arial Rounded MT Bold", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.noFocusBorderBtn8.ForeColor = System.Drawing.Color.White;
-            this.noFocusBorderBtn8.Location = new System.Drawing.Point(0, 158);
-            this.noFocusBorderBtn8.Margin = new System.Windows.Forms.Padding(0);
-            this.noFocusBorderBtn8.MinimumSize = new System.Drawing.Size(288, 40);
-            this.noFocusBorderBtn8.Name = "noFocusBorderBtn8";
-            this.noFocusBorderBtn8.Size = new System.Drawing.Size(288, 40);
-            this.noFocusBorderBtn8.TabIndex = 6;
-            this.noFocusBorderBtn8.TabStop = false;
-            this.noFocusBorderBtn8.Tag = "1";
-            this.noFocusBorderBtn8.Text = "Upload && Publish Script";
-            this.noFocusBorderBtn8.UseVisualStyleBackColor = false;
-            this.noFocusBorderBtn8.Click += new System.EventHandler(this.Upload);
             // 
             // noFocusBorderBtn1
             // 
@@ -1331,6 +1305,31 @@
             this.noFocusBorderBtn5.Text = "Upload";
             this.noFocusBorderBtn5.UseVisualStyleBackColor = false;
             this.noFocusBorderBtn5.MouseClick += new System.Windows.Forms.MouseEventHandler(this.noFocusBorderBtn1_MouseClick);
+            // 
+            // label3
+            // 
+            this.label3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(0, 441);
+            this.label3.Margin = new System.Windows.Forms.Padding(0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(755, 35);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Script Location";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label3.Click += new System.EventHandler(this.label3_Click);
+            // 
+            // fileSystemWatcher1
+            // 
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.IncludeSubdirectories = true;
+            this.fileSystemWatcher1.NotifyFilter = ((System.IO.NotifyFilters)((System.IO.NotifyFilters.FileName | System.IO.NotifyFilters.DirectoryName)));
+            this.fileSystemWatcher1.SynchronizingObject = this;
+            this.fileSystemWatcher1.Created += new System.IO.FileSystemEventHandler(this.UpdateDgvFiles);
+            this.fileSystemWatcher1.Deleted += new System.IO.FileSystemEventHandler(this.UpdateDgvFiles);
+            this.fileSystemWatcher1.Renamed += new System.IO.RenamedEventHandler(this.fileSystemWatcher1_Renamed);
             // 
             // UploadScript
             // 

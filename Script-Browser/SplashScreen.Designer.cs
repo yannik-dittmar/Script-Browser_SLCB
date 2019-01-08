@@ -33,12 +33,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.timerSmall = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.timerBig = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.timerRetry = new System.Windows.Forms.Timer(this.components);
             this.minimized = new System.Windows.Forms.Timer(this.components);
-            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,6 +73,22 @@
             this.panel1.Size = new System.Drawing.Size(444, 247);
             this.panel1.TabIndex = 3;
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveForm_MouseDown);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(414, 0);
+            this.label2.Margin = new System.Windows.Forms.Padding(0);
+            this.label2.Name = "label2";
+            this.label2.Padding = new System.Windows.Forms.Padding(5);
+            this.label2.Size = new System.Drawing.Size(30, 30);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "X";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // timerBig
             // 
@@ -113,22 +129,6 @@
             // 
             this.minimized.Interval = 5;
             this.minimized.Tick += new System.EventHandler(this.minimized_Tick);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(414, 0);
-            this.label2.Margin = new System.Windows.Forms.Padding(0);
-            this.label2.Name = "label2";
-            this.label2.Padding = new System.Windows.Forms.Padding(5);
-            this.label2.Size = new System.Drawing.Size(30, 30);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "X";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // SplashScreen
             // 

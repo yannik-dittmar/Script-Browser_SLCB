@@ -23,7 +23,7 @@ namespace Script_Browser
 
         [STAThread]
         static void Main(string[] args)
-        {
+        { 
             if (!SingleInstance.Start())
             {
                 SingleInstance.ShowFirstInstance();

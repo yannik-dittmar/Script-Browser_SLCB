@@ -358,7 +358,6 @@ namespace Script_Browser
         #endregion
 
         #region Tab: Description
-        //TODO: Add Markdown Info
 
         private void SwitchBtn(Button btn, bool enabled)
         {
@@ -432,6 +431,16 @@ namespace Script_Browser
             else
                 EnableStep(2);
             SetPage(2, sender != null);
+        }
+
+        //MarkdownInfo
+        private void webBrowser2_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+        {
+            if (e.Url != new Uri("file:///" + Environment.CurrentDirectory + "/HTML/Markdown.html"))
+            {
+                Process.Start(e.Url.ToString());
+                e.Cancel = true;
+            }
         }
 
         #endregion
@@ -728,7 +737,7 @@ namespace Script_Browser
                 if (result.Contains("verify"))
                     MetroMessageBox.Show(this, "Your email address has not been verified yet.\nPlease check your inbox or contact us over sl.chatbot.script.browser@gmail.com", "Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150);
                 else if (result.Contains("enough"))
-                    MetroMessageBox.Show(this, "You have reached the maximum amount of scripts for a single user!\nDelete some to upload new ones.", "Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); //TODO: Add delete script from cloud
+                    MetroMessageBox.Show(this, "You have reached the maximum amount of scripts for a single user!\nDelete some to upload new ones.", "Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150);
                 else if (result.Contains("true"))
                 {
                     label10.Text = "Your script has been successfully uploaded and will be published after our inspection!";
@@ -811,7 +820,7 @@ namespace Script_Browser
                 if (result.Contains("verify"))
                     MetroMessageBox.Show(this, "Your email address has not been verified yet.\nPlease check your inbox or contact us over sl.chatbot.script.browser@gmail.com", "Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150);
                 else if (result.Contains("enough"))
-                    MetroMessageBox.Show(this, "You have reached the maximum amount of scripts for a single user!\nDelete some to upload new ones.", "Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150); //TODO: Add delete script from cloud
+                    MetroMessageBox.Show(this, "You have reached the maximum amount of scripts for a single user!\nDelete some to upload new ones.", "Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error, 150);
                 else if (result.Contains("true"))
                 {
                     MetroMessageBox.Show(this, "Your update has been uploaded!\nIt will be published after our inspection.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information, 150);
@@ -946,14 +955,5 @@ namespace Script_Browser
         }
 
         #endregion
-
-        private void webBrowser2_Navigating(object sender, WebBrowserNavigatingEventArgs e)
-        {
-            if (e.Url != new Uri("file:///" + Environment.CurrentDirectory + "/HTML/Markdown.html"))
-            {
-                Process.Start(e.Url.ToString());
-                e.Cancel = true;
-            }
-        }
     }
 }

@@ -107,6 +107,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CheckPython.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CheckPython.Designer.cs">
+      <DependentUpon>CheckPython.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Comments.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -229,6 +235,9 @@
     <Compile Include="UploadScript.Designer.cs">
       <DependentUpon>UploadScript.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CheckPython.resx">
+      <DependentUpon>CheckPython.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Comments.resx">
       <DependentUpon>Comments.cs</DependentUpon>
       <SubType>Designer</SubType>

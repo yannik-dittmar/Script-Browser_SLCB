@@ -20,6 +20,7 @@ namespace SaveManager
         public List<string> ratedScripts = new List<string>();
         public List<string> accountScripts = new List<string>();
         public bool useUnverifiedScripts = false;
+        public bool checkPythonVersion = true;
 
         private string path = "";
 
@@ -37,6 +38,7 @@ namespace SaveManager
                     password = sf.password;
                     version = sf.version;
                     useUnverifiedScripts = sf.useUnverifiedScripts;
+                    checkPythonVersion = sf.checkPythonVersion;
 
                     if (sf.currentInstalled != null)
                         currentInstalled = sf.currentInstalled;
