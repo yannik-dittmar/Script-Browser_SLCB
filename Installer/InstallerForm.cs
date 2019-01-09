@@ -64,6 +64,8 @@ namespace Installer
             richTextBox2.SelectionAlignment = HorizontalAlignment.Center;
             richTextBox1.Select(0, 70);
             richTextBox1.SelectionAlignment = HorizontalAlignment.Center;
+
+            try { File.Delete(Environment.CurrentDirectory + @"\Script-Browser Setup.exe"); } catch { }
         }
 
         #region Windows API, Window Settings

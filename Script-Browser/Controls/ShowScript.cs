@@ -165,8 +165,11 @@ namespace Script_Browser.Controls
                 }
                 else
                 {
-                    button3.Text = "Installing..."; //TODO: Exceptions
+                    button3.Text = "Installing...";
                     button3.Refresh();
+
+                    if (!Directory.Exists(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp"))
+                        Directory.CreateDirectory(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp");
 
                     if (File.Exists(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Install.zip"))
                         File.Delete(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\Install.zip");

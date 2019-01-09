@@ -173,11 +173,6 @@
     <ResourceCompile Include="InstallerCheck.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Test.txt">
-      <DeploymentContent>true</DeploymentContent>
-    </Text>
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="C:\Users\Yannik\Dropbox\Programmierung\Digital-Programming\Logos\Logo_ICON.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

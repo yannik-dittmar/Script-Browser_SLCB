@@ -1,10 +1,13 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using FluentFTP;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -15,9 +18,12 @@ namespace UpdateLogger
 {
     public partial class Form1 : Form
     {
-        private string settingsFile = Directory.GetParent(Application.ExecutablePath) + "\\settings.json";
+        private string settingsFile = Environment.CurrentDirectory + "\\settings.json";
+        private string blacklistFile = Environment.CurrentDirectory + "\\blacklist.json";
         private string scanLocation = @"C:\Users\Yannik\Desktop\SLCBSB";
-        private JArray changelog; 
+        private JArray changelog;
+        private JArray blacklist;
+        private List<string> bl = new List<string>();
 
         public Form1()
         {
@@ -32,6 +38,24 @@ namespace UpdateLogger
                     changelog = new JArray();
             }
             catch { changelog = new JArray(); }
+
+            try
+            {
+                if (File.Exists(blacklistFile))
+                    blacklist = JArray.Parse(File.ReadAllText(blacklistFile));
+                else
+                    blacklist = new JArray();
+            }
+            catch { blacklist = new JArray(); }
+   
+            openFileDialog1.InitialDirectory = scanLocation;
+        }
+
+        private void ReadBlacklist()
+        {
+            bl.Clear();
+            foreach (JToken item in blacklist)
+                bl.Add(item.ToString());
         }
 
         private void Form1_Activated(object sender, EventArgs e)
@@ -41,6 +65,7 @@ namespace UpdateLogger
 
         private void PrintLog()
         {
+            ReadBlacklist();
             string version = "1.0.0";
             foreach (JToken change in changelog)
                 version = change["version"].ToString();
@@ -120,16 +145,55 @@ namespace UpdateLogger
             foreach (string currentFile in currentFiles)
             {
                 if (!((JObject)lastScan["files"]).ContainsKey(currentFile))
-                    result["files"]["changed"][currentFile] = subData.Item1[currentFile];
-                else if (lastScan["files"][currentFile].ToString() != subData.Item1[currentFile])
-                    result["files"]["changed"][currentFile] = subData.Item1[currentFile];
+                {
+                    if (!bl.Contains(currentFile))
+                    {
+                        bool found = false;
+                        foreach (string item in bl)
+                        {
+                            if (currentFile.StartsWith(item))
+                            {
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (!found)
+                            result["files"]["changed"][currentFile] = subData.Item1[currentFile];
+                    }
+                }
+                else if (lastScan["files"][currentFile].ToString() != subData.Item1[currentFile] && !bl.Contains(currentFile))
+                {
+                    bool found = false;
+                    foreach (string item in bl)
+                    {
+                        if (currentFile.StartsWith(item))
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found)
+                        result["files"]["changed"][currentFile] = subData.Item1[currentFile];
+                }
             }
 
             //Added Folders
             foreach (string currentFolder in currentFolders)
             {
-                if (((JArray)lastScan["folders"]).FirstOrDefault(f => f.ToString() == currentFolder) == null)
-                    ((JArray)result["folders"]["added"]).Add(currentFolder);
+                if (((JArray)lastScan["folders"]).FirstOrDefault(f => f.ToString() == currentFolder) == null && !bl.Contains(currentFolder))
+                {
+                    bool found = false;
+                    foreach (string item in bl)
+                    {
+                        if (currentFolder.StartsWith(item))
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found)
+                        ((JArray)result["folders"]["added"]).Add(currentFolder);
+                }
             }
 
             //Counters
@@ -203,7 +267,7 @@ namespace UpdateLogger
                 return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", "").ToLowerInvariant();
         }
 
-        //log Changes
+        //Log Changes
         private void button1_Click(object sender, EventArgs e)
         {
             changelog.Add(ScanChanges(GetLastScan()));
@@ -213,11 +277,12 @@ namespace UpdateLogger
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(changelog.ToString());
+            Process.Start(scanLocation);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //Changelog
             JArray exportChangelog = new JArray(changelog);
             foreach (JToken change in exportChangelog)
             {
@@ -227,7 +292,71 @@ namespace UpdateLogger
                     ((JArray)change["files"]["changed"]).Add(fileChange.Key);
             }
 
-            File.WriteAllText(@"C:\Users\Yannik\Desktop\changelog.txt", exportChangelog.ToString());
+            File.WriteAllText(Environment.CurrentDirectory + @"\changelog.txt", exportChangelog.ToString());
+
+            //Version
+            File.WriteAllText(Environment.CurrentDirectory + @"\version.txt", textBox2.Text);
+
+            //Create Zip
+            if (Directory.Exists(Environment.CurrentDirectory + @"\tmp"))
+                Directory.Delete(Environment.CurrentDirectory + @"\tmp", true);
+            Directory.CreateDirectory(Environment.CurrentDirectory + @"\tmp");
+
+            Tuple<Dictionary<string, string>, string[]> subData = GetSubData(scanLocation);
+            string[] currentFiles = subData.Item1.Keys.ToArray();
+            foreach (string file in currentFiles)
+            {
+                bool found = false;
+                foreach (string item in bl)
+                {
+                    if (file.StartsWith(item))
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found)
+                {
+                    if (!Directory.Exists(Environment.CurrentDirectory + @"\tmp" + file))
+                        Directory.CreateDirectory(Path.GetDirectoryName(Environment.CurrentDirectory + @"\tmp" + file));
+                    File.Copy(scanLocation + file, Environment.CurrentDirectory + @"\tmp" + file);
+                }
+            }
+            ZipFile.CreateFromDirectory(Environment.CurrentDirectory + @"\tmp\", Environment.CurrentDirectory + @"\setup.zip");
+            
+            //FTP Upload
+            try
+            {
+                using (FtpClient client = new FtpClient("digital-programming.de"))
+                {
+                    while (true)
+                    {
+                        try
+                        {
+                            string input = Microsoft.VisualBasic.Interaction.InputBox("Password for FTP-Connection: digital-programming.de", "FTP Password", "", 0, 0);
+                            client.Credentials = new System.Net.NetworkCredential("ni485822_1", input);
+                            client.Connect();
+                            break;
+                        }
+                        catch { }
+                    }
+
+                    client.UploadFiles(new[] { Environment.CurrentDirectory + @"\changelog.txt", Environment.CurrentDirectory + @"\version.txt", Environment.CurrentDirectory + @"\setup.zip" }, "/ScriptBrowser");
+                    if (client.DirectoryExists("/ScriptBrowser/bin/"))
+                        client.DeleteDirectory("/ScriptBrowser/bin/");
+
+                    List<string> dirs = new List<string>(Directory.EnumerateDirectories(Environment.CurrentDirectory + @"\tmp\"));
+                    dirs.Add(Environment.CurrentDirectory + @"\tmp\");
+
+                    foreach (string dir in dirs)
+                        client.UploadFiles(Directory.GetFiles(dir), dir.Replace(Environment.CurrentDirectory + @"\tmp\", "/ScriptBrowser/bin/").Replace("\\", "/"));
+                    MessageBox.Show(this, "Export finished!");
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(this, "Could not upload!\n" + ex.StackTrace); }
+
+            Directory.Delete(Environment.CurrentDirectory + @"\tmp\");
+            File.Delete(Environment.CurrentDirectory + @"\setup.zip");
         }
 
         //File Watcher
@@ -238,6 +367,38 @@ namespace UpdateLogger
 
         private void fileSystemWatcher1_Renamed(object sender, RenamedEventArgs e)
         {
+            PrintLog();
+        }
+
+        //Blacklist
+        private void button4_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.ShowDialog();
+        }
+
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+            foreach (string file in openFileDialog1.FileNames)
+                blacklist.Add(file.Replace(scanLocation, ""));
+            File.WriteAllText(blacklistFile, blacklist.ToString());
+            PrintLog();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            folderBrowserDialog1.SelectedPath = scanLocation;
+            DialogResult result = folderBrowserDialog1.ShowDialog();
+            if (result == DialogResult.OK && folderBrowserDialog1.SelectedPath != scanLocation)
+            {
+                blacklist.Add(folderBrowserDialog1.SelectedPath.Replace(scanLocation, ""));
+                File.WriteAllText(blacklistFile, blacklist.ToString());
+                PrintLog();
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            blacklist.RemoveAll();
             PrintLog();
         }
     }
