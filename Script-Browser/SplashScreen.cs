@@ -62,18 +62,9 @@ namespace Script_Browser
             InitializeComponent();
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
 
-            ChromiumWebBrowser web = new ChromiumWebBrowser();
-            web.LoadError += new EventHandler<LoadErrorEventArgs>(Error);
-            web.Dock = DockStyle.Fill;
-            panel1.Controls.Add(web);
-            web.Load(Environment.CurrentDirectory + @"\HTML\SplashScreen.html");
+            webBrowser1.Url = new Uri("file://" + Environment.CurrentDirectory + @"\HTML\SplashScreen.html");
 
             Start();
-        }
-
-        private void Error(object sender, LoadErrorEventArgs e)
-        {
-            Console.WriteLine(e.ErrorText);
         }
 
         private void Main_Shown(object sender, EventArgs e)
@@ -396,39 +387,10 @@ namespace Script_Browser
 
         #region Logo animation
 
-        private float ParametricBlend(float t)
+        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            if (t > 1)
-                return 1;
-            float sqt = (float)Math.Pow(t, 2);
-            return sqt / (2.0f * (sqt - t) + 1.0f);
-        }
-
-        private void timerSmall_Tick(object sender, EventArgs e)
-        {
-            panel1.Padding = new Padding(20 + (int)(ParametricBlend(sw.ElapsedMilliseconds / 2000.0f) * 40));
-            if (panel1.Padding.All >= 60)
-            {
-                sw.Restart();
-                timerSmall.Enabled = false;
-                timerBig.Enabled = true;
-            }
-        }
-
-        private void timerBig_Tick(object sender, EventArgs e)
-        {
-            panel1.Padding = new Padding(60 - (int)(ParametricBlend(sw.ElapsedMilliseconds / 2000.0f) * 40));
-            if (panel1.Padding.All <= 20)
-            {
-                sw.Restart();
-                timerSmall.Enabled = true;
-                timerBig.Enabled = false;
-            }
-        }
-
-        private void Main_Load(object sender, EventArgs e)
-        {
-            sw.Start();
+            webBrowser1.Update();
+            panel3.Visible = false;
         }
 
         #endregion

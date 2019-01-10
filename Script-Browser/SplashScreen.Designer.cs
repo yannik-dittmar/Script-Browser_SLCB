@@ -1,4 +1,6 @@
-﻿namespace Script_Browser
+﻿using Script_Browser.Controls;
+
+namespace Script_Browser
 {
     partial class SplashScreen
     {
@@ -31,14 +33,15 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SplashScreen));
             this.label1 = new System.Windows.Forms.Label();
-            this.timerSmall = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.timerBig = new System.Windows.Forms.Timer(this.components);
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.timerRetry = new System.Windows.Forms.Timer(this.components);
             this.minimized = new System.Windows.Forms.Timer(this.components);
+            this.timerRetry = new System.Windows.Forms.Timer(this.components);
+            this.transparentPanel1 = new Script_Browser.Controls.TransparentPanel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,14 +61,12 @@
             this.label1.TextChanged += new System.EventHandler(this.label1_TextChanged);
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // timerSmall
-            // 
-            this.timerSmall.Interval = 10;
-            this.timerSmall.Tick += new System.EventHandler(this.timerSmall_Tick);
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.panel3);
+            this.panel1.Controls.Add(this.transparentPanel1);
+            this.panel1.Controls.Add(this.webBrowser1);
             this.panel1.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -90,10 +91,29 @@
             this.label2.Text = "X";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
-            // timerBig
+            // panel3
             // 
-            this.timerBig.Interval = 10;
-            this.timerBig.Tick += new System.EventHandler(this.timerBig_Tick);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(444, 247);
+            this.panel3.TabIndex = 4;
+            this.panel3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveForm_MouseDown);
+            // 
+            // webBrowser1
+            // 
+            this.webBrowser1.AllowNavigation = false;
+            this.webBrowser1.AllowWebBrowserDrop = false;
+            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webBrowser1.Location = new System.Drawing.Point(0, 0);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.ScriptErrorsSuppressed = true;
+            this.webBrowser1.ScrollBarsEnabled = false;
+            this.webBrowser1.Size = new System.Drawing.Size(444, 247);
+            this.webBrowser1.TabIndex = 2;
+            this.webBrowser1.WebBrowserShortcutsEnabled = false;
+            this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
             // 
             // tableLayoutPanel1
             // 
@@ -120,15 +140,25 @@
             this.panel2.Size = new System.Drawing.Size(444, 5);
             this.panel2.TabIndex = 5;
             // 
+            // minimized
+            // 
+            this.minimized.Interval = 5;
+            this.minimized.Tick += new System.EventHandler(this.minimized_Tick);
+            // 
             // timerRetry
             // 
             this.timerRetry.Interval = 1000;
             this.timerRetry.Tick += new System.EventHandler(this.timerRetry_Tick);
             // 
-            // minimized
+            // transparentPanel1
             // 
-            this.minimized.Interval = 5;
-            this.minimized.Tick += new System.EventHandler(this.minimized_Tick);
+            this.transparentPanel1.BackColor = System.Drawing.Color.White;
+            this.transparentPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.transparentPanel1.Location = new System.Drawing.Point(0, 0);
+            this.transparentPanel1.Name = "transparentPanel1";
+            this.transparentPanel1.Size = new System.Drawing.Size(444, 247);
+            this.transparentPanel1.TabIndex = 3;
+            this.transparentPanel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveForm_MouseDown);
             // 
             // SplashScreen
             // 
@@ -146,7 +176,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Splash Screen";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SplashScreen_FormClosing);
-            this.Load += new System.EventHandler(this.Main_Load);
             this.Shown += new System.EventHandler(this.Main_Shown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -156,14 +185,15 @@
 
         #endregion
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Timer timerSmall;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Timer timerBig;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Timer timerRetry;
         private System.Windows.Forms.Timer minimized;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.WebBrowser webBrowser1;
+        private TransparentPanel transparentPanel1;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Timer timerRetry;
     }
 }
 

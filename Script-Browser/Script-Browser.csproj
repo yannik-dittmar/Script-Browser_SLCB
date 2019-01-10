@@ -59,13 +59,13 @@
     <ApplicationIcon>Logo_ICON.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>false</SignManifests>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>0BF82F3CF5FD53ED26A2FECD5F56E80630ED2448</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>2E8A9245D5239318600AC95F1F82FA0F7A2B4AC2</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>Script-Browser_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>coding.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -145,6 +145,12 @@
     </Compile>
     <Compile Include="Controls\SlideShow.Designer.cs">
       <DependentUpon>SlideShow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TransparentPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\TransparentPanel.Designer.cs">
+      <DependentUpon>TransparentPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Design\ArrowRenderer.cs" />
     <Compile Include="Design\ColorTableMenu.cs" />
@@ -303,6 +309,7 @@
       <DependentUpon>UploadScript.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="coding.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
