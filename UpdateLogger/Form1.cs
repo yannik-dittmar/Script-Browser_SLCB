@@ -20,7 +20,7 @@ namespace UpdateLogger
     {
         private string settingsFile = Environment.CurrentDirectory + "\\settings.json";
         private string blacklistFile = Environment.CurrentDirectory + "\\blacklist.json";
-        private string scanLocation = @"C:\Users\Yannik\Desktop\SLCBSB";
+        private string scanLocation = @"D:\MegaSync\Visual-Studio\Script-Browser_SLCB\Script-Browser\bin\Debug";
         private JArray changelog;
         private JArray blacklist;
         private List<string> bl = new List<string>();
@@ -355,7 +355,7 @@ namespace UpdateLogger
             }
             catch (Exception ex) { MessageBox.Show(this, "Could not upload!\n" + ex.StackTrace); }
 
-            Directory.Delete(Environment.CurrentDirectory + @"\tmp\");
+            Directory.Delete(Environment.CurrentDirectory + @"\tmp\", true);
             File.Delete(Environment.CurrentDirectory + @"\setup.zip");
         }
 
