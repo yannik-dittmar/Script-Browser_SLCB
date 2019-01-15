@@ -39,6 +39,12 @@ namespace Script_Browser.TabPages
 
         #region Account
 
+        private void loginPass_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Return || e.KeyData == Keys.Enter)
+                roundedEdgesButton1_Click(null, null);
+        }
+
         //Login
         private void roundedEdgesButton1_Click(object sender, EventArgs e)
         {

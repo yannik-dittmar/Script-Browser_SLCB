@@ -42,7 +42,7 @@ namespace Script_Browser.Controls
 
         public void LoadComments(int id, Main form, string author)
         {
-            web.Load(Environment.CurrentDirectory + @"\HTML\LoadingComments.html");
+            web.Load(Path.GetDirectoryName(Application.ExecutablePath) + @"\HTML\LoadingComments.html");
             this.form = form;
             this.id = id;
             this.author = author;
@@ -85,21 +85,21 @@ namespace Script_Browser.Controls
                         catch { htmlcomments = htmlcomments.Replace(p, ""); }
                     }
 
-                    string htmlLoad = File.ReadAllText(Environment.CurrentDirectory + @"\HTML\Comments.html").Replace("<comment INPUT>", htmlcomments);
+                    string htmlLoad = File.ReadAllText(Path.GetDirectoryName(Application.ExecutablePath) + @"\HTML\Comments.html").Replace("<comment INPUT>", htmlcomments);
 
                     if (!(bool)result["Verified"])
                         htmlLoad = htmlLoad.Replace("<textarea name='comment' id='comment' placeholder='Your comment...'", "<textarea name='comment' id='comment' placeholder='Login with a verified account to write comments.' disabled");
 
                     form.BeginInvoke(new MethodInvoker(delegate ()
                     {
-                        web.LoadHtml(htmlLoad, Environment.CurrentDirectory + @"\HTML\Comments.html");
+                        web.LoadHtml(htmlLoad, Path.GetDirectoryName(Application.ExecutablePath) + @"\HTML\Comments.html");
                         htmlReload = htmlLoad;
                     }));
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.StackTrace);
-                    form.BeginInvoke(new MethodInvoker(delegate () { web.Load(Environment.CurrentDirectory + @"\HTML\CommentError.html"); }));
+                    form.BeginInvoke(new MethodInvoker(delegate () { web.Load(Path.GetDirectoryName(Application.ExecutablePath) + @"\HTML\CommentError.html"); }));
                 }
             }).Start();
         }
@@ -131,7 +131,7 @@ namespace Script_Browser.Controls
         {
             Console.WriteLine("FAILED: " + e.FailedUrl + " | " + e.ErrorCode + " | " + e.ErrorText);
             if (!e.FailedUrl.Contains("CommentError.html") && e.ErrorCode != CefErrorCode.Aborted)
-                web.Load(Environment.CurrentDirectory + @"\HTML\CommentError.html");
+                web.Load(Path.GetDirectoryName(Application.ExecutablePath) + @"\HTML\CommentError.html");
         }
 
         private void AddressChanged(object sender, AddressChangedEventArgs e)
@@ -145,7 +145,7 @@ namespace Script_Browser.Controls
                     NameValueCollection vars = HttpUtility.ParseQueryString(infos.Query);
 
                     if (vars.AllKeys.Count() != 0 && !vars.AllKeys.Contains("refresh"))
-                        web.LoadHtml(htmlReload, Environment.CurrentDirectory + @"\HTML\Comments.html");
+                        web.LoadHtml(htmlReload, Path.GetDirectoryName(Application.ExecutablePath) + @"\HTML\Comments.html");
 
                     if (vars.AllKeys.Contains("comment"))
                     {
@@ -171,7 +171,7 @@ namespace Script_Browser.Controls
                     else if (vars.AllKeys.Contains("discord"))
                         Process.Start("http://discord.gg/KDe7Vyu");
                 }
-                catch { web.Load(Environment.CurrentDirectory + @"\HTML\CommentError.html"); }
+                catch { web.Load(Path.GetDirectoryName(Application.ExecutablePath) + @"\HTML\CommentError.html"); }
             }));
         }
     }

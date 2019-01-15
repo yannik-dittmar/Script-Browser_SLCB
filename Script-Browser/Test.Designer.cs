@@ -28,25 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.comments1 = new Script_Browser.Controls.Comments();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // comments1
+            // button1
             // 
-            this.comments1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
-            this.comments1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comments1.Location = new System.Drawing.Point(0, 0);
-            this.comments1.Name = "comments1";
-            this.comments1.Size = new System.Drawing.Size(720, 526);
-            this.comments1.TabIndex = 0;
-            this.comments1.Load += new System.EventHandler(this.comments1_Load);
+            this.button1.Location = new System.Drawing.Point(317, 68);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Test
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(720, 526);
-            this.Controls.Add(this.comments1);
+            this.Controls.Add(this.button1);
             this.Name = "Test";
             this.Text = "Test";
             this.ResumeLayout(false);
@@ -55,6 +55,6 @@
 
         #endregion
 
-        private Controls.Comments comments1;
+        private System.Windows.Forms.Button button1;
     }
 }

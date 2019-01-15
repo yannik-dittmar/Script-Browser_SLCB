@@ -18,8 +18,8 @@ namespace UpdateLogger
 {
     public partial class Form1 : Form
     {
-        private string settingsFile = Environment.CurrentDirectory + "\\settings.json";
-        private string blacklistFile = Environment.CurrentDirectory + "\\blacklist.json";
+        private string settingsFile = Path.GetDirectoryName(Application.ExecutablePath) + "\\settings.json";
+        private string blacklistFile = Path.GetDirectoryName(Application.ExecutablePath) + "\\blacklist.json";
         private string scanLocation = @"D:\MegaSync\Visual-Studio\Script-Browser_SLCB\Script-Browser\bin\Debug";
         private JArray changelog;
         private JArray blacklist;
@@ -292,15 +292,15 @@ namespace UpdateLogger
                     ((JArray)change["files"]["changed"]).Add(fileChange.Key);
             }
 
-            File.WriteAllText(Environment.CurrentDirectory + @"\changelog.txt", exportChangelog.ToString());
+            File.WriteAllText(Path.GetDirectoryName(Application.ExecutablePath) + @"\changelog.txt", exportChangelog.ToString());
 
             //Version
-            File.WriteAllText(Environment.CurrentDirectory + @"\version.txt", textBox2.Text);
+            File.WriteAllText(Path.GetDirectoryName(Application.ExecutablePath) + @"\version.txt", textBox2.Text);
 
             //Create Zip
-            if (Directory.Exists(Environment.CurrentDirectory + @"\tmp"))
-                Directory.Delete(Environment.CurrentDirectory + @"\tmp", true);
-            Directory.CreateDirectory(Environment.CurrentDirectory + @"\tmp");
+            if (Directory.Exists(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp"))
+                Directory.Delete(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp", true);
+            Directory.CreateDirectory(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp");
 
             Tuple<Dictionary<string, string>, string[]> subData = GetSubData(scanLocation);
             string[] currentFiles = subData.Item1.Keys.ToArray();
@@ -317,12 +317,12 @@ namespace UpdateLogger
                 }
                 if (!found)
                 {
-                    if (!Directory.Exists(Environment.CurrentDirectory + @"\tmp" + file))
-                        Directory.CreateDirectory(Path.GetDirectoryName(Environment.CurrentDirectory + @"\tmp" + file));
-                    File.Copy(scanLocation + file, Environment.CurrentDirectory + @"\tmp" + file);
+                    if (!Directory.Exists(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp" + file))
+                        Directory.CreateDirectory(Path.GetDirectoryName(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp" + file));
+                    File.Copy(scanLocation + file, Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp" + file);
                 }
             }
-            ZipFile.CreateFromDirectory(Environment.CurrentDirectory + @"\tmp\", Environment.CurrentDirectory + @"\setup.zip");
+            ZipFile.CreateFromDirectory(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\", Path.GetDirectoryName(Application.ExecutablePath) + @"\setup.zip");
             
             //FTP Upload
             try
@@ -341,22 +341,22 @@ namespace UpdateLogger
                         catch { }
                     }
 
-                    client.UploadFiles(new[] { Environment.CurrentDirectory + @"\changelog.txt", Environment.CurrentDirectory + @"\version.txt", Environment.CurrentDirectory + @"\setup.zip" }, "/ScriptBrowser");
+                    client.UploadFiles(new[] { Path.GetDirectoryName(Application.ExecutablePath) + @"\changelog.txt", Path.GetDirectoryName(Application.ExecutablePath) + @"\version.txt", Path.GetDirectoryName(Application.ExecutablePath) + @"\setup.zip" }, "/ScriptBrowser");
                     if (client.DirectoryExists("/ScriptBrowser/bin/"))
                         client.DeleteDirectory("/ScriptBrowser/bin/");
 
-                    List<string> dirs = new List<string>(Directory.EnumerateDirectories(Environment.CurrentDirectory + @"\tmp\"));
-                    dirs.Add(Environment.CurrentDirectory + @"\tmp\");
+                    List<string> dirs = new List<string>(Directory.EnumerateDirectories(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\"));
+                    dirs.Add(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\");
 
                     foreach (string dir in dirs)
-                        client.UploadFiles(Directory.GetFiles(dir), dir.Replace(Environment.CurrentDirectory + @"\tmp\", "/ScriptBrowser/bin/").Replace("\\", "/"));
+                        client.UploadFiles(Directory.GetFiles(dir), dir.Replace(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\", "/ScriptBrowser/bin/").Replace("\\", "/"));
                     MessageBox.Show(this, "Export finished!");
                 }
             }
             catch (Exception ex) { MessageBox.Show(this, "Could not upload!\n" + ex.StackTrace); }
 
-            Directory.Delete(Environment.CurrentDirectory + @"\tmp\", true);
-            File.Delete(Environment.CurrentDirectory + @"\setup.zip");
+            Directory.Delete(Path.GetDirectoryName(Application.ExecutablePath) + @"\tmp\", true);
+            File.Delete(Path.GetDirectoryName(Application.ExecutablePath) + @"\setup.zip");
         }
 
         //File Watcher

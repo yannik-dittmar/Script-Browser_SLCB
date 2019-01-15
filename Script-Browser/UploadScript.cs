@@ -80,7 +80,7 @@ namespace Script_Browser
             }
             catch { }
 
-            webBrowser2.Url = new Uri("file:///" + Environment.CurrentDirectory + "/HTML/Markdown.html");
+            webBrowser2.Url = new Uri("file:///" + Path.GetDirectoryName(Application.ExecutablePath) + "/HTML/Markdown.html");
 
             this.path = path;
             label3.Text = Path.GetDirectoryName(path) + "\\";
@@ -436,7 +436,7 @@ namespace Script_Browser
         //MarkdownInfo
         private void webBrowser2_Navigating(object sender, WebBrowserNavigatingEventArgs e)
         {
-            if (e.Url != new Uri("file:///" + Environment.CurrentDirectory + "/HTML/Markdown.html"))
+            if (e.Url != new Uri("file:///" + Path.GetDirectoryName(Application.ExecutablePath) + "/HTML/Markdown.html"))
             {
                 Process.Start(e.Url.ToString());
                 e.Cancel = true;

@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Digital-Programming")]
 [assembly: AssemblyProduct("SLCB Script-Browser")]
-[assembly: AssemblyCopyright("Copyright ©  2018")]
+[assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("Digital-Programming")]
 [assembly: AssemblyCulture("")]
 

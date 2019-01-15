@@ -128,7 +128,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(536, 36);
             this.label3.TabIndex = 5;
-            this.label3.Text = "SLCB Script-Browser © 2018 Digital-Programming";
+            this.label3.Text = "SLCB Script-Browser © 2019 Digital-Programming";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tcTlp1

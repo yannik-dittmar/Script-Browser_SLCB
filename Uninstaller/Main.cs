@@ -47,7 +47,7 @@ namespace Uninstaller
             try
             {
                 using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Script Browser", true))
-                    label3.Text = "SLCB Script-Browser v" + key.GetValue("DisplayVersion") + " © 2018 Digital-Programming";
+                    label3.Text = "SLCB Script-Browser v" + key.GetValue("DisplayVersion") + " © 2019 Digital-Programming";
             }
             catch { }
 

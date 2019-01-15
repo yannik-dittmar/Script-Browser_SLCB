@@ -452,19 +452,23 @@ namespace Script_Browser
             for (int i = 0; i < navbarTransitionOut.Count; i++)
             {
                 TableLayoutPanel tlp = navbarTransitionOut[i];
-                Color c = tlp.BackColor;
-                int r = c.R - 2;
-                if (r < 18)
-                    r = 18;
-                int g = c.G - 2;
-                if (g < 25)
-                    g = 25;
-                int b = c.B - 2;
-                if (b < 31)
-                    b = 31;
-                tlp.BackColor = Color.FromArgb(r, g, b);
-                if (r == 18 && g == 25 && b == 31)
-                    navbarTransitionOut.Remove(tlp);
+                if (!navbarTransitionIn.Contains(tlp))
+                {
+                    Color c = tlp.BackColor;
+                    int r = c.R - 2;
+                    if (r < 18)
+                        r = 18;
+                    int g = c.G - 2;
+                    if (g < 25)
+                        g = 25;
+                    int b = c.B - 2;
+                    if (b < 31)
+                        b = 31;
+                    tlp.BackColor = Color.FromArgb(r, g, b);
+                    if (r == 18 && g == 25 && b == 31)
+                        navbarTransitionOut.Remove(tlp);
+                }
+                else { navbarTransitionOut.Remove(tlp); }
             }
 
             NavTransitionOut.Enabled = navbarTransitionOut.Count != 0;

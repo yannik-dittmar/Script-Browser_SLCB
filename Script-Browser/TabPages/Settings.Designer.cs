@@ -47,6 +47,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label14 = new System.Windows.Forms.Label();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
             this.checkBox5 = new System.Windows.Forms.CheckBox();
@@ -90,7 +91,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.animator1 = new AnimatorNS.Animator(this.components);
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.label14 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -283,6 +283,7 @@
             this.loginPass.Size = new System.Drawing.Size(192, 23);
             this.loginPass.TabIndex = 1;
             this.loginPass.UseSystemPasswordChar = true;
+            this.loginPass.KeyDown += new System.Windows.Forms.KeyEventHandler(this.loginPass_KeyDown);
             // 
             // loginUsername
             // 
@@ -396,6 +397,7 @@
             // panel1
             // 
             this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.label14);
             this.panel1.Controls.Add(this.tableLayoutPanel6);
             this.animator1.SetDecoration(this.panel1, AnimatorNS.DecorationType.None);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -404,13 +406,29 @@
             this.panel1.Size = new System.Drawing.Size(747, 453);
             this.panel1.TabIndex = 3;
             // 
+            // label14
+            // 
+            this.label14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
+            this.animator1.SetDecoration(this.label14, AnimatorNS.DecorationType.None);
+            this.label14.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.White;
+            this.label14.Location = new System.Drawing.Point(0, 1142);
+            this.label14.Margin = new System.Windows.Forms.Padding(0);
+            this.label14.Name = "label14";
+            this.label14.Padding = new System.Windows.Forms.Padding(5);
+            this.label14.Size = new System.Drawing.Size(730, 46);
+            this.label14.TabIndex = 12;
+            this.label14.Text = "Streamlabs Chatbot Script-Browser made by Digital-Programming Copyright 2019\r\nAny" +
+    " bugs or feedback? Write an EMail at sl.chatbot.script.browser@gmail.com!";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // tableLayoutPanel6
             // 
             this.tableLayoutPanel6.AutoSize = true;
             this.tableLayoutPanel6.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanel6.ColumnCount = 1;
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Controls.Add(this.label14, 0, 9);
             this.tableLayoutPanel6.Controls.Add(this.tableLayoutPanel13, 0, 2);
             this.tableLayoutPanel6.Controls.Add(this.label13, 0, 1);
             this.tableLayoutPanel6.Controls.Add(this.tableLayoutPanel5, 0, 0);
@@ -424,7 +442,7 @@
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 10;
+            this.tableLayoutPanel6.RowCount = 9;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -434,8 +452,8 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(730, 1188);
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(730, 1142);
             this.tableLayoutPanel6.TabIndex = 3;
             // 
             // tableLayoutPanel13
@@ -1176,24 +1194,6 @@
             // 
             this.folderBrowserDialog1.Description = "Select Streamlabs Chatbot Folder";
             this.folderBrowserDialog1.RootFolder = System.Environment.SpecialFolder.MyComputer;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(139)))), ((int)(((byte)(118)))));
-            this.animator1.SetDecoration(this.label14, AnimatorNS.DecorationType.None);
-            this.label14.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.Color.White;
-            this.label14.Location = new System.Drawing.Point(0, 1142);
-            this.label14.Margin = new System.Windows.Forms.Padding(0);
-            this.label14.Name = "label14";
-            this.label14.Padding = new System.Windows.Forms.Padding(5);
-            this.label14.Size = new System.Drawing.Size(730, 46);
-            this.label14.TabIndex = 11;
-            this.label14.Text = "Streamlabs Chatbot Script-Browser made by Digital-Programming Copyright 2019\r\nAny" +
-    " bugs or feedback? Write an EMail at sl.chatbot.script.browser@gmail.com!";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Settings
             // 

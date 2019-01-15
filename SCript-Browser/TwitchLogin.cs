@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
@@ -55,7 +56,7 @@ namespace Script_Browser
             web.FrameLoadEnd += new EventHandler<FrameLoadEndEventArgs>(FrameEnd);
             web.LoadError += new EventHandler<LoadErrorEventArgs>(LoadError);
             web.AddressChanged += new EventHandler<AddressChangedEventArgs>(AddressChanged);
-            web.Load(Environment.CurrentDirectory + @"\HTML\LoadingTwitch.html");
+            web.Load(Path.GetDirectoryName(Application.ExecutablePath) + @"\HTML\LoadingTwitch.html");
         }
 
         private void FrameEnd(object sender, FrameLoadEndEventArgs e)
@@ -71,7 +72,7 @@ namespace Script_Browser
                 if (e.FailedUrl.Contains("access_token"))
                 {
                     loadinfinity = true;
-                    web.Load(Environment.CurrentDirectory + @"\HTML\LoadingTwitch.html");
+                    web.Load(Path.GetDirectoryName(Application.ExecutablePath) + @"\HTML\LoadingTwitch.html");
                     Uri infos = new Uri(e.FailedUrl.Replace("#", "?"));
                     string token = HttpUtility.ParseQueryString(infos.Query).Get("access_token");
                     using (WebClient wc = new WebClient())
@@ -103,14 +104,14 @@ namespace Script_Browser
                 else
                 {
                     loadinfinity = false;
-                    web.Load(Environment.CurrentDirectory + @"\HTML\Error.html");
+                    web.Load(Path.GetDirectoryName(Application.ExecutablePath) + @"\HTML\Error.html");
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.StackTrace);
                 loadinfinity = false;
-                web.Load(Environment.CurrentDirectory + @"\HTML\Error.html");
+                web.Load(Path.GetDirectoryName(Application.ExecutablePath) + @"\HTML\Error.html");
             }
         }
 

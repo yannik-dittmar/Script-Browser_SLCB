@@ -36,12 +36,12 @@ namespace Script_Browser
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.transparentPanel1 = new Script_Browser.Controls.TransparentPanel();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.minimized = new System.Windows.Forms.Timer(this.components);
             this.timerRetry = new System.Windows.Forms.Timer(this.components);
-            this.transparentPanel1 = new Script_Browser.Controls.TransparentPanel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -100,6 +100,16 @@ namespace Script_Browser
             this.panel3.TabIndex = 4;
             this.panel3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveForm_MouseDown);
             // 
+            // transparentPanel1
+            // 
+            this.transparentPanel1.BackColor = System.Drawing.Color.White;
+            this.transparentPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.transparentPanel1.Location = new System.Drawing.Point(0, 0);
+            this.transparentPanel1.Name = "transparentPanel1";
+            this.transparentPanel1.Size = new System.Drawing.Size(444, 247);
+            this.transparentPanel1.TabIndex = 3;
+            this.transparentPanel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveForm_MouseDown);
+            // 
             // webBrowser1
             // 
             this.webBrowser1.AllowNavigation = false;
@@ -149,16 +159,6 @@ namespace Script_Browser
             // 
             this.timerRetry.Interval = 1000;
             this.timerRetry.Tick += new System.EventHandler(this.timerRetry_Tick);
-            // 
-            // transparentPanel1
-            // 
-            this.transparentPanel1.BackColor = System.Drawing.Color.White;
-            this.transparentPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.transparentPanel1.Location = new System.Drawing.Point(0, 0);
-            this.transparentPanel1.Name = "transparentPanel1";
-            this.transparentPanel1.Size = new System.Drawing.Size(444, 247);
-            this.transparentPanel1.TabIndex = 3;
-            this.transparentPanel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveForm_MouseDown);
             // 
             // SplashScreen
             // 

@@ -45,7 +45,7 @@ namespace Installer
 
         #endregion
 
-        private string version = "1.0.0";
+        private string version = "1.0.1";
 
         private WebClient web;
         private long receivedBytes = 0;
@@ -58,14 +58,14 @@ namespace Installer
             InitializeComponent();
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
             tcTlp1.Tab(0);
-            label3.Text = "SLCB Script-Browser v" + version + " © 2018 Digital-Programming";
+            label3.Text = "SLCB Script-Browser v" + version + " © 2019 Digital-Programming";
 
             richTextBox2.SelectAll();
             richTextBox2.SelectionAlignment = HorizontalAlignment.Center;
             richTextBox1.Select(0, 70);
             richTextBox1.SelectionAlignment = HorizontalAlignment.Center;
 
-            try { File.Delete(Environment.CurrentDirectory + @"\Script-Browser Setup.exe"); } catch { }
+            try { File.Delete(Path.GetDirectoryName(Application.ExecutablePath) + @"\Script-Browser Setup.exe"); } catch { }
         }
 
         #region Windows API, Window Settings

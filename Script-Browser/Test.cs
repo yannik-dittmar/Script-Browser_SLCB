@@ -1,8 +1,11 @@
-﻿using Microsoft.Win32;
+﻿using CefSharp;
+using CefSharp.WinForms;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -19,30 +22,13 @@ namespace Script_Browser
         {
             InitializeComponent();
 
-            //string registry_key = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
-            //using (Microsoft.Win32.RegistryKey key = Registry.LocalMachine.OpenSubKey(registry_key))
-            //{
-            //    foreach (string subkey_name in key.GetSubKeyNames())
-            //    {
-            //        using (RegistryKey subkey = key.OpenSubKey(subkey_name))
-            //        {
-            //            try
-            //            {
-            //                if (subkey.GetValue("DisplayName") != null)
-            //                { 
-            //                    if (subkey.GetValue("DisplayName").ToString().Contains("Streamlabs Chatbot"))
-            //                        Console.WriteLine(subkey.GetValue("InstallLocation"));
-            //                }
-            //            }
-            //            catch { }
-            //        }
-            //    }
-            //}
+            MessageBox.Show(Path.GetDirectoryName(Application.ExecutablePath));
+            MessageBox.Show(Application.ExecutablePath);
         }
 
-        private void comments1_Load(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            //comments1.LoadComments(1, this);
+            Process.Start(@"C:\Users\KryptoPC\Desktop\Test\test.exe");
         }
     }
 }

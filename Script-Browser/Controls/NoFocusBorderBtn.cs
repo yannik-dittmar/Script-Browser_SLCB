@@ -26,7 +26,6 @@ namespace Script_Browser.Controls
 
             if (!Enabled)
             {
-                using (SolidBrush back = new SolidBrush(NotEnabledBG))
                 using (SolidBrush fore = new SolidBrush(ForeColor))
                 using (StringFormat sf = new StringFormat
                 {
@@ -34,8 +33,8 @@ namespace Script_Browser.Controls
                     LineAlignment = StringAlignment.Center
                 })
                 {
-                    e.Graphics.FillRectangle(back, e.ClipRectangle);
-                    e.Graphics.DrawString(Text, Font, fore, e.ClipRectangle, sf);
+                    e.Graphics.Clear(NotEnabledBG);
+                    e.Graphics.DrawString(Text, Font, fore, new Rectangle(0,0, this.Width, this.Height), sf);
                 }
             }
         }

@@ -62,9 +62,7 @@ namespace Script_Browser
             InitializeComponent();
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
 
-            webBrowser1.Url = new Uri("file://" + Environment.CurrentDirectory + @"\HTML\SplashScreen.html");
-
-            Start();
+            webBrowser1.Url = new Uri("file://" + Path.GetDirectoryName(Application.ExecutablePath) + @"\HTML\SplashScreen.html");
         }
 
         private void Main_Shown(object sender, EventArgs e)
@@ -391,6 +389,7 @@ namespace Script_Browser
         {
             webBrowser1.Update();
             panel3.Visible = false;
+            Start();
         }
 
         #endregion
