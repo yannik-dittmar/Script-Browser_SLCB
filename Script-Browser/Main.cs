@@ -95,6 +95,7 @@ namespace Script_Browser
             navbarTransitionIn.Add(tableLayoutPanel3);
             lastWinSize = Size;
             lastWinPos = Location;
+            label9.Text = "Version " + sf.version;
 
             topScripts1.form = this;
             search1.form = this;

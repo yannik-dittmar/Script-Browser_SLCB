@@ -71,6 +71,7 @@
             this.tESTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.label9 = new System.Windows.Forms.Label();
             this.metroPanel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -238,6 +239,7 @@
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel5, 3, 0);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel6, 4, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label9, 0, 0);
             this.animatorTabPage.SetDecoration(this.tableLayoutPanel2, AnimatorNS.DecorationType.None);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
@@ -671,6 +673,20 @@
             this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             this.notifyIcon1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseUp);
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.animatorTabPage.SetDecoration(this.label9, AnimatorNS.DecorationType.None);
+            this.label9.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label9.Font = new System.Drawing.Font("Arial Rounded MT Bold", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(3, 52);
+            this.label9.Name = "label9";
+            this.label9.Padding = new System.Windows.Forms.Padding(5);
+            this.label9.Size = new System.Drawing.Size(228, 22);
+            this.label9.TabIndex = 8;
+            this.label9.Text = "Version 1.0.0";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -696,6 +712,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -761,6 +778,7 @@
         private System.Windows.Forms.ToolStripMenuItem tESTToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
         public TabPages.LocalScripts localScripts1;
+        private System.Windows.Forms.Label label9;
     }
 }
 

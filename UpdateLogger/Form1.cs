@@ -137,8 +137,20 @@ namespace UpdateLogger
             //Removed Folders
             foreach (JToken lastfolder in lastScan["folders"])
             {
-                if (!currentFolders.Contains(lastfolder.ToString()))
-                    ((JArray)result["folders"]["removed"]).Add(lastfolder);
+                if (!currentFolders.Contains(lastfolder.ToString()) && !bl.Contains(lastfolder.ToString()))
+                {
+                    bool found = false;
+                    foreach (string item in bl)
+                    {
+                        if (lastfolder.ToString().StartsWith(item))
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found)
+                        ((JArray)result["folders"]["removed"]).Add(lastfolder);
+                }
             }
 
             //Added Files

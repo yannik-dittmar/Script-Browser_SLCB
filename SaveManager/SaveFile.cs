@@ -12,7 +12,7 @@ namespace SaveManager
     [Serializable]
     public class SaveFile
     {
-        public String version = "1.0.0";
+        public String version = "1.0.2";
         public string username = "";
         public string password = "";
         public string streamlabsPath = @"";

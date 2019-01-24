@@ -88,7 +88,7 @@ namespace Updater
                 }
             }
             Console.WriteLine("Finished!");
-            try { Process.Start(Path.GetDirectoryName(directory) + "\\SLCBSB-SplashScreen.exe"); } catch { }
+            try { Process.Start(Path.GetDirectoryName(directory) + "\\Script-Browser.exe"); } catch { }
         }
     }
 }

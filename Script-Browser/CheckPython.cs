@@ -100,7 +100,7 @@ namespace Script_Browser
                         {
                             string result = reader.ReadToEnd().Replace("Python ", "").Replace("\n", "").Replace("\r", "");
                             Version ver = new Version(result);
-                            Protocol.AddToProtocol("Python version " + ver + " detected.", Types.Info);
+                            Protocol.AddToProtocol("Python version " + ver + " detected. (" + pythonPath + ")", Types.Info);
                             installedVersion = ver;
                             if (ver.CompareTo(new Version(3,0)) < 0 && ver.CompareTo(new Version(2,0)) > 0)
                                 return PythonResult.Ok;
