@@ -54,8 +54,14 @@ namespace Script_Browser
         private Thread downloadThread;
         private Main main;
 
-        public SplashScreen(bool hide = false)
+        public SplashScreen(bool hide = false, string version = "")
         {
+            if (version != "")
+            {
+                sf.version = version;
+                sf.Save();
+            }
+
             Protocol.AddToProtocol("Starting protocol - SLCBSB Version: " + sf.version, Types.Info);
             this.DialogResult = DialogResult.No;
             this.hide = hide;

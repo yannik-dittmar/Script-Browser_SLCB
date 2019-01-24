@@ -22,9 +22,26 @@ namespace Script_Browser
         /// Der Haupteinstiegspunkt für die Anwendung.
         /// </summary>
 
+        static bool hide = false;
+        static string version = "";
+
         [STAThread]
         static void Main(string[] args)
-        { 
+        {
+            foreach (string arg in args)
+            {
+                if (arg == "hide" || arg == "/hide")
+                    hide = true;
+                else if (arg.StartsWith("setup:"))
+                {
+                    Console.WriteLine(arg.Substring(6));
+                    try { File.Delete(arg.Substring(6)); } catch { }
+                    try { Directory.Delete(Path.GetDirectoryName(arg.Substring(6)) + @"\blob_storage", true); } catch { }
+                }
+                else if (arg.StartsWith("version:"))
+                    version = arg.Substring(8);
+            }
+
             if (!SingleInstance.Start())
             {
                 SingleInstance.ShowFirstInstance();
@@ -59,10 +76,7 @@ namespace Script_Browser
             // Make sure you set performDependencyCheck false
             Cef.Initialize(settings, performDependencyCheck: false, browserProcessHandler: null);
 
-            if (args.Length == 0)
-                Application.Run(new SplashScreen());
-            else
-                Application.Run(new SplashScreen(true));
+            Application.Run(new SplashScreen(hide, version));
             //Application.Run(new Test());
         }
 

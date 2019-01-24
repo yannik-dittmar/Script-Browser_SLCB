@@ -106,6 +106,11 @@ namespace Script_Browser
 
             if (login != null)
                 Networking.Login(sf.username, sf.password, this, true, login);
+
+            if (Directory.Exists(Path.GetDirectoryName(Application.ExecutablePath) + @"\blob_storage"))
+                try { Directory.Delete(Path.GetDirectoryName(Application.ExecutablePath) + @"\blob_storage", true); } catch { }
+            if (Directory.Exists(Environment.CurrentDirectory + @"\blob_storage"))
+                try { Directory.Delete(Environment.CurrentDirectory + @"\blob_storage", true); } catch { }
         }
 
         private void Main_Load(object sender, EventArgs e)

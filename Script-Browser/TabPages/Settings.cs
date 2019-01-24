@@ -207,7 +207,7 @@ namespace Script_Browser.TabPages
             using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true))
             {
                 if (checkBox5.Checked)
-                    key.SetValue("Script Browser", Path.GetDirectoryName(Application.ExecutablePath) + "\\Script-Browser.exe /hide");
+                    key.SetValue("Script Browser", Path.GetDirectoryName(Application.ExecutablePath) + "\\Script-Browser.exe hide");
                 else
                     key.DeleteValue("Script Browser");
             }

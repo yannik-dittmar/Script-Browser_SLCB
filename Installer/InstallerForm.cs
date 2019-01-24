@@ -45,7 +45,7 @@ namespace Installer
 
         #endregion
 
-        private string version = "1.0.1";
+        private string version = "1.0.2";
 
         private WebClient web;
         private long receivedBytes = 0;
@@ -79,7 +79,10 @@ namespace Installer
                     if (MessageBox.Show("Do you really want to abort the installation?", "Abort Installation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                     {
                         web.CancelAsync();
-                        try { Directory.Delete(textBox1.Text, true); } catch { }
+                        web.Dispose();
+                        for (int i=0; i < 20; i++)
+                            try { Directory.Delete(textBox1.Text, true); break; } catch { Thread.Sleep(100); }
+
                         Environment.Exit(0);
                     }
                 }
@@ -315,6 +318,15 @@ namespace Installer
                 }
                 Log("Received file size");
 
+                Log("Receiving version...");
+                try
+                {
+                    using (WebClient webVer = new WebClient())
+                        version = webVer.DownloadString("http://digital-programming.de/ScriptBrowser/version.txt");
+                    Log("Received version");
+                }
+                catch { Log("ERROR: Could not receive version!"); }
+
                 Log("\n=== End Preperation ===");
                 this.BeginInvoke(new MethodInvoker(delegate () { labelStatus.Text = "Downloading Script-Browser"; }));
                 Log("\n=== Start Download ===\n");
@@ -327,7 +339,7 @@ namespace Installer
                 receivedBytes = 0;
                 sw.Restart();
                 downloadSuccess = false;
-                Log("Downloading Script-Browser (" + fileSize + ")...");
+                Log("Downloading Script-Browser v" + version + " (" + fileSize + ")...");
                 web.DownloadFileAsync(new Uri("http://digital-programming.de/ScriptBrowser/setup.zip"), textBox1.Text + "SB.zip");
 
                 while (web.IsBusy)
@@ -424,7 +436,7 @@ namespace Installer
                         {
                             Log("Register application to startup...");
                             using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true))
-                                key.SetValue("Script Browser", textBox1.Text + "Script-Browser.exe /hide");
+                                key.SetValue("Script Browser", textBox1.Text + "Script-Browser.exe hide");
                             Log("Registed application to startup");
                         }
                     }
@@ -625,7 +637,12 @@ namespace Installer
             try
             {
                 if (checkBox5.Checked)
-                    Process.Start(textBox1.Text + "Script-Browser.exe");
+                {
+                    if (checkBox6.Checked)
+                        Process.Start(textBox1.Text + "Script-Browser.exe","\"setup:" + Application.ExecutablePath + "\" \"version:" + version + "\"");
+                    else
+                        Process.Start(textBox1.Text + "Script-Browser.exe", "\"version:" + version + "\"");
+                }
             }
             catch { }
             try
